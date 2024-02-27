@@ -19,48 +19,50 @@ namespace BetterMatchmaking;
 internal class Config : SingletonAccessor
 {
 	[JsonIgnore]
-	public string Name { get; set; } = "";
+	public string Name { get; set; } = Constants.DEFAULT_CONFIG;
 
-	public string Language { get; set; } = "en-us";
+	public string Localization { get; set; } = "en-us";
+
+	public RegionLockFixCustomization RegionLockFix { get; set; } = new();
+	public MaxSearchResultLimitCustomization MaxSearchResultLimit { get; set; } = new();
 
 	public Config() { }
 
-	public Config Init()
+	public Config InitDefault()
 	{
-		Name = Constants.DEFAULT_CONFIG;
-
-		TeaLog.Info($"Default Config: Initializing...");
-		TeaLog.Info($"Default Config: Done!");
+		TeaLog.Info("Default Config: Initializing...");
+		TeaLog.Info("Default Config: Initialization Done!");
 
 		return this;
 	}
 
-	public Config Init(string name)
+	public Config Init()
 	{
-		Name = name;
+		TeaLog.Info("Config: Initializing...");
 
-		TeaLog.Info($"Config {Name}: Initializing...");
-		TeaLog.Info($"Config {Name}: Done!");
+		RegionLockFix.Init();
+		MaxSearchResultLimit.Init();
+
+		TeaLog.Info("Config: Initialization Done!");
 
 		return this;
 	}
 
 	public Config Save()
 	{
-		TeaLog.Info($"Config {Name}: Saving...");
+		TeaLog.Info("Config: Saving...");
 
-		configManager.ConfigWatcherInstance.TemporarilyDisable(Name);
-		JsonManager.SearializeToFile(Path.Combine(Constants.CONFIGS_PATH, $"{Name}.json"), this);
-		
-		TeaLog.Info($"Config {Name}: Done!");
+		configManager.ConfigWatcherInstance.TemporarilyDisable();
+		JsonManager.SearializeToFile(Constants.DEFAULT_CONFIG_FILE_PATH_NAME, this);
 
+		TeaLog.Info("Config: Saving Done!");
 		return this;
 	}
 
 	public Config DeepCopy()
 	{
 		var json = JsonManager.Serialize(this);
-		return JsonSerializer.Deserialize<Config>(json, JsonManager.JsonSerializerOptionsInstance).Init(Name);
+		return JsonSerializer.Deserialize<Config>(json, JsonManager.JsonSerializerOptionsInstance).Init();
 	}
 
 	public override string ToString()

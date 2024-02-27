@@ -21,7 +21,7 @@ public static class JsonManager
 	public static void SerializeToFile(string filePathName, string json)
 	{
 		//File.WriteAllText(filePathName, json);
-		;
+		Directory.CreateDirectory(Path.GetDirectoryName(filePathName));
 		var file = File.Open(filePathName, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
 		var streamWriter = new StreamWriter(file);
 		streamWriter.AutoFlush = true;
@@ -34,7 +34,7 @@ public static class JsonManager
 	private static async Task SerializeToFileAsync(string filePathName, string json)
 	{
 		//File.WriteAllText(filePathName, json);
-;
+		Directory.CreateDirectory(Path.GetDirectoryName(filePathName));
 		var file = File.Open(filePathName, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
 		var streamWriter = new StreamWriter(file);
 		streamWriter.AutoFlush = true;

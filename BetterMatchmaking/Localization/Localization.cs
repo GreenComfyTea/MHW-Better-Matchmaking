@@ -37,7 +37,6 @@ namespace BetterMatchmaking
 			TeaLog.Info($"Localization {Name}: Initializing...");
 
 			IsDefault = true;
-			Save();
 
 			TeaLog.Info($"Localization {Name}: Done!");
 
@@ -46,14 +45,12 @@ namespace BetterMatchmaking
 
 		public Localization Init(string name)
 		{
+			TeaLog.Info($"Localization {name}: Initializing...");
+
 			Name = name;
-
-			TeaLog.Info($"Localization {Name}: Initializing...");
-
 			IsDefault = false;
-			Save();
 
-			TeaLog.Info($"Localization {Name}: Done!");
+			TeaLog.Info($"Localization {name}: Done!");
 
 			return this;
 		}

@@ -12,9 +12,14 @@ namespace BetterMatchmaking;
 
 internal class BetterMatchmakingPlugin : IPlugin
 {
-	public string Name => "{Constants.MOD_NAME} v{Constants.VERSION}";
+	public string Name => $"{Constants.MOD_NAME} v{Constants.VERSION}";
 
-	public string Author => "Constants.MOD_AUTHOR";
+	public string Author => $"{Constants.MOD_AUTHOR}";
+
+	private LocalizationManager localizationManager;
+	private ConfigManager configManager;
+	private RegionLockFix regionLockFix;
+	private MaxSearchResultLimit maxSearchResultLimit;
 
 	public PluginData Initialize()
 	{
@@ -25,53 +30,44 @@ internal class BetterMatchmakingPlugin : IPlugin
 		};
 	}
 
-	public async Task Init()
+	public void Init()
 	{
 		try
 		{
 			TeaLog.Info("Plugin Loaded!");
 
-			var localizationManager = LocalizationManager.Instance;
-			var configManager = ConfigManager.Instance;
+			localizationManager = LocalizationManager.Instance;
+			configManager = ConfigManager.Instance;
+			regionLockFix = RegionLockFix.Instance;
+			maxSearchResultLimit = MaxSearchResultLimit.Instance;
 
 			localizationManager.Init();
 			configManager.Init();
+
 		}
 		catch (Exception exception)
 		{
-			//TeaLog.Error(exception.ToString());
+			TeaLog.Error(exception.ToString());
 		}
 	}
 
 	public void OnLoad()
 	{
-		_ = Init();
+		Init();
 	}
 
 	public void OnImGuiRender()
 	{
-		var font = ImGui.GetFont();
-		var oldScale = font.Scale;
-		font.Scale *= 1.5f;
-
 		try
 		{
-			//ImGui.PushFont(font);
-
-			//if (ImGui.Button($"{Constants.MOD_NAME} v{Constants.VERSION}"))
-			//{
-			//	CustomizationWindow.Instance.IsOpened = !CustomizationWindow.Instance.IsOpened;
-			//}
-
-			font.Scale = oldScale;
-			ImGui.PopFont();
+			if (ImGui.Button($"{Constants.MOD_NAME} v{Constants.VERSION}"))
+			{
+				CustomizationWindow.Instance.IsOpened = !CustomizationWindow.Instance.IsOpened;
+			}
 		}
 		catch (Exception exception)
 		{
-			//TeaLog.Error(exception.ToString());
-
-			font.Scale = oldScale;
-			ImGui.PopFont();
+			TeaLog.Error(exception.ToString());
 		}
 	}
 
@@ -79,24 +75,17 @@ internal class BetterMatchmakingPlugin : IPlugin
 	{
 		try
 		{
-			//CustomizationWindow.Instance.Render();
+			CustomizationWindow.Instance.Render();
 		}
 		catch (Exception exception)
 		{
-			//TeaLog.Error(exception.ToString());
+			TeaLog.Error(exception.ToString());
 		}
 	}
 
 	public void OnLobbySearch(ref int maxResults)
 	{
-		//TeaLog.Info("OnLobbySearch");
-
-		maxResults = 32;
-		//TeaLog.Info("Set Max Result to 32");
-
-
-		Matchmaking.AddRequestLobbyListDistanceFilter(LobbyDistanceFilter.WorldWide);
-		//Matchmaking.AddRequestLobbyListFilterSlotsAvailable(15);
-		//TeaLog.Info("Set Distance to WorldWide");
+		regionLockFix.Apply();
+		maxSearchResultLimit.Apply(ref maxResults);
 	}
 }

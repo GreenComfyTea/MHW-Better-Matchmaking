@@ -55,10 +55,10 @@ internal class LocalizationCustomization : SingletonAccessor
 		LocalizationNames = LocalizationNamesList.ToArray();
 	}
 
-	public async Task OnLocalizationChanged(int selectedLocalizationIndex)
+	public void OnLocalizationChanged(int selectedLocalizationIndex)
 	{
 		var currentLocalizationName = LocalizationNames[selectedLocalizationIndex];
-		configManager.Current.Language = currentLocalizationName;
+		configManager.Current.Localization = currentLocalizationName;
 		localizationManager.SetCurrentLocalization(currentLocalizationName);
 	}
 
@@ -70,7 +70,7 @@ internal class LocalizationCustomization : SingletonAccessor
 		if (ImGui.TreeNode(localizationManager.ImGui.Language))
 		{
 			tempChanged = ImGui.Combo(localizationManager.ImGui.Language, ref selectedLocalizationIndex, LocalizationNames, LocalizationNames.Length);
-			if (tempChanged) _ = OnLocalizationChanged(SelectedLocalizationIndex);
+			if (tempChanged) OnLocalizationChanged(SelectedLocalizationIndex);
 			changed = changed || tempChanged;
 
 			ImGui.Text(localizationManager.ImGui.Translators);

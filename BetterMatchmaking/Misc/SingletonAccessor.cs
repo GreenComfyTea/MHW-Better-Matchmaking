@@ -13,4 +13,8 @@ internal class SingletonAccessor
 	protected readonly LocalizationManager localizationManager = LocalizationManager.Instance;
 	[JsonIgnore]
 	protected readonly ConfigManager configManager = ConfigManager.Instance;
+	[JsonIgnore]
+	protected readonly RegionLockFix regionLockFix = RegionLockFix.Instance;
+	[JsonIgnore]
+	protected readonly MaxSearchResultLimit maxSearchResultLimit = MaxSearchResultLimit.Instance;
 }

@@ -39,30 +39,17 @@ namespace BetterMatchmaking
 		{
 			if (!IsOpened) return;
 
-			var font = ImGui.GetFont();
-			var oldScale = font.Scale;
-			font.Scale *= 1.5f;
+			//var font = ImGui.GetFont();
+			//var oldScale = font.Scale;
+			//font.Scale *= 1.5f;
 
 			try
 			{
 				var changed = false;
 
-				//ImGui.GetMainViewport().WorkSize = new Vector2(2880f, 1620f);
-				//ImGui.GetMainViewport().Size = new Vector2(2880f, 1620f);
 
-				ImGui.PushFont(font);
+				//ImGui.PushFont(font);
 				ImGui.Begin($"{Constants.MOD_NAME} v{Constants.VERSION}", ref isOpened);
-
-				ImGui.ShowMetricsWindow();
-
-				//var io = ImGui.GetIO();
-				//var drawData = ImGui.GetDrawData();
-				//var mainViewport = ImGui.GetMainViewport();
-
-				//var fbHeight = io.DisplaySize.Y * io.DisplayFramebufferScale.Y;
-				//var fbWidth = io.DisplaySize.X * io.DisplayFramebufferScale.X;
-
-
 
 				ImGui.Text(localizationManager.ImGui.MadeBy);
 				ImGui.SameLine();
@@ -94,9 +81,11 @@ namespace BetterMatchmaking
 				
 				configManager.Customization.RenderImGui();
 				changed = localizationManager.Customization.RenderImGui() || changed;
+				changed = regionLockFix.Customization.RenderImGui() || changed;
+				changed = maxSearchResultLimit.Customization.RenderImGui() || changed;
 
-				font.Scale = oldScale;
-				ImGui.PopFont();
+				//font.Scale = oldScale;
+				//ImGui.PopFont();
 
 				ImGui.End();
 
@@ -107,10 +96,10 @@ namespace BetterMatchmaking
 			}
 			catch (Exception e)
 			{
-				TeaLog.Info(e.ToString());
+				TeaLog.Error(e.ToString());
 
-				font.Scale = oldScale;
-				ImGui.PopFont();
+				//font.Scale = oldScale;
+				//ImGui.PopFont();
 			}
 		}
 	}

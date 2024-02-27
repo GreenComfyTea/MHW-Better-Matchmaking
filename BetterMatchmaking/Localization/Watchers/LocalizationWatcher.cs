@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -15,9 +16,12 @@ internal class LocalizationWatcher : SingletonAccessor
 
 	public LocalizationWatcher()
 	{
-		TeaLog.Info("LocalizationChangeWatcher: Initializing...");
-
 		Watcher = new(Constants.LOCALIZATIONS_PATH);
+	}
+
+	public LocalizationWatcher Init()
+	{
+		TeaLog.Info("LocalizationChangeWatcher: Initializing...");
 
 		Watcher.NotifyFilter = NotifyFilters.Attributes
 							 | NotifyFilters.CreationTime
@@ -35,14 +39,16 @@ internal class LocalizationWatcher : SingletonAccessor
 		Watcher.Filter = "*.json";
 		Watcher.EnableRaisingEvents = true;
 
-		TeaLog.Info("LocalizationChangeWatcher: Done!");
+		TeaLog.Info("LocalizationChangeWatcher: Initialization Done!");
+
+		return this;
 	}
 
 	private void OnLocalizationFileChanged(object sender, FileSystemEventArgs e)
 	{
 		if (e.ChangeType != WatcherChangeTypes.Changed) return;
 
-		TeaLog.Info($"LocalizationChangeWatcher: Changed {e.Name}");
+		TeaLog.Info($"LocalizationChangeWatcher: Changed {e.Name}.");
 
 		UpdateLocalization(e.FullPath, e.Name);
 	}
@@ -50,19 +56,21 @@ internal class LocalizationWatcher : SingletonAccessor
 	private void OnLocalizationFileCreated(object sender, FileSystemEventArgs e)
 	{
 
-		TeaLog.Info($"LocalizationChangeWatcher: Created {e.Name}");
+		TeaLog.Info($"LocalizationChangeWatcher: Created {e.Name}.");
 
 		UpdateLocalization(e.FullPath, e.Name);
 	}
 
 	private void OnLocalizationFileDeleted(object sender, FileSystemEventArgs e)
 	{
-		TeaLog.Info($"LocalizationChangeWatcher: Deleted {e.Name}");
+		TeaLog.Info($"LocalizationChangeWatcher: Deleted {e.Name}.");
+
+		if(e.Name.Equals(Constants.DEFAULT_LOCALIZATION)) localizationManager.Default.Save();
 	}
 
 	private void OnLocalizationFileRenamed(object sender, RenamedEventArgs e)
 	{
-		TeaLog.Info($"LocalizationChangeWatcher: Renamed {e.OldName} to {e.Name}");
+		TeaLog.Info($"LocalizationChangeWatcher: Renamed {e.OldName} to {e.Name}.");
 
 		localizationManager.Localizations.Remove(e.OldName);
 
@@ -81,7 +89,11 @@ internal class LocalizationWatcher : SingletonAccessor
 
 		var contains = LastEventTimes.TryGetValue(fileName, out lastEventTime);
 
-		if (contains && (currentEventTime - lastEventTime).TotalSeconds < 1) return;
+		if (contains && (currentEventTime - lastEventTime).TotalSeconds < 1)
+		{
+			TeaLog.Info($"LocalizationChangeWatcher: Skipping...");
+			return;
+		}
 
 		LastEventTimes[fileName] = currentEventTime;
 
@@ -94,6 +106,7 @@ internal class LocalizationWatcher : SingletonAccessor
 
 	public void TemporarilyDisable(string localizationName)
 	{
+		TeaLog.Info($"LocalizationChangeWatcher: Localization { localizationName}: Temporarily Disabling...");
 		LastEventTimes[$"{localizationName}.json"] = DateTime.Now;
 	}
 

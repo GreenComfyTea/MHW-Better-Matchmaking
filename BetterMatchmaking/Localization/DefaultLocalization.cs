@@ -46,6 +46,8 @@ internal class LocalizedStrings_ImGui : LocalizedStrings
 	public string New { get; set; } = "New";
 	public string Duplicate { get; set; } = "Duplicate";
 	public string Reset { get; set; } = "Reset";
+	public string ResetConfig { get; set; } = "Reset Config";
+
 	public string Delete { get; set; } = "Delete";
 
 	// Language
@@ -54,52 +56,26 @@ internal class LocalizedStrings_ImGui : LocalizedStrings
 
 	public string Translators { get; set; } = "Translators:";
 
-	// Bar
-	public string Visible { get; set; } = "Visible";
-	public string Settings { get; set; } = "Settings";
+	// Region Fix
+	public string Enabled { get; set; } = "Enabled";
+	public string RegionLockFix { get; set; } = "Region Lock Fix";
 
-	public string FillDirection { get; set; } = "Fill Direction";
-	public string LeftToRight { get; set; } = "Left to Right";
-	public string RightToLeft { get; set; } = "Right to Left";
-	public string TopToBottom { get; set; } = "Top to Bottom";
-	public string BottomToTop { get; set; } = "Bottom to Top";
+	public string DistanceFilter { get; set; } = "Distance Filter";
+	public string Close { get; set; } = "Close";
+	public string Default { get; set; } = "Default";
+	public string Far { get; set; } = "Far";
+	public string Worldwide { get; set; } = "Worldwide";
 
-	public string Offset { get; set; } = "Offset";
-	public string X { get; set; } = "X";
-	public string Y { get; set; } = "Y";
-
-	public string Size { get; set; } = "Size";
-	public string Width { get; set; } = "Width";
-	public string Height { get; set; } = "Height";
-
-	public string Outline { get; set; } = "Outline";
-	public string Thickness { get; set; } = "Thickness";
-
-	public string Mode { get; set; } = "Mode";
-	public string Outside { get; set; } = "Outside";
-	public string Center { get; set; } = "Center";
-	public string Inside { get; set; } = "Inside";
-
-	public string Colors { get; set; } = "Colors";
-	public string Fill { get; set; } = "Fill";
-	public string Background { get; set; } = "Background";
-
-	// Label
-	public string RightAlignmentShift { get; set; } = "Right Alignment Shift";
-	public string Color { get; set; } = "Color";
-	public string Shadow { get; set; } = "Shadow";
-
-	public string Font { get; set; } = "Font";
-
+	// Max Search Result Limit
+	public string MaxSearchResultLimit { get; set; } = "Max Search Result Limit";
+	public string Value { get; set; } = "Value";
 
 	[JsonIgnore]
-	public string[] FillDirections { get; set; } = Array.Empty<string>();
-	[JsonIgnore]
-	public string[] OutlineModes { get; set; } = Array.Empty<string>();
+	public string[] DistanceFilters { get; set; } = Array.Empty<string>();
+
 
 	public LocalizedStrings_ImGui()
 	{
-		FillDirections = [LeftToRight, RightToLeft, TopToBottom, BottomToTop];
-		OutlineModes = [Outside, Center, Inside];
+		DistanceFilters = [Close, Default, Far, Worldwide];
 	}
 }

@@ -34,7 +34,6 @@ internal class LocalizationManager
 	public Localization Current { get; set; }
 
 	public LocalizedStrings_LocalizationInfo LocalizationInfo { get; set; }
-	public LocalizedStrings_UI UI { get; set; }
 	public LocalizedStrings_ImGui ImGui { get; set; }
 
 	public LocalizationManager Init()
@@ -43,14 +42,20 @@ internal class LocalizationManager
 
 		Customization = new();
 		LocalizationWatcherInstance = new();
+		Default = new();
 
-		Default = new Localization();
 		Default.Init();
+		Default.Save();
 
+		// Create folder hierarchy if it doesn't exist
+		Directory.CreateDirectory(Constants.LOCALIZATIONS_PATH);
+		
 		SetCurrentLocalization(Default);
 		LoadAllLocalizations();
 
-		TeaLog.Info("LocalizationManager: Done!");
+		LocalizationWatcherInstance.Init();
+
+		TeaLog.Info("LocalizationManager: Initialization Done!");
 
 		return this;
 	}
@@ -58,12 +63,10 @@ internal class LocalizationManager
 	public LocalizationManager SetCurrentLocalization(Localization localization)
 	{
 		Current = localization;
-
-		LocalizationInfo = localization.LocalizationInfo;
-		UI = localization.UI;
-		ImGui = localization.ImGui;
-
 		Customization.SetCurrentLocalization(localization.Name);
+
+		LocalizationInfo = Current.LocalizationInfo;
+		ImGui = Current.ImGui;
 
 		return this;
 	}
@@ -97,15 +100,17 @@ internal class LocalizationManager
 		Customization.LocalizationNamesList = localizationNamesList;
 		Customization.UpdateNamesList();
 
+		TeaLog.Info("LocalizationManager: Loading All Localizations Done!");
+
 		return this;
 	}
 
 	public string LoadLocalization(string localizationFileNamePath)
 	{
+		var localizationName = Path.GetFileNameWithoutExtension(localizationFileNamePath);
+
 		try
 		{
-			var localizationName = Path.GetFileNameWithoutExtension(localizationFileNamePath);
-
 			if (localizationName.Equals(Default.Name)) return localizationName;
 
 			TeaLog.Info($"Localization {localizationName}: Loading...");
@@ -114,12 +119,15 @@ internal class LocalizationManager
 
 			var localization = JsonSerializer.Deserialize<Localization>(json, JsonManager.JsonSerializerOptionsInstance).Init(localizationName);
 
+			TeaLog.Info($"Localization {localizationName}: Loading Done!");
+
 			Localizations[localizationName] = localization;
 
 			return localizationName;
 		}
 		catch(Exception exception)
 		{
+			TeaLog.Info($"Localization {localizationName}: Loading Failed!");
 			TeaLog.Error(exception.ToString());
 			return null;
 		}
