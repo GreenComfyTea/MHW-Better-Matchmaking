@@ -25,6 +25,7 @@ internal class Config : SingletonAccessor
 
 	public RegionLockFixCustomization RegionLockFix { get; set; } = new();
 	public MaxSearchResultLimitCustomization MaxSearchResultLimit { get; set; } = new();
+	public SessionPlayerCountFilterCustomization SessionPlayerCountFilter { get; set; } = new();
 
 	public Config() { }
 
@@ -42,6 +43,7 @@ internal class Config : SingletonAccessor
 
 		RegionLockFix.Init();
 		MaxSearchResultLimit.Init();
+		SessionPlayerCountFilter.Init();
 
 		TeaLog.Info("Config: Initialization Done!");
 

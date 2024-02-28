@@ -18,9 +18,6 @@ internal class MaxSearchResultLimitCustomization : SingletonAccessor
 	private int value = 32;
 	public int Value { get => value; set => this.value = value; }
 
-	[JsonIgnore]
-	public LobbyDistanceFilter DistanceFilterEnum { get; set; } = LobbyDistanceFilter.WorldWide;
-
 	public MaxSearchResultLimitCustomization() { }
 
 	public MaxSearchResultLimitCustomization Init()

@@ -30,8 +30,8 @@ internal class RegionLockFix : SingletonAccessor
 		if(Customization.DistanceFilterEnum == LobbyDistanceFilter.Default) return this;
 
 		Matchmaking.AddRequestLobbyListDistanceFilter(Customization.DistanceFilterEnum);
-		
-		TeaLog.Info($"RegionLockFix: Applied {Customization.DistanceFilterEnum} Distance.");
+
+		TeaLog.Info($"RegionLockFix: Set Distance to {Customization.DistanceFilterEnum}.");
 		return this;
 
 	}

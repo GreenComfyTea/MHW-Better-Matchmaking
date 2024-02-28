@@ -17,4 +17,6 @@ internal class SingletonAccessor
 	protected readonly RegionLockFix regionLockFix = RegionLockFix.Instance;
 	[JsonIgnore]
 	protected readonly MaxSearchResultLimit maxSearchResultLimit = MaxSearchResultLimit.Instance;
+	[JsonIgnore]
+	protected readonly SessionPlayerCountFilter sessionPlayerCountFilter = SessionPlayerCountFilter.Instance;
 }

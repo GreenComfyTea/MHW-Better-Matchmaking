@@ -7,6 +7,9 @@ using SharpPluginLoader.Core.Actions;
 using SharpPluginLoader.Core.Entities;
 using Microsoft.VisualBasic;
 using System.IO;
+using static SharpPluginLoader.Core.Components.CollisionComponent;
+using System.Text.RegularExpressions;
+using System;
 
 namespace BetterMatchmaking;
 
@@ -20,6 +23,7 @@ internal class BetterMatchmakingPlugin : IPlugin
 	private ConfigManager configManager;
 	private RegionLockFix regionLockFix;
 	private MaxSearchResultLimit maxSearchResultLimit;
+	private SessionPlayerCountFilter sessionPlayerCountFilter;
 
 	public PluginData Initialize()
 	{
@@ -40,6 +44,7 @@ internal class BetterMatchmakingPlugin : IPlugin
 			configManager = ConfigManager.Instance;
 			regionLockFix = RegionLockFix.Instance;
 			maxSearchResultLimit = MaxSearchResultLimit.Instance;
+			sessionPlayerCountFilter = SessionPlayerCountFilter.Instance;
 
 			localizationManager.Init();
 			configManager.Init();
@@ -87,5 +92,10 @@ internal class BetterMatchmakingPlugin : IPlugin
 	{
 		regionLockFix.Apply();
 		maxSearchResultLimit.Apply(ref maxResults);
+		sessionPlayerCountFilter.ApplyMin().ApplyMax();
+
+		// (*(code*)(*steamApi_2)->vft->AddRequestLobbyListResultNumericalFilter(*steamApi_2, s_SlotPublicOpen_1434fd928, minOpenSlotsCount, 2);
+
+
 	}
 }

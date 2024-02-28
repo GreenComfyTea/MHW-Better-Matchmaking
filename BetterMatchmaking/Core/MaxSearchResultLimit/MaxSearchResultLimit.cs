@@ -27,12 +27,12 @@ internal class MaxSearchResultLimit : SingletonAccessor
 	public MaxSearchResultLimit Apply(ref int maxResults)
 	{
 		if (!Customization.Enabled) return this;
-		if(Customization.Value == Constants.DEFAULT_MAX_SEARCH_RESULT_LIMIT) return this;
+		if(Customization.Value == Constants.DEFAULT_SEARCH_RESULT_LIMIT_MAX) return this;
 
+		//maxResults = Customization.Value;
 		maxResults = 50;
 
 		TeaLog.Info($"MaxSearchResultLimit: Set Value to {Customization.Value}.");
-
 		return this;
 
 	}

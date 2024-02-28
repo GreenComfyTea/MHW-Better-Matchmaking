@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace BetterMatchmaking;
 
@@ -49,5 +50,20 @@ public static class Constants
 	public const string PAYPAL_LINK = "https://paypal.me/greencomfytea";
 	public const string KOFI_LINK = "https://ko-fi.com/greencomfytea";
 
-	public const int DEFAULT_MAX_SEARCH_RESULT_LIMIT = 20;
+	public const int DEFAULT_SEARCH_RESULT_LIMIT_MAX = 20;
+
+	public const int DEFAULT_SESSION_PLAYER_COUNT_MIN = 1;
+	public const int DEFAULT_SESSION_PLAYER_COUNT_MAX = 15;
+
+	public const string SEARCH_KEY_NAME = "Name";
+	public const string SEARCH_KEY_OWNER_ID = "OwnerId";
+	public const string SEARCH_KEY_IS_BEHIND_NAT = "IsBehindNAT";
+	public const string SEARCH_KEY_SLOT_PUBLIC_MAX = "SlotPublicMax";
+	public const string SEARCH_KEY_SLOT_PUBLIC_OPEN = "SlotPublicOpen";
+	public const string SEARCH_KEY_SLOT_PRIVATE_MAX = "SlotPrivateMax";
+	public const string SEARCH_KEY_SLOT_PRIVATE_OPEN = "SlotPrivateOpen";
+	public const string SEARCH_KEY_NUM = "SearchKeyNum";
+	public const string SEARCH_KEY_D = "SearchKey%d";
+	public const string SEARCH_KEY_BINARY_SIZE = "BinarySize";
+	public const string SEARCH_KEY_BINARY_DATA = "BinaryData";
 }

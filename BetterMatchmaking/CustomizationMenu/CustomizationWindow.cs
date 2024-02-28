@@ -83,6 +83,7 @@ namespace BetterMatchmaking
 				changed = localizationManager.Customization.RenderImGui() || changed;
 				changed = regionLockFix.Customization.RenderImGui() || changed;
 				changed = maxSearchResultLimit.Customization.RenderImGui() || changed;
+				changed = sessionPlayerCountFilter.Customization.RenderImGui() || changed;
 
 				//font.Scale = oldScale;
 				//ImGui.PopFont();

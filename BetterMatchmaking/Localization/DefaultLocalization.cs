@@ -70,6 +70,11 @@ internal class LocalizedStrings_ImGui : LocalizedStrings
 	public string MaxSearchResultLimit { get; set; } = "Max Search Result Limit";
 	public string Value { get; set; } = "Value";
 
+	// Session Player Count Filter
+	public string SessionPlayerCountFilter { get; set; } = "Session Player Count Filter";
+	public string Min { get; set; } = "Min";
+	public string Max { get; set; } = "Max";
+
 	[JsonIgnore]
 	public string[] DistanceFilters { get; set; } = Array.Empty<string>();
 

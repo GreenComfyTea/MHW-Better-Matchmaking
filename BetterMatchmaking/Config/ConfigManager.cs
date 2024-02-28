@@ -90,6 +90,7 @@ internal class ConfigManager : SingletonAccessor
 
 		regionLockFix.Customization = config.RegionLockFix;
 		maxSearchResultLimit.Customization = config.MaxSearchResultLimit;
+		sessionPlayerCountFilter.Customization = config.SessionPlayerCountFilter;
 	}
 
 	public Config LoadConfig()
