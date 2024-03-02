@@ -24,8 +24,9 @@ internal class SessionPlayerCountFilter
 
 	private SessionPlayerCountFilter() { }
 
-	public SessionPlayerCountFilter ApplyMin()
+	public SessionPlayerCountFilter ApplyMin(SearchTypes searchType)
 	{
+		if (searchType != SearchTypes.Session) return this;
 		if (!Customization.Min.Enabled) return this;
 		if(Customization.Min.Value == Constants.DEFAULT_SESSION_PLAYER_COUNT_MIN) return this;
 
@@ -42,8 +43,9 @@ internal class SessionPlayerCountFilter
 		return this;
 	}
 
-	public SessionPlayerCountFilter ApplyMax()
+	public SessionPlayerCountFilter ApplyMax(SearchTypes searchType)
 	{
+		if (searchType != SearchTypes.Session) return this;
 		if (!Customization.Max.Enabled) return this;
 		if (Customization.Max.Value == Constants.DEFAULT_SESSION_PLAYER_COUNT_MAX) return this;
 

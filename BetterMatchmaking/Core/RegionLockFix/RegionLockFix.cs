@@ -1,6 +1,9 @@
-﻿using SharpPluginLoader.Core.Steam;
+﻿using SharpPluginLoader.Core.Experimental;
+using SharpPluginLoader.Core.Memory;
+using SharpPluginLoader.Core.Steam;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,19 +23,50 @@ internal class RegionLockFix : SingletonAccessor
 
 	// Singleton Pattern End
 
+	//private delegate void numericalFilter_Delegate(nint steamInterface, nint keyAddress, int value, int comparison);
+	//private MarshallingHook<numericalFilter_Delegate> numericalFilter;
+
 	public RegionLockFixCustomization Customization { get; set; }
 
 	private RegionLockFix() { }
 
-	public RegionLockFix Apply()
+	public RegionLockFix Init()
 	{
-		if (!Customization.Enabled) return this;
-		if(Customization.DistanceFilterEnum == LobbyDistanceFilter.Default) return this;
+		// 0x7FFE2A0B5700
+		//var numericalFilterAddress = SteamApi.GetVirtualFunction(SteamApi.VirtualFunctionIndex.AddRequestLobbyListNumericalFilter);
+		//numericalFilter = MarshallingHook.Create<numericalFilter_Delegate>(numericalFilterAddress, (steamInterface, keyAddress, value, comparison) => {});
 
-		Matchmaking.AddRequestLobbyListDistanceFilter(Customization.DistanceFilterEnum);
-
-		TeaLog.Info($"RegionLockFix: Set Distance to {Customization.DistanceFilterEnum}.");
 		return this;
+	}
 
+	public RegionLockFix Apply(SearchTypes searchType)
+	{
+		if (searchType == SearchTypes.None) return this;
+
+		RegionLockFixLobbyCustomization customization;
+
+		switch (searchType)
+		{
+			case SearchTypes.Session:
+
+				customization = Customization.Sessions;
+				break;
+
+			case SearchTypes.Quest:
+
+				customization = Customization.Quests;
+				break;
+
+			default:
+				return this;
+		}
+
+		if (!customization.Enabled) return this;
+		if (customization.DistanceFilterEnum == LobbyDistanceFilter.Default) return this;
+
+		Matchmaking.AddRequestLobbyListDistanceFilter(customization.DistanceFilterEnum);
+
+		TeaLog.Info($"RegionLockFix: Set Distance to {customization.DistanceFilterEnum}.");
+		return this;
 	}
 }

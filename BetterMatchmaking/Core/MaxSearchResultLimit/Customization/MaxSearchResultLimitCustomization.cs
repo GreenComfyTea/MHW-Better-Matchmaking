@@ -1,27 +1,24 @@
 ﻿using ImGuiNET;
-using SharpPluginLoader.Core.Steam;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using System.Text;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
 internal class MaxSearchResultLimitCustomization : SingletonAccessor
 {
-	private bool enabled = true;
-	public bool Enabled { get => enabled; set => enabled = value; }
-
-	private int value = 32;
-	public int Value { get => value; set => this.value = value; }
+	public MaxSearchResultLimitLobbyCustomization Sessions { get; set; } = new();
+	public MaxSearchResultLimitLobbyCustomization Quests { get; set; } = new();
 
 	public MaxSearchResultLimitCustomization() { }
 
 	public MaxSearchResultLimitCustomization Init()
 	{
+		Sessions.Init();
+		Quests.Init(Constants.SEARCH_RESULT_LIMIT_MAX_QUESTS);
+
 		return this;
 	}
 
@@ -31,8 +28,8 @@ internal class MaxSearchResultLimitCustomization : SingletonAccessor
 
 		if (ImGui.TreeNode(localizationManager.ImGui.MaxSearchResultLimit))
 		{
-			changed = ImGui.Checkbox(localizationManager.ImGui.Enabled, ref enabled) || changed;
-			changed = ImGui.SliderInt(localizationManager.ImGui.Value, ref value, 1, 32) || changed;
+			changed = Sessions.RenderImGui(localizationManager.ImGui.Sessions) || changed;
+			changed = Quests.RenderImGui(localizationManager.ImGui.Quests) || changed;
 
 			ImGui.TreePop();
 

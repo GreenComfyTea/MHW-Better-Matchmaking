@@ -12,6 +12,8 @@ public enum OutlineModes { Outside, Center, Inside }
 
 public enum FillDirections { LeftToRight, RightToLeft, TopToBottom, BottomToTop }
 
+public enum SearchTypes { None, Session, Quest }
+
 public static class Constants
 {
 	public const string MOD_AUTHOR = "GreenComfyTea";
@@ -52,6 +54,9 @@ public static class Constants
 
 	public const int DEFAULT_SEARCH_RESULT_LIMIT_MAX = 20;
 
+	public const int SEARCH_RESULT_LIMIT_MAX_SESSIONS = 32;
+	public const int SEARCH_RESULT_LIMIT_MAX_QUESTS = 31;
+
 	public const int DEFAULT_SESSION_PLAYER_COUNT_MIN = 1;
 	public const int DEFAULT_SESSION_PLAYER_COUNT_MAX = 15;
 
@@ -66,4 +71,22 @@ public static class Constants
 	public const string SEARCH_KEY_D = "SearchKey%d";
 	public const string SEARCH_KEY_BINARY_SIZE = "BinarySize";
 	public const string SEARCH_KEY_BINARY_DATA = "BinaryData";
+
+	public const int SEARCH_KEY_SEARCH_TYPE_ID = 0;
+
+	public const char SEARCH_KEY_SESSION_PLAYER_TYPE_ID = '1';
+	public const char SEARCH_KEY_SESSION_QUEST_PREFERENCE_ID = '2';
+
+	public const char SEARCH_KEY_SESSION_LANGUAGE_ID = '4';
+	public const char SEARCH_KEY_SESSION_SIMILAR_HUNTER_RANK_ID = '5';
+	public const char SEARCH_KEY_SESSION_SIMILAR_MASTER_RANK_ID = '6';
+
+	public const char SEARCH_KEY_QUEST_REWARDS_AVAILABLE_ID = '2';
+	public const char SEARCH_KEY_QUEST_TARGET_ID = '3';
+	public const char SEARCH_KEY_QUEST_RANK_ID = '4';
+	public const char SEARCH_KEY_QUEST_LANGUAGE_ID = '5';
+	public const char SEARCH_KEY_QUEST_TYPE_ID = '6';
+
+	public const int SESSION_SEARCH_ID = 537292564;
+	public const int QUEST_SEARCH_ID = 421652;
 }

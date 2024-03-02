@@ -3,14 +3,13 @@ using SharpPluginLoader.Core.Steam;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class RegionLockFixCustomization : SingletonAccessor
+internal class RegionLockFixLobbyCustomization : SingletonAccessor
 {
 	private bool enabled = true;
 	public bool Enabled { get => enabled; set => enabled = value; }
@@ -20,12 +19,12 @@ internal class RegionLockFixCustomization : SingletonAccessor
 	[JsonIgnore]
 	public LobbyDistanceFilter DistanceFilterEnum { get; set; } = LobbyDistanceFilter.WorldWide;
 
-	public RegionLockFixCustomization()
+	public RegionLockFixLobbyCustomization()
 	{
 		DistanceFilter = localizationManager.Default.ImGui.Worldwide;
 	}
 
-	public RegionLockFixCustomization Init()
+	public RegionLockFixLobbyCustomization Init()
 	{
 		DistanceFilterEnum = (LobbyDistanceFilter)Array.FindIndex(
 			LocalizationManager.Instance.Default.ImGui.DistanceFilters, arrayString => arrayString.Equals(DistanceFilter)
@@ -34,13 +33,13 @@ internal class RegionLockFixCustomization : SingletonAccessor
 		return this;
 	}
 
-	public bool RenderImGui()
+	public bool RenderImGui(string title)
 	{
 		var changed = false;
 		var tempChanged = false;
 		var selectedIndex = 0;
 
-		if (ImGui.TreeNode(localizationManager.ImGui.RegionLockFix))
+		if (ImGui.TreeNode(title))
 		{
 			changed = ImGui.Checkbox(localizationManager.ImGui.Enabled, ref enabled) || changed;
 

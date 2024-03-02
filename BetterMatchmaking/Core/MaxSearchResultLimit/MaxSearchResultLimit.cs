@@ -1,4 +1,5 @@
-﻿using SharpPluginLoader.Core.Steam;
+﻿using SharpPluginLoader.Core.Memory;
+using SharpPluginLoader.Core.Steam;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,16 +25,36 @@ internal class MaxSearchResultLimit : SingletonAccessor
 
 	private MaxSearchResultLimit() { }
 
-	public MaxSearchResultLimit Apply(ref int maxResults)
+	public MaxSearchResultLimit Apply(SearchTypes searchType, ref int maxResultsRef)
 	{
-		if (!Customization.Enabled) return this;
-		if(Customization.Value == Constants.DEFAULT_SEARCH_RESULT_LIMIT_MAX) return this;
+		if (searchType == SearchTypes.None) return this;
 
-		//maxResults = Customization.Value;
-		maxResults = 50;
+		MaxSearchResultLimitLobbyCustomization customization;
+		int maxResults;
 
-		TeaLog.Info($"MaxSearchResultLimit: Set Value to {Customization.Value}.");
+		switch (searchType)
+		{
+			case SearchTypes.Session:
+
+				customization = Customization.Sessions;
+				maxResults = customization.Value;
+				break;
+
+			case SearchTypes.Quest:
+
+				customization = Customization.Quests;
+				maxResults = customization.Value + 1;
+				break;
+
+			default:
+				return this;
+		}
+
+		if (!customization.Enabled) return this;
+
+		maxResultsRef = maxResults;
+
+		TeaLog.Info($"MaxSearchResultLimit: Set to {maxResults}.");
 		return this;
-
 	}
 }

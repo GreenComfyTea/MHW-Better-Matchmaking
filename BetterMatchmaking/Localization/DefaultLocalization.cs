@@ -59,6 +59,9 @@ internal class LocalizedStrings_ImGui : LocalizedStrings
 	// Region Fix
 	public string Enabled { get; set; } = "Enabled";
 	public string RegionLockFix { get; set; } = "Region Lock Fix";
+	public string Sessions { get; set; } = "Sessions";
+	public string Quests { get; set; } = "Quests";
+
 
 	public string DistanceFilter { get; set; } = "Distance Filter";
 	public string Close { get; set; } = "Close";
