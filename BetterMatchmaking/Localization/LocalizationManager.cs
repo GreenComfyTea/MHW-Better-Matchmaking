@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class LocalizationManager
+internal class LocalizationManager : IDisposable
 {
 	// Singleton Pattern
 	private static readonly LocalizationManager singleton = new();
@@ -136,5 +136,10 @@ internal class LocalizationManager
 	public override string ToString()
 	{
 		return JsonManager.Serialize(this);
+	}
+
+	public void Dispose()
+	{
+		LocalizationWatcherInstance.Dispose();
 	}
 }

@@ -1,4 +1,5 @@
-﻿using SharpPluginLoader.Core.Configuration;
+﻿using SharpPluginLoader.Core;
+using SharpPluginLoader.Core.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Xml.Linq;
 
 namespace BetterMatchmaking;
 
-internal class ConfigWatcher : SingletonAccessor
+internal class ConfigWatcher : SingletonAccessor, IDisposable
 {
 	private DateTime LastEventTime = new();
 
@@ -118,5 +119,11 @@ internal class ConfigWatcher : SingletonAccessor
 	public override string ToString()
 	{
 		return JsonManager.Serialize(this);
+	}
+
+	public void Dispose()
+	{
+		Watcher.Dispose();
+		TeaLog.Info("ConfigChangeWatcher: Disposing...");
 	}
 }

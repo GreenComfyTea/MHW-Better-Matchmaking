@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharpPluginLoader.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -8,7 +9,7 @@ using System.Xml.Linq;
 
 namespace BetterMatchmaking;
 
-internal class LocalizationWatcher : SingletonAccessor
+internal class LocalizationWatcher : SingletonAccessor, IDisposable
 {
 	private Dictionary<string, DateTime> LastEventTimes = new();
 
@@ -113,5 +114,10 @@ internal class LocalizationWatcher : SingletonAccessor
 	public override string ToString()
 	{
 		return JsonManager.Serialize(this);
+	}
+	public void Dispose()
+	{
+		Watcher.Dispose();
+		TeaLog.Info("LocalizationChangeWatcher: Disposing...");
 	}
 }

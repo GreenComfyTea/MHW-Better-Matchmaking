@@ -13,7 +13,7 @@ using System.Xml.Linq;
 
 namespace BetterMatchmaking;
 
-internal class ConfigManager : SingletonAccessor
+internal class ConfigManager : SingletonAccessor, IDisposable
 {
 	// Singleton Pattern
 	private static readonly ConfigManager singleton = new();
@@ -125,5 +125,10 @@ internal class ConfigManager : SingletonAccessor
 	public override string ToString()
 	{
 		return JsonManager.Serialize(this);
+	}
+
+	public void Dispose()
+	{
+		ConfigWatcherInstance.Dispose();
 	}
 }
