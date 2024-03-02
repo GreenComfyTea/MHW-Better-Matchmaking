@@ -38,6 +38,8 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 	{
 		TeaLog.Info("ConfigManager: Initializing...");
 
+		InstantiateSingletons();
+
 		ConfigWatcherInstance = new();
 		Customization = new();
 		Default = new();
@@ -84,13 +86,15 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 		return this;
 	}
 
-	public void SetCurrentConfig(Config config)
+	public ConfigManager SetCurrentConfig(Config config)
 	{
 		Current = config;
 
-		regionLockFix.Customization = config.RegionLockFix;
-		maxSearchResultLimit.Customization = config.MaxSearchResultLimit;
-		sessionPlayerCountFilter.Customization = config.SessionPlayerCountFilter;
+		RegionLockFixInstance.Customization = config.RegionLockFix;
+		MaxSearchResultLimitInstance.Customization = config.MaxSearchResultLimit;
+		SessionPlayerCountFilterInstance.Customization = config.SessionPlayerCountFilter;
+
+		return this;
 	}
 
 	public static Config LoadConfig()

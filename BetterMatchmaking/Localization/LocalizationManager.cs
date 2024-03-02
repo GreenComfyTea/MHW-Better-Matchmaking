@@ -26,7 +26,7 @@ internal sealed class LocalizationManager : IDisposable
 
 	public LocalizationWatcher LocalizationWatcherInstance { get; set; }
 
-	public Dictionary<string, Localization> Localizations { get; set; } = new();
+	public Dictionary<string, Localization> Localizations { get; set; }
 
 	public LocalizationCustomization Customization { get; set; }
 

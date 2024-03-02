@@ -21,11 +21,13 @@ internal class RegionLockFixLobbyCustomization : SingletonAccessor
 
 	public RegionLockFixLobbyCustomization()
 	{
-		DistanceFilter = localizationManager.Default.ImGui.Worldwide;
+		InstantiateSingletons();
+		DistanceFilter = LocalizationManagerInstance.Default.ImGui.Worldwide;
 	}
 
 	public RegionLockFixLobbyCustomization Init()
 	{
+	
 		DistanceFilterEnum = (LobbyDistanceFilter)Array.FindIndex(
 			LocalizationManager.Instance.Default.ImGui.DistanceFilters, arrayString => arrayString.Equals(DistanceFilter)
 		);
@@ -41,14 +43,14 @@ internal class RegionLockFixLobbyCustomization : SingletonAccessor
 
 		if (ImGui.TreeNode(title))
 		{
-			changed = ImGui.Checkbox(localizationManager.ImGui.Enabled, ref _enabled) || changed;
+			changed = ImGui.Checkbox(LocalizationManagerInstance.ImGui.Enabled, ref _enabled) || changed;
 
 			selectedIndex = (int)DistanceFilterEnum;
-			tempChanged = ImGui.Combo(localizationManager.ImGui.DistanceFilter, ref selectedIndex, localizationManager.ImGui.DistanceFilters, 4);
+			tempChanged = ImGui.Combo(LocalizationManagerInstance.ImGui.DistanceFilter, ref selectedIndex, LocalizationManagerInstance.ImGui.DistanceFilters, 4);
 			if (tempChanged)
 			{
 				DistanceFilterEnum = (LobbyDistanceFilter)selectedIndex;
-				DistanceFilter = localizationManager.Default.ImGui.DistanceFilters[selectedIndex];
+				DistanceFilter = LocalizationManagerInstance.Default.ImGui.DistanceFilters[selectedIndex];
 			}
 
 			changed = changed || tempChanged;

@@ -10,15 +10,28 @@ namespace BetterMatchmaking;
 internal class SingletonAccessor
 {
 	[JsonIgnore]
-	protected readonly LocalizationManager localizationManager = LocalizationManager.Instance;
+	protected LocalizationManager LocalizationManagerInstance { get; set; }
 	[JsonIgnore]
-	protected readonly ConfigManager configManager = ConfigManager.Instance;
+	protected ConfigManager ConfigManagerInstance { get; set; }
 	[JsonIgnore]
-	protected readonly RegionLockFix regionLockFix = RegionLockFix.Instance;
+	protected RegionLockFix RegionLockFixInstance { get; set; }
 	[JsonIgnore]
-	protected readonly MaxSearchResultLimit maxSearchResultLimit = MaxSearchResultLimit.Instance;
+	protected MaxSearchResultLimit MaxSearchResultLimitInstance { get; set; }
 	[JsonIgnore]
-	protected readonly SessionPlayerCountFilter sessionPlayerCountFilter = SessionPlayerCountFilter.Instance;
+	protected SessionPlayerCountFilter SessionPlayerCountFilterInstance { get; set; }
 	[JsonIgnore]
-	protected readonly Core core = Core.Instance;
+	protected Core CoreInstance { get; set; }
+	[JsonIgnore]
+	protected CustomizationWindow CustomizationWindowInstance { get; set; }
+
+	protected void InstantiateSingletons()
+	{
+		LocalizationManagerInstance = LocalizationManager.Instance;
+		ConfigManagerInstance = ConfigManager.Instance;
+		RegionLockFixInstance = RegionLockFix.Instance;
+		MaxSearchResultLimitInstance = MaxSearchResultLimit.Instance;
+		SessionPlayerCountFilterInstance = SessionPlayerCountFilter.Instance;
+		CoreInstance = Core.Instance;
+		CustomizationWindowInstance = CustomizationWindow.Instance;
+	}
 }

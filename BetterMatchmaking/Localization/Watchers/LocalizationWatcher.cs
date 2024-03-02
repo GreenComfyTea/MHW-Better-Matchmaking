@@ -17,6 +17,7 @@ internal class LocalizationWatcher : SingletonAccessor, IDisposable
 
 	public LocalizationWatcher()
 	{
+		InstantiateSingletons();
 		Watcher = new(Constants.LOCALIZATIONS_PATH);
 	}
 
@@ -65,14 +66,14 @@ internal class LocalizationWatcher : SingletonAccessor, IDisposable
 	{
 		TeaLog.Info($"LocalizationChangeWatcher: Deleted {e.Name}.");
 
-		if(e.Name.Equals(Constants.DEFAULT_LOCALIZATION)) localizationManager.Default.Save();
+		if(e.Name.Equals(Constants.DEFAULT_LOCALIZATION)) LocalizationManagerInstance.Default.Save();
 	}
 
 	private void OnLocalizationFileRenamed(object sender, RenamedEventArgs e)
 	{
 		TeaLog.Info($"LocalizationChangeWatcher: Renamed {e.OldName} to {e.Name}.");
 
-		localizationManager.Localizations.Remove(e.OldName);
+		LocalizationManagerInstance.Localizations.Remove(e.OldName);
 
 		UpdateLocalization(e.FullPath, e.Name);
 	}
@@ -82,7 +83,7 @@ internal class LocalizationWatcher : SingletonAccessor, IDisposable
 		TeaLog.Info(e.GetException().ToString());
 	}
 
-	private void UpdateLocalization(string filePathName, string fileName)
+	private LocalizationWatcher UpdateLocalization(string filePathName, string fileName)
 	{
 		DateTime currentEventTime = DateTime.Now;
 		DateTime lastEventTime;
@@ -92,22 +93,26 @@ internal class LocalizationWatcher : SingletonAccessor, IDisposable
 		if (contains && (currentEventTime - lastEventTime).TotalSeconds < 1)
 		{
 			TeaLog.Info("LocalizationChangeWatcher: Skipping...");
-			return;
+			return this;
 		}
 
 		_lastEventTimes[fileName] = currentEventTime;
 
 		Timers.SetTimeout(() =>
 		{
-			var localizationName = localizationManager.LoadLocalization(filePathName);
-			localizationManager.SetCurrentLocalization(localizationManager.Current.Name);
+			var localizationName = LocalizationManagerInstance.LoadLocalization(filePathName);
+			LocalizationManagerInstance.SetCurrentLocalization(LocalizationManagerInstance.Current.Name);
 		}, 250);
+
+		return this;
 	}
 
-	public void TemporarilyDisable(string localizationName)
+	public LocalizationWatcher TemporarilyDisable(string localizationName)
 	{
 		TeaLog.Info($"LocalizationChangeWatcher: Localization { localizationName}: Temporarily Disabling...");
 		_lastEventTimes[$"{localizationName}.json"] = DateTime.Now;
+
+		return this;
 	}
 
 	public override string ToString()
@@ -116,7 +121,7 @@ internal class LocalizationWatcher : SingletonAccessor, IDisposable
 	}
 	public void Dispose()
 	{
-		Watcher.Dispose();
 		TeaLog.Info("LocalizationChangeWatcher: Disposing...");
+		Watcher.Dispose();
 	}
 }

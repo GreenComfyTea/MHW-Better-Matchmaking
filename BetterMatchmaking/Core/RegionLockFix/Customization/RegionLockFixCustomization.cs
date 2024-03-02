@@ -12,31 +12,34 @@ namespace BetterMatchmaking;
 
 internal class RegionLockFixCustomization : SingletonAccessor
 {
-    public RegionLockFixLobbyCustomization Sessions { get; set; } = new();
-    public RegionLockFixLobbyCustomization Quests { get; set; } = new();
+	public RegionLockFixLobbyCustomization Sessions { get; set; } = new();
+	public RegionLockFixLobbyCustomization Quests { get; set; } = new();
 
-    public RegionLockFixCustomization() { }
+	public RegionLockFixCustomization()
+	{
+		InstantiateSingletons();
+	}
 
-    public RegionLockFixCustomization Init()
-    {
-        Sessions.Init();
-        Quests.Init();
+	public RegionLockFixCustomization Init()
+	{
+		Sessions.Init();
+		Quests.Init();
 
-        return this;
-    }
+		return this;
+	}
 
-    public bool RenderImGui()
-    {
-        var changed = false;
+	public bool RenderImGui()
+	{
+		var changed = false;
 
-        if (ImGui.TreeNode(localizationManager.ImGui.RegionLockFix))
-        {
-            changed = Sessions.RenderImGui(localizationManager.ImGui.Sessions) || changed;
-            changed = Quests.RenderImGui(localizationManager.ImGui.Quests) || changed;
+		if (ImGui.TreeNode(LocalizationManagerInstance.ImGui.RegionLockFix))
+		{
+			changed = Sessions.RenderImGui(LocalizationManagerInstance.ImGui.Sessions) || changed;
+			changed = Quests.RenderImGui(LocalizationManagerInstance.ImGui.Quests) || changed;
 
-            ImGui.TreePop();
-        }
+			ImGui.TreePop();
+		}
 
-        return changed;
-    }
+		return changed;
+	}
 }

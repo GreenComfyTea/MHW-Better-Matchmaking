@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal sealed class MaxSearchResultLimit : SingletonAccessor
+internal sealed class MaxSearchResultLimit
 {
 	// Singleton Pattern
 	private static readonly MaxSearchResultLimit _singleton = new();

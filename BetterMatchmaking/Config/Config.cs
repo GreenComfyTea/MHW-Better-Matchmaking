@@ -27,11 +27,15 @@ internal class Config : SingletonAccessor
 	public MaxSearchResultLimitCustomization MaxSearchResultLimit { get; set; } = new();
 	public SessionPlayerCountFilterCustomization SessionPlayerCountFilter { get; set; } = new();
 
-	public Config() { }
+	public Config()
+	{
+		InstantiateSingletons();
+	}
 
 	public Config InitDefault()
 	{
 		TeaLog.Info("Default Config: Initializing...");
+
 		TeaLog.Info("Default Config: Initialization Done!");
 
 		return this;
@@ -54,7 +58,7 @@ internal class Config : SingletonAccessor
 	{
 		TeaLog.Info("Config: Saving...");
 
-		configManager.ConfigWatcherInstance.TemporarilyDisable();
+		ConfigManagerInstance.ConfigWatcherInstance.TemporarilyDisable();
 		JsonManager.SearializeToFile(Constants.DEFAULT_CONFIG_FILE_PATH_NAME, this);
 
 		TeaLog.Info("Config: Saving Done!");

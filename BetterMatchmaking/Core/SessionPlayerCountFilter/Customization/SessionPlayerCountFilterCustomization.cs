@@ -11,37 +11,40 @@ namespace BetterMatchmaking;
 
 internal class SessionPlayerCountFilterCustomization : SingletonAccessor
 {
-    public SessionPlayerCountFilterMinCustomization Min { get; set; } = new();
+	public SessionPlayerCountFilterMinCustomization Min { get; set; } = new();
 
-    public SessionPlayerCountFilterMaxCustomization Max { get; set; } = new();
+	public SessionPlayerCountFilterMaxCustomization Max { get; set; } = new();
 
-    public SessionPlayerCountFilterCustomization() { }
+	public SessionPlayerCountFilterCustomization()
+	{
+		InstantiateSingletons();
+	}
 
-    public SessionPlayerCountFilterCustomization Init()
-    {
-        if (Max.Value < Min.Value)
-        {
-            Max.Value = Min.Value;
-        }
+	public SessionPlayerCountFilterCustomization Init()
+	{
+		if (Max.Value < Min.Value)
+		{
+			Max.Value = Min.Value;
+		}
 
-        Min.SliderMax = Max.Value;
-        Max.SliderMin = Min.Value;
+		Min.SliderMax = Max.Value;
+		Max.SliderMin = Min.Value;
 
-        return this;
-    }
+		return this;
+	}
 
-    public bool RenderImGui()
-    {
-        var changed = false;
+	public bool RenderImGui()
+	{
+		var changed = false;
 
-        if (ImGui.TreeNode(localizationManager.ImGui.SessionPlayerCountFilter))
-        {
-            changed = Min.RenderImGui() || changed;
-            changed = Max.RenderImGui() || changed;
+		if (ImGui.TreeNode(LocalizationManagerInstance.ImGui.SessionPlayerCountFilter))
+		{
+			changed = Min.RenderImGui() || changed;
+			changed = Max.RenderImGui() || changed;
 
-            ImGui.TreePop();
-        }
+			ImGui.TreePop();
+		}
 
-        return changed;
-    }
+		return changed;
+	}
 }

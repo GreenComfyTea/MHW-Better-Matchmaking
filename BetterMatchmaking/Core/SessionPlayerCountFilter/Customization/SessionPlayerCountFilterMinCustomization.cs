@@ -19,22 +19,25 @@ internal class SessionPlayerCountFilterMinCustomization : SingletonAccessor
     [JsonIgnore]
     public int SliderMax { get; set; } = Constants.DEFAULT_SESSION_PLAYER_COUNT_MAX;
 
-    public SessionPlayerCountFilterMinCustomization() { }
+    public SessionPlayerCountFilterMinCustomization()
+    {
+        InstantiateSingletons();
+    }
 
     public bool RenderImGui()
     {
         var changed = false;
         var tempChanged = false;
 
-        if (ImGui.TreeNode(localizationManager.ImGui.Min))
+        if (ImGui.TreeNode(LocalizationManagerInstance.ImGui.Min))
         {
-            changed = ImGui.Checkbox(localizationManager.ImGui.Enabled, ref _enabled) || changed;
-            tempChanged = ImGui.SliderInt(localizationManager.ImGui.Value, ref _value, 1, SliderMax);
+            changed = ImGui.Checkbox(LocalizationManagerInstance.ImGui.Enabled, ref _enabled) || changed;
+            tempChanged = ImGui.SliderInt(LocalizationManagerInstance.ImGui.Value, ref _value, 1, SliderMax);
 
             if (tempChanged)
             {
                 changed = true;
-                var max = sessionPlayerCountFilter.Customization.Max;
+                var max = SessionPlayerCountFilterInstance.Customization.Max;
 
                 max.SliderMin = Value;
 

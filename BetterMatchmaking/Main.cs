@@ -11,18 +11,17 @@ using SharpPluginLoader.Core.Experimental;
 using SharpPluginLoader.Core.Networking;
 using System.Net.WebSockets;
 using System.Net;
+using System.Runtime.CompilerServices;
 
 namespace BetterMatchmaking;
 
-internal class BetterMatchmakingPlugin : IPlugin
+internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 {
 	public string Name => $"{Constants.MOD_NAME} v{Constants.VERSION}";
 
 	public string Author => Constants.MOD_AUTHOR;
 
 	private bool IsInitialized { get; set; } = false;
-
-	private Core CoreInstance { get; set; }
 
 	public PluginData Initialize()
 	{
@@ -32,39 +31,48 @@ internal class BetterMatchmakingPlugin : IPlugin
 		};
 	}
 
-	public void Init()
+	public BetterMatchmakingPlugin Init()
 	{
 		try
 		{
 			TeaLog.Info("Managers: Initializing...");
 
-			var localizationManager = LocalizationManager.Instance;
-			var configManager = ConfigManager.Instance;
-			var regionLockFix = RegionLockFix.Instance;
-			var maxSearchResultLimit = MaxSearchResultLimit.Instance;
-			var sessionPlayerCountFilter = SessionPlayerCountFilter.Instance;
-			CoreInstance = Core.Instance;
+			InstantiateSingletons();
 
-			localizationManager.Init();
-			configManager.Init();
+			LocalizationManagerInstance = LocalizationManager.Instance;
+			ConfigManagerInstance = ConfigManager.Instance;
+			RegionLockFixInstance = RegionLockFix.Instance;
+			MaxSearchResultLimitInstance = MaxSearchResultLimit.Instance;
+			SessionPlayerCountFilterInstance = SessionPlayerCountFilter.Instance;
+			CoreInstance = Core.Instance;
+			CustomizationWindowInstance = CustomizationWindow.Instance;
+
+			LocalizationManagerInstance.Init();
+			ConfigManagerInstance.Init();
+			CustomizationWindowInstance.Init();
 
 			IsInitialized = true;
 
 			TeaLog.Info("Managers: Initialization Done!");
+			return this;
 		}
 		catch (Exception exception)
 		{
 			TeaLog.Error(exception.ToString());
+			return this;
 		}
 	}
 
 	public void OnLoad()
 	{
-		Task.Run(Init);
+		_ = Task.Run(Init);
 	}
 
 	public void OnUnload()
 	{
+		LocalizationManagerInstance.Dispose();
+		ConfigManagerInstance.Dispose();
+		CoreInstance.Dispose();
 	}
 
 	public void OnImGuiRender()
@@ -91,7 +99,7 @@ internal class BetterMatchmakingPlugin : IPlugin
 		try
 		{
 			if (IsInitialized && !CoreInstance.AreHooksInitialized) CoreInstance.Init();
-			CustomizationWindow.Instance.Render();
+			CustomizationWindowInstance.Render();
 		}
 		catch (Exception exception)
 		{

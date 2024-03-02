@@ -17,6 +17,7 @@ internal class ConfigWatcher : SingletonAccessor, IDisposable
 
 	public ConfigWatcher()
 	{
+		InstantiateSingletons();
 		Watcher = new(Constants.PLUGIN_DATA_PATH);
 	}
 
@@ -65,7 +66,7 @@ internal class ConfigWatcher : SingletonAccessor, IDisposable
 		TeaLog.Info($"ConfigChangeWatcher: Deleted {e.Name}.");
 
 		// Save current config if the config file was deleted
-		configManager.Current.Save();
+		ConfigManagerInstance.Current.Save();
 	}
 
 	private void OnConfigFileRenamed(object sender, RenamedEventArgs e)
@@ -73,7 +74,7 @@ internal class ConfigWatcher : SingletonAccessor, IDisposable
 		TeaLog.Info($"ConfigChangeWatcher: Renamed {e.OldName} to {e.Name}.");
 
 		// Save current config if the config file was renamed
-		configManager.Current.Save();
+		ConfigManagerInstance.Current.Save();
 	}
 
 	private void OnConfigFileError(object sender, ErrorEventArgs e)
@@ -81,14 +82,14 @@ internal class ConfigWatcher : SingletonAccessor, IDisposable
 		TeaLog.Info(e.GetException().ToString());
 	}
 
-	private void UpdateConfig()
+	private ConfigWatcher UpdateConfig()
 	{
 		DateTime currentEventTime = DateTime.Now;
 
 		if ((currentEventTime - _lastEventTime).TotalSeconds < 1)
 		{
 			TeaLog.Info("ConfigChangeWatcher: Skipping...");
-			return;
+			return this;
 		}
 
 		_lastEventTime = currentEventTime;
@@ -105,15 +106,19 @@ internal class ConfigWatcher : SingletonAccessor, IDisposable
 			}
 
 			// If config file is good - use it and save
-			configManager.SetCurrentConfig(config);
+			ConfigManagerInstance.SetCurrentConfig(config);
 			config.Save();
 		}, 250);
+
+		return this;
 	}
 
-	public void TemporarilyDisable()
+	public ConfigWatcher TemporarilyDisable()
 	{
 		TeaLog.Info("ConfigChangeWatcher: Temporarily Disabling...");
 		_lastEventTime = DateTime.Now;
+
+		return this;
 	}
 
 	public override string ToString()
@@ -123,7 +128,7 @@ internal class ConfigWatcher : SingletonAccessor, IDisposable
 
 	public void Dispose()
 	{
-		Watcher.Dispose();
 		TeaLog.Info("ConfigChangeWatcher: Disposing...");
+		Watcher.Dispose();
 	}
 }

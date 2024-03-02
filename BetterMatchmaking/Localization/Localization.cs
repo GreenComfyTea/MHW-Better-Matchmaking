@@ -28,14 +28,16 @@ namespace BetterMatchmaking
 
 		public LocalizedStrings_ImGui ImGui { get; set; } = new();
 
-		public Localization() { }
+		public Localization() {
+			InstantiateSingletons();
+		}
 
 		public Localization Init()
 		{
 			Name = Constants.DEFAULT_LOCALIZATION;
 
 			TeaLog.Info($"Localization {Name}: Initializing...");
-
+			
 			IsDefault = true;
 
 			TeaLog.Info($"Localization {Name}: Done!");
@@ -47,6 +49,7 @@ namespace BetterMatchmaking
 		{
 			TeaLog.Info($"Localization {name}: Initializing...");
 
+			InstantiateSingletons();
 			Name = name;
 			IsDefault = false;
 
@@ -59,7 +62,7 @@ namespace BetterMatchmaking
 		{
 			TeaLog.Info($"Localization {Name}: Saving...");
 
-			localizationManager.LocalizationWatcherInstance.TemporarilyDisable(Name);
+			LocalizationManagerInstance.LocalizationWatcherInstance.TemporarilyDisable(Name);
 			JsonManager.SearializeToFile(Path.Combine(Constants.LOCALIZATIONS_PATH, $"{Name}.json"), this);
 
 			return this;

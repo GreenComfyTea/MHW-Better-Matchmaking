@@ -18,33 +18,43 @@ internal class LocalizationCustomization : SingletonAccessor
 	private int _selectedLocalizationIndex = 0;
 	private int SelectedLocalizationIndex { get => _selectedLocalizationIndex; set => _selectedLocalizationIndex = value; }
 
-	public void SetCurrentLocalization(string name)
+	public LocalizationCustomization()
+	{
+		InstantiateSingletons();
+	}
+
+	public LocalizationCustomization SetCurrentLocalization(string name)
 	{
 		var newSelectedLocalizationIndex = Array.IndexOf(LocalizationNames, name);
 
-		if (newSelectedLocalizationIndex == -1) return;
+		if (newSelectedLocalizationIndex == -1) return this;
 
 		SelectedLocalizationIndex = newSelectedLocalizationIndex;
+
+		return this;
 	}
 
-	public void DeleteLocalization(string name)
+	public LocalizationCustomization DeleteLocalization(string name)
 	{
 		if (LocalizationNamesList.Remove(name))
 		{
 			UpdateNamesList();
-			return;
 		}
+
+		return this;
 	}
 
-	public void AddLocalization(string name)
+	public LocalizationCustomization AddLocalization(string name)
 	{
-		if (LocalizationNamesList.Contains(name)) return;
+		if (LocalizationNamesList.Contains(name)) return this;
 
 		LocalizationNamesList.Add(name);
 		UpdateNamesList();
+
+		return this;
 	}
 
-	public void UpdateNamesList()
+	public LocalizationCustomization UpdateNamesList()
 	{
 		LocalizationNamesList.Sort((left, right) =>
 		{
@@ -54,13 +64,17 @@ internal class LocalizationCustomization : SingletonAccessor
 		});
 
 		LocalizationNames = LocalizationNamesList.ToArray();
+
+		return this;
 	}
 
-	public void OnLocalizationChanged(int selectedLocalizationIndex)
+	public LocalizationCustomization OnLocalizationChanged(int selectedLocalizationIndex)
 	{
 		var currentLocalizationName = LocalizationNames[selectedLocalizationIndex];
-		configManager.Current.Localization = currentLocalizationName;
-		localizationManager.SetCurrentLocalization(currentLocalizationName);
+		ConfigManagerInstance.Current.Localization = currentLocalizationName;
+		LocalizationManagerInstance.SetCurrentLocalization(currentLocalizationName);
+
+		return this;
 	}
 
 	public bool RenderImGui()
@@ -68,15 +82,15 @@ internal class LocalizationCustomization : SingletonAccessor
 		var changed = false;
 		var tempChanged = false;
 
-		if (ImGui.TreeNode(localizationManager.ImGui.Language))
+		if (ImGui.TreeNode(LocalizationManagerInstance.ImGui.Language))
 		{
-			tempChanged = ImGui.Combo(localizationManager.ImGui.Language, ref _selectedLocalizationIndex, LocalizationNames, LocalizationNames.Length);
+			tempChanged = ImGui.Combo(LocalizationManagerInstance.ImGui.Language, ref _selectedLocalizationIndex, LocalizationNames, LocalizationNames.Length);
 			if (tempChanged) OnLocalizationChanged(SelectedLocalizationIndex);
 			changed = changed || tempChanged;
 
-			ImGui.Text(localizationManager.ImGui.Translators);
+			ImGui.Text(LocalizationManagerInstance.ImGui.Translators);
 			ImGui.SameLine();
-			ImGui.TextColored(Constants.IMGUI_USERNAME_COLOR, localizationManager.Current.LocalizationInfo.Translators);
+			ImGui.TextColored(Constants.IMGUI_USERNAME_COLOR, LocalizationManagerInstance.Current.LocalizationInfo.Translators);
 
 			ImGui.TreePop();
 		}

@@ -12,10 +12,15 @@ internal class MaxSearchResultLimitCustomization : SingletonAccessor
 	public MaxSearchResultLimitLobbyCustomization Sessions { get; set; } = new();
 	public MaxSearchResultLimitLobbyCustomization Quests { get; set; } = new();
 
-	public MaxSearchResultLimitCustomization() { }
+	public MaxSearchResultLimitCustomization()
+	{
+		InstantiateSingletons();
+	}
 
 	public MaxSearchResultLimitCustomization Init()
 	{
+		InstantiateSingletons();
+
 		Sessions.Init();
 		Quests.Init(Constants.SEARCH_RESULT_LIMIT_MAX_QUESTS);
 
@@ -26,10 +31,10 @@ internal class MaxSearchResultLimitCustomization : SingletonAccessor
 	{
 		var changed = false;
 
-		if (ImGui.TreeNode(localizationManager.ImGui.MaxSearchResultLimit))
+		if (ImGui.TreeNode(LocalizationManagerInstance.ImGui.MaxSearchResultLimit))
 		{
-			changed = Sessions.RenderImGui(localizationManager.ImGui.Sessions) || changed;
-			changed = Quests.RenderImGui(localizationManager.ImGui.Quests) || changed;
+			changed = Sessions.RenderImGui(LocalizationManagerInstance.ImGui.Sessions) || changed;
+			changed = Quests.RenderImGui(LocalizationManagerInstance.ImGui.Quests) || changed;
 
 			ImGui.TreePop();
 		}

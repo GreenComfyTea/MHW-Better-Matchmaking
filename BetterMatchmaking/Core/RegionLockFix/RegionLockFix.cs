@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal sealed class RegionLockFix : SingletonAccessor
+internal sealed class RegionLockFix
 {
 	// Singleton Pattern
 	private static readonly RegionLockFix _singleton = new();
