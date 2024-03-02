@@ -93,7 +93,7 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 		sessionPlayerCountFilter.Customization = config.SessionPlayerCountFilter;
 	}
 
-	public Config LoadConfig()
+	public static Config LoadConfig()
 	{
 		try
 		{

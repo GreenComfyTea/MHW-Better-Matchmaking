@@ -45,7 +45,6 @@ internal class SessionPlayerCountFilterMaxCustomization : SingletonAccessor
             }
 
             ImGui.TreePop();
-
         }
 
         return changed;

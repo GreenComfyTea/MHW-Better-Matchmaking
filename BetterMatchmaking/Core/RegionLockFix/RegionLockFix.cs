@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class RegionLockFix : SingletonAccessor
+internal sealed class RegionLockFix : SingletonAccessor
 {
 	// Singleton Pattern
 	private static readonly RegionLockFix _singleton = new();
 
-	public static RegionLockFix Instance { get { return _singleton; } }
+	public static RegionLockFix Instance => _singleton;
 
 	// Explicit static constructor to tell C# compiler
 	// not to mark type as beforefieldinit

@@ -42,7 +42,6 @@ public static class ColorUtils
 		alpha = Convert.ToByte(255 * colorRgba.W);
 	}
 
-
 	public static string IndividualsToRgbaString(byte red, byte green, byte blue, byte alpha)
 	{
 		return $"0x{red:X2}{green:X2}{blue:X2}{alpha:X2}";
@@ -82,7 +81,6 @@ public static class ColorUtils
 		else if (rgbaString.StartsWith("#", StringComparison.CurrentCultureIgnoreCase))
 		{
 			rgbaPureString = rgbaString[1..];
-
 		}
 
 		uint parsedRgbaUint;

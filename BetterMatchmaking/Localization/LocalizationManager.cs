@@ -49,7 +49,7 @@ internal sealed class LocalizationManager : IDisposable
 
 		// Create folder hierarchy if it doesn't exist
 		Directory.CreateDirectory(Constants.LOCALIZATIONS_PATH);
-		
+
 		SetCurrentLocalization(Default);
 		LoadAllLocalizations();
 
@@ -81,7 +81,6 @@ internal sealed class LocalizationManager : IDisposable
 
 	public LocalizationManager LoadAllLocalizations()
 	{
-
 		TeaLog.Info("LocalizationManager: Loading All Localizations...");
 
 		Localizations = new();

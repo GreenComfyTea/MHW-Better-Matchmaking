@@ -18,7 +18,7 @@ internal class BetterMatchmakingPlugin : IPlugin
 {
 	public string Name => $"{Constants.MOD_NAME} v{Constants.VERSION}";
 
-	public string Author => $"{Constants.MOD_AUTHOR}";
+	public string Author => Constants.MOD_AUTHOR;
 
 	private bool IsInitialized { get; set; } = false;
 
@@ -29,7 +29,6 @@ internal class BetterMatchmakingPlugin : IPlugin
 		return new PluginData
 		{
 			ImGuiWrappedInTreeNode = false
-
 		};
 	}
 
@@ -38,8 +37,6 @@ internal class BetterMatchmakingPlugin : IPlugin
 		try
 		{
 			TeaLog.Info("Managers: Initializing...");
-
-			SteamApi.Init();
 
 			var localizationManager = LocalizationManager.Instance;
 			var configManager = ConfigManager.Instance;

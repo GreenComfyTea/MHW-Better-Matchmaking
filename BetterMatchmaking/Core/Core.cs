@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class Core : SingletonAccessor
+internal sealed class Core : SingletonAccessor
 {
 	// Singleton Pattern
 	private static readonly Core _singleton = new();
 
-	public static Core Instance { get { return _singleton; } }
+	public static Core Instance => _singleton;
 
 	// Explicit static constructor to tell C# compiler
 	// not to mark type as beforefieldinit
@@ -76,7 +76,7 @@ internal class Core : SingletonAccessor
 		return "";
 	}
 
-	private SearchTypes GetSearchType(nint netRequest)
+	private static SearchTypes GetSearchType(nint netRequest)
 	{
 		var requestArguments = MemoryUtil.Read<int>(netRequest + 0x58);
 		var searchKeyCount = MemoryUtil.Read<int>(requestArguments + 0x14);
@@ -123,7 +123,7 @@ internal class Core : SingletonAccessor
 
 		if (phase != 0) return _startRequestHook!.Original(netCore, netRequest);
 
-		TeaLog.Info($"startRequest\n");
+		TeaLog.Info("startRequest\n");
 
 		// Get Lobby Search Type
 
@@ -148,7 +148,7 @@ internal class Core : SingletonAccessor
 	{
 		try
 		{
-			TeaLog.Info($"OnNumericalFilter");
+			TeaLog.Info("OnNumericalFilter");
 
 			var key = MemoryUtil.ReadString(keyAddress);
 

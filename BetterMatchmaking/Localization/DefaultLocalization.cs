@@ -62,7 +62,6 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string Sessions { get; set; } = "Sessions";
 	public string Quests { get; set; } = "Quests";
 
-
 	public string DistanceFilter { get; set; } = "Distance Filter";
 	public string Close { get; set; } = "Close";
 	public string Default { get; set; } = "Default";
@@ -80,7 +79,6 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 
 	[JsonIgnore]
 	public string[] DistanceFilters { get; set; } = Array.Empty<string>();
-
 
 	public LocalizedStrings_ImGui()
 	{

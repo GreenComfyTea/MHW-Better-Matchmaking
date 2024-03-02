@@ -15,8 +15,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace BetterMatchmaking
 {
-
-	internal class CustomizationWindow : SingletonAccessor
+	internal sealed class CustomizationWindow : SingletonAccessor
 	{
 		// Singleton Pattern
 		private static readonly CustomizationWindow _singleton = new();
@@ -32,7 +31,6 @@ namespace BetterMatchmaking
 		private bool _isOpened = false;
 		public bool IsOpened { get => _isOpened; set => _isOpened = value; }
 
-
 		private CustomizationWindow() { }
 
 		public void Render()
@@ -46,7 +44,6 @@ namespace BetterMatchmaking
 			try
 			{
 				var changed = false;
-
 
 				//ImGui.PushFont(font);
 				ImGui.Begin($"{Constants.MOD_NAME} v{Constants.VERSION}", ref _isOpened);
@@ -78,7 +75,6 @@ namespace BetterMatchmaking
 				ImGui.NewLine();
 				ImGui.Separator();
 
-				
 				configManager.Customization.RenderImGui();
 				changed = localizationManager.Customization.RenderImGui() || changed;
 				changed = regionLockFix.Customization.RenderImGui() || changed;

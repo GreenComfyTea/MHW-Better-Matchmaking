@@ -35,7 +35,6 @@ internal class RegionLockFixCustomization : SingletonAccessor
             changed = Quests.RenderImGui(localizationManager.ImGui.Quests) || changed;
 
             ImGui.TreePop();
-
         }
 
         return changed;

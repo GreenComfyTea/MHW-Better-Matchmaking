@@ -38,7 +38,6 @@ internal class MaxSearchResultLimitLobbyCustomization : SingletonAccessor
 			changed = ImGui.SliderInt(localizationManager.ImGui.Value, ref _value, 1, Max) || changed;
 
 			ImGui.TreePop();
-
 		}
 
 		return changed;

@@ -12,9 +12,9 @@ namespace BetterMatchmaking;
 internal class LocalizationCustomization : SingletonAccessor
 {
 	public List<string> LocalizationNamesList { get; set; } = new();
-	
+
 	private string[] LocalizationNames { get; set; } = Array.Empty<string>();
-	
+
 	private int _selectedLocalizationIndex = 0;
 	private int SelectedLocalizationIndex { get => _selectedLocalizationIndex; set => _selectedLocalizationIndex = value; }
 

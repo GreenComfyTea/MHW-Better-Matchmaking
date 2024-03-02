@@ -50,10 +50,10 @@ internal class RegionLockFixLobbyCustomization : SingletonAccessor
 				DistanceFilterEnum = (LobbyDistanceFilter)selectedIndex;
 				DistanceFilter = localizationManager.Default.ImGui.DistanceFilters[selectedIndex];
 			}
+
 			changed = changed || tempChanged;
 
 			ImGui.TreePop();
-
 		}
 
 		return changed;

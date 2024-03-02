@@ -32,7 +32,6 @@ internal class MaxSearchResultLimitCustomization : SingletonAccessor
 			changed = Quests.RenderImGui(localizationManager.ImGui.Quests) || changed;
 
 			ImGui.TreePop();
-
 		}
 
 		return changed;

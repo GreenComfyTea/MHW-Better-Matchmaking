@@ -15,7 +15,6 @@ internal class SessionPlayerCountFilterCustomization : SingletonAccessor
 
     public SessionPlayerCountFilterMaxCustomization Max { get; set; } = new();
 
-
     public SessionPlayerCountFilterCustomization() { }
 
     public SessionPlayerCountFilterCustomization Init()
@@ -37,12 +36,10 @@ internal class SessionPlayerCountFilterCustomization : SingletonAccessor
 
         if (ImGui.TreeNode(localizationManager.ImGui.SessionPlayerCountFilter))
         {
-
             changed = Min.RenderImGui() || changed;
             changed = Max.RenderImGui() || changed;
 
             ImGui.TreePop();
-
         }
 
         return changed;

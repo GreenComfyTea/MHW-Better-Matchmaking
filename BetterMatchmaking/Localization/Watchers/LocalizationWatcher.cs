@@ -56,7 +56,6 @@ internal class LocalizationWatcher : SingletonAccessor, IDisposable
 
 	private void OnLocalizationFileCreated(object sender, FileSystemEventArgs e)
 	{
-
 		TeaLog.Info($"LocalizationChangeWatcher: Created {e.Name}.");
 
 		UpdateLocalization(e.FullPath, e.Name);
@@ -92,7 +91,7 @@ internal class LocalizationWatcher : SingletonAccessor, IDisposable
 
 		if (contains && (currentEventTime - lastEventTime).TotalSeconds < 1)
 		{
-			TeaLog.Info($"LocalizationChangeWatcher: Skipping...");
+			TeaLog.Info("LocalizationChangeWatcher: Skipping...");
 			return;
 		}
 

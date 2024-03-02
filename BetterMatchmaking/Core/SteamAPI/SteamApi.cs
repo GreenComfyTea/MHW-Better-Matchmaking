@@ -89,7 +89,7 @@ internal static unsafe partial class SteamApi
 	private static nint GetVirtualFunction(nint steamInterface, VirtualFunctionIndex functionIndex)
 	{
 		var vtable = *(nint*) steamInterface;
-		return MemoryUtil.Read<nint>(vtable + (int) functionIndex * nint.Size);
+		return MemoryUtil.Read<nint>(vtable + ((int) functionIndex * nint.Size));
 	}
 
 	private static nint GetSteamMatchmakingInterface()

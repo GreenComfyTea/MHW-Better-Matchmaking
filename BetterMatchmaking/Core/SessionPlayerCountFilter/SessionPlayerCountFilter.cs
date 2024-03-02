@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class SessionPlayerCountFilter
+internal sealed class SessionPlayerCountFilter
 {
 	// Singleton Pattern
 	private static readonly SessionPlayerCountFilter _singleton = new();
 
-	public static SessionPlayerCountFilter Instance { get { return _singleton; } }
+	public static SessionPlayerCountFilter Instance => _singleton;
 
 	// Explicit static constructor to tell C# compiler
 	// not to mark type as beforefieldinit

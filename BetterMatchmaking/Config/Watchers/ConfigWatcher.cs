@@ -87,7 +87,7 @@ internal class ConfigWatcher : SingletonAccessor, IDisposable
 
 		if ((currentEventTime - _lastEventTime).TotalSeconds < 1)
 		{
-			TeaLog.Info($"ConfigChangeWatcher: Skipping...");
+			TeaLog.Info("ConfigChangeWatcher: Skipping...");
 			return;
 		}
 
@@ -96,7 +96,7 @@ internal class ConfigWatcher : SingletonAccessor, IDisposable
 		Timers.SetTimeout(() =>
 		{
 			// Load from file
-			var config = configManager.LoadConfig();
+			var config = ConfigManager.LoadConfig();
 
 			// If config file is incorrect - do nothing
 			if (config == null)
@@ -112,7 +112,7 @@ internal class ConfigWatcher : SingletonAccessor, IDisposable
 
 	public void TemporarilyDisable()
 	{
-		TeaLog.Info($"ConfigChangeWatcher: Temporarily Disabling...");
+		TeaLog.Info("ConfigChangeWatcher: Temporarily Disabling...");
 		_lastEventTime = DateTime.Now;
 	}
 

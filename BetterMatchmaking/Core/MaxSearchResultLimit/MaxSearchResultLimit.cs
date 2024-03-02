@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class MaxSearchResultLimit : SingletonAccessor
+internal sealed class MaxSearchResultLimit : SingletonAccessor
 {
 	// Singleton Pattern
 	private static readonly MaxSearchResultLimit _singleton = new();
 
-	public static MaxSearchResultLimit Instance { get { return _singleton; } }
+	public static MaxSearchResultLimit Instance => _singleton;
 
 	// Explicit static constructor to tell C# compiler
 	// not to mark type as beforefieldinit

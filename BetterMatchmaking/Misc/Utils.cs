@@ -16,26 +16,28 @@ public static class Utils
 {
 	public static int Clamp(int value, int min, int max)
 	{
-		if (value < min)
+		if(value < min)
 		{
-			value = min;
+			return min;
 		}
-		else if (value > max)
+		else if(value > max)
 		{
-			value = max;
+			return max;
 		}
 
 		return value;
 	}
 
 	public static float Clamp(float value, float min, float max) {
-		if (value < min) {
-			value = min;
-		}
-		else if (value > max)
+		if(value < min)
 		{
-			value = max;
+			return min;
 		}
+		else if(value > max)
+		{
+			return max;
+		}
+
 		return value;
 	}
 

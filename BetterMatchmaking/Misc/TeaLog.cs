@@ -9,7 +9,6 @@ namespace BetterMatchmaking
 {
 	public static class TeaLog
 	{
-
 		public static void Info(string text)
 		{
 			Log.Info($"[{Constants.MOD_NAME}] {text}");
@@ -17,7 +16,6 @@ namespace BetterMatchmaking
 
 		public static void Warn(string text)
 		{
-
 			Log.Warn($"[{Constants.MOD_NAME}] {text}");
 		}
 
