@@ -10,9 +10,9 @@ namespace BetterMatchmaking;
 internal class SessionPlayerCountFilter
 {
 	// Singleton Pattern
-	private static readonly SessionPlayerCountFilter singleton = new();
+	private static readonly SessionPlayerCountFilter _singleton = new();
 
-	public static SessionPlayerCountFilter Instance { get { return singleton; } }
+	public static SessionPlayerCountFilter Instance { get { return _singleton; } }
 
 	// Explicit static constructor to tell C# compiler
 	// not to mark type as beforefieldinit

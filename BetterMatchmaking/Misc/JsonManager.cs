@@ -10,12 +10,11 @@ namespace BetterMatchmaking;
 
 public static class JsonManager
 {
-
-	public static readonly JsonSerializerOptions JsonSerializerOptionsInstance = new() { WriteIndented = true, AllowTrailingCommas = true };
+	public static readonly JsonSerializerOptions JSON_SERIALIZER_OPTIONS_INSTANCE = new() { WriteIndented = true, AllowTrailingCommas = true };
 
 	public static string Serialize(object obj)
 	{
-		return JsonSerializer.Serialize(obj, JsonSerializerOptionsInstance).Replace("  ", "\t");
+		return JsonSerializer.Serialize(obj, JSON_SERIALIZER_OPTIONS_INSTANCE).Replace("  ", "\t");
 	}
 
 	public static void SerializeToFile(string filePathName, string json)
@@ -42,7 +41,6 @@ public static class JsonManager
 		await streamWriter.WriteLineAsync(json);
 
 		streamWriter.Close();
-
 	}
 
 	public static void SearializeToFile(string filePathName, object obj)

@@ -12,11 +12,11 @@ namespace BetterMatchmaking;
 
 internal class MaxSearchResultLimitLobbyCustomization : SingletonAccessor
 {
-	private bool enabled = true;
-	public bool Enabled { get => enabled; set => enabled = value; }
+	private bool _enabled = true;
+	public bool Enabled { get => _enabled; set => _enabled = value; }
 
-	private int value = Constants.SEARCH_RESULT_LIMIT_MAX_SESSIONS;
-	public int Value { get => value; set => this.value = value; }
+	private int _value = Constants.SEARCH_RESULT_LIMIT_MAX_SESSIONS;
+	public int Value { get => _value; set => _value = value; }
 
 	public int Max { get; set; } = Constants.SEARCH_RESULT_LIMIT_MAX_SESSIONS;
 
@@ -34,8 +34,8 @@ internal class MaxSearchResultLimitLobbyCustomization : SingletonAccessor
 
 		if (ImGui.TreeNode(title))
 		{
-			changed = ImGui.Checkbox(localizationManager.ImGui.Enabled, ref enabled) || changed;
-			changed = ImGui.SliderInt(localizationManager.ImGui.Value, ref value, 1, Max) || changed;
+			changed = ImGui.Checkbox(localizationManager.ImGui.Enabled, ref _enabled) || changed;
+			changed = ImGui.SliderInt(localizationManager.ImGui.Value, ref _value, 1, Max) || changed;
 
 			ImGui.TreePop();
 

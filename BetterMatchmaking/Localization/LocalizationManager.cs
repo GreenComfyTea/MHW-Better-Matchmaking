@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class LocalizationManager : IDisposable
+internal sealed class LocalizationManager : IDisposable
 {
 	// Singleton Pattern
-	private static readonly LocalizationManager singleton = new();
+	private static readonly LocalizationManager _singleton = new();
 
-	public static LocalizationManager Instance { get { return singleton; } }
+	public static LocalizationManager Instance => _singleton;
 
 	// Explicit static constructor to tell C# compiler
 	// not to mark type as beforefieldinit
@@ -88,7 +88,6 @@ internal class LocalizationManager : IDisposable
 		var localizationNamesList = new List<string>();
 		Localizations[Default.Name] = Default;
 
-
 		foreach (var localalizationFileNamePath in Directory.EnumerateFiles(Constants.LOCALIZATIONS_PATH, "*.json"))
 		{
 			var localizationName = LoadLocalization(localalizationFileNamePath);
@@ -117,7 +116,7 @@ internal class LocalizationManager : IDisposable
 
 			var json = JsonManager.ReadFromFile(localizationFileNamePath);
 
-			var localization = JsonSerializer.Deserialize<Localization>(json, JsonManager.JsonSerializerOptionsInstance).Init(localizationName);
+			var localization = JsonSerializer.Deserialize<Localization>(json, JsonManager.JSON_SERIALIZER_OPTIONS_INSTANCE).Init(localizationName);
 
 			TeaLog.Info($"Localization {localizationName}: Loading Done!");
 

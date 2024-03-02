@@ -11,19 +11,19 @@ using Windows.UI.Text;
 
 namespace BetterMatchmaking;
 
-public interface LocalizedStrings { }
+public interface ILocalizedStrings;
 
-internal class LocalizedStrings_LocalizationInfo : LocalizedStrings
+internal class LocalizedStrings_LocalizationInfo : ILocalizedStrings
 {
 	public string Translators { get; set; } = "GreenComfyTea";
 }
 
-internal class LocalizedStrings_UI : LocalizedStrings
+internal class LocalizedStrings_UI : ILocalizedStrings
 {
 	public string UI { get; set; } = "UI";
 }
 
-internal class LocalizedStrings_ImGui : LocalizedStrings
+internal class LocalizedStrings_ImGui : ILocalizedStrings
 {
 	// Mod Info
 	public string MadeBy { get; set; } = "Made by:";

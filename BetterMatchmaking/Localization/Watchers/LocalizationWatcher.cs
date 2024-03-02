@@ -11,7 +11,7 @@ namespace BetterMatchmaking;
 
 internal class LocalizationWatcher : SingletonAccessor, IDisposable
 {
-	private Dictionary<string, DateTime> LastEventTimes = new();
+	private Dictionary<string, DateTime> _lastEventTimes = new();
 
 	private FileSystemWatcher Watcher { get; }
 
@@ -88,7 +88,7 @@ internal class LocalizationWatcher : SingletonAccessor, IDisposable
 		DateTime currentEventTime = DateTime.Now;
 		DateTime lastEventTime;
 
-		var contains = LastEventTimes.TryGetValue(fileName, out lastEventTime);
+		var contains = _lastEventTimes.TryGetValue(fileName, out lastEventTime);
 
 		if (contains && (currentEventTime - lastEventTime).TotalSeconds < 1)
 		{
@@ -96,7 +96,7 @@ internal class LocalizationWatcher : SingletonAccessor, IDisposable
 			return;
 		}
 
-		LastEventTimes[fileName] = currentEventTime;
+		_lastEventTimes[fileName] = currentEventTime;
 
 		Timers.SetTimeout(() =>
 		{
@@ -108,7 +108,7 @@ internal class LocalizationWatcher : SingletonAccessor, IDisposable
 	public void TemporarilyDisable(string localizationName)
 	{
 		TeaLog.Info($"LocalizationChangeWatcher: Localization { localizationName}: Temporarily Disabling...");
-		LastEventTimes[$"{localizationName}.json"] = DateTime.Now;
+		_lastEventTimes[$"{localizationName}.json"] = DateTime.Now;
 	}
 
 	public override string ToString()

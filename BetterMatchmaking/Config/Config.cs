@@ -64,7 +64,7 @@ internal class Config : SingletonAccessor
 	public Config DeepCopy()
 	{
 		var json = JsonManager.Serialize(this);
-		return JsonSerializer.Deserialize<Config>(json, JsonManager.JsonSerializerOptionsInstance).Init();
+		return JsonSerializer.Deserialize<Config>(json, JsonManager.JSON_SERIALIZER_OPTIONS_INSTANCE).Init();
 	}
 
 	public override string ToString()

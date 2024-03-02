@@ -19,4 +19,6 @@ internal class SingletonAccessor
 	protected readonly MaxSearchResultLimit maxSearchResultLimit = MaxSearchResultLimit.Instance;
 	[JsonIgnore]
 	protected readonly SessionPlayerCountFilter sessionPlayerCountFilter = SessionPlayerCountFilter.Instance;
+	[JsonIgnore]
+	protected readonly Core core = Core.Instance;
 }

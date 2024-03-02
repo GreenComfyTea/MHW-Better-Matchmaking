@@ -14,7 +14,7 @@ internal static unsafe partial class SteamApi
 	[LibraryImport("steam_api64.dll")]
 	private static partial nint SteamInternal_ContextInit(nint request);
 
-	private static nint steamMatchmakingInterfaceGetter;
+	private static nint _steamMatchmakingInterfaceGetter;
 
 	public enum VirtualFunctionIndex
 	{
@@ -67,9 +67,9 @@ internal static unsafe partial class SteamApi
 		var offset = MemoryUtil.Read<int>(leaInstruction);
 		TeaLog.Info($"SteamAPI: Found Offset {offset:X}");
 
-		steamMatchmakingInterfaceGetter = afterLeaInstruction + offset;
+		_steamMatchmakingInterfaceGetter = afterLeaInstruction + offset;
 
-		TeaLog.Info($"SteamAPI: Found SteamMatchmaking Interface Getter at 0x{steamMatchmakingInterfaceGetter:X}");
+		TeaLog.Info($"SteamAPI: Found SteamMatchmaking Interface Getter at 0x{_steamMatchmakingInterfaceGetter:X}");
 	}
 
 	public static void AddRequestLobbyListResultCountFilter(int maxResults)
@@ -94,6 +94,6 @@ internal static unsafe partial class SteamApi
 
 	private static nint GetSteamMatchmakingInterface()
 	{
-		return MemoryUtil.Read<nint>(SteamInternal_ContextInit(steamMatchmakingInterfaceGetter));
+		return MemoryUtil.Read<nint>(SteamInternal_ContextInit(_steamMatchmakingInterfaceGetter));
 	}
 }

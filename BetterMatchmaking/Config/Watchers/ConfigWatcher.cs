@@ -11,7 +11,7 @@ namespace BetterMatchmaking;
 
 internal class ConfigWatcher : SingletonAccessor, IDisposable
 {
-	private DateTime LastEventTime = new();
+	private DateTime _lastEventTime = new();
 
 	private FileSystemWatcher Watcher { get; }
 
@@ -85,13 +85,13 @@ internal class ConfigWatcher : SingletonAccessor, IDisposable
 	{
 		DateTime currentEventTime = DateTime.Now;
 
-		if ((currentEventTime - LastEventTime).TotalSeconds < 1)
+		if ((currentEventTime - _lastEventTime).TotalSeconds < 1)
 		{
 			TeaLog.Info($"ConfigChangeWatcher: Skipping...");
 			return;
 		}
 
-		LastEventTime = currentEventTime;
+		_lastEventTime = currentEventTime;
 
 		Timers.SetTimeout(() =>
 		{
@@ -113,7 +113,7 @@ internal class ConfigWatcher : SingletonAccessor, IDisposable
 	public void TemporarilyDisable()
 	{
 		TeaLog.Info($"ConfigChangeWatcher: Temporarily Disabling...");
-		LastEventTime = DateTime.Now;
+		_lastEventTime = DateTime.Now;
 	}
 
 	public override string ToString()

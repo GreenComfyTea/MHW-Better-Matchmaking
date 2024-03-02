@@ -11,8 +11,8 @@ namespace BetterMatchmaking;
 
 internal class RegionLockFixLobbyCustomization : SingletonAccessor
 {
-	private bool enabled = true;
-	public bool Enabled { get => enabled; set => enabled = value; }
+	private bool _enabled = true;
+	public bool Enabled { get => _enabled; set => _enabled = value; }
 
 	public string DistanceFilter { get; set; }
 
@@ -41,7 +41,7 @@ internal class RegionLockFixLobbyCustomization : SingletonAccessor
 
 		if (ImGui.TreeNode(title))
 		{
-			changed = ImGui.Checkbox(localizationManager.ImGui.Enabled, ref enabled) || changed;
+			changed = ImGui.Checkbox(localizationManager.ImGui.Enabled, ref _enabled) || changed;
 
 			selectedIndex = (int)DistanceFilterEnum;
 			tempChanged = ImGui.Combo(localizationManager.ImGui.DistanceFilter, ref selectedIndex, localizationManager.ImGui.DistanceFilters, 4);

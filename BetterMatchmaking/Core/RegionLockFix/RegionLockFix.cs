@@ -13,9 +13,9 @@ namespace BetterMatchmaking;
 internal class RegionLockFix : SingletonAccessor
 {
 	// Singleton Pattern
-	private static readonly RegionLockFix singleton = new();
+	private static readonly RegionLockFix _singleton = new();
 
-	public static RegionLockFix Instance { get { return singleton; } }
+	public static RegionLockFix Instance { get { return _singleton; } }
 
 	// Explicit static constructor to tell C# compiler
 	// not to mark type as beforefieldinit

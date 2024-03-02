@@ -34,7 +34,6 @@ public static class Constants
 	public const string DEFAULT_CONFIG_WITH_EXTENSION = $"{DEFAULT_CONFIG}.json";
 	public const string DEFAULT_CONFIG_FILE_PATH_NAME = $"{PLUGIN_DATA_PATH}{DEFAULT_CONFIG_WITH_EXTENSION}";
 
-
 	public const float DRAG_FLOAT_SPEED = 0.1f;
 	public const float DRAG_FLOAT_MAX = 15360f;
 	public const float DRAG_FLOAT_MIN = -DRAG_FLOAT_MAX;

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
@@ -11,11 +12,11 @@ namespace BetterMatchmaking;
 internal class LocalizationCustomization : SingletonAccessor
 {
 	public List<string> LocalizationNamesList { get; set; } = new();
-
-	public string[] LocalizationNames { get; set; } = Array.Empty<string>();
-
-	private int selectedLocalizationIndex = 0;
-	public int SelectedLocalizationIndex { get => selectedLocalizationIndex; set => selectedLocalizationIndex = value; }
+	
+	private string[] LocalizationNames { get; set; } = Array.Empty<string>();
+	
+	private int _selectedLocalizationIndex = 0;
+	private int SelectedLocalizationIndex { get => _selectedLocalizationIndex; set => _selectedLocalizationIndex = value; }
 
 	public void SetCurrentLocalization(string name)
 	{
@@ -69,7 +70,7 @@ internal class LocalizationCustomization : SingletonAccessor
 
 		if (ImGui.TreeNode(localizationManager.ImGui.Language))
 		{
-			tempChanged = ImGui.Combo(localizationManager.ImGui.Language, ref selectedLocalizationIndex, LocalizationNames, LocalizationNames.Length);
+			tempChanged = ImGui.Combo(localizationManager.ImGui.Language, ref _selectedLocalizationIndex, LocalizationNames, LocalizationNames.Length);
 			if (tempChanged) OnLocalizationChanged(SelectedLocalizationIndex);
 			changed = changed || tempChanged;
 

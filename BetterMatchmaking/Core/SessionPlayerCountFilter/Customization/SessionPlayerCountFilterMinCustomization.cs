@@ -10,11 +10,11 @@ namespace BetterMatchmaking;
 
 internal class SessionPlayerCountFilterMinCustomization : SingletonAccessor
 {
-    private bool enabled = true;
-    public bool Enabled { get => enabled; set => enabled = value; }
+    private bool _enabled = true;
+    public bool Enabled { get => _enabled; set => _enabled = value; }
 
-    private int value = 1;
-    public int Value { get => value; set => this.value = value; }
+    private int _value = 1;
+    public int Value { get => _value; set => _value = value; }
 
     [JsonIgnore]
     public int SliderMax { get; set; } = Constants.DEFAULT_SESSION_PLAYER_COUNT_MAX;
@@ -28,8 +28,8 @@ internal class SessionPlayerCountFilterMinCustomization : SingletonAccessor
 
         if (ImGui.TreeNode(localizationManager.ImGui.Min))
         {
-            changed = ImGui.Checkbox(localizationManager.ImGui.Enabled, ref enabled) || changed;
-            tempChanged = ImGui.SliderInt(localizationManager.ImGui.Value, ref value, 1, SliderMax);
+            changed = ImGui.Checkbox(localizationManager.ImGui.Enabled, ref _enabled) || changed;
+            tempChanged = ImGui.SliderInt(localizationManager.ImGui.Value, ref _value, 1, SliderMax);
 
             if (tempChanged)
             {
@@ -40,7 +40,7 @@ internal class SessionPlayerCountFilterMinCustomization : SingletonAccessor
 
                 if (max.Value < Value)
                 {
-                    max.Value = value;
+                    max.Value = _value;
                 }
             }
 

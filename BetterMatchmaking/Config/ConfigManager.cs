@@ -13,12 +13,12 @@ using System.Xml.Linq;
 
 namespace BetterMatchmaking;
 
-internal class ConfigManager : SingletonAccessor, IDisposable
+internal sealed class ConfigManager : SingletonAccessor, IDisposable
 {
 	// Singleton Pattern
-	private static readonly ConfigManager singleton = new();
+	private static readonly ConfigManager _singleton = new();
 
-	public static ConfigManager Instance { get { return singleton; } }
+	public static ConfigManager Instance => _singleton;
 
 	// Explicit static constructor to tell C# compiler
 	// not to mark type as beforefieldinit
@@ -67,7 +67,7 @@ internal class ConfigManager : SingletonAccessor, IDisposable
 		// If config file is incorrect - use default one
 		if (config == null)
 		{
-			TeaLog.Info($"Config: Loading Failed!");
+			TeaLog.Info("Config: Loading Failed!");
 			SetCurrentConfig(Default);
 
 			TeaLog.Info("ConfigManager: Initialization Done!");
@@ -97,13 +97,13 @@ internal class ConfigManager : SingletonAccessor, IDisposable
 	{
 		try
 		{
-			TeaLog.Info($"Config: Loading...");
+			TeaLog.Info("Config: Loading...");
 
 			var json = JsonManager.ReadFromFile(Constants.DEFAULT_CONFIG_FILE_PATH_NAME);
 
-			var config = JsonSerializer.Deserialize<Config>(json, JsonManager.JsonSerializerOptionsInstance).Init();
+			var config = JsonSerializer.Deserialize<Config>(json, JsonManager.JSON_SERIALIZER_OPTIONS_INSTANCE).Init();
 
-			TeaLog.Info($"Config: Loading Done!");
+			TeaLog.Info("Config: Loading Done!");
 			return config;
 		}
 		catch (Exception exception)

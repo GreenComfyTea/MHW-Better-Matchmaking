@@ -19,9 +19,9 @@ namespace BetterMatchmaking
 	internal class CustomizationWindow : SingletonAccessor
 	{
 		// Singleton Pattern
-		private static readonly CustomizationWindow singleton = new();
+		private static readonly CustomizationWindow _singleton = new();
 
-		public static CustomizationWindow Instance { get { return singleton; } }
+		public static CustomizationWindow Instance { get { return _singleton; } }
 
 		// Explicit static constructor to tell C# compiler
 		// not to mark type as beforefieldinit
@@ -29,8 +29,8 @@ namespace BetterMatchmaking
 
 		// Singleton Pattern End
 
-		private bool isOpened = false;
-		public bool IsOpened { get => isOpened; set => isOpened = value; }
+		private bool _isOpened = false;
+		public bool IsOpened { get => _isOpened; set => _isOpened = value; }
 
 
 		private CustomizationWindow() { }
@@ -49,7 +49,7 @@ namespace BetterMatchmaking
 
 
 				//ImGui.PushFont(font);
-				ImGui.Begin($"{Constants.MOD_NAME} v{Constants.VERSION}", ref isOpened);
+				ImGui.Begin($"{Constants.MOD_NAME} v{Constants.VERSION}", ref _isOpened);
 
 				ImGui.Text(localizationManager.ImGui.MadeBy);
 				ImGui.SameLine();
