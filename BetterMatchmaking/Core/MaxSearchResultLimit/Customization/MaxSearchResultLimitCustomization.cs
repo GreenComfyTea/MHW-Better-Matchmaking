@@ -21,10 +21,10 @@ internal class MaxSearchResultLimitCustomization : SingletonAccessor
 	{
 		var changed = false;
 
-		if (ImGui.TreeNode(LocalizationManagerInstance.ImGui.MaxSearchResultLimit))
+		if (ImGui.TreeNode(LocalizationManager_I.ImGui.MaxSearchResultLimit))
 		{
-			changed = Sessions.RenderImGui(LocalizationManagerInstance.ImGui.Sessions) || changed;
-			changed = Quests.RenderImGui(LocalizationManagerInstance.ImGui.Quests) || changed;
+			changed = Sessions.RenderImGui(LocalizationManager_I.ImGui.Sessions) || changed;
+			changed = Quests.RenderImGui(LocalizationManager_I.ImGui.Quests) || changed;
 
 			ImGui.TreePop();
 		}

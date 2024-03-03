@@ -29,8 +29,8 @@ internal class MaxSearchResultLimitLobbyCustomization : SingletonAccessor
 
 		if (ImGui.TreeNode(title))
 		{
-			changed = ImGui.Checkbox(LocalizationManagerInstance.ImGui.Enabled, ref _enabled) || changed;
-			changed = ImGui.SliderInt(LocalizationManagerInstance.ImGui.Value, ref _value, 1, Constants.SEARCH_RESULT_LIMIT_MAX) || changed;
+			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
+			changed = ImGui.SliderInt(LocalizationManager_I.ImGui.Value, ref _value, 1, Constants.SEARCH_RESULT_LIMIT_MAX) || changed;
 
 			ImGui.TreePop();
 		}

@@ -89,6 +89,10 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string Min { get; set; } = "Min";
 	public string Max { get; set; } = "Max";
 
+	// Player Type Lock Bypass
+
+	public string PlayerTypeFilterBypass { get; set; } = "Player Type Filter Bypass";
+
 	[JsonIgnore]
 	public string[] DistanceFilters { get; set; } = Array.Empty<string>();
 

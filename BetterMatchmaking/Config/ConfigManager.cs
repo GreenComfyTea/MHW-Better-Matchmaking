@@ -90,10 +90,11 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 	{
 		Current = config;
 
-		RegionLockFixInstance.Customization = config.RegionLockFix;
-		MaxSearchResultLimitInstance.Customization = config.MaxSearchResultLimit;
-		SessionPlayerCountFilterInstance.Customization = config.SessionPlayerCountFilter;
-		DebugManagerInstance.Customization = config.Debug;
+		RegionLockFix_I.Customization = config.RegionLockFix;
+		MaxSearchResultLimit_I.Customization = config.MaxSearchResultLimit;
+		SessionPlayerCountFilter_I.Customization = config.SessionPlayerCountFilter;
+		PlayerTypeFilterBypass_I.Customization = config.PlayerTypeFilterBypass;
+		DebugManager_I.Customization = config.Debug;
 
 		return this;
 	}

@@ -37,7 +37,7 @@ internal class SessionPlayerCountFilterCustomization : SingletonAccessor
 	{
 		var changed = false;
 
-		if (ImGui.TreeNode(LocalizationManagerInstance.ImGui.SessionPlayerCountFilter))
+		if (ImGui.TreeNode(LocalizationManager_I.ImGui.SessionPlayerCountFilter))
 		{
 			changed = Min.RenderImGui() || changed;
 			changed = Max.RenderImGui() || changed;

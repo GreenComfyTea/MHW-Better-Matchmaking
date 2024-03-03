@@ -54,45 +54,46 @@ namespace BetterMatchmaking
 				//ImGui.PushFont(font);
 				ImGui.Begin($"{Constants.MOD_NAME} v{Constants.VERSION}", ref _isOpened);
 
-				ImGui.Text(LocalizationManagerInstance.ImGui.MadeBy);
+				ImGui.Text(LocalizationManager_I.ImGui.MadeBy);
 				ImGui.SameLine();
 				ImGui.TextColored(Constants.MOD_AUTHOR_COLOR, Constants.MOD_AUTHOR);
 
-				if (ImGui.Button(LocalizationManagerInstance.ImGui.NexusMods)) Utils.OpenLink(Constants.NEXUSMODS_LINK);
+				if (ImGui.Button(LocalizationManager_I.ImGui.NexusMods)) Utils.OpenLink(Constants.NEXUSMODS_LINK);
 				ImGui.SameLine();
-				if (ImGui.Button(LocalizationManagerInstance.ImGui.GitHubRepo)) Utils.OpenLink(Constants.GITHUB_REPO_LINK);
+				if (ImGui.Button(LocalizationManager_I.ImGui.GitHubRepo)) Utils.OpenLink(Constants.GITHUB_REPO_LINK);
 
-				if (ImGui.Button(LocalizationManagerInstance.ImGui.Twitch)) Utils.OpenLink(Constants.TWITCH_LINK);
+				if (ImGui.Button(LocalizationManager_I.ImGui.Twitch)) Utils.OpenLink(Constants.TWITCH_LINK);
 				ImGui.SameLine();
-				if (ImGui.Button(LocalizationManagerInstance.ImGui.Twitter)) Utils.OpenLink(Constants.TWITTER_LINK);
+				if (ImGui.Button(LocalizationManager_I.ImGui.Twitter)) Utils.OpenLink(Constants.TWITTER_LINK);
 				ImGui.SameLine();
-				if (ImGui.Button(LocalizationManagerInstance.ImGui.ArtStation)) Utils.OpenLink(Constants.ARTSTATION_LINK);
+				if (ImGui.Button(LocalizationManager_I.ImGui.ArtStation)) Utils.OpenLink(Constants.ARTSTATION_LINK);
 
-				ImGui.Text(LocalizationManagerInstance.ImGui.DonationMessage1);
-				ImGui.Text(LocalizationManagerInstance.ImGui.DonationMessage2);
+				ImGui.Text(LocalizationManager_I.ImGui.DonationMessage1);
+				ImGui.Text(LocalizationManager_I.ImGui.DonationMessage2);
 
-				if (ImGui.Button(LocalizationManagerInstance.ImGui.Donate)) Utils.OpenLink(Constants.STREAMELEMENTS_TIP_LINK);
+				if (ImGui.Button(LocalizationManager_I.ImGui.Donate)) Utils.OpenLink(Constants.STREAMELEMENTS_TIP_LINK);
 				ImGui.SameLine();
-				if (ImGui.Button(LocalizationManagerInstance.ImGui.PayPal)) Utils.OpenLink(Constants.PAYPAL_LINK);
+				if (ImGui.Button(LocalizationManager_I.ImGui.PayPal)) Utils.OpenLink(Constants.PAYPAL_LINK);
 				ImGui.SameLine();
-				if (ImGui.Button(LocalizationManagerInstance.ImGui.BuyMeATea)) Utils.OpenLink(Constants.KOFI_LINK);
+				if (ImGui.Button(LocalizationManager_I.ImGui.BuyMeATea)) Utils.OpenLink(Constants.KOFI_LINK);
 
 				ImGui.Separator();
 				ImGui.NewLine();
 				ImGui.Separator();
 
-				ConfigManagerInstance.Customization.RenderImGui();
-				changed = LocalizationManagerInstance.Customization.RenderImGui() || changed;
-				changed = DebugManagerInstance.Customization.RenderImGui() || changed;
+				ConfigManager_I.Customization.RenderImGui();
+				changed = LocalizationManager_I.Customization.RenderImGui() || changed;
+				changed = DebugManager_I.Customization.RenderImGui() || changed;
 
 				ImGui.Separator();
 				ImGui.NewLine();
 				ImGui.Separator();
 
-				changed = RegionLockFixInstance.Customization.RenderImGui() || changed;
-				changed = MaxSearchResultLimitInstance.Customization.RenderImGui() || changed;
-				changed = SessionPlayerCountFilterInstance.Customization.RenderImGui() || changed;
-
+				changed = RegionLockFix_I.Customization.RenderImGui() || changed;
+				changed = MaxSearchResultLimit_I.Customization.RenderImGui() || changed;
+				changed = SessionPlayerCountFilter_I.Customization.RenderImGui() || changed;
+				changed = PlayerTypeFilterBypass_I.Customization.RenderImGui() || changed;
+				
 				//font.Scale = oldScale;
 				//ImGui.PopFont();
 
@@ -100,7 +101,7 @@ namespace BetterMatchmaking
 
 				if (changed)
 				{
-					ConfigManagerInstance.Current.Save();
+					ConfigManager_I.Current.Save();
 				}
 
 				return this;

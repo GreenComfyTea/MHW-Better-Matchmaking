@@ -26,6 +26,7 @@ internal class Config : SingletonAccessor
 	public RegionLockFixCustomization RegionLockFix { get; set; } = new();
 	public MaxSearchResultLimitCustomization MaxSearchResultLimit { get; set; } = new();
 	public SessionPlayerCountFilterCustomization SessionPlayerCountFilter { get; set; } = new();
+	public PlayerTypeFilterBypassCustomization PlayerTypeFilterBypass { get; set; } = new();
 
 	public DebugCustomization Debug { get; set; } = new();
 
@@ -60,7 +61,7 @@ internal class Config : SingletonAccessor
 	{
 		TeaLog.Info("Config: Saving...");
 
-		ConfigManagerInstance.ConfigWatcherInstance.TemporarilyDisable();
+		ConfigManager_I.ConfigWatcherInstance.TemporarilyDisable();
 		JsonManager.SearializeToFile(Constants.DEFAULT_CONFIG_FILE_PATH_NAME, this);
 
 		TeaLog.Info("Config: Saving Done!");

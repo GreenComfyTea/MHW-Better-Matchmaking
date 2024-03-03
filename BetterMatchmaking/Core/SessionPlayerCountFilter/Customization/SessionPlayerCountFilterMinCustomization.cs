@@ -29,15 +29,15 @@ internal class SessionPlayerCountFilterMinCustomization : SingletonAccessor
         var changed = false;
         var tempChanged = false;
 
-        if (ImGui.TreeNode(LocalizationManagerInstance.ImGui.Min))
+        if (ImGui.TreeNode(LocalizationManager_I.ImGui.Min))
         {
-            changed = ImGui.Checkbox(LocalizationManagerInstance.ImGui.Enabled, ref _enabled) || changed;
-            tempChanged = ImGui.SliderInt(LocalizationManagerInstance.ImGui.Value, ref _value, 1, SliderMax);
+            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
+            tempChanged = ImGui.SliderInt(LocalizationManager_I.ImGui.Value, ref _value, 1, SliderMax);
 
             if (tempChanged)
             {
                 changed = true;
-                var max = SessionPlayerCountFilterInstance.Customization.Max;
+                var max = SessionPlayerCountFilter_I.Customization.Max;
 
                 max.SliderMin = Value;
 

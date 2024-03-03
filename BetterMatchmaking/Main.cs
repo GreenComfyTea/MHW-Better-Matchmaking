@@ -22,6 +22,7 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 	public string Author => Constants.MOD_AUTHOR;
 
 	private bool IsInitialized { get; set; } = false;
+	private bool AreHooksInitialized { get; set; } = false;
 
 	public PluginData Initialize()
 	{
@@ -39,9 +40,9 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 
 			InstantiateSingletons();
 
-			LocalizationManagerInstance.Init();
-			ConfigManagerInstance.Init();
-			CustomizationWindowInstance.Init();
+			LocalizationManager_I.Init();
+			ConfigManager_I.Init();
+			CustomizationWindow_I.Init();
 
 			IsInitialized = true;
 
@@ -50,7 +51,7 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 		}
 		catch (Exception exception)
 		{
-			DebugManagerInstance.Report("BetterMatchmakingPlugin.Init()", exception.ToString());
+			DebugManager_I.Report("BetterMatchmakingPlugin.Init()", exception.ToString());
 			return this;
 		}
 	}
@@ -62,9 +63,10 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 
 	public void OnUnload()
 	{
-		LocalizationManagerInstance.Dispose();
-		ConfigManagerInstance.Dispose();
-		CoreInstance.Dispose();
+		LocalizationManager_I.Dispose();
+		ConfigManager_I.Dispose();
+		Core_I.Dispose();
+		PlayerTypeFilterBypass_I.Dispose();
 	}
 
 	public void OnImGuiRender()
@@ -80,7 +82,7 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 		}
 		catch (Exception exception)
 		{
-			DebugManagerInstance.Report("BetterMatchmakingPlugin.OnImGuiRender()", exception.ToString());
+			DebugManager_I.Report("BetterMatchmakingPlugin.OnImGuiRender()", exception.ToString());
 		}
 	}
 
@@ -90,43 +92,22 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 
 		try
 		{
-			if (IsInitialized && !CoreInstance.AreHooksInitialized) CoreInstance.Init();
-			
-			CustomizationWindowInstance.Render();
+			if(!AreHooksInitialized)
+			{
+				AreHooksInitialized = true;
+
+				Task.Run(() =>
+				{
+					Core_I.Init();
+					PlayerTypeFilterBypass_I.Init();
+				});
+			}
+
+			CustomizationWindow_I.Render();
 		}
 		catch (Exception exception)
 		{
-			DebugManagerInstance.Report("BetterMatchmakingPlugin.OnImGuiFreeRender()", exception.ToString());
+			DebugManager_I.Report("BetterMatchmakingPlugin.OnImGuiFreeRender()", exception.ToString());
 		}
 	}
 }
-
-// Same Language:
-
-// Matchmake ============== -1
-// Japanese ===============  0
-// English ================  1
-// French =================  2
-// Italian ================  5
-// German =================  4
-// Spanish ================  3
-// Brazilian Portuguese === 21
-// Polish ================= 11
-// Russian ================ 10
-// Korean =================  6
-// Traditional Chinese ====  7
-// Simplified Chinese =====  8
-// Arabic ================= 22
-// Latin-American Spanish = 23
-
-// Player Type:
-
-// Beginners === 0
-// Experienced = 1
-// Any ========= 2
-// Matchmake === 3
-
-// Rank Preference
-
-// Similar Hunter Rank: SearchKey5 =  6
-// Similar Master Rank: SearchKey6 = 10

@@ -66,14 +66,14 @@ internal class LocalizationWatcher : SingletonAccessor, IDisposable
 	{
 		TeaLog.Info($"LocalizationChangeWatcher: Deleted {e.Name}.");
 
-		if(e.Name.Equals(Constants.DEFAULT_LOCALIZATION)) LocalizationManagerInstance.Default.Save();
+		if(e.Name.Equals(Constants.DEFAULT_LOCALIZATION)) LocalizationManager_I.Default.Save();
 	}
 
 	private void OnLocalizationFileRenamed(object sender, RenamedEventArgs e)
 	{
 		TeaLog.Info($"LocalizationChangeWatcher: Renamed {e.OldName} to {e.Name}.");
 
-		LocalizationManagerInstance.Localizations.Remove(e.OldName);
+		LocalizationManager_I.Localizations.Remove(e.OldName);
 
 		UpdateLocalization(e.FullPath, e.Name);
 	}
@@ -100,9 +100,9 @@ internal class LocalizationWatcher : SingletonAccessor, IDisposable
 
 		Timers.SetTimeout(() =>
 		{
-			var localizationName = LocalizationManagerInstance.LoadLocalization(filePathName);
-			LocalizationManagerInstance.Customization.AddLocalization(localizationName);
-			LocalizationManagerInstance.SetCurrentLocalization(LocalizationManagerInstance.Current.Name);
+			var localizationName = LocalizationManager_I.LoadLocalization(filePathName);
+			LocalizationManager_I.Customization.AddLocalization(localizationName);
+			LocalizationManager_I.SetCurrentLocalization(LocalizationManager_I.Current.Name);
 		}, 250);
 
 		return this;

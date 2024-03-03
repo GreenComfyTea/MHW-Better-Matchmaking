@@ -62,7 +62,7 @@ namespace BetterMatchmaking
 		{
 			TeaLog.Info($"Localization {Name}: Saving...");
 
-			LocalizationManagerInstance.LocalizationWatcherInstance.TemporarilyDisable(Name);
+			LocalizationManager_I.LocalizationWatcherInstance.TemporarilyDisable(Name);
 			JsonManager.SearializeToFile(Path.Combine(Constants.LOCALIZATIONS_PATH, $"{Name}.json"), this);
 
 			return this;

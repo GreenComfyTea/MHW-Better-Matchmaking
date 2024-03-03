@@ -20,10 +20,10 @@ internal class ConfigCustomization : SingletonAccessor
 	{
 		var changed = false;
 
-		if (ImGui.TreeNode(LocalizationManagerInstance.ImGui.Config))
+		if (ImGui.TreeNode(LocalizationManager_I.ImGui.Config))
 		{
-			changed = ImGui.Button(LocalizationManagerInstance.ImGui.ResetConfig) || changed;
-			if(changed) ConfigManagerInstance.ResetConfig();
+			changed = ImGui.Button(LocalizationManager_I.ImGui.ResetConfig) || changed;
+			if(changed) ConfigManager_I.ResetConfig();
 
 			ImGui.TreePop();
 		}

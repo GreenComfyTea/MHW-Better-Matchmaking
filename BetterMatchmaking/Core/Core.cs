@@ -22,34 +22,20 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 	// Singleton Pattern End
 
-	public bool AreHooksInitialized { get; set; } = false;
-
-	public delegate void numericalFilter_Delegate(nint steamInterface, nint keyAddress, int value, int comparison);
-
-	public delegate int startRequest_Delegate(nint netCore, nint netRequest);
-	public Hook<startRequest_Delegate> StartRequestHook { get; set; }
-	public Hook<numericalFilter_Delegate> NumericalFilterHook { get; set; }
+	private delegate int startRequest_Delegate(nint netCore, nint netRequest);
+	private Hook<startRequest_Delegate> StartRequestHook { get; set; }
 
 	private Core() { }
 
 	public Core Init()
 	{
-		AreHooksInitialized = true;
+		TeaLog.Info("Core: Initializing Hooks...");
 
-		Task.Run(() =>
-		{
-			TeaLog.Info("Core: Initializing Hooks...");
+		InstantiateSingletons();
 
-			InstantiateSingletons();
+		StartRequestHook = Hook.Create<startRequest_Delegate>(0x1421e2430, OnStartRequest);
 
-			// 0x7FFE2A0B5700
-			var numericalFilterAddress = Matchmaking.GetVirtualFunction(Matchmaking.VirtualFunctionIndex.AddRequestLobbyListNumericalFilter);
-			NumericalFilterHook = Hook.Create<numericalFilter_Delegate>(numericalFilterAddress, OnNumericalFilter);
-
-			StartRequestHook = Hook.Create<startRequest_Delegate>(0x1421e2430, OnStartRequest);
-
-			TeaLog.Info("Core: Hook Initialization Done!");
-		});
+		TeaLog.Info("Core: Hook Initialization Done!");
 
 		return this;
 	}
@@ -119,7 +105,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 		return searchType;
 	}
 
-	public int OnStartRequest(nint netCore, nint netRequest)
+	private int OnStartRequest(nint netCore, nint netRequest)
 	{
 		try
 		{
@@ -142,40 +128,23 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 			// Apply Stuff
 
-			MaxSearchResultLimitInstance.Apply(searchType, ref maxResultsRef);
-			RegionLockFixInstance.Apply(searchType);
-			SessionPlayerCountFilterInstance.ApplyMin(searchType).ApplyMax(searchType);
+			MaxSearchResultLimit_I.Apply(searchType, ref maxResultsRef);
+			RegionLockFix_I.Apply(searchType);
+			SessionPlayerCountFilter_I.ApplyMin(searchType).ApplyMax(searchType);
 		}
 		catch(Exception exception)
 		{
-			DebugManagerInstance.Report("Core.OnStartRequest()", exception.ToString());
+			DebugManager_I.Report("Core.OnStartRequest()", exception.ToString());
 		}
 
 		return StartRequestHook!.Original(netCore, netRequest);
 	}
 
-	private void OnNumericalFilter(nint steamInterface, nint keyAddress, int value, int comparison)
-	{
-		try
-		{
-			TeaLog.Info("OnNumericalFilter");
-
-			var key = MemoryUtil.ReadString(keyAddress);
-
-			TeaLog.Info($"{key} ({GetSearchKeyName(key)}) {GetComparisonSign(comparison)} {value}");
-		}
-		catch (Exception exception)
-		{
-			DebugManagerInstance.Report("Core.OnNumericalFilter()", exception.ToString());
-		}
-
-		NumericalFilterHook!.Original(steamInterface, keyAddress, value, comparison);
-	}
-
 	public void Dispose()
 	{
+		if(StartRequestHook == null) return;
+
 		TeaLog.Info("Core: Disposing Hooks...");
-		NumericalFilterHook?.Dispose();
 		StartRequestHook?.Dispose();
 	}
 }

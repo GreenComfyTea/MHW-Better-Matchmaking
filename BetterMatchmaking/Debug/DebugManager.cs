@@ -36,6 +36,8 @@ internal class DebugManager
 
 		Reports[key] = newReport;
 
+		TeaLog.Error(message);
+
 		AddToHistory(newReport);
 	}
 

@@ -33,12 +33,12 @@ internal class RegionLockFixCustomization : SingletonAccessor
 	{
 		var changed = false;
 
-		if (ImGui.TreeNode(LocalizationManagerInstance.ImGui.RegionLockFix))
+		if (ImGui.TreeNode(LocalizationManager_I.ImGui.RegionLockFix))
 		{
-			changed = Sessions.RenderImGui(LocalizationManagerInstance.ImGui.Sessions) || changed;
-			changed = Quests.RenderImGui(LocalizationManagerInstance.ImGui.Quests) || changed;
+			changed = Sessions.RenderImGui(LocalizationManager_I.ImGui.Sessions) || changed;
+			changed = Quests.RenderImGui(LocalizationManager_I.ImGui.Quests) || changed;
 
-			if (ImGui.TreeNode(LocalizationManagerInstance.ImGui.Explanation))
+			if (ImGui.TreeNode(LocalizationManager_I.ImGui.Explanation))
 			{
 				ImGui.TextColored(Constants.IMGUI_RED_COLOR, "Close");
 				ImGui.SameLine();

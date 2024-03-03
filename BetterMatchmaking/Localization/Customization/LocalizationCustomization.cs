@@ -34,7 +34,7 @@ internal class LocalizationCustomization : SingletonAccessor
 		SelectedLocalizationIndex = newSelectedLocalizationIndex;
 
 		TranslatorColor =
-			LocalizationManagerInstance.Current.LocalizationInfo.Translators.Equals(Constants.MOD_AUTHOR)
+			LocalizationManager_I.Current.LocalizationInfo.Translators.Equals(Constants.MOD_AUTHOR)
 			? Constants.MOD_AUTHOR_COLOR
 			: Constants.IMGUI_USERNAME_COLOR;
 
@@ -78,8 +78,8 @@ internal class LocalizationCustomization : SingletonAccessor
 	public LocalizationCustomization OnLocalizationChanged(int selectedLocalizationIndex)
 	{
 		var currentLocalizationName = LocalizationNames[selectedLocalizationIndex];
-		ConfigManagerInstance.Current.Localization = currentLocalizationName;
-		LocalizationManagerInstance.SetCurrentLocalization(currentLocalizationName);
+		ConfigManager_I.Current.Localization = currentLocalizationName;
+		LocalizationManager_I.SetCurrentLocalization(currentLocalizationName);
 
 		return this;
 	}
@@ -89,15 +89,15 @@ internal class LocalizationCustomization : SingletonAccessor
 		var changed = false;
 		var tempChanged = false;
 
-		if (ImGui.TreeNode(LocalizationManagerInstance.ImGui.Language))
+		if (ImGui.TreeNode(LocalizationManager_I.ImGui.Language))
 		{
-			tempChanged = ImGui.Combo(LocalizationManagerInstance.ImGui.Language, ref _selectedLocalizationIndex, LocalizationNames, LocalizationNames.Length);
+			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.Language, ref _selectedLocalizationIndex, LocalizationNames, LocalizationNames.Length);
 			if (tempChanged) OnLocalizationChanged(SelectedLocalizationIndex);
 			changed = changed || tempChanged;
 
-			ImGui.Text($"{LocalizationManagerInstance.ImGui.Translators}:");
+			ImGui.Text($"{LocalizationManager_I.ImGui.Translators}:");
 			ImGui.SameLine();
-			ImGui.TextColored(TranslatorColor, LocalizationManagerInstance.Current.LocalizationInfo.Translators);
+			ImGui.TextColored(TranslatorColor, LocalizationManager_I.Current.LocalizationInfo.Translators);
 
 			ImGui.TreePop();
 		}

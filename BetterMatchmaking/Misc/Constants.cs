@@ -9,10 +9,30 @@ using System.Xml.Linq;
 namespace BetterMatchmaking;
 
 public enum OutlineModes { Outside, Center, Inside }
-
 public enum FillDirections { LeftToRight, RightToLeft, TopToBottom, BottomToTop }
-
 public enum SearchTypes { None, Session, Quest }
+public enum PlayerTypes { Beginners, Experienced, Any, Matchmake }
+public enum SimilarHunterRank { Disabled, Enabled = 5 }
+public enum SimilarMasterRank { Disabled, Enabled = 10 }
+
+public enum Languages
+{
+	Matchmake = -1,
+	Japanese = 0,
+	English = 1,
+	French = 2,
+	Italian = 5,
+	German = 4,
+	Spanish = 3,
+	BrazilianPortuguese = 21,
+	Polish = 11,
+	Russian = 10,
+	Korean = 6,
+	TraditionalChinese = 7,
+	SimplifiedChinese = 8,
+	Arabic = 22,
+	LatinAmericanSpanish = 23
+}
 
 public static class Constants
 {
@@ -74,7 +94,7 @@ public static class Constants
 
 	public const int SEARCH_KEY_SEARCH_TYPE_ID = 0;
 
-	public const char SEARCH_KEY_SESSION_PLAYER_TYPE_ID = '1';
+	public const int SEARCH_KEY_SESSION_PLAYER_TYPE_ID = 1;
 	public const char SEARCH_KEY_SESSION_QUEST_PREFERENCE_ID = '2';
 
 	public const char SEARCH_KEY_SESSION_LANGUAGE_ID = '4';
@@ -89,6 +109,12 @@ public static class Constants
 
 	public const int SESSION_SEARCH_ID = 537292564;
 	public const int QUEST_SEARCH_ID = 421652;
+
+
+	public const string SEARCH_KEY_SESSION_PLAYER_TYPE = "SearchKey1";
+	public const int SESSION_PLAYER_TYPE_BEGINNERS = 0;
+	public const int SESSION_PLAYER_TYPE_EXPERIENCED = 1;
+	public const int SESSION_PLAYER_TYPE_ANY = 2;
 
 	public static readonly Vector4 IMGUI_RED_COLOR = new(1f, 0.25f, 0.25f, 1f);
 	public static readonly Vector4 IMGUI_YELLOW_COLOR = new(1f, 0.75f, 0.5f, 1f);

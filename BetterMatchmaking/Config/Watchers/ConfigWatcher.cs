@@ -66,7 +66,7 @@ internal class ConfigWatcher : SingletonAccessor, IDisposable
 		TeaLog.Info($"ConfigChangeWatcher: Deleted {e.Name}.");
 
 		// Save current config if the config file was deleted
-		ConfigManagerInstance.Current.Save();
+		ConfigManager_I.Current.Save();
 	}
 
 	private void OnConfigFileRenamed(object sender, RenamedEventArgs e)
@@ -74,7 +74,7 @@ internal class ConfigWatcher : SingletonAccessor, IDisposable
 		TeaLog.Info($"ConfigChangeWatcher: Renamed {e.OldName} to {e.Name}.");
 
 		// Save current config if the config file was renamed
-		ConfigManagerInstance.Current.Save();
+		ConfigManager_I.Current.Save();
 	}
 
 	private void OnConfigFileError(object sender, ErrorEventArgs e)
@@ -106,7 +106,7 @@ internal class ConfigWatcher : SingletonAccessor, IDisposable
 			}
 
 			// If config file is good - use it and save
-			ConfigManagerInstance.SetCurrentConfig(config);
+			ConfigManager_I.SetCurrentConfig(config);
 			config.Save();
 		}, 250);
 
