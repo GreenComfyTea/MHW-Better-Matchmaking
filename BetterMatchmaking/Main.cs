@@ -39,14 +39,6 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 
 			InstantiateSingletons();
 
-			LocalizationManagerInstance = LocalizationManager.Instance;
-			ConfigManagerInstance = ConfigManager.Instance;
-			RegionLockFixInstance = RegionLockFix.Instance;
-			MaxSearchResultLimitInstance = MaxSearchResultLimit.Instance;
-			SessionPlayerCountFilterInstance = SessionPlayerCountFilter.Instance;
-			CoreInstance = Core.Instance;
-			CustomizationWindowInstance = CustomizationWindow.Instance;
-
 			LocalizationManagerInstance.Init();
 			ConfigManagerInstance.Init();
 			CustomizationWindowInstance.Init();
@@ -58,7 +50,7 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 		}
 		catch (Exception exception)
 		{
-			TeaLog.Error(exception.ToString());
+			DebugManagerInstance.Report("BetterMatchmakingPlugin.Init()", exception.ToString());
 			return this;
 		}
 	}
@@ -88,7 +80,7 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 		}
 		catch (Exception exception)
 		{
-			TeaLog.Error(exception.ToString());
+			DebugManagerInstance.Report("BetterMatchmakingPlugin.OnImGuiRender()", exception.ToString());
 		}
 	}
 
@@ -99,11 +91,12 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 		try
 		{
 			if (IsInitialized && !CoreInstance.AreHooksInitialized) CoreInstance.Init();
+			
 			CustomizationWindowInstance.Render();
 		}
 		catch (Exception exception)
 		{
-			TeaLog.Error(exception.ToString());
+			DebugManagerInstance.Report("BetterMatchmakingPlugin.OnImGuiFreeRender()", exception.ToString());
 		}
 	}
 }

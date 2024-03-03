@@ -101,6 +101,7 @@ internal class LocalizationWatcher : SingletonAccessor, IDisposable
 		Timers.SetTimeout(() =>
 		{
 			var localizationName = LocalizationManagerInstance.LoadLocalization(filePathName);
+			LocalizationManagerInstance.Customization.AddLocalization(localizationName);
 			LocalizationManagerInstance.SetCurrentLocalization(LocalizationManagerInstance.Current.Name);
 		}, 250);
 

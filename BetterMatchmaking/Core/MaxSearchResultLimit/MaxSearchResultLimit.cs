@@ -30,20 +30,17 @@ internal sealed class MaxSearchResultLimit
 		if (searchType == SearchTypes.None) return this;
 
 		MaxSearchResultLimitLobbyCustomization customization;
-		int maxResults;
 
 		switch (searchType)
 		{
 			case SearchTypes.Session:
 
 				customization = Customization.Sessions;
-				maxResults = customization.Value;
 				break;
 
 			case SearchTypes.Quest:
 
 				customization = Customization.Quests;
-				maxResults = customization.Value + 1;
 				break;
 
 			default:
@@ -52,9 +49,9 @@ internal sealed class MaxSearchResultLimit
 
 		if (!customization.Enabled) return this;
 
-		maxResultsRef = maxResults;
+		maxResultsRef = customization.Value;
 
-		TeaLog.Info($"MaxSearchResultLimit: Set to {maxResults}.");
+		TeaLog.Info($"MaxSearchResultLimit: Set to {customization.Value}.");
 		return this;
 	}
 }

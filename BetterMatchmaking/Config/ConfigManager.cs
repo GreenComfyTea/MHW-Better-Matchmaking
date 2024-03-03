@@ -93,6 +93,7 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 		RegionLockFixInstance.Customization = config.RegionLockFix;
 		MaxSearchResultLimitInstance.Customization = config.MaxSearchResultLimit;
 		SessionPlayerCountFilterInstance.Customization = config.SessionPlayerCountFilter;
+		DebugManagerInstance.Customization = config.Debug;
 
 		return this;
 	}

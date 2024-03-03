@@ -17,16 +17,6 @@ internal class MaxSearchResultLimitCustomization : SingletonAccessor
 		InstantiateSingletons();
 	}
 
-	public MaxSearchResultLimitCustomization Init()
-	{
-		InstantiateSingletons();
-
-		Sessions.Init();
-		Quests.Init(Constants.SEARCH_RESULT_LIMIT_MAX_QUESTS);
-
-		return this;
-	}
-
 	public bool RenderImGui()
 	{
 		var changed = false;

@@ -18,6 +18,8 @@ internal class LocalizationCustomization : SingletonAccessor
 	private int _selectedLocalizationIndex = 0;
 	private int SelectedLocalizationIndex { get => _selectedLocalizationIndex; set => _selectedLocalizationIndex = value; }
 
+	private Vector4 TranslatorColor { get; set; } = Constants.MOD_AUTHOR_COLOR;
+
 	public LocalizationCustomization()
 	{
 		InstantiateSingletons();
@@ -30,6 +32,11 @@ internal class LocalizationCustomization : SingletonAccessor
 		if (newSelectedLocalizationIndex == -1) return this;
 
 		SelectedLocalizationIndex = newSelectedLocalizationIndex;
+
+		TranslatorColor =
+			LocalizationManagerInstance.Current.LocalizationInfo.Translators.Equals(Constants.MOD_AUTHOR)
+			? Constants.MOD_AUTHOR_COLOR
+			: Constants.IMGUI_USERNAME_COLOR;
 
 		return this;
 	}
@@ -88,9 +95,9 @@ internal class LocalizationCustomization : SingletonAccessor
 			if (tempChanged) OnLocalizationChanged(SelectedLocalizationIndex);
 			changed = changed || tempChanged;
 
-			ImGui.Text(LocalizationManagerInstance.ImGui.Translators);
+			ImGui.Text($"{LocalizationManagerInstance.ImGui.Translators}:");
 			ImGui.SameLine();
-			ImGui.TextColored(Constants.IMGUI_USERNAME_COLOR, LocalizationManagerInstance.Current.LocalizationInfo.Translators);
+			ImGui.TextColored(TranslatorColor, LocalizationManagerInstance.Current.LocalizationInfo.Translators);
 
 			ImGui.TreePop();
 		}

@@ -23,6 +23,8 @@ internal class SingletonAccessor
 	protected Core CoreInstance { get; set; }
 	[JsonIgnore]
 	protected CustomizationWindow CustomizationWindowInstance { get; set; }
+	[JsonIgnore]
+	protected DebugManager DebugManagerInstance { get; set; }
 
 	protected void InstantiateSingletons()
 	{
@@ -33,5 +35,6 @@ internal class SingletonAccessor
 		SessionPlayerCountFilterInstance = SessionPlayerCountFilter.Instance;
 		CoreInstance = Core.Instance;
 		CustomizationWindowInstance = CustomizationWindow.Instance;
+		DebugManagerInstance = DebugManager.Instance;
 	}
 }

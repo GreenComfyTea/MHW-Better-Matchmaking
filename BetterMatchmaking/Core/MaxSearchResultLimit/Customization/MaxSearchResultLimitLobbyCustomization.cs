@@ -15,20 +15,12 @@ internal class MaxSearchResultLimitLobbyCustomization : SingletonAccessor
 	private bool _enabled = true;
 	public bool Enabled { get => _enabled; set => _enabled = value; }
 
-	private int _value = Constants.SEARCH_RESULT_LIMIT_MAX_SESSIONS;
+	private int _value = Constants.SEARCH_RESULT_LIMIT_MAX;
 	public int Value { get => _value; set => _value = value; }
-
-	public int Max { get; set; } = Constants.SEARCH_RESULT_LIMIT_MAX_SESSIONS;
 
 	public MaxSearchResultLimitLobbyCustomization()
 	{
 		InstantiateSingletons();
-	}
-
-	public MaxSearchResultLimitLobbyCustomization Init(int max = Constants.SEARCH_RESULT_LIMIT_MAX_SESSIONS)
-	{
-		Max = max;
-		return this;
 	}
 
 	public bool RenderImGui(string title)
@@ -38,7 +30,7 @@ internal class MaxSearchResultLimitLobbyCustomization : SingletonAccessor
 		if (ImGui.TreeNode(title))
 		{
 			changed = ImGui.Checkbox(LocalizationManagerInstance.ImGui.Enabled, ref _enabled) || changed;
-			changed = ImGui.SliderInt(LocalizationManagerInstance.ImGui.Value, ref _value, 1, Max) || changed;
+			changed = ImGui.SliderInt(LocalizationManagerInstance.ImGui.Value, ref _value, 1, Constants.SEARCH_RESULT_LIMIT_MAX) || changed;
 
 			ImGui.TreePop();
 		}

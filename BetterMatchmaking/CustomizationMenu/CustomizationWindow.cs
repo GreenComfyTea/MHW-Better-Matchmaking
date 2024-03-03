@@ -83,6 +83,12 @@ namespace BetterMatchmaking
 
 				ConfigManagerInstance.Customization.RenderImGui();
 				changed = LocalizationManagerInstance.Customization.RenderImGui() || changed;
+				changed = DebugManagerInstance.Customization.RenderImGui() || changed;
+
+				ImGui.Separator();
+				ImGui.NewLine();
+				ImGui.Separator();
+
 				changed = RegionLockFixInstance.Customization.RenderImGui() || changed;
 				changed = MaxSearchResultLimitInstance.Customization.RenderImGui() || changed;
 				changed = SessionPlayerCountFilterInstance.Customization.RenderImGui() || changed;

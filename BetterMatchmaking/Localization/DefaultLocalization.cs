@@ -54,9 +54,18 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 
 	public string Language { get; set; } = "Language";
 
-	public string Translators { get; set; } = "Translators:";
+	public string Translators { get; set; } = "Translators";
+
+	// Debug Manager
+
+	public string Errors { get; set; } = "Errors";
+	public string CurrentTime { get; set; } = "Current Time";
+	public string EverythingSeemsToBeOk { get; set; } = "Everything Seems To Be OK!";
+	public string History { get; set; } = "History";
+	public string HistorySize { get; set; } = "History Size";
 
 	// Region Fix
+
 	public string Enabled { get; set; } = "Enabled";
 	public string RegionLockFix { get; set; } = "Region Lock Fix";
 	public string Sessions { get; set; } = "Sessions";
@@ -67,6 +76,9 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string Default { get; set; } = "Default";
 	public string Far { get; set; } = "Far";
 	public string Worldwide { get; set; } = "Worldwide";
+
+	public string Explanation { get; set; } = "Explanation";
+	
 
 	// Max Search Result Limit
 	public string MaxSearchResultLimit { get; set; } = "Max Search Result Limit";

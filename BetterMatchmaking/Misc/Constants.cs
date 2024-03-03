@@ -26,6 +26,8 @@ public static class Constants
 
 	public const string DEFAULT_LOCALIZATION = "en-us";
 
+	public const string REPO_PATH = $@"E:\GitHub\MHW-Better-Matchmaking\{MOD_FOLDER_NAME}\";
+
 	public const string PLUGIN_PATH = $@"nativePC\plugins\CSharp\{MOD_FOLDER_NAME}\";
 	public const string PLUGIN_DATA_PATH = $@"{PLUGIN_PATH}data\";
 	public const string LOCALIZATIONS_PATH = $@"{PLUGIN_DATA_PATH}localizations\";
@@ -53,8 +55,7 @@ public static class Constants
 
 	public const int DEFAULT_SEARCH_RESULT_LIMIT_MAX = 20;
 
-	public const int SEARCH_RESULT_LIMIT_MAX_SESSIONS = 32;
-	public const int SEARCH_RESULT_LIMIT_MAX_QUESTS = 31;
+	public const int SEARCH_RESULT_LIMIT_MAX = 32;
 
 	public const int DEFAULT_SESSION_PLAYER_COUNT_MIN = 1;
 	public const int DEFAULT_SESSION_PLAYER_COUNT_MAX = 15;
@@ -88,4 +89,11 @@ public static class Constants
 
 	public const int SESSION_SEARCH_ID = 537292564;
 	public const int QUEST_SEARCH_ID = 421652;
+
+	public static readonly Vector4 IMGUI_RED_COLOR = new(1f, 0.25f, 0.25f, 1f);
+	public static readonly Vector4 IMGUI_YELLOW_COLOR = new(1f, 0.75f, 0.5f, 1f);
+	public static readonly Vector4 IMGUI_BLUE_COLOR = new(0.4f, 0.6f, 1f, 1f);
+	public static readonly Vector4 IMGUI_GREEN_COLOR = new(0.5f, 1f, 0.5f, 1f);
+	public static readonly Vector4 IMGUI_PURPLE_COLOR = new(0.666f, 0.4f, 0.666f, 1f);
+	public static readonly Vector4 IMGUI_LIGHT_GREEN_COLOR = new(0.4f, 0.666f, 0.4f, 1f);
 }

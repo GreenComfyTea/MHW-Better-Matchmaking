@@ -1,4 +1,5 @@
 ﻿using SharpPluginLoader.Core.Memory;
+using SharpPluginLoader.Core.Steam;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,10 +25,10 @@ internal sealed class Core : SingletonAccessor, IDisposable
 	public bool AreHooksInitialized { get; set; } = false;
 
 	public delegate void numericalFilter_Delegate(nint steamInterface, nint keyAddress, int value, int comparison);
-	public Hook<numericalFilter_Delegate> NumericalFilterHook { get; set; }
 
 	public delegate int startRequest_Delegate(nint netCore, nint netRequest);
-	public static Hook<startRequest_Delegate> StartRequestHook { get; set; }
+	public Hook<startRequest_Delegate> StartRequestHook { get; set; }
+	public Hook<numericalFilter_Delegate> NumericalFilterHook { get; set; }
 
 	private Core() { }
 
@@ -41,10 +42,8 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 			InstantiateSingletons();
 
-			SteamApi.Init();
-
 			// 0x7FFE2A0B5700
-			var numericalFilterAddress = SteamApi.GetVirtualFunction(SteamApi.VirtualFunctionIndex.AddRequestLobbyListNumericalFilter);
+			var numericalFilterAddress = Matchmaking.GetVirtualFunction(Matchmaking.VirtualFunctionIndex.AddRequestLobbyListNumericalFilter);
 			NumericalFilterHook = Hook.Create<numericalFilter_Delegate>(numericalFilterAddress, OnNumericalFilter);
 
 			StartRequestHook = Hook.Create<startRequest_Delegate>(0x1421e2430, OnStartRequest);
@@ -122,28 +121,35 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 	public int OnStartRequest(nint netCore, nint netRequest)
 	{
-		// Phase Check
-		var phase = MemoryUtil.Read<int>(netRequest + 0xE0);
+		try
+		{
+			// Phase Check
+			var phase = MemoryUtil.Read<int>(netRequest + 0xE0);
 
-		if (phase != 0) return StartRequestHook!.Original(netCore, netRequest);
+			if(phase != 0) return StartRequestHook!.Original(netCore, netRequest);
 
-		TeaLog.Info("startRequest\n");
+			TeaLog.Info("startRequest\n");
 
-		// Get Lobby Search Type
+			// Get Lobby Search Type
 
-		var searchType = GetSearchType(netRequest);
+			var searchType = GetSearchType(netRequest);
 
-		if (searchType == SearchTypes.None) return StartRequestHook!.Original(netCore, netRequest);
+			if(searchType == SearchTypes.None) return StartRequestHook!.Original(netCore, netRequest);
 
-		// Max Results
+			// Max Results
 
-		ref var maxResultsRef = ref MemoryUtil.GetRef<int>(netRequest + 0x60);
+			ref var maxResultsRef = ref MemoryUtil.GetRef<int>(netRequest + 0x60);
 
-		// Apply Stuff
+			// Apply Stuff
 
-		MaxSearchResultLimitInstance.Apply(searchType, ref maxResultsRef);
-		RegionLockFixInstance.Apply(searchType);
-		SessionPlayerCountFilterInstance.ApplyMin(searchType).ApplyMax(searchType);
+			MaxSearchResultLimitInstance.Apply(searchType, ref maxResultsRef);
+			RegionLockFixInstance.Apply(searchType);
+			SessionPlayerCountFilterInstance.ApplyMin(searchType).ApplyMax(searchType);
+		}
+		catch(Exception exception)
+		{
+			DebugManagerInstance.Report("Core.OnStartRequest()", exception.ToString());
+		}
 
 		return StartRequestHook!.Original(netCore, netRequest);
 	}
@@ -157,14 +163,13 @@ internal sealed class Core : SingletonAccessor, IDisposable
 			var key = MemoryUtil.ReadString(keyAddress);
 
 			TeaLog.Info($"{key} ({GetSearchKeyName(key)}) {GetComparisonSign(comparison)} {value}");
-
-			NumericalFilterHook!.Original(steamInterface, keyAddress, value, comparison);
 		}
 		catch (Exception exception)
 		{
-			TeaLog.Error(exception.ToString());
-			NumericalFilterHook!.Original(steamInterface, keyAddress, value, comparison);
+			DebugManagerInstance.Report("Core.OnNumericalFilter()", exception.ToString());
 		}
+
+		NumericalFilterHook!.Original(steamInterface, keyAddress, value, comparison);
 	}
 
 	public void Dispose()

@@ -27,6 +27,8 @@ internal class Config : SingletonAccessor
 	public MaxSearchResultLimitCustomization MaxSearchResultLimit { get; set; } = new();
 	public SessionPlayerCountFilterCustomization SessionPlayerCountFilter { get; set; } = new();
 
+	public DebugCustomization Debug { get; set; } = new();
+
 	public Config()
 	{
 		InstantiateSingletons();
@@ -46,8 +48,8 @@ internal class Config : SingletonAccessor
 		TeaLog.Info("Config: Initializing...");
 
 		RegionLockFix.Init();
-		MaxSearchResultLimit.Init();
 		SessionPlayerCountFilter.Init();
+		Debug.Init();
 
 		TeaLog.Info("Config: Initialization Done!");
 
