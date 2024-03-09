@@ -1,17 +1,5 @@
-﻿using SharpPluginLoader.Core;
-using ImGuiNET;
-using System.Diagnostics;
-using SharpPluginLoader.Core.Memory;
-using SharpPluginLoader.Core.Steam;
-using SharpPluginLoader.Core.Actions;
-using SharpPluginLoader.Core.Entities;
-using System.IO;
-using System;
-using SharpPluginLoader.Core.Experimental;
-using SharpPluginLoader.Core.Networking;
-using System.Net.WebSockets;
-using System.Net;
-using System.Runtime.CompilerServices;
+﻿using ImGuiNET;
+using SharpPluginLoader.Core;
 
 namespace BetterMatchmaking;
 
@@ -44,6 +32,12 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 			ConfigManager_I.Init();
 			CustomizationWindow_I.Init();
 
+			PlayerTypeFilter_I.Init();
+			QuestPreferenceFilter_I.Init();
+			LanguageFilter_I.Init();
+
+			CustomQuestRankFilter_I.Init();
+
 			IsInitialized = true;
 
 			TeaLog.Info("Managers: Initialization Done!");
@@ -66,7 +60,6 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 		LocalizationManager_I.Dispose();
 		ConfigManager_I.Dispose();
 		Core_I.Dispose();
-		PlayerTypeFilterBypass_I.Dispose();
 	}
 
 	public void OnImGuiRender()
@@ -95,12 +88,7 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 			if(!AreHooksInitialized)
 			{
 				AreHooksInitialized = true;
-
-				Task.Run(() =>
-				{
-					Core_I.Init();
-					PlayerTypeFilterBypass_I.Init();
-				});
+				Task.Run(Core_I.Init);
 			}
 
 			CustomizationWindow_I.Render();

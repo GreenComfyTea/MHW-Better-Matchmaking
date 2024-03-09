@@ -16,21 +16,20 @@ internal class RegionLockFixLobbyCustomization : SingletonAccessor
 
 	public string DistanceFilter { get; set; }
 
+	private LobbyDistanceFilter _distanceFilterEnum = LobbyDistanceFilter.WorldWide;
 	[JsonIgnore]
-	public LobbyDistanceFilter DistanceFilterEnum { get; set; } = LobbyDistanceFilter.WorldWide;
+	public LobbyDistanceFilter DistanceFilterEnum { get => _distanceFilterEnum; set => _distanceFilterEnum = value; }
 
 	public RegionLockFixLobbyCustomization()
 	{
 		InstantiateSingletons();
+
 		DistanceFilter = LocalizationManager_I.Default.ImGui.Worldwide;
 	}
 
 	public RegionLockFixLobbyCustomization Init()
 	{
-	
-		DistanceFilterEnum = (LobbyDistanceFilter)Array.FindIndex(
-			LocalizationManager.Instance.Default.ImGui.DistanceFilters, arrayString => arrayString.Equals(DistanceFilter)
-		);
+		var success = Enum.TryParse(DistanceFilter, true, out _distanceFilterEnum);
 
 		return this;
 	}
@@ -41,15 +40,17 @@ internal class RegionLockFixLobbyCustomization : SingletonAccessor
 		var tempChanged = false;
 		var selectedIndex = 0;
 
+		var distanceFilters = LocalizationManager_I.ImGui.DistanceFilters;
+
 		if (ImGui.TreeNode(title))
 		{
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
 
-			selectedIndex = (int)DistanceFilterEnum;
-			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.DistanceFilter, ref selectedIndex, LocalizationManager_I.ImGui.DistanceFilters, 4);
+			selectedIndex = (int) DistanceFilterEnum;
+			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.DistanceFilter, ref selectedIndex, distanceFilters, distanceFilters.Length);
 			if (tempChanged)
 			{
-				DistanceFilterEnum = (LobbyDistanceFilter)selectedIndex;
+				DistanceFilterEnum = (LobbyDistanceFilter) selectedIndex;
 				DistanceFilter = LocalizationManager_I.Default.ImGui.DistanceFilters[selectedIndex];
 			}
 

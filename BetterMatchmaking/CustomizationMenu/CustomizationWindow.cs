@@ -1,4 +1,4 @@
-﻿using ImGuiNET;
+using ImGuiNET;
 using SharpPluginLoader.Core;
 using SharpPluginLoader.Core.Configuration;
 using SharpPluginLoader.Core.Memory;
@@ -51,6 +51,8 @@ namespace BetterMatchmaking
 			{
 				var changed = false;
 
+				ImGui.SetNextWindowSize(new Vector2(640, 640));
+
 				//ImGui.PushFont(font);
 				ImGui.Begin($"{Constants.MOD_NAME} v{Constants.VERSION}", ref _isOpened);
 
@@ -92,10 +94,10 @@ namespace BetterMatchmaking
 				changed = RegionLockFix_I.Customization.RenderImGui() || changed;
 				changed = MaxSearchResultLimit_I.Customization.RenderImGui() || changed;
 				changed = SessionPlayerCountFilter_I.Customization.RenderImGui() || changed;
-				changed = PlayerTypeFilterBypass_I.Customization.RenderImGui() || changed;
-				
-				//font.Scale = oldScale;
-				//ImGui.PopFont();
+				//changed = PlayerTypeFilterBypass_I.Customization.RenderImGui() || changed;
+				//changed = CustomQuestRankFilter_I.Customization.RenderImGui() || changed;
+
+				changed = ConfigManager_I.Current.CustomFilters.RenderImGui() || changed;
 
 				ImGui.End();
 

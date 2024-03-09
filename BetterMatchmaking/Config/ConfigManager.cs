@@ -93,8 +93,12 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 		RegionLockFix_I.Customization = config.RegionLockFix;
 		MaxSearchResultLimit_I.Customization = config.MaxSearchResultLimit;
 		SessionPlayerCountFilter_I.Customization = config.SessionPlayerCountFilter;
-		PlayerTypeFilterBypass_I.Customization = config.PlayerTypeFilterBypass;
+		//CustomQuestRankFilter_I.Customization = config.CustomQuestRankFilter;
 		DebugManager_I.Customization = config.Debug;
+
+		PlayerTypeFilter_I.Customization = config.CustomFilters.Sessions.PlayerType;
+		QuestPreferenceFilter_I.Customization = config.CustomFilters.Sessions.QuestPreference;
+		LanguageFilter_I.Customization = config.CustomFilters.Sessions.Language;
 
 		return this;
 	}

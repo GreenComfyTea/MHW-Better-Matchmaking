@@ -22,8 +22,13 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 	// Singleton Pattern End
 
+	public SearchTypes CurrentSearchType { get; set; } = SearchTypes.None;
+
 	private delegate int startRequest_Delegate(nint netCore, nint netRequest);
 	private Hook<startRequest_Delegate> StartRequestHook { get; set; }
+
+	private delegate void numericalFilter_Delegate(nint steamInterface, nint keyAddress, int value, int comparison);
+	private Hook<numericalFilter_Delegate> NumericalFilterHook { get; set; }
 
 	private Core() { }
 
@@ -34,6 +39,10 @@ internal sealed class Core : SingletonAccessor, IDisposable
 		InstantiateSingletons();
 
 		StartRequestHook = Hook.Create<startRequest_Delegate>(0x1421e2430, OnStartRequest);
+
+		// 0x7FFE2A0B5700
+		var numericalFilterAddress = Matchmaking.GetVirtualFunction(Matchmaking.VirtualFunctionIndex.AddRequestLobbyListNumericalFilter);
+		NumericalFilterHook = Hook.Create<numericalFilter_Delegate>(numericalFilterAddress, OnNumericalFilter);
 
 		TeaLog.Info("Core: Hook Initialization Done!");
 
@@ -70,39 +79,29 @@ internal sealed class Core : SingletonAccessor, IDisposable
 		var requestArguments = MemoryUtil.Read<int>(netRequest + 0x58);
 		var searchKeyCount = MemoryUtil.Read<int>(requestArguments + 0x14);
 
-		var searchType = SearchTypes.None;
-
 		var searchKeyData = requestArguments + 0x1C;
-		for (int i = 0; i < searchKeyCount; i++)
+		for(int i = 0; i < searchKeyCount; i++)
 		{
 			var keyId = MemoryUtil.Read<int>(searchKeyData - 0x4);
 			var key = MemoryUtil.Read<int>(searchKeyData + 0x8);
 
 			TeaLog.Info($"key {keyId}: {key}");
 
-			if (keyId != Constants.SEARCH_KEY_SEARCH_TYPE_ID)
+			if(keyId != Constants.SEARCH_KEY_SEARCH_TYPE_ID)
 			{
 				searchKeyData += 0x10;
 				continue;
 			}
 
-			switch (key)
+			return key switch
 			{
-				case Constants.SESSION_SEARCH_ID:
-
-					searchType = SearchTypes.Session;
-					break;
-
-				case Constants.QUEST_SEARCH_ID:
-
-					searchType = SearchTypes.Quest;
-					break;
-			}
-
-			searchKeyData += 0x10;
+				(int) SearchTypes.Session => SearchTypes.Session,
+				(int) SearchTypes.Quest => SearchTypes.Quest,
+				_ => SearchTypes.None
+			};
 		}
 
-		return searchType;
+		return SearchTypes.None;
 	}
 
 	private int OnStartRequest(nint netCore, nint netRequest)
@@ -112,15 +111,20 @@ internal sealed class Core : SingletonAccessor, IDisposable
 			// Phase Check
 			var phase = MemoryUtil.Read<int>(netRequest + 0xE0);
 
-			if(phase != 0) return StartRequestHook!.Original(netCore, netRequest);
+			if(phase != 0)
+			{
+				CurrentSearchType = SearchTypes.None;
+				LanguageFilter_I.SkipNext = false;
+				return StartRequestHook!.Original(netCore, netRequest);
+			}
 
 			TeaLog.Info("startRequest\n");
 
 			// Get Lobby Search Type
 
-			var searchType = GetSearchType(netRequest);
+			CurrentSearchType = GetSearchType(netRequest);
 
-			if(searchType == SearchTypes.None) return StartRequestHook!.Original(netCore, netRequest);
+			if(CurrentSearchType == SearchTypes.None) return StartRequestHook!.Original(netCore, netRequest);
 
 			// Max Results
 
@@ -128,9 +132,9 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 			// Apply Stuff
 
-			MaxSearchResultLimit_I.Apply(searchType, ref maxResultsRef);
-			RegionLockFix_I.Apply(searchType);
-			SessionPlayerCountFilter_I.ApplyMin(searchType).ApplyMax(searchType);
+			MaxSearchResultLimit_I.Apply(CurrentSearchType, ref maxResultsRef);
+			RegionLockFix_I.Apply(CurrentSearchType);
+			SessionPlayerCountFilter_I.ApplyMin(CurrentSearchType).ApplyMax(CurrentSearchType);
 		}
 		catch(Exception exception)
 		{
@@ -140,11 +144,35 @@ internal sealed class Core : SingletonAccessor, IDisposable
 		return StartRequestHook!.Original(netCore, netRequest);
 	}
 
+	private void OnNumericalFilter(nint steamInterface, nint keyAddress, int value, int comparison)
+	{
+		var skip = false;
+
+		try
+		{
+			TeaLog.Info("OnNumericalFilter");
+
+			var key = MemoryUtil.ReadString(keyAddress);
+
+			TeaLog.Info($"{key} ({GetSearchKeyName(key)}) {GetComparisonSign(comparison)} {value}");
+
+			skip = PlayerTypeFilter_I.Apply(ref key, ref value, ref comparison) || skip;
+			skip = QuestPreferenceFilter_I.Apply(ref key, ref value, ref comparison) || skip;
+			skip = LanguageFilter_I.ApplySameLanguage(ref key, ref value, ref comparison) || skip;
+			skip = LanguageFilter_I.ApplyAnyLanguage(ref key, ref value, ref comparison) || skip;
+		}
+		catch(Exception exception)
+		{
+			DebugManager_I.Report("PlayerTypeLockBypass.OnNumericalFilter()", exception.ToString());
+		}
+
+		if(!skip) NumericalFilterHook!.Original(steamInterface, keyAddress, value, comparison);
+	}
+
 	public void Dispose()
 	{
-		if(StartRequestHook == null) return;
-
 		TeaLog.Info("Core: Disposing Hooks...");
-		StartRequestHook?.Dispose();
+		if(StartRequestHook != null) StartRequestHook?.Dispose();
+		if(NumericalFilterHook != null) NumericalFilterHook?.Dispose();
 	}
 }

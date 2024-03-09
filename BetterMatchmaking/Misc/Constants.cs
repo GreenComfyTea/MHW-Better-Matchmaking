@@ -10,10 +10,18 @@ namespace BetterMatchmaking;
 
 public enum OutlineModes { Outside, Center, Inside }
 public enum FillDirections { LeftToRight, RightToLeft, TopToBottom, BottomToTop }
-public enum SearchTypes { None, Session, Quest }
 public enum PlayerTypes { Beginners, Experienced, Any, Matchmake }
-public enum SimilarHunterRank { Disabled, Enabled = 5 }
+public enum SimilarHunterRank { Disabled, Enabled = 6 }
 public enum SimilarMasterRank { Disabled, Enabled = 10 }
+
+public enum SearchTypes
+{
+	None = 0,
+	Session = 537292564,
+	Quest = 421652,
+}
+
+public enum LanguageSearchTypes { SameLanguage, AnyLanguage };
 
 public enum Languages
 {
@@ -32,6 +40,130 @@ public enum Languages
 	SimplifiedChinese = 8,
 	Arabic = 22,
 	LatinAmericanSpanish = 23
+}
+
+public enum QuestTypes
+{
+	OptionalQuests = 1,
+	Assignments = 2,
+	Investigations = 3,
+	Expeditions = 4,
+	EventQuests = 5,
+	SpecialInvestigations = 6
+}
+
+public enum QuestRanks
+{
+	LowRank1 = 1,
+	LowRank2 = 2,
+	LowRank3 = 3,
+	LowRank4 = 4,
+	LowRank5 = 5,
+
+	HighRank6 = 6,
+	HighRank7 = 7,
+	HighRank8 = 8,
+	HighRank9 = 9,
+
+	MasterRank1 = 11,
+	MasterRank2 = 12,
+	MasterRank3 = 13,
+	MasterRank4 = 14,
+	MasterRank5 = 15,
+	MasterRank6 = 16,
+
+	LowRank = 20,
+	HighRank = 21,
+	MasterRank = 22
+}
+
+public enum QuestPreferences
+{
+	None = 0,
+	Assignments = 1,
+	Optional = 2,
+	Investigation = 3,
+	TheGuidingLandsExpedition = 1710092,
+	EventQuests = 4,
+	SpecialAssignments = 699999,
+	Arena = 5,
+	Expeditions = 6,
+	TemperedMonsters = 710099,
+	SmallMonsters =			130000,
+
+	GreatJagras =			130001,
+	KuluYaKu =				200000,
+	PukeiPukei =			210000,
+	Barroth =				300000,
+	Jyuratodus =			310000,
+	TobiKadachi =			320000,
+	Anjanath =				330000,
+	Rathian =				420000,
+	TzitziYaKu =			420001,
+	Paolumu =				420002,
+	GreatGirros =			430000,
+	Radobaan =				430001,
+	Legiana =				440000,
+	Odogaron =				500000,
+	Rathalos =				510000,
+	Diablos =				510001,
+	Kirin =					510002,
+	ZorahMagdaros =			400350,
+	Dodogama =				610000,
+	PinkRathian =			620000,
+	Bazelgeuse =			620001,
+	Lavasioth =				620002,
+	Uragaan =				620003,
+	AzureRathalos =			630004,
+	BlackDiablos =			620005,
+	Nergigante =			710000,
+	Teostra =				800000,
+	KushalaDaora =			800001,
+	VaalHazak =				800002,
+	Xenojiiva =				810000,
+
+	KulveTaroth =			900440,
+	Deviljho =				700000,
+	Lunastra =				900450,
+	Behemoth =				900449,
+	AncientLeshen =			900448,
+
+	Beotodus =				1100100,
+	Banbaro =				1100400,
+	ViperTobiKadachi =		1200200,
+	NightshadePaolumu =		1210199,
+	CoralPukeiPukei =		1210200,
+	Barioth =				1300200,
+	Nargacuga =				1320099,
+	Glavenus =				1320100,
+	Tigrex =				1330099,
+	Brachydios =			1330100,
+	ShriekingLegiana =		1400200,
+	FulgurAnjanath =		1410100,
+	AcidicGlavenus =		1420199,
+	EbonyOdogaron =			1420200,
+	Velkhana =				1330500,
+	SeethingBazelgeuse =	1510200,
+	BlackveilVaalHazak =	1520300,
+	Namielle =				1530400,
+	RuinerNergigante =		1600100,
+	SharaIshvalda =			1600500,
+
+	SavageDeviljho =		1710094,
+	BruteTigrex =			1710095,
+	Zinogre =				1710096,
+	YianGaruga =			1710097,
+	ScarredYianGaruga =		1710098,
+	GoldRathian =			1710099,
+	SilverRathalos =		1710100,
+	Rajang =				1600009,
+	StygianZinogre =		1600008,
+	FuriousRajang =			1600010,
+	RagingBrachydios =		1600011,
+	FrostfangBarioth =		1510000,
+	Safijiiva =				1600013,
+	Alatreon =				1600012,
+	Fatalis =				1600014
 }
 
 public static class Constants
@@ -107,11 +239,13 @@ public static class Constants
 	public const char SEARCH_KEY_QUEST_LANGUAGE_ID = '5';
 	public const char SEARCH_KEY_QUEST_TYPE_ID = '6';
 
-	public const int SESSION_SEARCH_ID = 537292564;
-	public const int QUEST_SEARCH_ID = 421652;
-
-
 	public const string SEARCH_KEY_SESSION_PLAYER_TYPE = "SearchKey1";
+	public const string SEARCH_KEY_SESSION_QUEST_PREFERENCE = "SearchKey2";
+	public const string SEARCH_KEY_SESSION_LANGUAGE = "SearchKey4";
+	public const string SEARCH_KEY_QUEST_RANK = SEARCH_KEY_SESSION_LANGUAGE;
+	public const string SEARCH_KEY_SESSION_SIMILAR_HUNTER_RANK = "SearchKey5";
+	public const string SEARCH_KEY_SESSION_SIMILAR_MASTER_RANK = "SearchKey6";
+
 	public const int SESSION_PLAYER_TYPE_BEGINNERS = 0;
 	public const int SESSION_PLAYER_TYPE_EXPERIENCED = 1;
 	public const int SESSION_PLAYER_TYPE_ANY = 2;

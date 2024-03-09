@@ -19,7 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ImGui.NET" Version="1.90.1.1" />
+    <PackageReference Include="SharpPluginLoader.ImGui" Version="1.90.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,9 +30,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="data\config.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <Folder Include="Core\Quests\" />
+    <Folder Include="data\" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
