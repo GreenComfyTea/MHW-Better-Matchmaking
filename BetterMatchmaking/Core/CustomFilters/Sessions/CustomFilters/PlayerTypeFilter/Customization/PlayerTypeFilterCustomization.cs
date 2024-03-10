@@ -27,7 +27,6 @@ internal class PlayerTypeFilterCustomization : SingletonAccessor
 		InstantiateSingletons();
 
 		PlayerTypeReplacementTarget = LocalizationManager_I.Default.ImGui.Any;
-
 	}
 
 	public PlayerTypeFilterCustomization Init()

@@ -78,7 +78,6 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string Worldwide { get; set; } = "Worldwide";
 
 	public string Explanation { get; set; } = "Explanation";
-	
 
 	// Max Search Result Limit
 	public string MaxSearchResultLimit { get; set; } = "Max Search Result Limit";
@@ -93,7 +92,6 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string CustomFilters { get; set; } = "Custom Filters";
 	public string ReplacementTarget { get; set; } = "Replacement Target";
 	public string FilterOptions { get; set; } = "Filter Options";
-	
 
 	// Player Type
 
@@ -203,8 +201,6 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string Fatalis { get; set; } = "Fatalis";
 
 	// Language Filter
-	public string LanguageFilter { get; set; } = "Language Filter";
-
 	public string SameLanguage { get; set; } = "Same Language";
 	public string AnyLanguage { get; set; } = "Any Language";
 
@@ -222,7 +218,6 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string SimplifiedChinese { get; set; } = "Simplified Chinese";
 	public string Arabic { get; set; } = "Arabic";
 	public string LatinAmericanSpanish { get; set; } = "Latin-American Spanish";
-
 
 	// Quest Type Filter
 
@@ -279,7 +274,6 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string[] QuestRankReplacementTargets { get; set; } = Array.Empty<string>();
 	[JsonIgnore]
 	public string[] QuestRanks { get; set; } = Array.Empty<string>();
-
 
 	public LocalizedStrings_ImGui()
 	{

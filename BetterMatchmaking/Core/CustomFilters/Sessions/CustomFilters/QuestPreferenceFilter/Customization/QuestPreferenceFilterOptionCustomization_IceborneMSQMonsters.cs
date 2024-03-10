@@ -69,7 +69,6 @@ internal class QuestPreferenceFilterOptionCustomization_IceborneMSQMonsters : Si
 	private bool _sharaIshvalda = true;
 	public bool SharaIshvalda { get => _sharaIshvalda; set => _sharaIshvalda = value; }
 
-
 	public QuestPreferenceFilterOptionCustomization_IceborneMSQMonsters()
 	{
 		InstantiateSingletons();

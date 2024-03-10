@@ -26,7 +26,6 @@ internal class QuestTypeFilterCustomization : SingletonAccessor
 		InstantiateSingletons();
 
 		QuestTypeReplacementTarget = LocalizationManager_I.Default.ImGui.Expeditions;
-
 	}
 
 	public QuestTypeFilterCustomization Init()

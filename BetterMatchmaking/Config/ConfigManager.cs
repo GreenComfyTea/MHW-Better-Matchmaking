@@ -97,11 +97,12 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 
 		PlayerTypeFilter_I.Customization = config.CustomFilters.Sessions.PlayerType;
 		QuestPreferenceFilter_I.Customization = config.CustomFilters.Sessions.QuestPreference;
-		LanguageFilter_I.Customization = config.CustomFilters.Sessions.Language;
+		LanguageFilter_I.SessionCustomization = config.CustomFilters.Sessions.Language;
 
 		QuestTypeFilter_I.Customization = config.CustomFilters.Quests.QuestType;
 		DifficultyFilter_I.Customization = config.CustomFilters.Quests.Difficulty;
 		RewardFilter_I.Customization = config.CustomFilters.Quests.Rewards;
+		LanguageFilter_I.QuestCustomization = config.CustomFilters.Quests.Language;
 
 		return this;
 	}

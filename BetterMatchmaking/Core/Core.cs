@@ -24,6 +24,9 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 	public SearchTypes CurrentSearchType { get; set; } = SearchTypes.None;
 
+	public bool IsLanguageAny { get; set; } = false;
+	public bool IsQuestRewardsNoPreference { get; set; } = false;
+
 	private delegate int startRequest_Delegate(nint netCore, nint netRequest);
 	private Hook<startRequest_Delegate> StartRequestHook { get; set; }
 
@@ -74,12 +77,16 @@ internal sealed class Core : SingletonAccessor, IDisposable
 		return "";
 	}
 
-	private static SearchTypes GetSearchType(nint netRequest)
+	private void AnalyzeSearchKeys(nint netRequest)
 	{
 		var requestArguments = MemoryUtil.Read<int>(netRequest + 0x58);
 		var searchKeyCount = MemoryUtil.Read<int>(requestArguments + 0x14);
 
 		var searchKeyData = requestArguments + 0x1C;
+
+		var isLanguageUpdated = false;
+		var isQuestRewardsUpdated = false;
+
 		for(int i = 0; i < searchKeyCount; i++)
 		{
 			var keyId = MemoryUtil.Read<int>(searchKeyData - 0x4);
@@ -87,21 +94,44 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 			TeaLog.Info($"key {keyId}: {key}");
 
-			if(keyId != Constants.SEARCH_KEY_SEARCH_TYPE_ID)
+			if(keyId == Constants.SEARCH_KEY_SEARCH_TYPE_ID)
 			{
-				searchKeyData += 0x10;
-				continue;
+				CurrentSearchType = key switch
+				{
+					(int) SearchTypes.Session => SearchTypes.Session,
+					(int) SearchTypes.Quest => SearchTypes.Quest,
+					_ => SearchTypes.None
+				};
+			}
+			else if(CurrentSearchType == SearchTypes.Session)
+			{
+				if(keyId == Constants.SEARCH_KEY_SESSION_LANGUAGE_ID)
+				{
+					IsLanguageAny = false;
+					isLanguageUpdated = true;
+				}
+			}
+			else if(CurrentSearchType == SearchTypes.Quest)
+			{
+				if(keyId == Constants.SEARCH_KEY_QUEST_LANGUAGE_ID)
+				{
+					IsLanguageAny = false;
+					isLanguageUpdated = true;
+				}
+				else if(keyId == Constants.SEARCH_KEY_QUEST_REWARDS_AVAILABLE_ID)
+				{
+					IsQuestRewardsNoPreference = false;
+					isQuestRewardsUpdated = true;
+				}
 			}
 
-			return key switch
-			{
-				(int) SearchTypes.Session => SearchTypes.Session,
-				(int) SearchTypes.Quest => SearchTypes.Quest,
-				_ => SearchTypes.None
-			};
+			searchKeyData += 0x10;
 		}
 
-		return SearchTypes.None;
+		if(!isLanguageUpdated) IsLanguageAny = true;
+		if(!isQuestRewardsUpdated) IsQuestRewardsNoPreference = true;
+
+		TeaLog.Info($"IsLanguageAny: {IsLanguageAny}");
 	}
 
 	private int OnStartRequest(nint netCore, nint netRequest)
@@ -114,15 +144,12 @@ internal sealed class Core : SingletonAccessor, IDisposable
 			if(phase != 0)
 			{
 				CurrentSearchType = SearchTypes.None;
-				LanguageFilter_I.SkipNext = false;
 				return StartRequestHook!.Original(netCore, netRequest);
 			}
 
 			TeaLog.Info("startRequest\n");
 
-			// Get Lobby Search Type
-
-			CurrentSearchType = GetSearchType(netRequest);
+			AnalyzeSearchKeys(netRequest);
 
 			if(CurrentSearchType == SearchTypes.None) return StartRequestHook!.Original(netCore, netRequest);
 
@@ -135,6 +162,8 @@ internal sealed class Core : SingletonAccessor, IDisposable
 			MaxSearchResultLimit_I.Apply(CurrentSearchType, ref maxResultsRef);
 			RegionLockFix_I.Apply(CurrentSearchType);
 			SessionPlayerCountFilter_I.ApplyMin(CurrentSearchType).ApplyMax(CurrentSearchType);
+
+			LanguageFilter_I.ApplyAnyLanguage();
 		}
 		catch(Exception exception)
 		{
@@ -165,7 +194,6 @@ internal sealed class Core : SingletonAccessor, IDisposable
 			skip = PlayerTypeFilter_I.Apply(ref key, ref value, ref comparison) || skip;
 			skip = QuestPreferenceFilter_I.Apply(ref key, ref value, ref comparison) || skip;
 			skip = LanguageFilter_I.ApplySameLanguage(ref key, ref value, ref comparison) || skip;
-			skip = LanguageFilter_I.ApplyAnyLanguage(ref key, ref value, ref comparison) || skip;
 
 			skip = QuestTypeFilter_I.Apply(ref key, ref value, ref comparison) || skip;
 			skip = DifficultyFilter_I.Apply(ref key, ref value, ref comparison) || skip;

@@ -24,7 +24,6 @@ internal class CustomFilterCustomization : SingletonAccessor
         var changed = false;
         if (ImGui.TreeNode(LocalizationManager_I.ImGui.CustomFilters))
         {
-
             changed = Sessions.RenderImGui() || changed;
             changed = Quests.RenderImGui() || changed;
 

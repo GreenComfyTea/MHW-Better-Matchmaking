@@ -101,7 +101,6 @@ internal class QuestPreferenceFilterOptionCustomization_BaseGameMSQMonsters : Si
 	private bool _xenojiiva = true;
 	public bool Xenojiiva { get => _xenojiiva; set => _xenojiiva = value; }
 
-
 	public QuestPreferenceFilterOptionCustomization_BaseGameMSQMonsters()
 	{
 		InstantiateSingletons();

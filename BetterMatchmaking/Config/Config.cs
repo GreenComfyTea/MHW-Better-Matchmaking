@@ -26,7 +26,6 @@ internal class Config : SingletonAccessor
 	public RegionLockFixCustomization RegionLockFix { get; set; } = new();
 	public MaxSearchResultLimitCustomization MaxSearchResultLimit { get; set; } = new();
 	public SessionPlayerCountFilterCustomization SessionPlayerCountFilter { get; set; } = new();
-
 	public CustomFilterCustomization CustomFilters { get; set; } = new();
 
 	public DebugCustomization Debug { get; set; } = new();
@@ -61,6 +60,7 @@ internal class Config : SingletonAccessor
 		CustomFilters.Quests.QuestType.Init();
 		CustomFilters.Quests.Difficulty.Init();
 		CustomFilters.Quests.Rewards.Init();
+		CustomFilters.Quests.Language.Init();
 
 		TeaLog.Info("Config: Initialization Done!");
 

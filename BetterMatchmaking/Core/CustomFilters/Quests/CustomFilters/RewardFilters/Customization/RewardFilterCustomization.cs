@@ -19,7 +19,6 @@ internal class RewardFilterCustomization : SingletonAccessor
 	public RewardFilterCustomization()
 	{
 		InstantiateSingletons();
-
 	}
 
 	public RewardFilterCustomization Init()
@@ -35,7 +34,9 @@ internal class RewardFilterCustomization : SingletonAccessor
 		{
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
 
-			ImGui.Text($"{LocalizationManager_I.ImGui.ReplacementTarget}: {LocalizationManager_I.ImGui.RewardsAvailable}");
+			ImGui.Text($"{LocalizationManager_I.ImGui.ReplacementTarget}:");
+			ImGui.SameLine();
+			ImGui.TextColored(Constants.IMGUI_BLUE_COLOR, LocalizationManager_I.ImGui.RewardsAvailable);
 
 			changed = FilterOptions.RenderImGui() || changed;
 

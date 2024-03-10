@@ -8,7 +8,7 @@ using Windows.Networking.Sockets;
 
 namespace BetterMatchmaking;
 
-internal class DebugManager
+internal sealed class DebugManager
 {
 	// Singleton Pattern
 	private static readonly DebugManager _singleton = new();
@@ -21,8 +21,8 @@ internal class DebugManager
 
 	// Singleton Pattern End
 
-	public Dictionary<string, Report> Reports = new();
-	public Queue<Report> History = new();
+	public Dictionary<string, Report> Reports { get; } = new();
+	public Queue<Report> History { get; } = new();
 
 	public DebugCustomization Customization { get; set; }
 
@@ -56,7 +56,7 @@ internal class DebugManager
 	public void TrimHistory()
 	{
 		while (History.Count > Customization.HistorySize)
-		{ 
+		{
 			History.Dequeue();
 		}
 	}

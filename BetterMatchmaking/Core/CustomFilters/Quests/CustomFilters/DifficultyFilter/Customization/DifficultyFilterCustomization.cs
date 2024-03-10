@@ -23,7 +23,6 @@ internal class DifficultyFilterCustomization : SingletonAccessor
 	[JsonIgnore]
 	public Difficulties ReplacementTargetEnum { get; set; } = Difficulties.LowRank1;
 
-
 	public DifficultyFilterCustomization()
 	{
 		InstantiateSingletons();
@@ -32,7 +31,6 @@ internal class DifficultyFilterCustomization : SingletonAccessor
 
 	public DifficultyFilterCustomization Init()
 	{
-
 		var stringIndex = Array.FindIndex(
 			LocalizationManager.Instance.Default.ImGui.QuestRankReplacementTargets, arrayString => arrayString.Equals(ReplacementTarget)
 		);
@@ -42,7 +40,7 @@ internal class DifficultyFilterCustomization : SingletonAccessor
 		return this;
 	}
 
-	private int StringIndexToEnum(int stringIndex)
+	private static int StringIndexToEnum(int stringIndex)
 	{
 		var highRank9Index = Array.FindIndex(
 			LocalizationManager.Instance.Default.ImGui.QuestRankReplacementTargets, arrayString => arrayString.Equals(LocalizationManager.Instance.Default.ImGui.HighRank9)
@@ -54,7 +52,7 @@ internal class DifficultyFilterCustomization : SingletonAccessor
 		return stringIndex - 1;
 	}
 
-	private int EnumToStringIndex(Difficulties replacementTargetEnum)
+	private static int EnumToStringIndex(Difficulties replacementTargetEnum)
 	{
 		var replacementTargetEnumValue = (int)replacementTargetEnum;
 
@@ -75,9 +73,6 @@ internal class DifficultyFilterCustomization : SingletonAccessor
 		if (ImGui.TreeNode(LocalizationManager_I.ImGui.Difficulty))
 		{
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
-
-
-
 
 			selectedIndex = EnumToStringIndex(ReplacementTargetEnum);
 			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref selectedIndex, questRanks, questRanks.Length);

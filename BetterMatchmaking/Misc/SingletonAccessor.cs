@@ -28,9 +28,9 @@ internal class SingletonAccessor
 	protected MaxSearchResultLimit MaxSearchResultLimit_I { get; set; }
 	[JsonIgnore]
 	protected SessionPlayerCountFilter SessionPlayerCountFilter_I { get; set; }
-	
 
-	
+
+
 	[JsonIgnore]
 	protected PlayerTypeFilter PlayerTypeFilter_I { get; set; }
 	[JsonIgnore]
@@ -46,6 +46,8 @@ internal class SingletonAccessor
 	protected DifficultyFilter DifficultyFilter_I { get; set; }
 	[JsonIgnore]
 	protected RewardFilter RewardFilter_I { get; set; }
+
+
 
 	protected void InstantiateSingletons()
 	{

@@ -37,7 +37,7 @@ namespace BetterMatchmaking
 			Name = Constants.DEFAULT_LOCALIZATION;
 
 			TeaLog.Info($"Localization {Name}: Initializing...");
-			
+
 			IsDefault = true;
 
 			TeaLog.Info($"Localization {Name}: Done!");

@@ -31,7 +31,7 @@ internal class DebugCustomization : SingletonAccessor
 			ImGui.TextColored(Constants.IMGUI_BLUE_COLOR, $"{LocalizationManager_I.ImGui.CurrentTime}:");
 			ImGui.SameLine();
 			ImGui.Text(DateTime.Now.ToString("HH:mm:ss.fffffff"));
-			
+
 			if(DebugManager_I.Reports.Count == 0)
 			{
 				ImGui.Text(LocalizationManager_I.ImGui.EverythingSeemsToBeOk);

@@ -27,7 +27,6 @@ internal class DifficultyFilterOptionCustomization_MasterRank : SingletonAccesso
 	private bool _masterRank6 = true;
 	public bool MasterRank6 { get => _masterRank6; set => _masterRank6 = value; }
 
-
 	public DifficultyFilterOptionCustomization_MasterRank()
 	{
 		InstantiateSingletons();

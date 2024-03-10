@@ -231,17 +231,17 @@ public static class Constants
 	public const int SEARCH_KEY_SEARCH_TYPE_ID = 0;
 
 	public const int SEARCH_KEY_SESSION_PLAYER_TYPE_ID = 1;
-	public const char SEARCH_KEY_SESSION_QUEST_PREFERENCE_ID = '2';
+	public const int SEARCH_KEY_SESSION_QUEST_PREFERENCE_ID = 2;
 
-	public const char SEARCH_KEY_SESSION_LANGUAGE_ID = '4';
-	public const char SEARCH_KEY_SESSION_SIMILAR_HUNTER_RANK_ID = '5';
-	public const char SEARCH_KEY_SESSION_SIMILAR_MASTER_RANK_ID = '6';
+	public const int SEARCH_KEY_SESSION_LANGUAGE_ID = 4;
+	public const int SEARCH_KEY_SESSION_SIMILAR_HUNTER_RANK_ID = 5;
+	public const int SEARCH_KEY_SESSION_SIMILAR_MASTER_RANK_ID = 6;
 
-	public const char SEARCH_KEY_QUEST_REWARDS_AVAILABLE_ID = '2';
-	public const char SEARCH_KEY_QUEST_TARGET_ID = '3';
-	public const char SEARCH_KEY_QUEST_RANK_ID = '4';
-	public const char SEARCH_KEY_QUEST_LANGUAGE_ID = '5';
-	public const char SEARCH_KEY_QUEST_TYPE_ID = '6';
+	public const int SEARCH_KEY_QUEST_REWARDS_AVAILABLE_ID = 2;
+	public const int SEARCH_KEY_QUEST_TARGET_ID = 3;
+	public const int SEARCH_KEY_QUEST_RANK_ID = 4;
+	public const int SEARCH_KEY_QUEST_LANGUAGE_ID = 5;
+	public const int SEARCH_KEY_QUEST_TYPE_ID = 6;
 
 	public const string SEARCH_KEY_SESSION_PLAYER_TYPE = "SearchKey1";
 	public const string SEARCH_KEY_SESSION_QUEST_PREFERENCE = "SearchKey2";
@@ -252,6 +252,7 @@ public static class Constants
 	public const string SEARCH_KEY_SESSION_QUEST_TYPE = SEARCH_KEY_SESSION_SIMILAR_MASTER_RANK;
 	public const string SEARCH_KEY_SESSION_QUEST_DIFFICULTY = SEARCH_KEY_SESSION_LANGUAGE;
 	public const string SEARCH_KEY_SESSION_QUEST_REWARDS = SEARCH_KEY_SESSION_QUEST_PREFERENCE;
+	public const string SEARCH_KEY_QUEST_LANGUAGE = SEARCH_KEY_SESSION_SIMILAR_HUNTER_RANK;
 
 	public const int SESSION_PLAYER_TYPE_BEGINNERS = 0;
 	public const int SESSION_PLAYER_TYPE_EXPERIENCED = 1;

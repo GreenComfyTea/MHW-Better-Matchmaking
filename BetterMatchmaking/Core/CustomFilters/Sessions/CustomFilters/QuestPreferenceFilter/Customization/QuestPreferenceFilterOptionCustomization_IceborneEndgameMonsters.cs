@@ -138,7 +138,6 @@ internal class QuestPreferenceFilterOptionCustomization_IceborneEndgameMonsters 
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Alatreon, ref _alatreon) || changed;
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Fatalis, ref _fatalis) || changed;
 
-
 			ImGui.TreePop();
 		}
 

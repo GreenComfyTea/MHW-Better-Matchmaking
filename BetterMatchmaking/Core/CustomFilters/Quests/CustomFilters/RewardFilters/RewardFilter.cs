@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class RewardFilter : SingletonAccessor
+internal sealed class RewardFilter : SingletonAccessor
 {
 	// Singleton Pattern
 	private static readonly RewardFilter _singleton = new();

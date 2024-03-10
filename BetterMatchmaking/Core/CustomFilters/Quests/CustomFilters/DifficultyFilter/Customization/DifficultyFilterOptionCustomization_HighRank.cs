@@ -21,7 +21,6 @@ internal class DifficultyFilterOptionCustomization_HighRank : SingletonAccessor
 	private bool _highRank9 = true;
 	public bool HighRank9 { get => _highRank9; set => _highRank9 = value; }
 
-
 	public DifficultyFilterOptionCustomization_HighRank()
 	{
 		InstantiateSingletons();

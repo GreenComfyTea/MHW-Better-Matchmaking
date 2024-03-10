@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class QuestTypeFilter : SingletonAccessor
+internal sealed class QuestTypeFilter : SingletonAccessor
 {
 	// Singleton Pattern
 	private static readonly QuestTypeFilter _singleton = new();
@@ -39,41 +39,41 @@ internal class QuestTypeFilter : SingletonAccessor
 		if(!key.Equals(Constants.SEARCH_KEY_SESSION_QUEST_TYPE)) return false;
 		if(value != (int) Customization.QuestTypeReplacementTargetEnum) return false;
 
-		TeaLog.Info($"QuestTypeFilter: Skipping Original Call...");
+		TeaLog.Info("QuestTypeFilter: Skipping Original Call...");
 
 		if(!Customization.FilterOptions.OptionalQuests)
 		{
-			TeaLog.Info($"QuestTypeFilter: Skipping Optional Quests...");
+			TeaLog.Info("QuestTypeFilter: Skipping Optional Quests...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SESSION_QUEST_TYPE, (int) QuestTypes.OptionalQuests, LobbyComparison.NotEqual);
 		}
 
 		if(!Customization.FilterOptions.Assignments)
 		{
-			TeaLog.Info($"QuestTypeFilter: Skipping Assignments...");
+			TeaLog.Info("QuestTypeFilter: Skipping Assignments...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SESSION_QUEST_TYPE, (int) QuestTypes.Assignments, LobbyComparison.NotEqual);
 		}
 
 		if(!Customization.FilterOptions.Investigations)
 		{
-			TeaLog.Info($"QuestTypeFilter: Skipping Investigations...");
+			TeaLog.Info("QuestTypeFilter: Skipping Investigations...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SESSION_QUEST_TYPE, (int) QuestTypes.Investigations, LobbyComparison.NotEqual);
 		}
 
 		if(!Customization.FilterOptions.Expeditions)
 		{
-			TeaLog.Info($"QuestTypeFilter: Skipping Expeditions...");
+			TeaLog.Info("QuestTypeFilter: Skipping Expeditions...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SESSION_QUEST_TYPE, (int) QuestTypes.Expeditions, LobbyComparison.NotEqual);
 		}
 
 		if(!Customization.FilterOptions.EventQuests)
 		{
-			TeaLog.Info($"QuestTypeFilter: Skipping Event Quests...");
+			TeaLog.Info("QuestTypeFilter: Skipping Event Quests...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SESSION_QUEST_TYPE, (int) QuestTypes.EventQuests, LobbyComparison.NotEqual);
 		}
 
 		if(!Customization.FilterOptions.SpecialInvestigations)
 		{
-			TeaLog.Info($"QuestTypeFilter: Skipping Special Investigations...");
+			TeaLog.Info("QuestTypeFilter: Skipping Special Investigations...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SESSION_QUEST_TYPE, (int) QuestTypes.SpecialInvestigations, LobbyComparison.NotEqual);
 		}
 
