@@ -24,12 +24,44 @@ internal class PlayerTypeFilterOptionCustomization : SingletonAccessor
 		InstantiateSingletons();
 	}
 
+	private PlayerTypeFilterOptionCustomization SelectAll()
+	{
+		Beginners = true;
+		Experienced = true;
+		Any = true;
+
+		return this;
+	}
+
+	private PlayerTypeFilterOptionCustomization DeselectAll()
+	{
+		Beginners = false;
+		Experienced = false;
+		Any = false;
+
+		return this;
+	}
+
 	public bool RenderImGui()
 	{
 		var changed = false;
 
 		if(ImGui.TreeNode(LocalizationManager_I.ImGui.FilterOptions))
 		{
+			if(ImGui.Button(LocalizationManager_I.ImGui.SelectAll))
+			{
+				SelectAll();
+				changed = true;
+			}
+
+			ImGui.SameLine();
+
+			if(ImGui.Button(LocalizationManager_I.ImGui.DeselectAll))
+			{
+				DeselectAll();
+				changed = true;
+			}
+
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Beginners, ref _beginners) || changed;
 			ImGui.SameLine();
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Experienced, ref _experienced) || changed;

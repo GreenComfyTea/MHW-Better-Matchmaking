@@ -9,6 +9,10 @@ namespace BetterMatchmaking;
 
 internal class CustomFilterQuestCustomization : SingletonAccessor
 {
+	public QuestTypeFilterCustomization QuestType { get; set; } = new();
+
+	public DifficultyFilterCustomization Difficulty { get; set; } = new();
+
 	public CustomFilterQuestCustomization()
 	{
 		InstantiateSingletons();
@@ -17,8 +21,10 @@ internal class CustomFilterQuestCustomization : SingletonAccessor
 	public bool RenderImGui()
 	{
 		var changed = false;
-		if(ImGui.TreeNode(LocalizationManager_I.ImGui.Quests))
+		if (ImGui.TreeNode(LocalizationManager_I.ImGui.Quests))
 		{
+			changed = QuestType.RenderImGui() || changed;
+			changed = Difficulty.RenderImGui() || changed;
 
 			ImGui.TreePop();
 		}

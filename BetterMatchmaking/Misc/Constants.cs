@@ -52,7 +52,7 @@ public enum QuestTypes
 	SpecialInvestigations = 6
 }
 
-public enum QuestRanks
+public enum Difficulties
 {
 	LowRank1 = 1,
 	LowRank2 = 2,
@@ -64,6 +64,8 @@ public enum QuestRanks
 	HighRank7 = 7,
 	HighRank8 = 8,
 	HighRank9 = 9,
+
+	HighRankSearch = 10,
 
 	MasterRank1 = 11,
 	MasterRank2 = 12,
@@ -242,9 +244,11 @@ public static class Constants
 	public const string SEARCH_KEY_SESSION_PLAYER_TYPE = "SearchKey1";
 	public const string SEARCH_KEY_SESSION_QUEST_PREFERENCE = "SearchKey2";
 	public const string SEARCH_KEY_SESSION_LANGUAGE = "SearchKey4";
-	public const string SEARCH_KEY_QUEST_RANK = SEARCH_KEY_SESSION_LANGUAGE;
 	public const string SEARCH_KEY_SESSION_SIMILAR_HUNTER_RANK = "SearchKey5";
 	public const string SEARCH_KEY_SESSION_SIMILAR_MASTER_RANK = "SearchKey6";
+
+	public const string SEARCH_KEY_SESSION_QUEST_TYPE = SEARCH_KEY_SESSION_SIMILAR_MASTER_RANK;
+	public const string SEARCH_KEY_SESSION_QUEST_DIFFICULTY = SEARCH_KEY_SESSION_LANGUAGE;
 
 	public const int SESSION_PLAYER_TYPE_BEGINNERS = 0;
 	public const int SESSION_PLAYER_TYPE_EXPERIENCED = 1;

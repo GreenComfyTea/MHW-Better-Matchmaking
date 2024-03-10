@@ -133,8 +133,8 @@ internal class LanguageFilter : SingletonAccessor
 
 		if(Customization.LanguageReplacementTargetEnum != LanguageSearchTypes.SameLanguage) return false;
 		if((LobbyComparison) comparison != LobbyComparison.Equal) return false;
-		
-		TeaLog.Info($"LanguageFilter: Skipping Same Language...");
+
+		TeaLog.Info($"LanguageFilter: Same Language -> Skipping Original Call...");
 		SkipNext = true;
 		Apply();
 
@@ -149,6 +149,7 @@ internal class LanguageFilter : SingletonAccessor
 		if(Core_I.CurrentSearchType != SearchTypes.Session) return false;
 		if(!key.Equals(Constants.SEARCH_KEY_SESSION_QUEST_PREFERENCE)) return false;
 
+		TeaLog.Info($"LanguageFilter: Any Language -> Skipping Original Call...");
 		SkipNext = true;
 		Apply();
 

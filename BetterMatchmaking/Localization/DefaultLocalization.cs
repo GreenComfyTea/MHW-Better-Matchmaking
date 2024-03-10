@@ -224,11 +224,17 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string LatinAmericanSpanish { get; set; } = "Latin-American Spanish";
 
 
+	// Quest Type Filter
+
+	public string QuestType { get; set; } = "Quest Type";
+
+	public string OptionalQuests { get; set; } = "Optional Quests";
+	public string Investigations { get; set; } = "Investigations";
+	public string SpecialInvestigations { get; set; } = "Special Investigations";
+
 	// Custom Quest Rank Filter
 
-	public string CustomQuestRankFilter { get; set; } = "Custom Quest Rank Filter";
-
-
+	public string Difficulty { get; set; } = "Difficulty";
 
 	public string LowRank { get; set; } = "Low Rank";
 	public string HighRank { get; set; } = "High Rank";
@@ -254,13 +260,15 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 
 
 	[JsonIgnore]
-	public string[] DistanceFilters { get; set; } = Array.Empty<string>();
+	public string[] DistanceFilterArray { get; set; } = Array.Empty<string>();
 	[JsonIgnore]
-	public string[] PlayerTypes { get; set; } = Array.Empty<string>();
+	public string[] PlayerTypeArray { get; set; } = Array.Empty<string>();
 	[JsonIgnore]
-	public string[] QuestPreferences { get; set; } = Array.Empty<string>();
+	public string[] QuestPreferenceArray { get; set; } = Array.Empty<string>();
 	[JsonIgnore]
-	public string[] LanguageSearchTypes { get; set; } = Array.Empty<string>();
+	public string[] LanguageSearchTypeArray { get; set; } = Array.Empty<string>();
+	[JsonIgnore]
+	public string[] QuestTypeArray { get; set; } = Array.Empty<string>();
 	[JsonIgnore]
 	public string[] QuestRankReplacementTargets { get; set; } = Array.Empty<string>();
 	[JsonIgnore]
@@ -269,11 +277,13 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 
 	public LocalizedStrings_ImGui()
 	{
-		DistanceFilters = [Close, Default, Far, Worldwide];
+		DistanceFilterArray = [Close, Default, Far, Worldwide];
 
-		PlayerTypes = [Beginners, Experienced, Any];
+		PlayerTypeArray = [Beginners, Experienced, Any];
 
-		LanguageSearchTypes = [SameLanguage, AnyLanguage];
+		LanguageSearchTypeArray = [SameLanguage, AnyLanguage];
+
+		QuestTypeArray = [OptionalQuests, Assignments, Investigations, Expeditions, EventQuests, SpecialAssignments];
 
 		QuestRankReplacementTargets =
 		[
@@ -290,7 +300,7 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 			MasterRank1, MasterRank2, MasterRank3, MasterRank4, MasterRank5, MasterRank6
 		];
 
-		QuestPreferences =
+		QuestPreferenceArray =
 		[
 			None,
 			Assignments,

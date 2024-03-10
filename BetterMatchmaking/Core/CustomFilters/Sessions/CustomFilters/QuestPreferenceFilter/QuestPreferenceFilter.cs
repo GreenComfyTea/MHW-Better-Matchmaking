@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.UserDataTasks.DataProvider;
 
 namespace BetterMatchmaking;
 
@@ -48,6 +47,8 @@ internal class QuestPreferenceFilter : SingletonAccessor
 		{
 			return false;
 		}
+
+		TeaLog.Info($"QuestPreferenceFilter: Skipping Original Call...");
 
 		if(!Customization.FilterOptions.General.None)
 		{
@@ -536,8 +537,6 @@ internal class QuestPreferenceFilter : SingletonAccessor
 			TeaLog.Info($"QuestPreferenceFilter: Skipping Fatalis...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SESSION_QUEST_PREFERENCE, (int) QuestPreferences.Fatalis, LobbyComparison.NotEqual);
 		}
-
-
 
 		return true;
 	}

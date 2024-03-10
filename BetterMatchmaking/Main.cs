@@ -36,7 +36,9 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 			QuestPreferenceFilter_I.Init();
 			LanguageFilter_I.Init();
 
-			CustomQuestRankFilter_I.Init();
+			QuestTypeFilter_I.Init();
+
+			DifficultyFilter_I.Init();
 
 			IsInitialized = true;
 

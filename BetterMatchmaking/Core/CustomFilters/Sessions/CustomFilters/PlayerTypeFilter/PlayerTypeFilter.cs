@@ -39,6 +39,8 @@ internal class PlayerTypeFilter : SingletonAccessor
 		if(!key.Equals(Constants.SEARCH_KEY_SESSION_PLAYER_TYPE)) return false;
 		if(value != (int) Customization.PlayerTypeReplacementTargetEnum) return false;
 
+		TeaLog.Info($"PlayerTypeFilter: Skipping Original Call...");
+
 		if(!Customization.FilterOptions.Beginners)
 		{
 			TeaLog.Info($"CustomQuestRankFilter: Skipping Beginners...");

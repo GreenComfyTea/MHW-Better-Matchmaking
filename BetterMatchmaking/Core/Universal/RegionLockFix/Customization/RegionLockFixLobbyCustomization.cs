@@ -40,7 +40,7 @@ internal class RegionLockFixLobbyCustomization : SingletonAccessor
 		var tempChanged = false;
 		var selectedIndex = 0;
 
-		var distanceFilters = LocalizationManager_I.ImGui.DistanceFilters;
+		var distanceFilters = LocalizationManager_I.ImGui.DistanceFilterArray;
 
 		if (ImGui.TreeNode(title))
 		{
@@ -51,7 +51,7 @@ internal class RegionLockFixLobbyCustomization : SingletonAccessor
 			if (tempChanged)
 			{
 				DistanceFilterEnum = (LobbyDistanceFilter) selectedIndex;
-				DistanceFilter = LocalizationManager_I.Default.ImGui.DistanceFilters[selectedIndex];
+				DistanceFilter = LocalizationManager_I.Default.ImGui.DistanceFilterArray[selectedIndex];
 			}
 
 			changed = changed || tempChanged;

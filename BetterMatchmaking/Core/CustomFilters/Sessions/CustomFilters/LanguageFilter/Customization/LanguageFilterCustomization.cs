@@ -42,7 +42,7 @@ internal class LanguageFilterCustomization : SingletonAccessor
 		var tempChanged = false;
 		var selectedIndex = 0;
 
-		var languageSearchTypes = LocalizationManager_I.ImGui.LanguageSearchTypes;
+		var languageSearchTypes = LocalizationManager_I.ImGui.LanguageSearchTypeArray;
 
 		if(ImGui.TreeNode(LocalizationManager_I.ImGui.LanguageFilter))
 		{
@@ -54,7 +54,7 @@ internal class LanguageFilterCustomization : SingletonAccessor
 			if(tempChanged)
 			{
 				LanguageReplacementTargetEnum = (LanguageSearchTypes) selectedIndex;
-				LanguageReplacementTarget = LocalizationManager_I.Default.ImGui.LanguageSearchTypes[selectedIndex];
+				LanguageReplacementTarget = LocalizationManager_I.Default.ImGui.LanguageSearchTypeArray[selectedIndex];
 			}
 
 			changed = changed || tempChanged;

@@ -30,7 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Core\Quests\" />
     <Folder Include="data\" />
   </ItemGroup>
 

@@ -54,7 +54,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 		if (key == "SearchKey1") return "Player Type | ???";
 		if (key == "SearchKey2") return "Quest Preference | Rewards Available";
 		if (key == "SearchKey3") return "??? | Target";
-		if (key == "SearchKey4") return "Language | Quest Rank (HR/MR)";
+		if (key == "SearchKey4") return "Language | Difficulty";
 		if (key == "SearchKey5") return "Similar Hunter Rank | Language";
 		if (key == "SearchKey6") return "Similar Master Rank | Quest Type";
 		if (key == "SearchKey7") return "Master Rank |";
@@ -152,6 +152,12 @@ internal sealed class Core : SingletonAccessor, IDisposable
 		{
 			TeaLog.Info("OnNumericalFilter");
 
+			if(CurrentSearchType == SearchTypes.None)
+			{
+				NumericalFilterHook!.Original(steamInterface, keyAddress, value, comparison);
+				return;
+			}
+
 			var key = MemoryUtil.ReadString(keyAddress);
 
 			TeaLog.Info($"{key} ({GetSearchKeyName(key)}) {GetComparisonSign(comparison)} {value}");
@@ -160,6 +166,9 @@ internal sealed class Core : SingletonAccessor, IDisposable
 			skip = QuestPreferenceFilter_I.Apply(ref key, ref value, ref comparison) || skip;
 			skip = LanguageFilter_I.ApplySameLanguage(ref key, ref value, ref comparison) || skip;
 			skip = LanguageFilter_I.ApplyAnyLanguage(ref key, ref value, ref comparison) || skip;
+
+			skip = QuestTypeFilter_I.Apply(ref key, ref value, ref comparison) || skip;
+			skip = DifficultyFilter_I.Apply(ref key, ref value, ref comparison) || skip;
 		}
 		catch(Exception exception)
 		{

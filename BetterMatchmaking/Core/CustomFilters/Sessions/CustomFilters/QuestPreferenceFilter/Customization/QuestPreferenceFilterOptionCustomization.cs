@@ -20,6 +20,28 @@ internal class QuestPreferenceFilterOptionCustomization : SingletonAccessor
 		InstantiateSingletons();
 	}
 
+	private QuestPreferenceFilterOptionCustomization SelectAll()
+	{
+		General.SelectAll();
+		BaseGameMSQMonsters.SelectAll();
+		BaseGameEndgameMonsters.SelectAll();
+		IceborneMSQMonsters.SelectAll();
+		IceborneEndgameMonsters.SelectAll();
+
+		return this;
+	}
+
+	private QuestPreferenceFilterOptionCustomization DeselectAll()
+	{
+		General.DeselectAll();
+		BaseGameMSQMonsters.DeselectAll();
+		BaseGameEndgameMonsters.DeselectAll();
+		IceborneMSQMonsters.DeselectAll();
+		IceborneEndgameMonsters.DeselectAll();
+
+		return this;
+	}
+
 	public bool RenderImGui()
 	{
 		var changed = false;
@@ -28,11 +50,7 @@ internal class QuestPreferenceFilterOptionCustomization : SingletonAccessor
 		{
 			if(ImGui.Button(LocalizationManager_I.ImGui.SelectAll))
 			{
-				General.SelectAll();
-				BaseGameMSQMonsters.SelectAll();
-				BaseGameEndgameMonsters.SelectAll();
-				IceborneMSQMonsters.SelectAll();
-				IceborneEndgameMonsters.SelectAll();
+				SelectAll();
 				changed = true;
 			}
 
@@ -40,11 +58,7 @@ internal class QuestPreferenceFilterOptionCustomization : SingletonAccessor
 
 			if(ImGui.Button(LocalizationManager_I.ImGui.DeselectAll))
 			{
-				General.DeselectAll();
-				BaseGameMSQMonsters.DeselectAll();
-				BaseGameEndgameMonsters.DeselectAll();
-				IceborneMSQMonsters.DeselectAll();
-				IceborneEndgameMonsters.DeselectAll();
+				DeselectAll();
 				changed = true;
 			}
 

@@ -30,12 +30,12 @@ internal class QuestPreferenceFilterCustomization : SingletonAccessor
 		InstantiateSingletons();
 
 		QuestPreferenceReplacementTarget = LocalizationManager_I.Default.ImGui.SmallMonsters;
-		ReplacementTargetSelectedIndex = Array.IndexOf(LocalizationManager_I.Default.ImGui.QuestPreferences, QuestPreferenceReplacementTarget);
+		ReplacementTargetSelectedIndex = Array.IndexOf(LocalizationManager_I.Default.ImGui.QuestPreferenceArray, QuestPreferenceReplacementTarget);
 	}
 
 	public QuestPreferenceFilterCustomization Init()
 	{
-		ReplacementTargetSelectedIndex = Array.IndexOf(LocalizationManager_I.Default.ImGui.QuestPreferences, QuestPreferenceReplacementTarget);
+		ReplacementTargetSelectedIndex = Array.IndexOf(LocalizationManager_I.Default.ImGui.QuestPreferenceArray, QuestPreferenceReplacementTarget);
 		UpdateEnumFromString();
 
 		return this;
@@ -54,7 +54,7 @@ internal class QuestPreferenceFilterCustomization : SingletonAccessor
 		var changed = false;
 		var tempChanged = false;
 
-		var questPreferences = LocalizationManager_I.ImGui.QuestPreferences;
+		var questPreferences = LocalizationManager_I.ImGui.QuestPreferenceArray;
 
 		if(ImGui.TreeNode(LocalizationManager_I.ImGui.QuestPreference))
 		{
@@ -64,7 +64,7 @@ internal class QuestPreferenceFilterCustomization : SingletonAccessor
 
 			if(tempChanged)
 			{
-				QuestPreferenceReplacementTarget = LocalizationManager_I.Default.ImGui.QuestPreferences[_replacementTargetSelectedIndex];
+				QuestPreferenceReplacementTarget = LocalizationManager_I.Default.ImGui.QuestPreferenceArray[_replacementTargetSelectedIndex];
 				UpdateEnumFromString();
 			}
 

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
@@ -56,12 +57,66 @@ internal class LanguageFilterOptionCustomization : SingletonAccessor
 		InstantiateSingletons();
 	}
 
+	private LanguageFilterOptionCustomization SelectAll()
+	{
+		Japanese = true;
+		English = true;
+		French = true;
+		Italian = true;
+		German = true;
+		Spanish = true;
+		BrazilianPortuguese = true;
+		Polish = true;
+		Russian = true;
+		Korean = true;
+		TraditionalChinese = true;
+		SimplifiedChinese = true;
+		Arabic = true;
+		LatinAmericanSpanish = true;
+
+		return this;
+	}
+
+	private LanguageFilterOptionCustomization DeselectAll()
+	{
+		Japanese = false;
+		English = false;
+		French = false;
+		Italian = false;
+		German = false;
+		Spanish = false;
+		BrazilianPortuguese = false;
+		Polish = false;
+		Russian = false;
+		Korean = false;
+		TraditionalChinese = false;
+		SimplifiedChinese = false;
+		Arabic = false;
+		LatinAmericanSpanish = false;
+
+		return this;
+	}
+
 	public bool RenderImGui()
 	{
 		var changed = false;
 
 		if(ImGui.TreeNode(LocalizationManager_I.ImGui.FilterOptions))
 		{
+			if(ImGui.Button(LocalizationManager_I.ImGui.SelectAll))
+			{
+				SelectAll();
+				changed = true;
+			}
+
+			ImGui.SameLine();
+
+			if(ImGui.Button(LocalizationManager_I.ImGui.DeselectAll))
+			{
+				DeselectAll();
+				changed = true;
+			}
+
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Japanese, ref _japanese) || changed;
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.English, ref _english) || changed;
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.French, ref _french) || changed;

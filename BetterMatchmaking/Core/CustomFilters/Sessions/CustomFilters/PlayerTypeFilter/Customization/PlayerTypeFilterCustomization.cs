@@ -42,7 +42,7 @@ internal class PlayerTypeFilterCustomization : SingletonAccessor
 		var tempChanged = false;
 		var selectedIndex = 0;
 
-		var playerTypes = LocalizationManager_I.ImGui.PlayerTypes;
+		var playerTypes = LocalizationManager_I.ImGui.PlayerTypeArray;
 
 		if(ImGui.TreeNode(LocalizationManager_I.ImGui.PlayerType))
 		{
@@ -54,7 +54,7 @@ internal class PlayerTypeFilterCustomization : SingletonAccessor
 			if(tempChanged)
 			{
 				PlayerTypeReplacementTargetEnum = (PlayerTypes) selectedIndex;
-				PlayerTypeReplacementTarget = LocalizationManager_I.Default.ImGui.PlayerTypes[selectedIndex];
+				PlayerTypeReplacementTarget = LocalizationManager_I.Default.ImGui.PlayerTypeArray[selectedIndex];
 			}
 
 			changed = changed || tempChanged;

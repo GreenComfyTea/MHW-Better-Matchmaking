@@ -58,6 +58,9 @@ internal class Config : SingletonAccessor
 		CustomFilters.Sessions.QuestPreference.Init();
 		CustomFilters.Sessions.Language.Init();
 
+		CustomFilters.Quests.QuestType.Init();
+		CustomFilters.Quests.Difficulty.Init();
+
 		TeaLog.Info("Config: Initialization Done!");
 
 		return this;
