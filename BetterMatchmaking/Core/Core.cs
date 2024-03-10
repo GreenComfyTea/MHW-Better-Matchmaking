@@ -169,6 +169,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 			skip = QuestTypeFilter_I.Apply(ref key, ref value, ref comparison) || skip;
 			skip = DifficultyFilter_I.Apply(ref key, ref value, ref comparison) || skip;
+			skip = RewardFilter_I.Apply(ref key, ref value, ref comparison) || skip;
 		}
 		catch(Exception exception)
 		{

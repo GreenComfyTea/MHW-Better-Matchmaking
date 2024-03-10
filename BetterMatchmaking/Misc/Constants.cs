@@ -14,6 +14,8 @@ public enum PlayerTypes { Beginners, Experienced, Any, Matchmake }
 public enum SimilarHunterRank { Disabled, Enabled = 6 }
 public enum SimilarMasterRank { Disabled, Enabled = 10 }
 
+public enum Rewards { NoRewards, RewardsAvailable }
+
 public enum SearchTypes
 {
 	None = 0,
@@ -249,6 +251,7 @@ public static class Constants
 
 	public const string SEARCH_KEY_SESSION_QUEST_TYPE = SEARCH_KEY_SESSION_SIMILAR_MASTER_RANK;
 	public const string SEARCH_KEY_SESSION_QUEST_DIFFICULTY = SEARCH_KEY_SESSION_LANGUAGE;
+	public const string SEARCH_KEY_SESSION_QUEST_REWARDS = SEARCH_KEY_SESSION_QUEST_PREFERENCE;
 
 	public const int SESSION_PLAYER_TYPE_BEGINNERS = 0;
 	public const int SESSION_PLAYER_TYPE_EXPERIENCED = 1;

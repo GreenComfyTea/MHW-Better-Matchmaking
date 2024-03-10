@@ -37,8 +37,8 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 			LanguageFilter_I.Init();
 
 			QuestTypeFilter_I.Init();
-
 			DifficultyFilter_I.Init();
+			RewardFilter_I.Init();
 
 			IsInitialized = true;
 

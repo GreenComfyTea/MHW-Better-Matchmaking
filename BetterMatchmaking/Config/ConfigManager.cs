@@ -101,6 +101,7 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 
 		QuestTypeFilter_I.Customization = config.CustomFilters.Quests.QuestType;
 		DifficultyFilter_I.Customization = config.CustomFilters.Quests.Difficulty;
+		RewardFilter_I.Customization = config.CustomFilters.Quests.Rewards;
 
 		return this;
 	}

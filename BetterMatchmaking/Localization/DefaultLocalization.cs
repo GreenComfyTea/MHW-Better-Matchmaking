@@ -258,6 +258,12 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string MasterRank5 { get; set; } = "M5⭐";
 	public string MasterRank6 { get; set; } = "M6⭐";
 
+	// Rewards Filter
+
+	public string Rewards { get; set; } = "Rewards";
+
+	public string NoRewards { get; set; } = "No Rewards";
+	public string RewardsAvailable { get; set; } = "Rewards Available";
 
 	[JsonIgnore]
 	public string[] DistanceFilterArray { get; set; } = Array.Empty<string>();

@@ -40,9 +40,12 @@ internal class SingletonAccessor
 
 
 
+	[JsonIgnore]
 	protected QuestTypeFilter QuestTypeFilter_I { get; set; }
 	[JsonIgnore]
 	protected DifficultyFilter DifficultyFilter_I { get; set; }
+	[JsonIgnore]
+	protected RewardFilter RewardFilter_I { get; set; }
 
 	protected void InstantiateSingletons()
 	{
@@ -61,8 +64,7 @@ internal class SingletonAccessor
 		LanguageFilter_I = LanguageFilter.Instance;
 
 		QuestTypeFilter_I = QuestTypeFilter.Instance;
-
 		DifficultyFilter_I = DifficultyFilter.Instance;
-
+		RewardFilter_I = RewardFilter.Instance;
 	}
 }
