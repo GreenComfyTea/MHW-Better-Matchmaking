@@ -145,7 +145,7 @@ internal sealed class LanguageFilter : SingletonAccessor
 		if (customization.LanguageReplacementTargetEnum != LanguageSearchTypes.SameLanguage) return false;
 		if (comparison != (int) LobbyComparison.Equal) return false;
 
-		TeaLog.Info("LanguageFilter: Skipping Original Call...");
+		TeaLog.Info("LanguageFilter: Skipping Original Filter...");
 		Apply(languageKey);
 
 		return true;

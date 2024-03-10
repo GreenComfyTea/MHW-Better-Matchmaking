@@ -15,6 +15,7 @@ public enum SimilarHunterRank { Disabled, Enabled = 6 }
 public enum SimilarMasterRank { Disabled, Enabled = 10 }
 
 public enum Rewards { NoRewards, RewardsAvailable }
+public enum RewardTypes { NoPreference, RewardsAvailable }
 
 public enum SearchTypes
 {

@@ -257,6 +257,7 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 
 	public string Rewards { get; set; } = "Rewards";
 
+	public string NoPreference { get; set; } = "No Preference";
 	public string NoRewards { get; set; } = "No Rewards";
 	public string RewardsAvailable { get; set; } = "Rewards Available";
 
@@ -273,7 +274,8 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	[JsonIgnore]
 	public string[] QuestRankReplacementTargets { get; set; } = Array.Empty<string>();
 	[JsonIgnore]
-	public string[] QuestRanks { get; set; } = Array.Empty<string>();
+	public string[] RewardReplacementTargets { get; set; } = Array.Empty<string>();
+
 
 	public LocalizedStrings_ImGui()
 	{
@@ -285,16 +287,11 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 
 		QuestTypeArray = [OptionalQuests, Assignments, Investigations, Expeditions, EventQuests, SpecialAssignments];
 
+		RewardReplacementTargets = [NoPreference, RewardsAvailable];
+
 		QuestRankReplacementTargets =
 		[
 			LowRank, HighRank, MasterRank,
-			LowRank1, LowRank2, LowRank3, LowRank4, LowRank5,
-			HighRank6, HighRank7, HighRank8, HighRank9,
-			MasterRank1, MasterRank2, MasterRank3, MasterRank4, MasterRank5, MasterRank6
-		];
-
-		QuestRanks =
-		[
 			LowRank1, LowRank2, LowRank3, LowRank4, LowRank5,
 			HighRank6, HighRank7, HighRank8, HighRank9,
 			MasterRank1, MasterRank2, MasterRank3, MasterRank4, MasterRank5, MasterRank6

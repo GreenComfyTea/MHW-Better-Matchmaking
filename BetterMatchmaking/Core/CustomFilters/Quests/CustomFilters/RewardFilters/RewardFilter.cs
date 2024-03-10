@@ -1,4 +1,5 @@
-﻿using SharpPluginLoader.Core.Steam;
+﻿using SharpPluginLoader.Core.IO;
+using SharpPluginLoader.Core.Steam;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,15 +32,8 @@ internal sealed class RewardFilter : SingletonAccessor
 		return this;
 	}
 
-	public bool Apply(ref string key, ref int value, ref int comparison)
+	private RewardFilter Apply()
 	{
-		if(!Customization.Enabled) return false;
-		if(Core_I.CurrentSearchType != SearchTypes.Quest) return false;
-		if((LobbyComparison) comparison != LobbyComparison.Equal) return false;
-		if(!key.Equals(Constants.SEARCH_KEY_SESSION_QUEST_REWARDS)) return false;
-
-		TeaLog.Info("RewardFilter: Skipping Original Call...");
-
 		if(!Customization.FilterOptions.NoRewards)
 		{
 			TeaLog.Info("RewardFilter: Skipping No Rewards...");
@@ -52,6 +46,33 @@ internal sealed class RewardFilter : SingletonAccessor
 			Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SESSION_QUEST_REWARDS, (int) Rewards.RewardsAvailable, LobbyComparison.NotEqual);
 		}
 
+		return this;
+	}
+
+	public bool ApplyRewardsAvailable(ref string key, ref int value, ref int comparison)
+	{
+		if(!Customization.Enabled) return false;
+		if(Core_I.CurrentSearchType != SearchTypes.Quest) return false;
+		if(Core_I.IsQuestRewardsNoPreference) return false;
+		if((LobbyComparison) comparison != LobbyComparison.Equal) return false;
+		if(!key.Equals(Constants.SEARCH_KEY_SESSION_QUEST_REWARDS)) return false;
+		if(Customization.RewardTypeReplacementTargetEnum != RewardTypes.RewardsAvailable) return false;
+
+		TeaLog.Info("RewardFilter: Skipping Original Filter...");
+		Apply();
+
 		return true;
+	}
+
+	public RewardFilter ApplyNoPreference()
+	{
+		if(!Core_I.IsQuestRewardsNoPreference) return this;
+		if(!Customization.Enabled) return this;
+		if(Core_I.CurrentSearchType != SearchTypes.Quest) return this;
+		if(Customization.RewardTypeReplacementTargetEnum != RewardTypes.NoPreference) return this;
+
+		Apply();
+
+		return this;
 	}
 }

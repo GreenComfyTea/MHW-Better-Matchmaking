@@ -136,15 +136,13 @@ internal sealed class DifficultyFilter : SingletonAccessor
 		if(comparisonEnum == LobbyComparison.NotEqual) return false;
 		if(!key.Equals(Constants.SEARCH_KEY_SESSION_QUEST_DIFFICULTY)) return false;
 
-		TeaLog.Info(Customization.ReplacementTargetEnum.ToString());
-
 		// Low Rank Search
 		// Rank <= LR5
 		if(comparisonEnum == LobbyComparison.EqualToOrLessThan
 		&& value == (int) Difficulties.LowRank5
 		&& Customization.ReplacementTargetEnum == Difficulties.LowRank)
 		{
-			TeaLog.Info("DifficultyFilter: Skipping Original Call...");
+			TeaLog.Info("DifficultyFilter: Skipping Original Filter...");
 			Apply();
 
 			return true;
@@ -156,7 +154,7 @@ internal sealed class DifficultyFilter : SingletonAccessor
 		&& value == (int) (Difficulties.LowRank5)
 		&& Customization.ReplacementTargetEnum == Difficulties.HighRank)
 		{
-			TeaLog.Info("DifficultyFilter: High Rank Search -> Lower Threshold -> Skipping Original Call...");
+			TeaLog.Info("DifficultyFilter: High Rank Search -> Lower Threshold -> Skipping Original Filter...");
 
 			return true;
 		}
@@ -166,7 +164,7 @@ internal sealed class DifficultyFilter : SingletonAccessor
 		&& value == (int) (Difficulties.HighRankSearch)
 		&& Customization.ReplacementTargetEnum == Difficulties.HighRank)
 		{
-			TeaLog.Info("DifficultyFilter: High Rank Search -> Upper Threshold -> Skipping Original Call...");
+			TeaLog.Info("DifficultyFilter: High Rank Search -> Upper Threshold -> Skipping Original Filter...");
 			Apply();
 
 			return true;
@@ -178,7 +176,7 @@ internal sealed class DifficultyFilter : SingletonAccessor
 		&& value == (int) (Difficulties.HighRankSearch)
 		&& Customization.ReplacementTargetEnum == Difficulties.MasterRank)
 		{
-			TeaLog.Info("DifficultyFilter: Skipping Original Call...");
+			TeaLog.Info("DifficultyFilter: Skipping Original Filter...");
 			Apply();
 
 			return true;
@@ -187,7 +185,7 @@ internal sealed class DifficultyFilter : SingletonAccessor
 		if(comparisonEnum == LobbyComparison.Equal
 		&& value == (int) Customization.ReplacementTargetEnum)
 		{
-			TeaLog.Info("DifficultyFilter: Skipping Original Call...");
+			TeaLog.Info("DifficultyFilter: Skipping Original Filter...");
 			Apply();
 
 			return true;

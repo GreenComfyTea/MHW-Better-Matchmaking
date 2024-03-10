@@ -130,8 +130,6 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 		if(!isLanguageUpdated) IsLanguageAny = true;
 		if(!isQuestRewardsUpdated) IsQuestRewardsNoPreference = true;
-
-		TeaLog.Info($"IsLanguageAny: {IsLanguageAny}");
 	}
 
 	private int OnStartRequest(nint netCore, nint netRequest)
@@ -164,6 +162,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 			SessionPlayerCountFilter_I.ApplyMin(CurrentSearchType).ApplyMax(CurrentSearchType);
 
 			LanguageFilter_I.ApplyAnyLanguage();
+			RewardFilter_I.ApplyNoPreference();
 		}
 		catch(Exception exception)
 		{
@@ -197,7 +196,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 			skip = QuestTypeFilter_I.Apply(ref key, ref value, ref comparison) || skip;
 			skip = DifficultyFilter_I.Apply(ref key, ref value, ref comparison) || skip;
-			skip = RewardFilter_I.Apply(ref key, ref value, ref comparison) || skip;
+			skip = RewardFilter_I.ApplyRewardsAvailable(ref key, ref value, ref comparison) || skip;
 		}
 		catch(Exception exception)
 		{

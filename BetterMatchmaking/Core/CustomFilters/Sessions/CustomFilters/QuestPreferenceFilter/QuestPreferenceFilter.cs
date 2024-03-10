@@ -48,7 +48,7 @@ internal sealed class QuestPreferenceFilter : SingletonAccessor
 			return false;
 		}
 
-		TeaLog.Info("QuestPreferenceFilter: Skipping Original Call...");
+		TeaLog.Info("QuestPreferenceFilter: Skipping Original Filter...");
 
 		if(!Customization.FilterOptions.General.None)
 		{

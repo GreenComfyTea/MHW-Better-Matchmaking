@@ -39,7 +39,7 @@ internal sealed class QuestTypeFilter : SingletonAccessor
 		if(!key.Equals(Constants.SEARCH_KEY_SESSION_QUEST_TYPE)) return false;
 		if(value != (int) Customization.QuestTypeReplacementTargetEnum) return false;
 
-		TeaLog.Info("QuestTypeFilter: Skipping Original Call...");
+		TeaLog.Info("QuestTypeFilter: Skipping Original Filter...");
 
 		if(!Customization.FilterOptions.OptionalQuests)
 		{
