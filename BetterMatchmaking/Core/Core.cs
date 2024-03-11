@@ -62,6 +62,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 		if (key == "SearchKey6") return "Similar Master Rank | Quest Type";
 		if (key == "SearchKey7") return "Master Rank |";
 		if (key == "SearchKey8") return "Master Rank |";
+
 		return "";
 	}
 
@@ -91,8 +92,6 @@ internal sealed class Core : SingletonAccessor, IDisposable
 		{
 			var keyId = MemoryUtil.Read<int>(searchKeyData - 0x4);
 			var key = MemoryUtil.Read<int>(searchKeyData + 0x8);
-
-			TeaLog.Info($"key {keyId}: {key}");
 
 			if(keyId == Constants.SEARCH_KEY_SEARCH_TYPE_ID)
 			{
@@ -145,8 +144,6 @@ internal sealed class Core : SingletonAccessor, IDisposable
 				return StartRequestHook!.Original(netCore, netRequest);
 			}
 
-			TeaLog.Info("startRequest\n");
-
 			AnalyzeSearchKeys(netRequest);
 
 			if(CurrentSearchType == SearchTypes.None) return StartRequestHook!.Original(netCore, netRequest);
@@ -178,8 +175,6 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 		try
 		{
-			TeaLog.Info("OnNumericalFilter");
-
 			if(CurrentSearchType == SearchTypes.None)
 			{
 				NumericalFilterHook!.Original(steamInterface, keyAddress, value, comparison);

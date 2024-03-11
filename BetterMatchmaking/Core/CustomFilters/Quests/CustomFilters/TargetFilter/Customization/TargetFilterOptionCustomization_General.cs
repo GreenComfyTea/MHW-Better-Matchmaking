@@ -9,6 +9,9 @@ namespace BetterMatchmaking;
 
 internal class TargetFilterOptionCustomization_General : SingletonAccessor
 {
+	private bool _none = true;
+	public bool None { get => _none; set => _none = value; }
+
 	private bool _smallMonsters = true;
 	public bool SmallMonsters { get => _smallMonsters; set => _smallMonsters = value; }
 
@@ -19,6 +22,7 @@ internal class TargetFilterOptionCustomization_General : SingletonAccessor
 
 	public TargetFilterOptionCustomization_General SelectAll()
 	{
+		None = true;
 		SmallMonsters = true;
 
 		return this;
@@ -26,6 +30,7 @@ internal class TargetFilterOptionCustomization_General : SingletonAccessor
 
 	public TargetFilterOptionCustomization_General DeselectAll()
 	{
+		None = false;
 		SmallMonsters = false;
 
 		return this;
@@ -51,6 +56,7 @@ internal class TargetFilterOptionCustomization_General : SingletonAccessor
 				changed = true;
 			}
 
+			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.None, ref _none) || changed;
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.SmallMonsters, ref _smallMonsters) || changed;
 
 			ImGui.TreePop();

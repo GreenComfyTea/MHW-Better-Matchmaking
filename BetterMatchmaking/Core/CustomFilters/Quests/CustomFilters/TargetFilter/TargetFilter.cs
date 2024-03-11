@@ -49,6 +49,12 @@ internal sealed class TargetFilter : SingletonAccessor
 
 		TeaLog.Info("TargetFilter: Skipping Original Filter...");
 
+		if(!Customization.FilterOptions.General.None)
+		{
+			TeaLog.Info("TargetFilter: Skipping None...");
+			Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_QUEST_TARGET, (int) QuestPreferences.None, LobbyComparison.NotEqual);
+		}
+
 		if(!Customization.FilterOptions.General.SmallMonsters)
 		{
 			TeaLog.Info("TargetFilter: Skipping Small Monsters...");
