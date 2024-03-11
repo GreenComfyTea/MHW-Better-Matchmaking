@@ -22,7 +22,7 @@ internal class CustomFilterCustomization : SingletonAccessor
     public bool RenderImGui()
     {
         var changed = false;
-        if (ImGui.TreeNode(LocalizationManager_I.ImGui.CustomFilters))
+        if (ImGui.TreeNode(LocalizationManager_I.ImGui.InGameFilterOverride))
         {
             changed = Sessions.RenderImGui() || changed;
             changed = Quests.RenderImGui() || changed;

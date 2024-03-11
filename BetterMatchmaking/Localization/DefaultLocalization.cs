@@ -60,7 +60,7 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 
 	public string Errors { get; set; } = "Errors";
 	public string CurrentTime { get; set; } = "Current Time";
-	public string EverythingSeemsToBeOk { get; set; } = "Everything Seems To Be OK!";
+	public string EverythingSeemsToBeOk { get; set; } = "Everything Seems to Be OK!";
 	public string History { get; set; } = "History";
 	public string HistorySize { get; set; } = "History Size";
 
@@ -89,7 +89,7 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string Max { get; set; } = "Max";
 
 	// Custom Filters
-	public string CustomFilters { get; set; } = "Custom Filters";
+	public string InGameFilterOverride { get; set; } = "In-Game Filter Override";
 	public string ReplacementTarget { get; set; } = "Replacement Target";
 	public string FilterOptions { get; set; } = "Filter Options";
 
