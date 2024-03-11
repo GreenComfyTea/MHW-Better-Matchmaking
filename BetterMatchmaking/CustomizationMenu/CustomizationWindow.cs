@@ -94,10 +94,7 @@ namespace BetterMatchmaking
 				changed = RegionLockFix_I.Customization.RenderImGui() || changed;
 				changed = MaxSearchResultLimit_I.Customization.RenderImGui() || changed;
 				changed = SessionPlayerCountFilter_I.Customization.RenderImGui() || changed;
-				//changed = PlayerTypeFilterBypass_I.Customization.RenderImGui() || changed;
-				//changed = CustomQuestRankFilter_I.Customization.RenderImGui() || changed;
-
-				changed = ConfigManager_I.Current.CustomFilters.RenderImGui() || changed;
+				changed = ConfigManager_I.Current.InGameFilterOverride.RenderImGui() || changed;
 
 				ImGui.End();
 

@@ -95,15 +95,15 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 		SessionPlayerCountFilter_I.Customization = config.SessionPlayerCountFilter;
 		DebugManager_I.Customization = config.Debug;
 
-		PlayerTypeFilter_I.Customization = config.CustomFilters.Sessions.PlayerType;
-		QuestPreferenceFilter_I.Customization = config.CustomFilters.Sessions.QuestPreference;
-		LanguageFilter_I.SessionCustomization = config.CustomFilters.Sessions.Language;
+		PlayerTypeFilter_I.Customization = config.InGameFilterOverride.Sessions.PlayerType;
+		QuestPreferenceFilter_I.Customization = config.InGameFilterOverride.Sessions.QuestPreference;
+		LanguageFilter_I.SessionCustomization = config.InGameFilterOverride.Sessions.Language;
 
-		QuestTypeFilter_I.Customization = config.CustomFilters.Quests.QuestType;
-		DifficultyFilter_I.Customization = config.CustomFilters.Quests.Difficulty;
-		RewardFilter_I.Customization = config.CustomFilters.Quests.Rewards;
-		LanguageFilter_I.QuestCustomization = config.CustomFilters.Quests.Language;
-		TargetFilter_I.Customization = config.CustomFilters.Quests.Target;
+		QuestTypeFilter_I.Customization = config.InGameFilterOverride.Quests.QuestType;
+		DifficultyFilter_I.Customization = config.InGameFilterOverride.Quests.Difficulty;
+		RewardFilter_I.Customization = config.InGameFilterOverride.Quests.Rewards;
+		LanguageFilter_I.QuestCustomization = config.InGameFilterOverride.Quests.Language;
+		TargetFilter_I.Customization = config.InGameFilterOverride.Quests.Target;
 
 		return this;
 	}

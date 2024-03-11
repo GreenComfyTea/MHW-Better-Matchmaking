@@ -26,7 +26,7 @@ internal class Config : SingletonAccessor
 	public RegionLockFixCustomization RegionLockFix { get; set; } = new();
 	public MaxSearchResultLimitCustomization MaxSearchResultLimit { get; set; } = new();
 	public SessionPlayerCountFilterCustomization SessionPlayerCountFilter { get; set; } = new();
-	public CustomFilterCustomization CustomFilters { get; set; } = new();
+	public InGameFilterCustomization InGameFilterOverride { get; set; } = new();
 
 	public DebugCustomization Debug { get; set; } = new();
 
@@ -53,15 +53,15 @@ internal class Config : SingletonAccessor
 		RegionLockFix.Init();
 		SessionPlayerCountFilter.Init();
 
-		CustomFilters.Sessions.PlayerType.Init();
-		CustomFilters.Sessions.QuestPreference.Init();
-		CustomFilters.Sessions.Language.Init();
+		InGameFilterOverride.Sessions.PlayerType.Init();
+		InGameFilterOverride.Sessions.QuestPreference.Init();
+		InGameFilterOverride.Sessions.Language.Init();
 
-		CustomFilters.Quests.QuestType.Init();
-		CustomFilters.Quests.Difficulty.Init();
-		CustomFilters.Quests.Rewards.Init();
-		CustomFilters.Quests.Language.Init();
-		CustomFilters.Quests.Target.Init();
+		InGameFilterOverride.Quests.QuestType.Init();
+		InGameFilterOverride.Quests.Difficulty.Init();
+		InGameFilterOverride.Quests.Rewards.Init();
+		InGameFilterOverride.Quests.Language.Init();
+		InGameFilterOverride.Quests.Target.Init();
 
 		TeaLog.Info("Config: Initialization Done!");
 
