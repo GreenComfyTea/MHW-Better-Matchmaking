@@ -8,50 +8,41 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal sealed class MaxSearchResultLimit
+internal sealed class MaxSearchResultLimit : SingletonAccessor
 {
-    // Singleton Pattern
-    private static readonly MaxSearchResultLimit _singleton = new();
+	// Singleton Pattern
+	private static readonly MaxSearchResultLimit _singleton = new();
 
-    public static MaxSearchResultLimit Instance => _singleton;
+	public static MaxSearchResultLimit Instance => _singleton;
 
-    // Explicit static constructor to tell C# compiler
-    // not to mark type as beforefieldinit
-    static MaxSearchResultLimit() { }
+	// Explicit static constructor to tell C# compiler
+	// not to mark type as beforefieldinit
+	static MaxSearchResultLimit() { }
 
-    // Singleton Pattern End
+	// Singleton Pattern End
 
-    public MaxSearchResultLimitCustomization Customization { get; set; }
+	public MaxSearchResultLimitCustomization SessionCustomization { get; set; }
+	public MaxSearchResultLimitCustomization QuestCustomization { get; set; }
 
-    private MaxSearchResultLimit() { }
+	private MaxSearchResultLimit()
+	{
+		InstantiateSingletons();
+	}
 
-    public MaxSearchResultLimit Apply(SearchTypes searchType, ref int maxResultsRef)
-    {
-        if (searchType == SearchTypes.None) return this;
+	public MaxSearchResultLimit Apply(ref int maxResultsRef)
+	{
+		if(Core_I.CurrentSearchType == SearchTypes.None) return this;
 
-        MaxSearchResultLimitLobbyCustomization customization;
+		var customization =
+			 Core_I.CurrentSearchType == SearchTypes.Session
+				 ? SessionCustomization
+				 : QuestCustomization;
 
-        switch (searchType)
-        {
-            case SearchTypes.Session:
+		if(!customization.Enabled) return this;
 
-                customization = Customization.Sessions;
-                break;
+		maxResultsRef = customization.Value;
 
-            case SearchTypes.Quest:
-
-                customization = Customization.Quests;
-                break;
-
-            default:
-                return this;
-        }
-
-        if (!customization.Enabled) return this;
-
-        maxResultsRef = customization.Value;
-
-        TeaLog.Info($"MaxSearchResultLimit: Set to {customization.Value}.");
-        return this;
-    }
+		TeaLog.Info($"MaxSearchResultLimit: Set to {customization.Value}.");
+		return this;
+	}
 }

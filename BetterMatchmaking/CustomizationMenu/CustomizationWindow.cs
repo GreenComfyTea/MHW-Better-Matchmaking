@@ -31,6 +31,8 @@ namespace BetterMatchmaking
 		private bool _isOpened = false;
 		public bool IsOpened { get => _isOpened; set => _isOpened = value; }
 
+		private Vector2 DefaultPosition { get; set; } = new(630, 640);
+
 		private CustomizationWindow() { }
 
 		public CustomizationWindow Init()
@@ -51,7 +53,9 @@ namespace BetterMatchmaking
 			{
 				var changed = false;
 
-				ImGui.SetNextWindowSize(new Vector2(640, 640));
+				//ImGui.SetNextWindowSize(new Vector2(640, 640), ImGuiCond.FirstUseEver | ImGuiCond.Once);
+
+				ImGui.ShowMetricsWindow();
 
 				//ImGui.PushFont(font);
 				ImGui.Begin($"{Constants.MOD_NAME} v{Constants.VERSION}", ref _isOpened);
@@ -91,10 +95,8 @@ namespace BetterMatchmaking
 				ImGui.NewLine();
 				ImGui.Separator();
 
-				changed = RegionLockFix_I.Customization.RenderImGui() || changed;
-				changed = MaxSearchResultLimit_I.Customization.RenderImGui() || changed;
-				changed = SessionPlayerCountFilter_I.Customization.RenderImGui() || changed;
-				changed = ConfigManager_I.Current.InGameFilterOverride.RenderImGui() || changed;
+				changed = ConfigManager_I.Current.Sessions.RenderImGui() || changed;
+				changed = ConfigManager_I.Current.Quests.RenderImGui() || changed;
 
 				ImGui.End();
 

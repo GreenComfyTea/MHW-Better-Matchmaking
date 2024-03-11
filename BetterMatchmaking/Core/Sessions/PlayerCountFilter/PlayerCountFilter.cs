@@ -7,26 +7,29 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal sealed class SessionPlayerCountFilter
+internal sealed class PlayerCountFilter : SingletonAccessor
 {
     // Singleton Pattern
-    private static readonly SessionPlayerCountFilter _singleton = new();
+    private static readonly PlayerCountFilter _singleton = new();
 
-    public static SessionPlayerCountFilter Instance => _singleton;
+    public static PlayerCountFilter Instance => _singleton;
 
     // Explicit static constructor to tell C# compiler
     // not to mark type as beforefieldinit
-    static SessionPlayerCountFilter() { }
+    static PlayerCountFilter() { }
 
     // Singleton Pattern End
 
-    public SessionPlayerCountFilterCustomization Customization { get; set; }
+    public PlayerCountFilterCustomization Customization { get; set; }
 
-    private SessionPlayerCountFilter() { }
-
-    public SessionPlayerCountFilter ApplyMin(SearchTypes searchType)
+    private PlayerCountFilter()
     {
-        if (searchType != SearchTypes.Session) return this;
+        InstantiateSingletons();
+    }
+
+    public PlayerCountFilter ApplyMin()
+    {
+        if (Core_I.CurrentSearchType != SearchTypes.Session) return this;
         if (!Customization.Min.Enabled) return this;
         if (Customization.Min.Value == Constants.DEFAULT_SESSION_PLAYER_COUNT_MIN) return this;
 
@@ -39,14 +42,14 @@ internal sealed class SessionPlayerCountFilter
 
         Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SLOT_PUBLIC_OPEN, openSlotsMax, LobbyComparison.EqualToOrLessThan);
 
-        TeaLog.Info($"SessionPlayerCountFilter: Set Min to {Customization.Min.Value}.");
+        TeaLog.Info($"PlayerCountFilter: Set Min to {Customization.Min.Value}.");
         return this;
     }
 
-    public SessionPlayerCountFilter ApplyMax(SearchTypes searchType)
+    public PlayerCountFilter ApplyMax()
     {
-        if (searchType != SearchTypes.Session) return this;
-        if (!Customization.Max.Enabled) return this;
+		if(Core_I.CurrentSearchType != SearchTypes.Session) return this;
+		if (!Customization.Max.Enabled) return this;
         if (Customization.Max.Value == Constants.DEFAULT_SESSION_PLAYER_COUNT_MAX) return this;
 
         var openSlotsMin = Constants.DEFAULT_SESSION_PLAYER_COUNT_MAX - Customization.Max.Value + 1;
@@ -58,7 +61,7 @@ internal sealed class SessionPlayerCountFilter
 
         Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SLOT_PUBLIC_OPEN, openSlotsMin, LobbyComparison.EqualToOrGreaterThan);
 
-        TeaLog.Info($"SessionPlayerCountFilter: Set Max to {Customization.Max.Value}.");
+        TeaLog.Info($"PlayerCountFilter: Set Max to {Customization.Max.Value}.");
         return this;
     }
 }

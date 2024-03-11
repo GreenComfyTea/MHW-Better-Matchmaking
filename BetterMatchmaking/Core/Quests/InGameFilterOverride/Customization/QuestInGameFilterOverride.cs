@@ -1,4 +1,5 @@
 ﻿using ImGuiNET;
+using SharpPluginLoader.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class CustomFilterQuestCustomization : SingletonAccessor
+internal class QuestInGameFilterOverride : SingletonAccessor
 {
 	public QuestTypeFilterCustomization QuestType { get; set; } = new();
 
@@ -19,15 +20,26 @@ internal class CustomFilterQuestCustomization : SingletonAccessor
 
 	public TargetFilterCustomization Target { get; set; } = new();
 
-	public CustomFilterQuestCustomization()
+	public QuestInGameFilterOverride()
 	{
 		InstantiateSingletons();
+	}
+
+	public QuestInGameFilterOverride Init()
+	{
+		QuestType.Init();
+		Difficulty.Init();
+		Rewards.Init();
+		Language.Init();
+		Target.Init();
+
+		return this;
 	}
 
 	public bool RenderImGui()
 	{
 		var changed = false;
-		if (ImGui.TreeNode(LocalizationManager_I.ImGui.Quests))
+		if(ImGui.TreeNode(LocalizationManager_I.ImGui.InGameFilterOverride))
 		{
 			changed = QuestType.RenderImGui() || changed;
 			changed = Difficulty.RenderImGui() || changed;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class SessionPlayerCountFilterMaxCustomization : SingletonAccessor
+internal class PlayerCountFilterMaxCustomization : SingletonAccessor
 {
     private bool _enabled = true;
     public bool Enabled { get => _enabled; set => _enabled = value; }
@@ -19,7 +19,7 @@ internal class SessionPlayerCountFilterMaxCustomization : SingletonAccessor
     [JsonIgnore]
     public int SliderMin { get; set; } = Constants.DEFAULT_SESSION_PLAYER_COUNT_MIN;
 
-    public SessionPlayerCountFilterMaxCustomization()
+    public PlayerCountFilterMaxCustomization()
     {
         InstantiateSingletons();
     }

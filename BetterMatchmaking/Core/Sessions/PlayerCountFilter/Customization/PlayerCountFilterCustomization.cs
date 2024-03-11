@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class SessionPlayerCountFilterCustomization : SingletonAccessor
+internal class PlayerCountFilterCustomization : SingletonAccessor
 {
-    public SessionPlayerCountFilterMinCustomization Min { get; set; } = new();
+    public PlayerCountFilterMinCustomization Min { get; set; } = new();
 
-    public SessionPlayerCountFilterMaxCustomization Max { get; set; } = new();
+    public PlayerCountFilterMaxCustomization Max { get; set; } = new();
 
-    public SessionPlayerCountFilterCustomization()
+    public PlayerCountFilterCustomization()
     {
         InstantiateSingletons();
     }
 
-    public SessionPlayerCountFilterCustomization Init()
+    public PlayerCountFilterCustomization Init()
     {
         if (Max.Value < Min.Value)
         {
@@ -37,7 +37,7 @@ internal class SessionPlayerCountFilterCustomization : SingletonAccessor
     {
         var changed = false;
 
-        if (ImGui.TreeNode(LocalizationManager_I.ImGui.SessionPlayerCountFilter))
+        if (ImGui.TreeNode(LocalizationManager_I.ImGui.PlayerCountFilter))
         {
             changed = Min.RenderImGui() || changed;
             changed = Max.RenderImGui() || changed;

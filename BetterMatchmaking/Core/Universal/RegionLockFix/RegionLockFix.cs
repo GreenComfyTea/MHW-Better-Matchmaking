@@ -10,54 +10,45 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal sealed class RegionLockFix
+internal sealed class RegionLockFix : SingletonAccessor
 {
-    // Singleton Pattern
-    private static readonly RegionLockFix _singleton = new();
+	// Singleton Pattern
+	private static readonly RegionLockFix _singleton = new();
 
-    public static RegionLockFix Instance => _singleton;
+	public static RegionLockFix Instance => _singleton;
 
-    // Explicit static constructor to tell C# compiler
-    // not to mark type as beforefieldinit
-    static RegionLockFix() { }
+	// Explicit static constructor to tell C# compiler
+	// not to mark type as beforefieldinit
+	static RegionLockFix() { }
 
-    // Singleton Pattern End
+	// Singleton Pattern End
 
-    //private delegate void numericalFilter_Delegate(nint steamInterface, nint keyAddress, int value, int comparison);
-    //private MarshallingHook<numericalFilter_Delegate> numericalFilter;
+	//private delegate void numericalFilter_Delegate(nint steamInterface, nint keyAddress, int value, int comparison);
+	//private MarshallingHook<numericalFilter_Delegate> numericalFilter;
 
-    public RegionLockFixCustomization Customization { get; set; }
+	public RegionLockFixCustomization SessionCustomization { get; set; }
+	public RegionLockFixCustomization QuestCustomization { get; set; }
 
-    private RegionLockFix() { }
+	private RegionLockFix()
+	{
+		InstantiateSingletons();
+	}
 
-    public RegionLockFix Apply(SearchTypes searchType)
-    {
-        if (searchType == SearchTypes.None) return this;
+	public RegionLockFix Apply()
+	{
+		if (Core_I.CurrentSearchType == SearchTypes.None) return this;
 
-        RegionLockFixLobbyCustomization customization;
+		var customization =
+			Core_I.CurrentSearchType == SearchTypes.Session
+				? SessionCustomization
+				: QuestCustomization;
 
-        switch (searchType)
-        {
-            case SearchTypes.Session:
+		if (!customization.Enabled) return this;
+		if (customization.DistanceFilterEnum == LobbyDistanceFilter.Default) return this;
 
-                customization = Customization.Sessions;
-                break;
+		Matchmaking.AddRequestLobbyListDistanceFilter(customization.DistanceFilterEnum);
 
-            case SearchTypes.Quest:
-
-                customization = Customization.Quests;
-                break;
-
-            default:
-                return this;
-        }
-
-        if (!customization.Enabled) return this;
-        if (customization.DistanceFilterEnum == LobbyDistanceFilter.Default) return this;
-
-        Matchmaking.AddRequestLobbyListDistanceFilter(customization.DistanceFilterEnum);
-
-        TeaLog.Info($"RegionLockFix: Set Distance to {customization.DistanceFilterEnum}.");
-        return this;
-    }
+		TeaLog.Info($"RegionLockFix: Set Distance to {customization.DistanceFilterEnum}.");
+		return this;
+	}
 }

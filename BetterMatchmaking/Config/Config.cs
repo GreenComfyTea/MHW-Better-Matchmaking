@@ -23,12 +23,9 @@ internal class Config : SingletonAccessor
 
 	public string Localization { get; set; } = "en-us";
 
-	public RegionLockFixCustomization RegionLockFix { get; set; } = new();
-	public MaxSearchResultLimitCustomization MaxSearchResultLimit { get; set; } = new();
-	public SessionPlayerCountFilterCustomization SessionPlayerCountFilter { get; set; } = new();
-	public InGameFilterCustomization InGameFilterOverride { get; set; } = new();
-
 	public DebugCustomization Debug { get; set; } = new();
+	public SessionCustomization Sessions { get; set; } = new();
+	public QuestCustomization Quests { get; set; } = new();
 
 	public Config()
 	{
@@ -49,19 +46,8 @@ internal class Config : SingletonAccessor
 		TeaLog.Info("Config: Initializing...");
 
 		Debug.Init();
-
-		RegionLockFix.Init();
-		SessionPlayerCountFilter.Init();
-
-		InGameFilterOverride.Sessions.PlayerType.Init();
-		InGameFilterOverride.Sessions.QuestPreference.Init();
-		InGameFilterOverride.Sessions.Language.Init();
-
-		InGameFilterOverride.Quests.QuestType.Init();
-		InGameFilterOverride.Quests.Difficulty.Init();
-		InGameFilterOverride.Quests.Rewards.Init();
-		InGameFilterOverride.Quests.Language.Init();
-		InGameFilterOverride.Quests.Target.Init();
+		Sessions.Init();
+		Quests.Init();
 
 		TeaLog.Info("Config: Initialization Done!");
 

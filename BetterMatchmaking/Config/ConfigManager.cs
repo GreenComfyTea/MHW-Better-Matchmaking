@@ -90,20 +90,28 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 	{
 		Current = config;
 
-		RegionLockFix_I.Customization = config.RegionLockFix;
-		MaxSearchResultLimit_I.Customization = config.MaxSearchResultLimit;
-		SessionPlayerCountFilter_I.Customization = config.SessionPlayerCountFilter;
 		DebugManager_I.Customization = config.Debug;
 
-		PlayerTypeFilter_I.Customization = config.InGameFilterOverride.Sessions.PlayerType;
-		QuestPreferenceFilter_I.Customization = config.InGameFilterOverride.Sessions.QuestPreference;
-		LanguageFilter_I.SessionCustomization = config.InGameFilterOverride.Sessions.Language;
 
-		QuestTypeFilter_I.Customization = config.InGameFilterOverride.Quests.QuestType;
-		DifficultyFilter_I.Customization = config.InGameFilterOverride.Quests.Difficulty;
-		RewardFilter_I.Customization = config.InGameFilterOverride.Quests.Rewards;
-		LanguageFilter_I.QuestCustomization = config.InGameFilterOverride.Quests.Language;
-		TargetFilter_I.Customization = config.InGameFilterOverride.Quests.Target;
+
+		RegionLockFix_I.SessionCustomization = config.Sessions.RegionLockFix;
+		MaxSearchResultLimit_I.SessionCustomization = config.Sessions.MaxSearchResultLimit;
+		SessionPlayerCountFilter_I.Customization = config.Sessions.PlayerCountFilter;
+
+		PlayerTypeFilter_I.Customization = config.Sessions.InGameFilterOverride.PlayerType;
+		QuestPreferenceFilter_I.Customization = config.Sessions.InGameFilterOverride.QuestPreference;
+		LanguageFilter_I.SessionCustomization = config.Sessions.InGameFilterOverride.Language;
+
+
+
+		RegionLockFix_I.QuestCustomization = config.Quests.RegionLockFix;
+		MaxSearchResultLimit_I.QuestCustomization = config.Quests.MaxSearchResultLimit;
+
+		QuestTypeFilter_I.Customization = config.Quests.InGameFilterOverride.QuestType;
+		DifficultyFilter_I.Customization = config.Quests.InGameFilterOverride.Difficulty;
+		RewardFilter_I.Customization = config.Quests.InGameFilterOverride.Rewards;
+		LanguageFilter_I.QuestCustomization = config.Quests.InGameFilterOverride.Language;
+		TargetFilter_I.Customization = config.Quests.InGameFilterOverride.Target;
 
 		return this;
 	}

@@ -154,9 +154,9 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 			// Apply Stuff
 
-			MaxSearchResultLimit_I.Apply(CurrentSearchType, ref maxResultsRef);
-			RegionLockFix_I.Apply(CurrentSearchType);
-			SessionPlayerCountFilter_I.ApplyMin(CurrentSearchType).ApplyMax(CurrentSearchType);
+			MaxSearchResultLimit_I.Apply(ref maxResultsRef);
+			RegionLockFix_I.Apply();
+			SessionPlayerCountFilter_I.ApplyMin().ApplyMax();
 
 			LanguageFilter_I.ApplyAnyLanguage();
 			RewardFilter_I.ApplyNoPreference();

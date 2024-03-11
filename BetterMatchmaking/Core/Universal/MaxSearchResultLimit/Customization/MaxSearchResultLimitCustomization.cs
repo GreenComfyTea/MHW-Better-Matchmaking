@@ -1,34 +1,45 @@
 ﻿using ImGuiNET;
+using SharpPluginLoader.Core.Steam;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
 internal class MaxSearchResultLimitCustomization : SingletonAccessor
 {
-    public MaxSearchResultLimitLobbyCustomization Sessions { get; set; } = new();
-    public MaxSearchResultLimitLobbyCustomization Quests { get; set; } = new();
+	private bool _enabled = true;
+	public bool Enabled { get => _enabled; set => _enabled = value; }
 
-    public MaxSearchResultLimitCustomization()
-    {
-        InstantiateSingletons();
-    }
+	private int _value = Constants.SEARCH_RESULT_LIMIT_MAX;
+	public int Value { get => _value; set => _value = value; }
 
-    public bool RenderImGui()
-    {
-        var changed = false;
+	public MaxSearchResultLimitCustomization()
+	{
+		InstantiateSingletons();
+	}
 
-        if (ImGui.TreeNode(LocalizationManager_I.ImGui.MaxSearchResultLimit))
-        {
-            changed = Sessions.RenderImGui(LocalizationManager_I.ImGui.Sessions) || changed;
-            changed = Quests.RenderImGui(LocalizationManager_I.ImGui.Quests) || changed;
+	public MaxSearchResultLimitCustomization Init()
+	{
+		return this;
+	}
 
-            ImGui.TreePop();
-        }
+	public bool RenderImGui()
+	{
+		var changed = false;
 
-        return changed;
-    }
+		if (ImGui.TreeNode(LocalizationManager_I.ImGui.MaxSearchResultLimit))
+		{
+			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
+			changed = ImGui.SliderInt(LocalizationManager_I.ImGui.Value, ref _value, 1, Constants.SEARCH_RESULT_LIMIT_MAX) || changed;
+
+			ImGui.TreePop();
+		}
+
+		return changed;
+	}
 }

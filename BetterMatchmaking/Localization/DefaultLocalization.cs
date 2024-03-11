@@ -84,7 +84,7 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string Value { get; set; } = "Value";
 
 	// Session Player Count Filter
-	public string SessionPlayerCountFilter { get; set; } = "Session Player Count Filter";
+	public string PlayerCountFilter { get; set; } = "Player Count Filter";
 	public string Min { get; set; } = "Min";
 	public string Max { get; set; } = "Max";
 

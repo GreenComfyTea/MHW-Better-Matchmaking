@@ -10,9 +10,9 @@ namespace BetterMatchmaking;
 
 internal class InGameFilterCustomization : SingletonAccessor
 {
-    public CustomFilterSessionCustomization Sessions { get; set; } = new();
+    public SessionCustomization Sessions { get; set; } = new();
 
-    public CustomFilterQuestCustomization Quests { get; set; } = new();
+    public QuestCustomization Quests { get; set; } = new();
 
     public InGameFilterCustomization()
     {
