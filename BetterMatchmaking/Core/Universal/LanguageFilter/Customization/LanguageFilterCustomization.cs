@@ -10,59 +10,61 @@ namespace BetterMatchmaking;
 
 internal class LanguageFilterCustomization : SingletonAccessor
 {
-    private bool _enabled = true;
-    public bool Enabled { get => _enabled; set => _enabled = value; }
+	private bool _enabled = true;
+	public bool Enabled { get => _enabled; set => _enabled = value; }
 
-    public string LanguageReplacementTarget { get; set; }
+	public string LanguageReplacementTarget { get; set; }
 
-    public LanguageFilterOptionCustomization FilterOptions { get; set; } = new();
+	public LanguageFilterOptionCustomization FilterOptions { get; set; } = new();
 
-    private LanguageSearchTypes _languageReplacementTargetEnum = LanguageSearchTypes.SameLanguage;
-    [JsonIgnore]
-    public LanguageSearchTypes LanguageReplacementTargetEnum { get => _languageReplacementTargetEnum; set => _languageReplacementTargetEnum = value; }
+	private LanguageSearchTypes _languageReplacementTargetEnum = LanguageSearchTypes.SameLanguage;
+	[JsonIgnore]
+	public LanguageSearchTypes LanguageReplacementTargetEnum { get => _languageReplacementTargetEnum; set => _languageReplacementTargetEnum = value; }
 
-    public LanguageFilterCustomization()
-    {
-        InstantiateSingletons();
+	public LanguageFilterCustomization()
+	{
+		InstantiateSingletons();
 
-        LanguageReplacementTarget = LocalizationManager_I.Default.ImGui.SameLanguage;
-    }
+		LanguageReplacementTarget = LocalizationManager_I.Default.ImGui.SameLanguage;
+	}
 
-    public LanguageFilterCustomization Init()
-    {
-        var replacementTarget = LanguageReplacementTarget.Replace(" ", "");
-        var success = Enum.TryParse(replacementTarget, true, out _languageReplacementTargetEnum);
-        return this;
-    }
+	public LanguageFilterCustomization Init()
+	{
+		var replacementTarget = LanguageReplacementTarget.Replace(" ", "");
+		var success = Enum.TryParse(replacementTarget, true, out _languageReplacementTargetEnum);
+		return this;
+	}
 
-    public bool RenderImGui()
-    {
-        var changed = false;
-        var tempChanged = false;
-        var selectedIndex = 0;
+	public bool RenderImGui()
+	{
+		var changed = false;
+		var tempChanged = false;
+		var selectedIndex = 0;
 
-        var languageSearchTypes = LocalizationManager_I.ImGui.LanguageSearchTypeArray;
+		var languageSearchTypes = LocalizationManager_I.ImGui.LanguageSearchTypeArray;
 
-        if (ImGui.TreeNode(LocalizationManager_I.ImGui.Language))
-        {
-            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
+		if (ImGui.TreeNode(LocalizationManager_I.ImGui.Language))
+		{
+			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
 
-            selectedIndex = (int)LanguageReplacementTargetEnum;
-            tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref selectedIndex, languageSearchTypes, languageSearchTypes.Length);
+			selectedIndex = (int)LanguageReplacementTargetEnum;
 
-            if (tempChanged)
-            {
-                LanguageReplacementTargetEnum = (LanguageSearchTypes)selectedIndex;
-                LanguageReplacementTarget = LocalizationManager_I.Default.ImGui.LanguageSearchTypeArray[selectedIndex];
-            }
+			ImGui.SetNextItemWidth(CustomizationWindow_I.ComboBoxWidth);
+			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref selectedIndex, languageSearchTypes, languageSearchTypes.Length);
 
-            changed = changed || tempChanged;
+			if (tempChanged)
+			{
+				LanguageReplacementTargetEnum = (LanguageSearchTypes)selectedIndex;
+				LanguageReplacementTarget = LocalizationManager_I.Default.ImGui.LanguageSearchTypeArray[selectedIndex];
+			}
 
-            changed = FilterOptions.RenderImGui() || changed;
+			changed = changed || tempChanged;
 
-            ImGui.TreePop();
-        }
+			changed = FilterOptions.RenderImGui() || changed;
 
-        return changed;
-    }
+			ImGui.TreePop();
+		}
+
+		return changed;
+	}
 }

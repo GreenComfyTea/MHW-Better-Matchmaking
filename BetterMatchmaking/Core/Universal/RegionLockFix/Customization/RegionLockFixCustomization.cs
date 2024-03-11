@@ -47,7 +47,10 @@ internal class RegionLockFixCustomization : SingletonAccessor
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
 
 			selectedIndex = (int) DistanceFilterEnum;
+
+			ImGui.SetNextItemWidth(CustomizationWindow_I.ComboBoxWidth);
 			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.DistanceFilter, ref selectedIndex, distanceFilters, distanceFilters.Length);
+
 			if (tempChanged)
 			{
 				DistanceFilterEnum = (LobbyDistanceFilter) selectedIndex;

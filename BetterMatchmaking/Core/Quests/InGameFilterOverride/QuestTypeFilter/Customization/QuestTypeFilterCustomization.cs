@@ -10,60 +10,62 @@ namespace BetterMatchmaking;
 
 internal class QuestTypeFilterCustomization : SingletonAccessor
 {
-    private bool _enabled = true;
-    public bool Enabled { get => _enabled; set => _enabled = value; }
+	private bool _enabled = true;
+	public bool Enabled { get => _enabled; set => _enabled = value; }
 
-    public string QuestTypeReplacementTarget { get; set; }
+	public string QuestTypeReplacementTarget { get; set; }
 
-    public QuestTypeFilterOptionCustomization FilterOptions { get; set; } = new();
+	public QuestTypeFilterOptionCustomization FilterOptions { get; set; } = new();
 
-    private QuestTypes _questTypeReplacementTargetEnum = QuestTypes.Expeditions;
-    [JsonIgnore]
-    public QuestTypes QuestTypeReplacementTargetEnum { get => _questTypeReplacementTargetEnum; set => _questTypeReplacementTargetEnum = value; }
+	private QuestTypes _questTypeReplacementTargetEnum = QuestTypes.Expeditions;
+	[JsonIgnore]
+	public QuestTypes QuestTypeReplacementTargetEnum { get => _questTypeReplacementTargetEnum; set => _questTypeReplacementTargetEnum = value; }
 
-    public QuestTypeFilterCustomization()
-    {
-        InstantiateSingletons();
+	public QuestTypeFilterCustomization()
+	{
+		InstantiateSingletons();
 
-        QuestTypeReplacementTarget = LocalizationManager_I.Default.ImGui.Expeditions;
-    }
+		QuestTypeReplacementTarget = LocalizationManager_I.Default.ImGui.Expeditions;
+	}
 
-    public QuestTypeFilterCustomization Init()
-    {
-        var replacementTarget = QuestTypeReplacementTarget.Replace(" ", "");
-        var success = Enum.TryParse(replacementTarget, true, out _questTypeReplacementTargetEnum);
+	public QuestTypeFilterCustomization Init()
+	{
+		var replacementTarget = QuestTypeReplacementTarget.Replace(" ", "");
+		var success = Enum.TryParse(replacementTarget, true, out _questTypeReplacementTargetEnum);
 
-        return this;
-    }
+		return this;
+	}
 
-    public bool RenderImGui()
-    {
-        var changed = false;
-        var tempChanged = false;
-        var selectedIndex = 0;
+	public bool RenderImGui()
+	{
+		var changed = false;
+		var tempChanged = false;
+		var selectedIndex = 0;
 
-        var questTypes = LocalizationManager_I.ImGui.QuestTypeArray;
+		var questTypes = LocalizationManager_I.ImGui.QuestTypeArray;
 
-        if (ImGui.TreeNode(LocalizationManager_I.ImGui.QuestType))
-        {
-            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
+		if (ImGui.TreeNode(LocalizationManager_I.ImGui.QuestType))
+		{
+			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
 
-            selectedIndex = (int)QuestTypeReplacementTargetEnum - 1;
-            tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref selectedIndex, questTypes, questTypes.Length);
+			selectedIndex = (int)QuestTypeReplacementTargetEnum - 1;
 
-            if (tempChanged)
-            {
-                QuestTypeReplacementTargetEnum = (QuestTypes)(selectedIndex + 1);
-                QuestTypeReplacementTarget = LocalizationManager_I.Default.ImGui.QuestTypeArray[selectedIndex];
-            }
+			ImGui.SetNextItemWidth(CustomizationWindow_I.ComboBoxWidth);
+			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref selectedIndex, questTypes, questTypes.Length);
 
-            changed = changed || tempChanged;
+			if (tempChanged)
+			{
+				QuestTypeReplacementTargetEnum = (QuestTypes)(selectedIndex + 1);
+				QuestTypeReplacementTarget = LocalizationManager_I.Default.ImGui.QuestTypeArray[selectedIndex];
+			}
 
-            changed = FilterOptions.RenderImGui() || changed;
+			changed = changed || tempChanged;
 
-            ImGui.TreePop();
-        }
+			changed = FilterOptions.RenderImGui() || changed;
 
-        return changed;
-    }
+			ImGui.TreePop();
+		}
+
+		return changed;
+	}
 }

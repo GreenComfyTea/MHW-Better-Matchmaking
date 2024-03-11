@@ -12,6 +12,8 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 	private bool IsInitialized { get; set; } = false;
 	private bool AreHooksInitialized { get; set; } = false;
 
+	private bool IsImGuiRenderingEnabled { get; set; } = false;
+
 	public PluginData Initialize()
 	{
 		return new PluginData
@@ -65,9 +67,13 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 		Core_I.Dispose();
 	}
 
+	public int count = 0;
+
 	public void OnImGuiRender()
 	{
 		if (!IsInitialized) return;
+
+		IsImGuiRenderingEnabled = true;
 
 		try
 		{
@@ -85,6 +91,7 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 	public void OnImGuiFreeRender()
 	{
 		if (!IsInitialized) return;
+		if(!IsImGuiRenderingEnabled) return;
 
 		try
 		{
@@ -100,5 +107,7 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 		{
 			DebugManager_I.Report("BetterMatchmakingPlugin.OnImGuiFreeRender()", exception.ToString());
 		}
+
+		IsImGuiRenderingEnabled = false;
 	}
 }

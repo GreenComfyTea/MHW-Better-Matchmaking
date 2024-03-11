@@ -31,7 +31,7 @@ namespace BetterMatchmaking
 		private bool _isOpened = false;
 		public bool IsOpened { get => _isOpened; set => _isOpened = value; }
 
-		private Vector2 DefaultPosition { get; set; } = new(630, 640);
+		public float ComboBoxWidth { get; set; } = 100f;
 
 		private CustomizationWindow() { }
 
@@ -45,20 +45,17 @@ namespace BetterMatchmaking
 		{
 			if (!IsOpened) return this;
 
-			//var font = ImGui.GetFont();
-			//var oldScale = font.Scale;
-			//font.Scale *= 1.5f;
-
 			try
 			{
 				var changed = false;
 
-				//ImGui.SetNextWindowSize(new Vector2(640, 640), ImGuiCond.FirstUseEver | ImGuiCond.Once);
-
-				ImGui.ShowMetricsWindow();
+				ImGui.SetNextWindowPos(Constants.DEFAULT_WINDOW_POSITION, ImGuiCond.FirstUseEver);
+				ImGui.SetNextWindowSize(Constants.DEFAULT_WINDOW_SIZE, ImGuiCond.FirstUseEver);
 
 				//ImGui.PushFont(font);
 				ImGui.Begin($"{Constants.MOD_NAME} v{Constants.VERSION}", ref _isOpened);
+
+				ComboBoxWidth = Constants.COMBOBOX_WIDTH_MULTIPLIER * ImGui.GetWindowSize().Y;
 
 				ImGui.Text(LocalizationManager_I.ImGui.MadeBy);
 				ImGui.SameLine();
@@ -110,9 +107,8 @@ namespace BetterMatchmaking
 			catch (Exception e)
 			{
 				TeaLog.Error(e.ToString());
+
 				return this;
-				//font.Scale = oldScale;
-				//ImGui.PopFont();
 			}
 		}
 	}

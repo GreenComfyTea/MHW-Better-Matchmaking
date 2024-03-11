@@ -10,71 +10,72 @@ namespace BetterMatchmaking;
 
 internal class QuestPreferenceFilterCustomization : SingletonAccessor
 {
-    private bool _enabled = true;
-    public bool Enabled { get => _enabled; set => _enabled = value; }
+	private bool _enabled = true;
+	public bool Enabled { get => _enabled; set => _enabled = value; }
 
-    public string QuestPreferenceReplacementTarget { get; set; }
+	public string QuestPreferenceReplacementTarget { get; set; }
 
-    public QuestPreferenceFilterOptionCustomization FilterOptions { get; set; } = new();
+	public QuestPreferenceFilterOptionCustomization FilterOptions { get; set; } = new();
 
-    private QuestPreferences _questPreferenceReplacementTargetEnum = QuestPreferences.SmallMonsters;
-    [JsonIgnore]
-    public QuestPreferences QuestPreferenceReplacementTargetEnum { get => _questPreferenceReplacementTargetEnum; set => _questPreferenceReplacementTargetEnum = value; }
+	private QuestPreferences _questPreferenceReplacementTargetEnum = QuestPreferences.SmallMonsters;
+	[JsonIgnore]
+	public QuestPreferences QuestPreferenceReplacementTargetEnum { get => _questPreferenceReplacementTargetEnum; set => _questPreferenceReplacementTargetEnum = value; }
 
-    private int _replacementTargetSelectedIndex;
-    [JsonIgnore]
-    public int ReplacementTargetSelectedIndex { get => _replacementTargetSelectedIndex; set => _replacementTargetSelectedIndex = value; }
+	private int _replacementTargetSelectedIndex;
+	[JsonIgnore]
+	public int ReplacementTargetSelectedIndex { get => _replacementTargetSelectedIndex; set => _replacementTargetSelectedIndex = value; }
 
-    public QuestPreferenceFilterCustomization()
-    {
-        InstantiateSingletons();
+	public QuestPreferenceFilterCustomization()
+	{
+		InstantiateSingletons();
 
-        QuestPreferenceReplacementTarget = LocalizationManager_I.Default.ImGui.SmallMonsters;
-        ReplacementTargetSelectedIndex = Array.IndexOf(LocalizationManager_I.Default.ImGui.QuestPreferenceArray, QuestPreferenceReplacementTarget);
-    }
+		QuestPreferenceReplacementTarget = LocalizationManager_I.Default.ImGui.SmallMonsters;
+		ReplacementTargetSelectedIndex = Array.IndexOf(LocalizationManager_I.Default.ImGui.QuestPreferenceArray, QuestPreferenceReplacementTarget);
+	}
 
-    public QuestPreferenceFilterCustomization Init()
-    {
-        ReplacementTargetSelectedIndex = Array.IndexOf(LocalizationManager_I.Default.ImGui.QuestPreferenceArray, QuestPreferenceReplacementTarget);
-        UpdateEnumFromString();
+	public QuestPreferenceFilterCustomization Init()
+	{
+		ReplacementTargetSelectedIndex = Array.IndexOf(LocalizationManager_I.Default.ImGui.QuestPreferenceArray, QuestPreferenceReplacementTarget);
+		UpdateEnumFromString();
 
-        return this;
-    }
+		return this;
+	}
 
-    private QuestPreferenceFilterCustomization UpdateEnumFromString()
-    {
-        var replacementTarget = QuestPreferenceReplacementTarget.Replace(" ", "").Replace("-", "").Replace("'", "");
-        var success = Enum.TryParse(replacementTarget, out _questPreferenceReplacementTargetEnum);
+	private QuestPreferenceFilterCustomization UpdateEnumFromString()
+	{
+		var replacementTarget = QuestPreferenceReplacementTarget.Replace(" ", "").Replace("-", "").Replace("'", "");
+		var success = Enum.TryParse(replacementTarget, out _questPreferenceReplacementTargetEnum);
 
-        return this;
-    }
+		return this;
+	}
 
-    public bool RenderImGui()
-    {
-        var changed = false;
-        var tempChanged = false;
+	public bool RenderImGui()
+	{
+		var changed = false;
+		var tempChanged = false;
 
-        var questPreferences = LocalizationManager_I.ImGui.QuestPreferenceArray;
+		var questPreferences = LocalizationManager_I.ImGui.QuestPreferenceArray;
 
-        if (ImGui.TreeNode(LocalizationManager_I.ImGui.QuestPreference))
-        {
-            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
+		if (ImGui.TreeNode(LocalizationManager_I.ImGui.QuestPreference))
+		{
+			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
 
-            tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref _replacementTargetSelectedIndex, questPreferences, questPreferences.Length);
+			ImGui.SetNextItemWidth(CustomizationWindow_I.ComboBoxWidth);
+			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref _replacementTargetSelectedIndex, questPreferences, questPreferences.Length);
 
-            if (tempChanged)
-            {
-                QuestPreferenceReplacementTarget = LocalizationManager_I.Default.ImGui.QuestPreferenceArray[ReplacementTargetSelectedIndex];
-                UpdateEnumFromString();
-            }
+			if (tempChanged)
+			{
+				QuestPreferenceReplacementTarget = LocalizationManager_I.Default.ImGui.QuestPreferenceArray[ReplacementTargetSelectedIndex];
+				UpdateEnumFromString();
+			}
 
-            changed = changed || tempChanged;
+			changed = changed || tempChanged;
 
-            changed = FilterOptions.RenderImGui() || changed;
+			changed = FilterOptions.RenderImGui() || changed;
 
-            ImGui.TreePop();
-        }
+			ImGui.TreePop();
+		}
 
-        return changed;
-    }
+		return changed;
+	}
 }

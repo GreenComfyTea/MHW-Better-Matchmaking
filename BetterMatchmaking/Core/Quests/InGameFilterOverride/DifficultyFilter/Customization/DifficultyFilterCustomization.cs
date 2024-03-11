@@ -13,86 +13,88 @@ namespace BetterMatchmaking;
 
 internal class DifficultyFilterCustomization : SingletonAccessor
 {
-    private bool _enabled = false;
-    public bool Enabled { get => _enabled; set => _enabled = value; }
+	private bool _enabled = false;
+	public bool Enabled { get => _enabled; set => _enabled = value; }
 
-    public string ReplacementTarget { get; set; }
+	public string ReplacementTarget { get; set; }
 
-    public DifficultyFilterOptionCustomization FilterOptions { get; set; } = new();
+	public DifficultyFilterOptionCustomization FilterOptions { get; set; } = new();
 
-    [JsonIgnore]
-    public Difficulties ReplacementTargetEnum { get; set; } = Difficulties.LowRank1;
+	[JsonIgnore]
+	public Difficulties ReplacementTargetEnum { get; set; } = Difficulties.LowRank1;
 
-    public DifficultyFilterCustomization()
-    {
-        InstantiateSingletons();
-        ReplacementTarget = LocalizationManager_I.Default.ImGui.LowRank1;
-    }
+	public DifficultyFilterCustomization()
+	{
+		InstantiateSingletons();
+		ReplacementTarget = LocalizationManager_I.Default.ImGui.LowRank1;
+	}
 
-    public DifficultyFilterCustomization Init()
-    {
-        var stringIndex = Array.FindIndex(
-            LocalizationManager.Instance.Default.ImGui.QuestRankReplacementTargets, arrayString => arrayString.Equals(ReplacementTarget)
-        );
+	public DifficultyFilterCustomization Init()
+	{
+		var stringIndex = Array.FindIndex(
+			LocalizationManager.Instance.Default.ImGui.QuestRankReplacementTargets, arrayString => arrayString.Equals(ReplacementTarget)
+		);
 
-        ReplacementTargetEnum = (Difficulties)StringIndexToEnum(stringIndex);
+		ReplacementTargetEnum = (Difficulties)StringIndexToEnum(stringIndex);
 
-        return this;
-    }
+		return this;
+	}
 
-    private static int StringIndexToEnum(int stringIndex)
-    {
-        var highRank9Index = Array.FindIndex(
-            LocalizationManager.Instance.Default.ImGui.QuestRankReplacementTargets, arrayString => arrayString.Equals(LocalizationManager.Instance.Default.ImGui.HighRank9)
-        );
+	private static int StringIndexToEnum(int stringIndex)
+	{
+		var highRank9Index = Array.FindIndex(
+			LocalizationManager.Instance.Default.ImGui.QuestRankReplacementTargets, arrayString => arrayString.Equals(LocalizationManager.Instance.Default.ImGui.HighRank9)
+		);
 
-        if (stringIndex <= 2) return stringIndex + 20;
-        if (stringIndex <= highRank9Index) return stringIndex - 2;
+		if (stringIndex <= 2) return stringIndex + 20;
+		if (stringIndex <= highRank9Index) return stringIndex - 2;
 
-        return stringIndex - 1;
-    }
+		return stringIndex - 1;
+	}
 
-    private static int EnumToStringIndex(Difficulties replacementTargetEnum)
-    {
-        var replacementTargetEnumValue = (int)replacementTargetEnum;
+	private static int EnumToStringIndex(Difficulties replacementTargetEnum)
+	{
+		var replacementTargetEnumValue = (int)replacementTargetEnum;
 
-        if (replacementTargetEnumValue <= (int)Difficulties.HighRank9) return replacementTargetEnumValue + 2;
-        if (replacementTargetEnumValue <= (int)Difficulties.MasterRank6) return replacementTargetEnumValue + 1;
+		if (replacementTargetEnumValue <= (int)Difficulties.HighRank9) return replacementTargetEnumValue + 2;
+		if (replacementTargetEnumValue <= (int)Difficulties.MasterRank6) return replacementTargetEnumValue + 1;
 
-        return replacementTargetEnumValue - 20;
-    }
+		return replacementTargetEnumValue - 20;
+	}
 
-    public bool RenderImGui()
-    {
-        var changed = false;
-        var tempChanged = false;
-        var selectedIndex = 0;
+	public bool RenderImGui()
+	{
+		var changed = false;
+		var tempChanged = false;
+		var selectedIndex = 0;
 
-        var questRanks = LocalizationManager_I.ImGui.QuestRankReplacementTargets;
+		var questRanks = LocalizationManager_I.ImGui.QuestRankReplacementTargets;
 
-        if (ImGui.TreeNode(LocalizationManager_I.ImGui.Difficulty))
-        {
-            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
+		if (ImGui.TreeNode(LocalizationManager_I.ImGui.Difficulty))
+		{
+			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
 
-            selectedIndex = EnumToStringIndex(ReplacementTargetEnum);
-            tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref selectedIndex, questRanks, questRanks.Length);
+			selectedIndex = EnumToStringIndex(ReplacementTargetEnum);
 
-            if (tempChanged)
-            {
-                ReplacementTargetEnum = (Difficulties)StringIndexToEnum(selectedIndex);
-                ReplacementTarget = LocalizationManager_I.Default.ImGui.QuestRankReplacementTargets[selectedIndex];
-                TeaLog.Info(ReplacementTarget);
-            }
+			ImGui.SetNextItemWidth(CustomizationWindow_I.ComboBoxWidth);
+			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref selectedIndex, questRanks, questRanks.Length);
 
-            changed = changed || tempChanged;
+			if (tempChanged)
+			{
+				ReplacementTargetEnum = (Difficulties) StringIndexToEnum(selectedIndex);
+				ReplacementTarget = LocalizationManager_I.Default.ImGui.QuestRankReplacementTargets[selectedIndex];
+				TeaLog.Info(ReplacementTarget);
+			}
 
-            changed = FilterOptions.RenderImGui() || changed;
+			changed = changed || tempChanged;
 
-            //TeaLog.Info($"ReplacementTargetEnum: {ReplacementTargetEnum} -> selectedIndex: {selectedIndex} -> ReplacementTargetEnum: {ReplacementTargetEnum} -> ReplacementTarget: {ReplacementTarget}");
+			changed = FilterOptions.RenderImGui() || changed;
 
-            ImGui.TreePop();
-        }
+			//TeaLog.Info($"ReplacementTargetEnum: {ReplacementTargetEnum} -> selectedIndex: {selectedIndex} -> ReplacementTargetEnum: {ReplacementTargetEnum} -> ReplacementTarget: {ReplacementTarget}");
 
-        return changed;
-    }
+			ImGui.TreePop();
+		}
+
+		return changed;
+	}
 }

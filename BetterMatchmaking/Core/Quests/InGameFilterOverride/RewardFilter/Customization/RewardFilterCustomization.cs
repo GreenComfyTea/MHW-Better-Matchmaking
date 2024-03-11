@@ -11,60 +11,62 @@ namespace BetterMatchmaking;
 
 internal class RewardFilterCustomization : SingletonAccessor
 {
-    private bool _enabled = true;
-    public bool Enabled { get => _enabled; set => _enabled = value; }
+	private bool _enabled = true;
+	public bool Enabled { get => _enabled; set => _enabled = value; }
 
-    public string RewardTypeReplacementTarget { get; set; }
+	public string RewardTypeReplacementTarget { get; set; }
 
-    public RewardFilterOptionCustomization FilterOptions { get; set; } = new();
+	public RewardFilterOptionCustomization FilterOptions { get; set; } = new();
 
-    private RewardTypes _rewardTypeReplacementTargetEnum = RewardTypes.NoPreference;
-    [JsonIgnore]
-    public RewardTypes RewardTypeReplacementTargetEnum { get => _rewardTypeReplacementTargetEnum; set => _rewardTypeReplacementTargetEnum = value; }
+	private RewardTypes _rewardTypeReplacementTargetEnum = RewardTypes.NoPreference;
+	[JsonIgnore]
+	public RewardTypes RewardTypeReplacementTargetEnum { get => _rewardTypeReplacementTargetEnum; set => _rewardTypeReplacementTargetEnum = value; }
 
-    public RewardFilterCustomization()
-    {
-        InstantiateSingletons();
+	public RewardFilterCustomization()
+	{
+		InstantiateSingletons();
 
-        RewardTypeReplacementTarget = LocalizationManager_I.Default.ImGui.NoPreference;
-    }
+		RewardTypeReplacementTarget = LocalizationManager_I.Default.ImGui.NoPreference;
+	}
 
-    public RewardFilterCustomization Init()
-    {
-        var replacementTarget = RewardTypeReplacementTarget.Replace(" ", "");
-        var success = Enum.TryParse(replacementTarget, true, out _rewardTypeReplacementTargetEnum);
+	public RewardFilterCustomization Init()
+	{
+		var replacementTarget = RewardTypeReplacementTarget.Replace(" ", "");
+		var success = Enum.TryParse(replacementTarget, true, out _rewardTypeReplacementTargetEnum);
 
-        return this;
-    }
+		return this;
+	}
 
-    public bool RenderImGui()
-    {
-        var changed = false;
-        var tempChanged = false;
-        var selectedIndex = 0;
+	public bool RenderImGui()
+	{
+		var changed = false;
+		var tempChanged = false;
+		var selectedIndex = 0;
 
-        var rewardReplacementTargets = LocalizationManager_I.ImGui.RewardReplacementTargets;
+		var rewardReplacementTargets = LocalizationManager_I.ImGui.RewardReplacementTargets;
 
-        if (ImGui.TreeNode(LocalizationManager_I.ImGui.Rewards))
-        {
-            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
+		if (ImGui.TreeNode(LocalizationManager_I.ImGui.Rewards))
+		{
+			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
 
-            selectedIndex = (int)RewardTypeReplacementTargetEnum;
-            tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref selectedIndex, rewardReplacementTargets, rewardReplacementTargets.Length);
+			selectedIndex = (int)RewardTypeReplacementTargetEnum;
 
-            if (tempChanged)
-            {
-                RewardTypeReplacementTargetEnum = (RewardTypes)selectedIndex;
-                RewardTypeReplacementTarget = LocalizationManager_I.Default.ImGui.RewardReplacementTargets[selectedIndex];
-            }
+			ImGui.SetNextItemWidth(CustomizationWindow_I.ComboBoxWidth);
+			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref selectedIndex, rewardReplacementTargets, rewardReplacementTargets.Length);
 
-            changed = changed || tempChanged;
+			if (tempChanged)
+			{
+				RewardTypeReplacementTargetEnum = (RewardTypes)selectedIndex;
+				RewardTypeReplacementTarget = LocalizationManager_I.Default.ImGui.RewardReplacementTargets[selectedIndex];
+			}
 
-            changed = FilterOptions.RenderImGui() || changed;
+			changed = changed || tempChanged;
 
-            ImGui.TreePop();
-        }
+			changed = FilterOptions.RenderImGui() || changed;
 
-        return changed;
-    }
+			ImGui.TreePop();
+		}
+
+		return changed;
+	}
 }

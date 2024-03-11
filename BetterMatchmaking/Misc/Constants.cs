@@ -1,3 +1,4 @@
+using ImGuiNET;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -266,4 +267,9 @@ public static class Constants
 	public static readonly Vector4 IMGUI_GREEN_COLOR = new(0.5f, 1f, 0.5f, 1f);
 	public static readonly Vector4 IMGUI_PURPLE_COLOR = new(0.666f, 0.4f, 0.666f, 1f);
 	public static readonly Vector4 IMGUI_LIGHT_GREEN_COLOR = new(0.4f, 0.666f, 0.4f, 1f);
+
+	public const float COMBOBOX_WIDTH_MULTIPLIER = 0.4f;
+
+	public static readonly Vector2 DEFAULT_WINDOW_POSITION = new(480, 60);
+	public static readonly Vector2 DEFAULT_WINDOW_SIZE = new(600, 500);
 }

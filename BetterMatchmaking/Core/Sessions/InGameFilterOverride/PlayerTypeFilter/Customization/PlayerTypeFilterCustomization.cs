@@ -11,58 +11,60 @@ namespace BetterMatchmaking;
 
 internal class PlayerTypeFilterCustomization : SingletonAccessor
 {
-    private bool _enabled = true;
-    public bool Enabled { get => _enabled; set => _enabled = value; }
+	private bool _enabled = true;
+	public bool Enabled { get => _enabled; set => _enabled = value; }
 
-    public string PlayerTypeReplacementTarget { get; set; }
+	public string PlayerTypeReplacementTarget { get; set; }
 
-    public PlayerTypeFilterOptionCustomization FilterOptions { get; set; } = new();
+	public PlayerTypeFilterOptionCustomization FilterOptions { get; set; } = new();
 
-    private PlayerTypes _playerTypeReplacementTargetEnum = PlayerTypes.Any;
-    [JsonIgnore]
-    public PlayerTypes PlayerTypeReplacementTargetEnum { get => _playerTypeReplacementTargetEnum; set => _playerTypeReplacementTargetEnum = value; }
+	private PlayerTypes _playerTypeReplacementTargetEnum = PlayerTypes.Any;
+	[JsonIgnore]
+	public PlayerTypes PlayerTypeReplacementTargetEnum { get => _playerTypeReplacementTargetEnum; set => _playerTypeReplacementTargetEnum = value; }
 
-    public PlayerTypeFilterCustomization()
-    {
-        InstantiateSingletons();
+	public PlayerTypeFilterCustomization()
+	{
+		InstantiateSingletons();
 
-        PlayerTypeReplacementTarget = LocalizationManager_I.Default.ImGui.Any;
-    }
+		PlayerTypeReplacementTarget = LocalizationManager_I.Default.ImGui.Any;
+	}
 
-    public PlayerTypeFilterCustomization Init()
-    {
-        var success = Enum.TryParse(PlayerTypeReplacementTarget, true, out _playerTypeReplacementTargetEnum);
-        return this;
-    }
+	public PlayerTypeFilterCustomization Init()
+	{
+		var success = Enum.TryParse(PlayerTypeReplacementTarget, true, out _playerTypeReplacementTargetEnum);
+		return this;
+	}
 
-    public bool RenderImGui()
-    {
-        var changed = false;
-        var tempChanged = false;
-        var selectedIndex = 0;
+	public bool RenderImGui()
+	{
+		var changed = false;
+		var tempChanged = false;
+		var selectedIndex = 0;
 
-        var playerTypes = LocalizationManager_I.ImGui.PlayerTypeArray;
+		var playerTypes = LocalizationManager_I.ImGui.PlayerTypeArray;
 
-        if (ImGui.TreeNode(LocalizationManager_I.ImGui.PlayerType))
-        {
-            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
+		if (ImGui.TreeNode(LocalizationManager_I.ImGui.PlayerType))
+		{
+			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
 
-            selectedIndex = (int)PlayerTypeReplacementTargetEnum;
-            tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref selectedIndex, playerTypes, playerTypes.Length);
+			selectedIndex = (int)PlayerTypeReplacementTargetEnum;
 
-            if (tempChanged)
-            {
-                PlayerTypeReplacementTargetEnum = (PlayerTypes)selectedIndex;
-                PlayerTypeReplacementTarget = LocalizationManager_I.Default.ImGui.PlayerTypeArray[selectedIndex];
-            }
+			ImGui.SetNextItemWidth(CustomizationWindow_I.ComboBoxWidth);
+			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref selectedIndex, playerTypes, playerTypes.Length);
 
-            changed = changed || tempChanged;
+			if (tempChanged)
+			{
+				PlayerTypeReplacementTargetEnum = (PlayerTypes)selectedIndex;
+				PlayerTypeReplacementTarget = LocalizationManager_I.Default.ImGui.PlayerTypeArray[selectedIndex];
+			}
 
-            changed = FilterOptions.RenderImGui() || changed;
+			changed = changed || tempChanged;
 
-            ImGui.TreePop();
-        }
+			changed = FilterOptions.RenderImGui() || changed;
 
-        return changed;
-    }
+			ImGui.TreePop();
+		}
+
+		return changed;
+	}
 }
