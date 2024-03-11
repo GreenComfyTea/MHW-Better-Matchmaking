@@ -197,10 +197,11 @@ internal sealed class Core : SingletonAccessor, IDisposable
 			skip = QuestTypeFilter_I.Apply(ref key, ref value, ref comparison) || skip;
 			skip = DifficultyFilter_I.Apply(ref key, ref value, ref comparison) || skip;
 			skip = RewardFilter_I.ApplyRewardsAvailable(ref key, ref value, ref comparison) || skip;
+			skip = TargetFilter_I.Apply(ref key, ref value, ref comparison) || skip;
 		}
 		catch(Exception exception)
 		{
-			DebugManager_I.Report("PlayerTypeLockBypass.OnNumericalFilter()", exception.ToString());
+			DebugManager_I.Report("Core.OnNumericalFilter()", exception.ToString());
 		}
 
 		if(!skip) NumericalFilterHook!.Original(steamInterface, keyAddress, value, comparison);

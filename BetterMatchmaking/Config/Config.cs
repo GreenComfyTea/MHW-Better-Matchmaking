@@ -61,6 +61,7 @@ internal class Config : SingletonAccessor
 		CustomFilters.Quests.Difficulty.Init();
 		CustomFilters.Quests.Rewards.Init();
 		CustomFilters.Quests.Language.Init();
+		CustomFilters.Quests.Target.Init();
 
 		TeaLog.Info("Config: Initialization Done!");
 

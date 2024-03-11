@@ -103,6 +103,7 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 		DifficultyFilter_I.Customization = config.CustomFilters.Quests.Difficulty;
 		RewardFilter_I.Customization = config.CustomFilters.Quests.Rewards;
 		LanguageFilter_I.QuestCustomization = config.CustomFilters.Quests.Language;
+		TargetFilter_I.Customization = config.CustomFilters.Quests.Target;
 
 		return this;
 	}

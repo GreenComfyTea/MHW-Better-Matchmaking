@@ -261,6 +261,10 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string NoRewards { get; set; } = "No Rewards";
 	public string RewardsAvailable { get; set; } = "Rewards Available";
 
+	// Target Filter
+
+	public string Target { get; set; } = "Target";
+
 	[JsonIgnore]
 	public string[] DistanceFilterArray { get; set; } = Array.Empty<string>();
 	[JsonIgnore]
@@ -275,7 +279,8 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string[] QuestRankReplacementTargets { get; set; } = Array.Empty<string>();
 	[JsonIgnore]
 	public string[] RewardReplacementTargets { get; set; } = Array.Empty<string>();
-
+	[JsonIgnore]
+	public string[] TargetArray { get; set; } = Array.Empty<string>();
 
 	public LocalizedStrings_ImGui()
 	{
@@ -309,6 +314,86 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 			Arena,
 			Expeditions,
 			TemperedMonsters,
+			SmallMonsters,
+
+			GreatJagras,
+			KuluYaKu,
+			PukeiPukei,
+			Barroth,
+			Jyuratodus,
+			TobiKadachi,
+			Anjanath,
+			Rathian,
+			TzitziYaKu,
+			Paolumu,
+			GreatGirros,
+			Radobaan,
+			Legiana,
+			Odogaron,
+			Rathalos,
+			Diablos,
+			Kirin,
+			ZorahMagdaros,
+			Dodogama,
+			PinkRathian,
+			Bazelgeuse,
+			Lavasioth,
+			Uragaan,
+			AzureRathalos,
+			BlackDiablos,
+			Nergigante,
+			Teostra,
+			KushalaDaora,
+			VaalHazak,
+			Xenojiiva,
+
+			KulveTaroth,
+			Deviljho,
+			Lunastra,
+			Behemoth,
+			AncientLeshen,
+
+			Beotodus,
+			Banbaro,
+			ViperTobiKadachi,
+			NightshadePaolumu,
+			CoralPukeiPukei,
+			Barioth,
+			Nargacuga,
+			Glavenus,
+			Tigrex,
+			Brachydios,
+			ShriekingLegiana,
+			FulgurAnjanath,
+			AcidicGlavenus,
+			EbonyOdogaron,
+			Velkhana,
+			SeethingBazelgeuse,
+			BlackveilVaalHazak,
+			Namielle,
+			RuinerNergigante,
+			SharaIshvalda,
+
+			SavageDeviljho,
+			BruteTigrex,
+			Zinogre,
+			YianGaruga,
+			ScarredYianGaruga,
+			GoldRathian,
+			SilverRathalos,
+			Rajang,
+			StygianZinogre,
+			FuriousRajang,
+			RagingBrachydios,
+			FrostfangBarioth,
+			Safijiiva,
+			Alatreon,
+			Fatalis
+		];
+
+		TargetArray =
+		[
+			NoPreference,
 			SmallMonsters,
 
 			GreatJagras,

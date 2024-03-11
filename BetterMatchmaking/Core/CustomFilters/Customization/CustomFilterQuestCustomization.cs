@@ -17,6 +17,8 @@ internal class CustomFilterQuestCustomization : SingletonAccessor
 
 	public LanguageFilterCustomization Language { get; set; } = new();
 
+	public TargetFilterCustomization Target { get; set; } = new();
+
 	public CustomFilterQuestCustomization()
 	{
 		InstantiateSingletons();
@@ -31,6 +33,7 @@ internal class CustomFilterQuestCustomization : SingletonAccessor
 			changed = Difficulty.RenderImGui() || changed;
 			changed = Rewards.RenderImGui() || changed;
 			changed = Language.RenderImGui() || changed;
+			changed = Target.RenderImGui() || changed;
 
 			ImGui.TreePop();
 		}

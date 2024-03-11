@@ -64,7 +64,7 @@ internal class QuestPreferenceFilterCustomization : SingletonAccessor
 
 			if(tempChanged)
 			{
-				QuestPreferenceReplacementTarget = LocalizationManager_I.Default.ImGui.QuestPreferenceArray[_replacementTargetSelectedIndex];
+				QuestPreferenceReplacementTarget = LocalizationManager_I.Default.ImGui.QuestPreferenceArray[ReplacementTargetSelectedIndex];
 				UpdateEnumFromString();
 			}
 
