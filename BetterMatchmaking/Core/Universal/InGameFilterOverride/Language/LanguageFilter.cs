@@ -21,8 +21,8 @@ internal sealed class LanguageFilter : SingletonAccessor
 	// Singleton Pattern End
 
 	public LanguageFilterCustomization SessionCustomization { get; set; }
-
 	public LanguageFilterCustomization QuestCustomization { get; set; }
+	public LanguageFilterCustomization GuidingLandsCustomization { get; set; }
 
 	private LanguageFilter() { }
 
@@ -126,18 +126,31 @@ internal sealed class LanguageFilter : SingletonAccessor
 	{
 		if(Core_I.CurrentSearchType == SearchTypes.None) return false;
 
-		LanguageFilterCustomization customization;
-		string languageKey;
+		LanguageFilterCustomization customization = null;
+		string languageKey = string.Empty;
 
-		if(Core_I.CurrentSearchType == SearchTypes.Session)
+		switch(Core_I.CurrentSearchType)
 		{
-			customization = SessionCustomization;
-			languageKey = Constants.SEARCH_KEY_SESSION_LANGUAGE;
-		}
-		else
-		{
-			customization = QuestCustomization;
-			languageKey = Constants.SEARCH_KEY_QUEST_LANGUAGE;
+			case SearchTypes.Session:
+
+				customization = SessionCustomization;
+				languageKey = Constants.SEARCH_KEY_SESSION_LANGUAGE;
+				break;
+
+			case SearchTypes.Quest:
+
+				customization = QuestCustomization;
+				languageKey = Constants.SEARCH_KEY_QUEST_LANGUAGE;
+
+				break;
+
+			case SearchTypes.GuidingLands:
+
+				customization = GuidingLandsCustomization;
+				languageKey = Constants.SEARCH_KEY_GUIDING_LANDS_LANGUAGE;
+
+				return false;
+				break;
 		}
 
 		if(!customization.Enabled) return false;
@@ -155,18 +168,31 @@ internal sealed class LanguageFilter : SingletonAccessor
 	{
 		if(!Core_I.IsLanguageAny) return this;
 
-		LanguageFilterCustomization customization;
-		string languageKey;
+		LanguageFilterCustomization customization = null;
+		string languageKey = string.Empty;
 
-		if(Core_I.CurrentSearchType == SearchTypes.Session)
+		switch(Core_I.CurrentSearchType)
 		{
-			customization = SessionCustomization;
-			languageKey = Constants.SEARCH_KEY_SESSION_LANGUAGE;
-		}
-		else
-		{
-			customization = QuestCustomization;
-			languageKey = Constants.SEARCH_KEY_QUEST_LANGUAGE;
+			case SearchTypes.Session:
+
+				customization = SessionCustomization;
+				languageKey = Constants.SEARCH_KEY_SESSION_LANGUAGE;
+				break;
+
+			case SearchTypes.Quest:
+
+				customization = QuestCustomization;
+				languageKey = Constants.SEARCH_KEY_QUEST_LANGUAGE;
+
+				break;
+
+			case SearchTypes.GuidingLands:
+
+				customization = GuidingLandsCustomization;
+				languageKey = Constants.SEARCH_KEY_GUIDING_LANDS_LANGUAGE;
+
+				return this;
+				break;
 		}
 
 		if (!customization.Enabled) return this;

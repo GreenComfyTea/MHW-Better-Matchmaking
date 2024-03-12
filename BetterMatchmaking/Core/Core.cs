@@ -93,42 +93,72 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 		for(int i = 0; i < searchKeyCount; i++)
 		{
-			var keyId = MemoryUtil.Read<int>(searchKeyData - 0x4);
-			var key = MemoryUtil.Read<int>(searchKeyData + 0x8);
+			var keyID = MemoryUtil.Read<int>(searchKeyData - 0x4);
+			var value = MemoryUtil.Read<int>(searchKeyData + 0x8);
 
-			if(keyId == Constants.SEARCH_KEY_SEARCH_TYPE_ID)
+			if(keyID == Constants.SEARCH_KEY_SEARCH_TYPE_ID)
 			{
-				CurrentSearchType = key switch
+				CurrentSearchType = value switch
 				{
 					(int) SearchTypes.Session => SearchTypes.Session,
 					(int) SearchTypes.Quest => SearchTypes.Quest,
 					_ => SearchTypes.None
 				};
+
+				searchKeyData += 0x10;
+				continue;
 			}
-			else if(CurrentSearchType == SearchTypes.Session)
+
+			if(CurrentSearchType == SearchTypes.Session)
 			{
-				if(keyId == Constants.SEARCH_KEY_SESSION_LANGUAGE_ID)
+				if(keyID == (int) SessionSearchKeyIDs.Language)
 				{
 					IsLanguageAny = false;
 					isLanguageUpdated = true;
 				}
+
+				searchKeyData += 0x10;
+				continue;
 			}
-			else if(CurrentSearchType == SearchTypes.Quest)
+
+			if(CurrentSearchType == SearchTypes.Quest)
 			{
-				if(keyId == Constants.SEARCH_KEY_QUEST_LANGUAGE_ID)
+				if(keyID == (int) GuidingLandsSearchKeyIDs.IsGuidingLands)
 				{
-					IsLanguageAny = false;
-					isLanguageUpdated = true;
+					if(value == (int) GuidingLands.Yes)
+					{
+						CurrentSearchType = SearchTypes.GuidingLands;
+					}
+
+					searchKeyData += 0x10;
+					continue;
 				}
-				else if(keyId == Constants.SEARCH_KEY_QUEST_TYPE_ID)
-				{
-					IsQuestTypeNoPreference = false;
-					isQuestTypeUpdated = true;
-				}
-				else if(keyId == Constants.SEARCH_KEY_QUEST_REWARDS_AVAILABLE_ID)
+				
+				if(keyID == (int) QuestSearchKeyIDs.RewardsAvailable)
 				{
 					IsQuestRewardsNoPreference = false;
 					isQuestRewardsUpdated = true;
+
+					searchKeyData += 0x10;
+					continue;
+				}
+				
+				if(keyID == (int) QuestSearchKeyIDs.Language)
+				{
+					IsLanguageAny = false;
+					isLanguageUpdated = true;
+
+					searchKeyData += 0x10;
+					continue;
+				}
+				
+				if(keyID == (int) QuestSearchKeyIDs.QuestType)
+				{
+					IsQuestTypeNoPreference = false;
+					isQuestTypeUpdated = true;
+
+					searchKeyData += 0x10;
+					continue;
 				}
 			}
 

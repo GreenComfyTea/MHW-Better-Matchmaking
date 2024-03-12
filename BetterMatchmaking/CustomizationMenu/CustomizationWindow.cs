@@ -136,6 +136,7 @@ namespace BetterMatchmaking
 
 				changed = ConfigManager_I.Current.Sessions.RenderImGui() || changed;
 				changed = ConfigManager_I.Current.Quests.RenderImGui() || changed;
+				changed = ConfigManager_I.Current.GuidingLands.RenderImGui() || changed;
 
 				ImGui.End();
 				//ImGui.PopFont();

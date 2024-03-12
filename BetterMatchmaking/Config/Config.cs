@@ -26,6 +26,7 @@ internal class Config : SingletonAccessor
 	public DebugCustomization Debug { get; set; } = new();
 	public SessionCustomization Sessions { get; set; } = new();
 	public QuestCustomization Quests { get; set; } = new();
+	public GuidingLandsCustomization GuidingLands { get; set; } = new();
 
 	public Config()
 	{
@@ -48,6 +49,7 @@ internal class Config : SingletonAccessor
 		Debug.Init();
 		Sessions.Init();
 		Quests.Init();
+		GuidingLands.Init();
 
 		TeaLog.Info("Config: Initialization Done!");
 

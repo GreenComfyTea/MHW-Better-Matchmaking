@@ -23,13 +23,41 @@ public enum SearchTypes
 	None = 0,
 	Session = 537292564,
 	Quest = 421652,
-	GuidingLands = 421653
+	GuidingLands = 1074163476
 }
 
 public enum GuidingLands
 {
 	No = 17,
 	Yes = 273
+}
+
+public enum SessionSearchKeyIDs
+{
+	PlayerType = 1,
+	QuestPreference = 2,
+	Language = 4,
+	SimilarHunterRank = 5,
+	SimilarMasterRank = 6
+}
+
+public enum QuestSearchKeyIDs
+{
+	RewardsAvailable = 1,
+	Target = 2,
+	Rank = 4,
+	Language = 5,
+	QuestType = 6
+}
+
+public enum GuidingLandsSearchKeyIDs
+{
+	IsGuidingLands = 1,
+	ExpeditionObjective = 2,
+	TargetMonster = 3,
+	Conditions = 4,
+	Language = 5,
+	RegionLevel = 6
 }
 
 public enum LanguageSearchTypes { SameLanguage, AnyLanguage };
@@ -240,19 +268,6 @@ public static class Constants
 
 	public const int SEARCH_KEY_SEARCH_TYPE_ID = 0;
 
-	public const int SEARCH_KEY_SESSION_PLAYER_TYPE_ID = 1;
-	public const int SEARCH_KEY_SESSION_QUEST_PREFERENCE_ID = 2;
-
-	public const int SEARCH_KEY_SESSION_LANGUAGE_ID = 4;
-	public const int SEARCH_KEY_SESSION_SIMILAR_HUNTER_RANK_ID = 5;
-	public const int SEARCH_KEY_SESSION_SIMILAR_MASTER_RANK_ID = 6;
-
-	public const int SEARCH_KEY_QUEST_REWARDS_AVAILABLE_ID = 2;
-	public const int SEARCH_KEY_QUEST_TARGET_ID = 3;
-	public const int SEARCH_KEY_QUEST_RANK_ID = 4;
-	public const int SEARCH_KEY_QUEST_LANGUAGE_ID = 5;
-	public const int SEARCH_KEY_QUEST_TYPE_ID = 6;
-
 	public const string SEARCH_KEY_SESSION_PLAYER_TYPE = "SearchKey1";
 	public const string SEARCH_KEY_SESSION_QUEST_PREFERENCE = "SearchKey2";
 	public const string SEARCH_KEY_SESSION_LANGUAGE = "SearchKey4";
@@ -265,9 +280,7 @@ public static class Constants
 	public const string SEARCH_KEY_QUEST_LANGUAGE = SEARCH_KEY_SESSION_SIMILAR_HUNTER_RANK;
 	public const string SEARCH_KEY_QUEST_TARGET = "SearchKey3";
 
-	public const int SESSION_PLAYER_TYPE_BEGINNERS = 0;
-	public const int SESSION_PLAYER_TYPE_EXPERIENCED = 1;
-	public const int SESSION_PLAYER_TYPE_ANY = 2;
+	public const string SEARCH_KEY_GUIDING_LANDS_LANGUAGE = SEARCH_KEY_QUEST_LANGUAGE;
 
 	public static readonly Vector4 IMGUI_RED_COLOR = new(1f, 0.25f, 0.25f, 1f);
 	public static readonly Vector4 IMGUI_YELLOW_COLOR = new(1f, 0.75f, 0.5f, 1f);

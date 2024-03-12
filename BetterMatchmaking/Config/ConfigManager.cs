@@ -113,6 +113,11 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 		LanguageFilter_I.QuestCustomization = config.Quests.InGameFilterOverride.Language;
 		TargetFilter_I.Customization = config.Quests.InGameFilterOverride.Target;
 
+
+
+		RegionLockFix_I.GuidingLandsCustomization = config.GuidingLands.RegionLockFix;
+		MaxSearchResultLimit_I.GuidingLandsCustomization = config.GuidingLands.MaxSearchResultLimit;
+
 		return this;
 	}
 

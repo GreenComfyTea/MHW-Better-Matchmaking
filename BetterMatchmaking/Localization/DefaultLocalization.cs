@@ -88,7 +88,8 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string Min { get; set; } = "Min";
 	public string Max { get; set; } = "Max";
 
-	// Custom Filters
+	// In-Game Filter Override
+
 	public string InGameFilterOverride { get; set; } = "In-Game Filter Override";
 	public string ReplacementTarget { get; set; } = "Replacement Target";
 	public string FilterOptions { get; set; } = "Filter Options";
@@ -264,6 +265,9 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	// Target Filter
 
 	public string Target { get; set; } = "Target";
+
+	// Guiding Lands
+	public string GuidingLands { get; set; } = "GuidingLands";
 
 	[JsonIgnore]
 	public string[] DistanceFilterArray { get; set; } = Array.Empty<string>();

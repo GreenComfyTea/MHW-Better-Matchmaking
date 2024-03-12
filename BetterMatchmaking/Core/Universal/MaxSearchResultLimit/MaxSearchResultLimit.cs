@@ -23,7 +23,7 @@ internal sealed class MaxSearchResultLimit : SingletonAccessor
 
 	public MaxSearchResultLimitCustomization SessionCustomization { get; set; }
 	public MaxSearchResultLimitCustomization QuestCustomization { get; set; }
-
+	public MaxSearchResultLimitCustomization GuidingLandsCustomization { get; set; }
 	private MaxSearchResultLimit()
 	{
 		InstantiateSingletons();
@@ -33,10 +33,13 @@ internal sealed class MaxSearchResultLimit : SingletonAccessor
 	{
 		if(Core_I.CurrentSearchType == SearchTypes.None) return this;
 
-		var customization =
-			 Core_I.CurrentSearchType == SearchTypes.Session
-				 ? SessionCustomization
-				 : QuestCustomization;
+		var customization = Core_I.CurrentSearchType switch
+		{
+			SearchTypes.Session => SessionCustomization,
+			SearchTypes.Quest => QuestCustomization,
+			SearchTypes.GuidingLands => GuidingLandsCustomization,
+			_ => null
+		};
 
 		if(!customization.Enabled) return this;
 

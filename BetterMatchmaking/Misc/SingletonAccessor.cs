@@ -28,6 +28,8 @@ internal class SingletonAccessor
 	protected MaxSearchResultLimit MaxSearchResultLimit_I { get; set; }
 	[JsonIgnore]
 	protected PlayerCountFilter SessionPlayerCountFilter_I { get; set; }
+	[JsonIgnore]
+	protected QuestPreferenceTargetFilter QuestPreferenceTargetFilter_I { get; set; }
 
 
 
@@ -61,6 +63,7 @@ internal class SingletonAccessor
 		RegionLockFix_I = RegionLockFix.Instance;
 		MaxSearchResultLimit_I = MaxSearchResultLimit.Instance;
 		SessionPlayerCountFilter_I = PlayerCountFilter.Instance;
+		QuestPreferenceTargetFilter_I = QuestPreferenceTargetFilter.Instance;
 
 		PlayerTypeFilter_I = PlayerTypeFilter.Instance;
 		QuestPreferenceFilter_I = QuestPreferenceFilter.Instance;

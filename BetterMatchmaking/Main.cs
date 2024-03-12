@@ -1,5 +1,6 @@
 ﻿using ImGuiNET;
 using SharpPluginLoader.Core;
+using System.Diagnostics;
 
 namespace BetterMatchmaking;
 
@@ -37,6 +38,7 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 			PlayerTypeFilter_I.Init();
 			QuestPreferenceFilter_I.Init();
 			LanguageFilter_I.Init();
+			QuestPreferenceTargetFilter_I.Init();
 
 			QuestTypeFilter_I.Init();
 			DifficultyFilter_I.Init();

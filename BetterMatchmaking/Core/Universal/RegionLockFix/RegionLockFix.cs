@@ -28,6 +28,7 @@ internal sealed class RegionLockFix : SingletonAccessor
 
 	public RegionLockFixCustomization SessionCustomization { get; set; }
 	public RegionLockFixCustomization QuestCustomization { get; set; }
+	public RegionLockFixCustomization GuidingLandsCustomization { get; set; }
 
 	private RegionLockFix()
 	{
@@ -38,10 +39,13 @@ internal sealed class RegionLockFix : SingletonAccessor
 	{
 		if (Core_I.CurrentSearchType == SearchTypes.None) return this;
 
-		var customization =
-			Core_I.CurrentSearchType == SearchTypes.Session
-				? SessionCustomization
-				: QuestCustomization;
+		var customization = Core_I.CurrentSearchType switch
+		{
+			SearchTypes.Session => SessionCustomization,
+			SearchTypes.Quest => QuestCustomization,
+			SearchTypes.GuidingLands => GuidingLandsCustomization,
+			_ => null
+		};
 
 		if (!customization.Enabled) return this;
 		if (customization.DistanceFilterEnum == LobbyDistanceFilter.Default) return this;
