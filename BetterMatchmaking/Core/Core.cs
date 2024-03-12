@@ -25,6 +25,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 	public SearchTypes CurrentSearchType { get; set; } = SearchTypes.None;
 
 	public bool IsLanguageAny { get; set; } = false;
+	public bool IsQuestTypeNoPreference { get; set; } = false;
 	public bool IsQuestRewardsNoPreference { get; set; } = false;
 
 	private delegate int startRequest_Delegate(nint netCore, nint netRequest);
@@ -54,14 +55,15 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 	public static string GetSearchKeyName(string key)
 	{
-		if (key == "SearchKey1") return "Player Type | ???";
-		if (key == "SearchKey2") return "Quest Preference | Rewards Available";
-		if (key == "SearchKey3") return "??? | Target";
-		if (key == "SearchKey4") return "Language | Difficulty";
-		if (key == "SearchKey5") return "Similar Hunter Rank | Language";
-		if (key == "SearchKey6") return "Similar Master Rank | Quest Type";
-		if (key == "SearchKey7") return "Master Rank |";
-		if (key == "SearchKey8") return "Master Rank |";
+		if(key == "SearchKey0") return "Search Type";
+		if (key == "SearchKey1") return "Player Type | ??? | Guiding Lands";
+		if (key == "SearchKey2") return "Quest Preference | Rewards Available | Expedition Objective";
+		if (key == "SearchKey3") return "??? | Target | ???";
+		if (key == "SearchKey4") return "Language | Difficulty | Conditions";
+		if (key == "SearchKey5") return "Similar Hunter Rank | Language | ???";
+		if (key == "SearchKey6") return "Similar Master Rank | Quest Type | ???";
+		if (key == "SearchKey7") return "Min Master Rank | ??? | ???";
+		if (key == "SearchKey8") return "Max Master Rank | ??? | ???";
 
 		return "";
 	}
@@ -87,6 +89,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 		var isLanguageUpdated = false;
 		var isQuestRewardsUpdated = false;
+		var isQuestTypeUpdated = false;
 
 		for(int i = 0; i < searchKeyCount; i++)
 		{
@@ -117,6 +120,11 @@ internal sealed class Core : SingletonAccessor, IDisposable
 					IsLanguageAny = false;
 					isLanguageUpdated = true;
 				}
+				else if(keyId == Constants.SEARCH_KEY_QUEST_TYPE_ID)
+				{
+					IsQuestTypeNoPreference = false;
+					isQuestTypeUpdated = true;
+				}
 				else if(keyId == Constants.SEARCH_KEY_QUEST_REWARDS_AVAILABLE_ID)
 				{
 					IsQuestRewardsNoPreference = false;
@@ -128,6 +136,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 		}
 
 		if(!isLanguageUpdated) IsLanguageAny = true;
+		if(!isQuestTypeUpdated) IsQuestTypeNoPreference = true;
 		if(!isQuestRewardsUpdated) IsQuestRewardsNoPreference = true;
 	}
 
@@ -144,6 +153,8 @@ internal sealed class Core : SingletonAccessor, IDisposable
 				return StartRequestHook!.Original(netCore, netRequest);
 			}
 
+			TeaLog.Info("OnStartRequest");
+
 			AnalyzeSearchKeys(netRequest);
 
 			if(CurrentSearchType == SearchTypes.None) return StartRequestHook!.Original(netCore, netRequest);
@@ -159,6 +170,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 			SessionPlayerCountFilter_I.ApplyMin().ApplyMax();
 
 			LanguageFilter_I.ApplyAnyLanguage();
+			QuestTypeFilter_I.ApplyNoPreference();
 			RewardFilter_I.ApplyNoPreference();
 		}
 		catch(Exception exception)
@@ -175,6 +187,10 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 		try
 		{
+			var key1 = MemoryUtil.ReadString(keyAddress);
+
+			TeaLog.Info($"{key1} ({GetSearchKeyName(key1)}) {GetComparisonSign(comparison)} {value}");
+
 			if(CurrentSearchType == SearchTypes.None)
 			{
 				NumericalFilterHook!.Original(steamInterface, keyAddress, value, comparison);

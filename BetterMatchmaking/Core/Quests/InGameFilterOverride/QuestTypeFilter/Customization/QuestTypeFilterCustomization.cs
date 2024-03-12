@@ -10,7 +10,7 @@ namespace BetterMatchmaking;
 
 internal class QuestTypeFilterCustomization : SingletonAccessor
 {
-	private bool _enabled = true;
+	private bool _enabled = false;
 	public bool Enabled { get => _enabled; set => _enabled = value; }
 
 	public string QuestTypeReplacementTarget { get; set; }
@@ -48,14 +48,14 @@ internal class QuestTypeFilterCustomization : SingletonAccessor
 		{
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
 
-			selectedIndex = (int)QuestTypeReplacementTargetEnum - 1;
+			selectedIndex = (int) QuestTypeReplacementTargetEnum;
 
 			ImGui.SetNextItemWidth(CustomizationWindow_I.ComboBoxWidth);
 			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref selectedIndex, questTypes, questTypes.Length);
 
 			if (tempChanged)
 			{
-				QuestTypeReplacementTargetEnum = (QuestTypes)(selectedIndex + 1);
+				QuestTypeReplacementTargetEnum = (QuestTypes) (selectedIndex);
 				QuestTypeReplacementTarget = LocalizationManager_I.Default.ImGui.QuestTypeArray[selectedIndex];
 			}
 

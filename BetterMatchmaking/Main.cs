@@ -90,16 +90,17 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 
 	public void OnImGuiFreeRender()
 	{
-		if (!IsInitialized) return;
-		if(!IsImGuiRenderingEnabled) return;
-
 		try
 		{
+			if(!IsInitialized) return;
+
 			if(!AreHooksInitialized)
 			{
 				AreHooksInitialized = true;
 				Task.Run(Core_I.Init);
 			}
+
+			if(!IsImGuiRenderingEnabled) return;
 
 			CustomizationWindow_I.Render();
 		}

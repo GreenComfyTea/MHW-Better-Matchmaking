@@ -10,16 +10,16 @@ namespace BetterMatchmaking;
 
 internal class TargetFilterCustomization : SingletonAccessor
 {
-	private bool _enabled = true;
+	private bool _enabled = false;
 	public bool Enabled { get => _enabled; set => _enabled = value; }
 
 	public string TargetReplacementTarget { get; set; }
 
 	public TargetFilterOptionCustomization FilterOptions { get; set; } = new();
 
-	private QuestPreferences _targetReplacementTargetEnum = QuestPreferences.SmallMonsters;
+	private Targets _targetReplacementTargetEnum = Targets.SmallMonsters;
 	[JsonIgnore]
-	public QuestPreferences TargetReplacementTargetEnum { get => _targetReplacementTargetEnum; set => _targetReplacementTargetEnum = value; }
+	public Targets TargetReplacementTargetEnum { get => _targetReplacementTargetEnum; set => _targetReplacementTargetEnum = value; }
 
 	private int _replacementTargetSelectedIndex;
 	[JsonIgnore]

@@ -290,7 +290,7 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 
 		LanguageSearchTypeArray = [SameLanguage, AnyLanguage];
 
-		QuestTypeArray = [OptionalQuests, Assignments, Investigations, Expeditions, EventQuests, SpecialAssignments];
+		QuestTypeArray = [NoPreference, OptionalQuests, Assignments, Investigations, Expeditions, EventQuests, SpecialAssignments];
 
 		RewardReplacementTargets = [NoPreference, RewardsAvailable];
 

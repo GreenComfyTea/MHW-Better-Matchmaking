@@ -1,4 +1,5 @@
-﻿using SharpPluginLoader.Core.Steam;
+﻿using SharpPluginLoader.Core.IO;
+using SharpPluginLoader.Core.Steam;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,74 +10,92 @@ namespace BetterMatchmaking;
 
 internal sealed class QuestTypeFilter : SingletonAccessor
 {
-    // Singleton Pattern
-    private static readonly QuestTypeFilter _singleton = new();
+	// Singleton Pattern
+	private static readonly QuestTypeFilter _singleton = new();
 
-    public static QuestTypeFilter Instance => _singleton;
+	public static QuestTypeFilter Instance => _singleton;
 
-    // Explicit static constructor to tell C# compiler
-    // not to mark type as beforefieldinit
-    static QuestTypeFilter() { }
+	// Explicit static constructor to tell C# compiler
+	// not to mark type as beforefieldinit
+	static QuestTypeFilter() { }
 
-    // Singleton Pattern End
+	// Singleton Pattern End
 
-    public QuestTypeFilterCustomization Customization { get; set; }
+	public QuestTypeFilterCustomization Customization { get; set; }
 
-    private QuestTypeFilter() { }
+	private QuestTypeFilter() { }
 
-    public QuestTypeFilter Init()
-    {
-        InstantiateSingletons();
+	public QuestTypeFilter Init()
+	{
+		InstantiateSingletons();
 
-        return this;
-    }
+		return this;
+	}
 
-    public bool Apply(ref string key, ref int value, ref int comparison)
-    {
-        if (!Customization.Enabled) return false;
-        if (Core_I.CurrentSearchType != SearchTypes.Quest) return false;
-        if ((LobbyComparison)comparison != LobbyComparison.Equal) return false;
-        if (!key.Equals(Constants.SEARCH_KEY_SESSION_QUEST_TYPE)) return false;
-        if (value != (int)Customization.QuestTypeReplacementTargetEnum) return false;
+	private QuestTypeFilter Apply()
+	{
+		if(!Customization.FilterOptions.OptionalQuests)
+		{
+			TeaLog.Info("QuestTypeFilter: Skipping Optional Quests...");
+			Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SESSION_QUEST_TYPE, (int) QuestTypes.OptionalQuests, LobbyComparison.NotEqual);
+		}
 
-        TeaLog.Info("QuestTypeFilter: Skipping Original Filter...");
+		if(!Customization.FilterOptions.Assignments)
+		{
+			TeaLog.Info("QuestTypeFilter: Skipping Assignments...");
+			Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SESSION_QUEST_TYPE, (int) QuestTypes.Assignments, LobbyComparison.NotEqual);
+		}
 
-        if (!Customization.FilterOptions.OptionalQuests)
-        {
-            TeaLog.Info("QuestTypeFilter: Skipping Optional Quests...");
-            Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SESSION_QUEST_TYPE, (int)QuestTypes.OptionalQuests, LobbyComparison.NotEqual);
-        }
+		if(!Customization.FilterOptions.Investigations)
+		{
+			TeaLog.Info("QuestTypeFilter: Skipping Investigations...");
+			Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SESSION_QUEST_TYPE, (int) QuestTypes.Investigations, LobbyComparison.NotEqual);
+		}
 
-        if (!Customization.FilterOptions.Assignments)
-        {
-            TeaLog.Info("QuestTypeFilter: Skipping Assignments...");
-            Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SESSION_QUEST_TYPE, (int)QuestTypes.Assignments, LobbyComparison.NotEqual);
-        }
+		if(!Customization.FilterOptions.Expeditions)
+		{
+			TeaLog.Info("QuestTypeFilter: Skipping Expeditions...");
+			Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SESSION_QUEST_TYPE, (int) QuestTypes.Expeditions, LobbyComparison.NotEqual);
+		}
 
-        if (!Customization.FilterOptions.Investigations)
-        {
-            TeaLog.Info("QuestTypeFilter: Skipping Investigations...");
-            Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SESSION_QUEST_TYPE, (int)QuestTypes.Investigations, LobbyComparison.NotEqual);
-        }
+		if(!Customization.FilterOptions.EventQuests)
+		{
+			TeaLog.Info("QuestTypeFilter: Skipping Event Quests...");
+			Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SESSION_QUEST_TYPE, (int) QuestTypes.EventQuests, LobbyComparison.NotEqual);
+		}
 
-        if (!Customization.FilterOptions.Expeditions)
-        {
-            TeaLog.Info("QuestTypeFilter: Skipping Expeditions...");
-            Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SESSION_QUEST_TYPE, (int)QuestTypes.Expeditions, LobbyComparison.NotEqual);
-        }
+		if(!Customization.FilterOptions.SpecialInvestigations)
+		{
+			TeaLog.Info("QuestTypeFilter: Skipping Special Investigations...");
+			Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SESSION_QUEST_TYPE, (int) QuestTypes.SpecialInvestigations, LobbyComparison.NotEqual);
+		}
 
-        if (!Customization.FilterOptions.EventQuests)
-        {
-            TeaLog.Info("QuestTypeFilter: Skipping Event Quests...");
-            Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SESSION_QUEST_TYPE, (int)QuestTypes.EventQuests, LobbyComparison.NotEqual);
-        }
+		return this;
+	}
 
-        if (!Customization.FilterOptions.SpecialInvestigations)
-        {
-            TeaLog.Info("QuestTypeFilter: Skipping Special Investigations...");
-            Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SESSION_QUEST_TYPE, (int)QuestTypes.SpecialInvestigations, LobbyComparison.NotEqual);
-        }
+	public bool Apply(ref string key, ref int value, ref int comparison)
+	{
+		if (!Customization.Enabled) return false;
+		if (Core_I.CurrentSearchType != SearchTypes.Quest) return false;
+		if ((LobbyComparison)comparison != LobbyComparison.Equal) return false;
+		if (!key.Equals(Constants.SEARCH_KEY_SESSION_QUEST_TYPE)) return false;
+		if (value != (int)Customization.QuestTypeReplacementTargetEnum) return false;
 
-        return true;
-    }
+		TeaLog.Info("QuestTypeFilter: Skipping Original Filter...");
+		Apply();
+
+		return true;
+	}
+
+	public QuestTypeFilter ApplyNoPreference()
+	{
+		if(!Core_I.IsQuestTypeNoPreference) return this;
+		if(!Customization.Enabled) return this;
+		if(Core_I.CurrentSearchType != SearchTypes.Quest) return this;
+		if(Customization.QuestTypeReplacementTargetEnum != QuestTypes.NoPreference) return this;
+
+		Apply();
+
+		return this;
+	}
 }

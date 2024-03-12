@@ -10,7 +10,7 @@ namespace BetterMatchmaking;
 
 internal class LanguageFilterCustomization : SingletonAccessor
 {
-	private bool _enabled = true;
+	private bool _enabled = false;
 	public bool Enabled { get => _enabled; set => _enabled = value; }
 
 	public string LanguageReplacementTarget { get; set; }

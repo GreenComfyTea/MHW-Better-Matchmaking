@@ -23,6 +23,13 @@ public enum SearchTypes
 	None = 0,
 	Session = 537292564,
 	Quest = 421652,
+	GuidingLands = 421653
+}
+
+public enum GuidingLands
+{
+	No = 17,
+	Yes = 273
 }
 
 public enum LanguageSearchTypes { SameLanguage, AnyLanguage };
@@ -48,6 +55,7 @@ public enum Languages
 
 public enum QuestTypes
 {
+	NoPreference = 0,
 	OptionalQuests = 1,
 	Assignments = 2,
 	Investigations = 3,
@@ -83,7 +91,7 @@ public enum Difficulties
 	MasterRank = 22
 }
 
-public enum QuestPreferences
+public enum Targets
 {
 	None = 0,
 	Assignments = 1,

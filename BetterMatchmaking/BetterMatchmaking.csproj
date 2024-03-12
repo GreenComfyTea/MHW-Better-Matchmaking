@@ -19,7 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SharpPluginLoader.ImGui" Version="1.90.2" />
+    <PackageReference Include="SharpPluginLoader.ImGui" Version="1.90.2.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,7 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="data\" />
+    <None Update="data\NotoSansKR-Bold.otf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

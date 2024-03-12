@@ -10,10 +10,10 @@ namespace BetterMatchmaking;
 
 internal class PlayerCountFilterMinCustomization : SingletonAccessor
 {
-    private bool _enabled = true;
+    private bool _enabled = false;
     public bool Enabled { get => _enabled; set => _enabled = value; }
 
-    private int _value = 1;
+    private int _value = 2;
     public int Value { get => _value; set => _value = value; }
 
     [JsonIgnore]
