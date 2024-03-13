@@ -129,14 +129,20 @@
 </p>
 
 # Links
-* **[Nexus Mods](https://nexusmods.com/monsterhunterworld/mods/7263)**  
+* **[Nexus Mods](https://nexusmods.com/monsterhunterworld/mods/7263)**
+
+# Features
+1. Steam Region Lock Fix;
+2. Increased Max Search Result Count (from 20 to 32);
+3. Custom Session Player Count Filter;
+4. Improved In-Game Search Filters (overrides one of the existing option and allows to search by several options at the same time).
 
 # Requirements
 1. [Stracker's Loader](https://www.nexusmods.com/monsterhunterworld/mods/1982);
 2. [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0);
 3. [SharpPluginLoader v0.0.4.1](https://github.com/Fexty12573/SharpPluginLoader) (Other versions are not guaranteed to work).
 
-# How to install:
+# How to Install
 1. Install [Stracker's Loader](https://www.nexusmods.com/monsterhunterworld/mods/1982);
 2. Install [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) (Get the **.NET Desktop Runtime 8.0.x**);
 3. Install [SharpPluginLoader](https://github.com/Fexty12573/SharpPluginLoader);
@@ -144,6 +150,21 @@
     * Official release can be downloaded from [Nexus Mods](https://nexusmods.com/monsterhunterworld/mods/7263);
     * Nightly builds are available in [this repo](https://github.com/greencomfytea/mhw-better-matchmaking) and can contain broken functionality, debugging info on screen, bugs and might require latest unreleased version of [SharpPluginLoader](https://github.com/Fexty12573/SharpPluginLoader). Use with caution!
 5. Extract the mod from the archive and place it in **Monster Hunter World** root folder.
+
+# How to Use
+1. Open SharpPluginLoader﻿ menu by pressing F9 key;
+2. Press "Better Matchmaking" button;
+3. Configure according to your needs.
+
+# For Translators
+The mod has support for localizations. If you wish to translate the mod, follow these steps:
+1. Go to `Monster Hunter World\nativePC\plugins\CSharp\BetterMatchmaking\data\localizations\` folder. There should be `en-us.json` file. If not, launch the game once, the file will be regenerated;
+2. Copy-paste the file and give it a new name. Any format is supported but I expect it to be `ISO language code` for uniformity reasons;
+3. Open the file with any text editor and translate strings;
+4. Make an issue/pull request, or dm me on discord/twitter, to submit your translation. I will check it and include it in the next release.
+
+> [!IMPORTANT]
+> There is no support for unicode symbols at the moment. It will be added in the next release.
 
 # Credits
 **GreenComfyTea** - creator of the mod and it's main contributor.  
