@@ -37,7 +37,7 @@
 	</a>
 	<br>
 	<a href="https://www.nexusmods.com/monsterhunterworld/mods/1982">
-		<img alt="Stracker's Loader Dependency" src="https://custom-icon-badges.demolab.com/badge/dependency-Stracker%27s Loader%20v3.0.1-brightgreen?logo=package-dependencies" />
+		<img alt="Stracker's Loader Dependency" src="https://custom-icon-badges.demolab.com/badge/dependency-Stracker%27s Loader-brightgreen?logo=package-dependencies" />
 	</a>
 	<a href="https://dotnet.microsoft.com/en-us/download/dotnet/8.0">
 		<img alt=".NET Dependency" src="https://custom-icon-badges.demolab.com/badge/dependency-.NET%20v8.0-brightgreen?logo=package-dependencies" />
@@ -132,18 +132,18 @@
 * **[Nexus Mods](https://nexusmods.com/monsterhunterworld/mods/7263)**  
 
 # Requirements
-1. [Stracker's Loader v3.0.1](https://www.nexusmods.com/monsterhunterworld/mods/1982);
+1. [Stracker's Loader](https://www.nexusmods.com/monsterhunterworld/mods/1982);
 2. [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0);
 3. [SharpPluginLoader v0.0.4.1](https://github.com/Fexty12573/SharpPluginLoader) (Other version are not guaranteed to work).
 
 # How to install:
 1. Install [Stracker's Loader](https://www.nexusmods.com/monsterhunterworld/mods/1982);
-1. Install [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) (Get the **.NET Desktop Runtime 8.0.x**);
-2. Install [SharpPluginLoader](https://github.com/Fexty12573/SharpPluginLoader);
-3. Download the mod:
+2. Install [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) (Get the **.NET Desktop Runtime 8.0.x**);
+3. Install [SharpPluginLoader](https://github.com/Fexty12573/SharpPluginLoader);
+4. Download the mod:
     * Official release can be downloaded from [Nexus Mods](https://nexusmods.com/monsterhunterworld/mods/7263);
     * Nightly builds are available in [this repo](https://github.com/greencomfytea/mhw-better-matchmaking) and can contain broken functionality, debugging info on screen, bugs and might require latest unreleased version of [SharpPluginLoader](https://github.com/Fexty12573/SharpPluginLoader). Use with caution!
-4. Extract the mod from the archive and place it in **Monster Hunter World** root folder.
+5. Extract the mod from the archive and place it in **Monster Hunter World** root folder.
 
 # Credits
 **GreenComfyTea** - creator of the mod and it's main contributor.  
