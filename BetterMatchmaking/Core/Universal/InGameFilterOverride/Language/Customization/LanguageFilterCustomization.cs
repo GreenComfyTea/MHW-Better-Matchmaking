@@ -13,25 +13,25 @@ internal class LanguageFilterCustomization : SingletonAccessor
 	private bool _enabled = false;
 	public bool Enabled { get => _enabled; set => _enabled = value; }
 
-	public string LanguageReplacementTarget { get; set; }
+	public string ReplacementTarget { get; set; }
 
-	public LanguageFilterOptionCustomization FilterOptions { get; set; } = new();
+	public LanguageFilterCustomization_Options FilterOptions { get; set; } = new();
 
-	private LanguageSearchTypes _languageReplacementTargetEnum = LanguageSearchTypes.SameLanguage;
+	private LanguageSearchTypes _replacementTargetEnum = LanguageSearchTypes.SameLanguage;
 	[JsonIgnore]
-	public LanguageSearchTypes LanguageReplacementTargetEnum { get => _languageReplacementTargetEnum; set => _languageReplacementTargetEnum = value; }
+	public LanguageSearchTypes ReplacementTargetEnum { get => _replacementTargetEnum; set => _replacementTargetEnum = value; }
 
 	public LanguageFilterCustomization()
 	{
 		InstantiateSingletons();
 
-		LanguageReplacementTarget = LocalizationManager_I.Default.ImGui.SameLanguage;
+		ReplacementTarget = LocalizationManager_I.Default.ImGui.SameLanguage;
 	}
 
 	public LanguageFilterCustomization Init()
 	{
-		var replacementTarget = LanguageReplacementTarget.Replace(" ", "");
-		var success = Enum.TryParse(replacementTarget, true, out _languageReplacementTargetEnum);
+		var replacementTarget = ReplacementTarget.Replace(" ", "");
+		var success = Enum.TryParse(replacementTarget, true, out _replacementTargetEnum);
 		return this;
 	}
 
@@ -47,15 +47,15 @@ internal class LanguageFilterCustomization : SingletonAccessor
 		{
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
 
-			selectedIndex = (int)LanguageReplacementTargetEnum;
+			selectedIndex = (int)ReplacementTargetEnum;
 
 			ImGui.SetNextItemWidth(CustomizationWindow_I.ComboBoxWidth);
 			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref selectedIndex, languageSearchTypes, languageSearchTypes.Length);
 
 			if (tempChanged)
 			{
-				LanguageReplacementTargetEnum = (LanguageSearchTypes)selectedIndex;
-				LanguageReplacementTarget = LocalizationManager_I.Default.ImGui.LanguageSearchTypeArray[selectedIndex];
+				ReplacementTargetEnum = (LanguageSearchTypes)selectedIndex;
+				ReplacementTarget = LocalizationManager_I.Default.ImGui.LanguageSearchTypeArray[selectedIndex];
 			}
 
 			changed = changed || tempChanged;

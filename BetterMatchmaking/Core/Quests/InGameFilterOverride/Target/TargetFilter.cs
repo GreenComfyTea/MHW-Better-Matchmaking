@@ -39,11 +39,11 @@ internal sealed class TargetFilter : SingletonAccessor
 		if (Core_I.CurrentSearchType != SearchTypes.Quest) return false;
 		if (comparisonEnum == LobbyComparison.NotEqual) return false;
 		if (!key.Equals(Constants.SEARCH_KEY_QUEST_TARGET)) return false;
-		if (comparisonEnum == LobbyComparison.Equal && value != (int)Customization.TargetReplacementTargetEnum) return false;
+		if (comparisonEnum == LobbyComparison.Equal && value != (int)Customization.ReplacementTargetEnum) return false;
 
 		if (comparisonEnum == LobbyComparison.EqualToOrLessThan
 		&& value == (int) Targets.SilverRathalos
-		&& Customization.TargetReplacementTargetEnum != Targets.None)
+		&& Customization.ReplacementTargetEnum != Targets.None)
 		{
 			return false;
 		}

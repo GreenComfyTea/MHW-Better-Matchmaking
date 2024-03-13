@@ -28,7 +28,8 @@ internal sealed class Core : SingletonAccessor, IDisposable
 	public bool IsQuestTypeNoPreference { get; set; } = false;
 	public bool IsQuestRewardsNoPreference { get; set; } = false;
 	public bool IsExpeditionObjectiveNoPreference { get; set; } = false;
-
+	public bool IsRegionLevelNoPreference { get; set; } = false;
+	
 
 	private delegate int startRequest_Delegate(nint netCore, nint netRequest);
 	private Hook<startRequest_Delegate> StartRequestHook { get; set; }
@@ -95,7 +96,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 			if(key == "SearchKey3") return "???";
 			if(key == "SearchKey4") return "Conditions";
 			if(key == "SearchKey5") return "???";
-			if(key == "SearchKey6") return "???";
+			if(key == "SearchKey6") return "Region Level";
 			if(key == "SearchKey7") return "???";
 			if(key == "SearchKey8") return "???";
 
@@ -128,6 +129,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 		var isQuestRewardsUpdated = false;
 		var isQuestTypeUpdated = false;
 		var isExpeditionObjectiveUpdated = false;
+		var isRegionLevelUpdated = false;
 
 		for(int i = 0; i < searchKeyCount; i++)
 		{
@@ -210,6 +212,15 @@ internal sealed class Core : SingletonAccessor, IDisposable
 					searchKeyData += 0x10;
 					continue;
 				}
+
+				if(keyID == (int) GuidingLandsSearchKeyIDs.RegionLevel)
+				{
+					IsRegionLevelNoPreference = false;
+					isRegionLevelUpdated = true;
+
+					searchKeyData += 0x10;
+					continue;
+				}
 			}
 
 			searchKeyData += 0x10;
@@ -219,6 +230,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 		if(!isQuestTypeUpdated) IsQuestTypeNoPreference = true;
 		if(!isQuestRewardsUpdated) IsQuestRewardsNoPreference = true;
 		if(!isExpeditionObjectiveUpdated) IsExpeditionObjectiveNoPreference = true;
+		if(!isRegionLevelUpdated) IsRegionLevelNoPreference = true;
 	}
 
 	private int OnStartRequest(nint netCore, nint netRequest)
@@ -255,6 +267,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 			RewardFilter_I.ApplyNoPreference();
 
 			ExpeditionObjectiveFilter_I.ApplyNoPreference();
+			RegionLevelFilter_I.ApplyNoPreference();
 		}
 		catch(Exception exception)
 		{
@@ -290,6 +303,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 			skip = TargetFilter_I.Apply(ref key, ref value, ref comparison) || skip;
 
 			skip = ExpeditionObjectiveFilter_I.Apply(ref key, ref value, ref comparison) || skip;
+			skip = RegionLevelFilter_I.Apply(ref key, ref value, ref comparison) || skip;
 		}
 		catch(Exception exception)
 		{

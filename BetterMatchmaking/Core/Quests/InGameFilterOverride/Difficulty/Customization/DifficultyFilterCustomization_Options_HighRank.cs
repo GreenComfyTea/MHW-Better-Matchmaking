@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class DifficultyFilterOptionCustomization_HighRank : SingletonAccessor
+internal class DifficultyFilterCustomization_Options_HighRank : SingletonAccessor
 {
     private bool _highRank6 = true;
     public bool HighRank6 { get => _highRank6; set => _highRank6 = value; }
@@ -21,12 +21,12 @@ internal class DifficultyFilterOptionCustomization_HighRank : SingletonAccessor
     private bool _highRank9 = true;
     public bool HighRank9 { get => _highRank9; set => _highRank9 = value; }
 
-    public DifficultyFilterOptionCustomization_HighRank()
+    public DifficultyFilterCustomization_Options_HighRank()
     {
         InstantiateSingletons();
     }
 
-    public DifficultyFilterOptionCustomization_HighRank SelectAll()
+    public DifficultyFilterCustomization_Options_HighRank SelectAll()
     {
         HighRank6 = true;
         HighRank7 = true;
@@ -36,7 +36,7 @@ internal class DifficultyFilterOptionCustomization_HighRank : SingletonAccessor
         return this;
     }
 
-    public DifficultyFilterOptionCustomization_HighRank DeselectAll()
+    public DifficultyFilterCustomization_Options_HighRank DeselectAll()
     {
         HighRank6 = false;
         HighRank7 = false;

@@ -18,7 +18,7 @@ internal class DifficultyFilterCustomization : SingletonAccessor
 
 	public string ReplacementTarget { get; set; }
 
-	public DifficultyFilterOptionCustomization FilterOptions { get; set; } = new();
+	public DifficultyFilterCustomization_Options FilterOptions { get; set; } = new();
 
 	[JsonIgnore]
 	public Difficulties ReplacementTargetEnum { get; set; } = Difficulties.LowRank1;

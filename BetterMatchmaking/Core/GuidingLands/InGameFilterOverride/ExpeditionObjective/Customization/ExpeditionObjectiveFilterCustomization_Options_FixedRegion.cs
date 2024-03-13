@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class ExpeditionObjectiveFilterOptionCustomization_FixedRegion : SingletonAccessor
+internal class ExpeditionObjectiveFilterCustomization_Options_FixedRegion : SingletonAccessor
 {
 	private bool _fixedRegionForest = true;
 	public bool FixedRegionForest { get => _fixedRegionForest; set => _fixedRegionForest = value; }
@@ -27,12 +27,12 @@ internal class ExpeditionObjectiveFilterOptionCustomization_FixedRegion : Single
 	private bool _fixedRegionTundra = true;
 	public bool FixedRegionTundra { get => _fixedRegionTundra; set => _fixedRegionTundra = value; }
 
-	public ExpeditionObjectiveFilterOptionCustomization_FixedRegion()
+	public ExpeditionObjectiveFilterCustomization_Options_FixedRegion()
 	{
 		InstantiateSingletons();
 	}
 
-	public ExpeditionObjectiveFilterOptionCustomization_FixedRegion SelectAll()
+	public ExpeditionObjectiveFilterCustomization_Options_FixedRegion SelectAll()
 	{
 		FixedRegionForest = true;
 		FixedRegionWildspire = true;
@@ -44,7 +44,7 @@ internal class ExpeditionObjectiveFilterOptionCustomization_FixedRegion : Single
 		return this;
 	}
 
-	public ExpeditionObjectiveFilterOptionCustomization_FixedRegion DeselectAll()
+	public ExpeditionObjectiveFilterCustomization_Options_FixedRegion DeselectAll()
 	{
 		FixedRegionForest = false;
 		FixedRegionWildspire = false;

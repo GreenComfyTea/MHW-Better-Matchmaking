@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class RewardFilterOptionCustomization : SingletonAccessor
+internal class RewardFilterCustomization_Options : SingletonAccessor
 {
     private bool _noRewards = true;
     public bool NoRewards { get => _noRewards; set => _noRewards = value; }
@@ -15,12 +15,12 @@ internal class RewardFilterOptionCustomization : SingletonAccessor
     private bool _rewardsAvailable = true;
     public bool RewardsAvailable { get => _rewardsAvailable; set => _rewardsAvailable = value; }
 
-    public RewardFilterOptionCustomization()
+    public RewardFilterCustomization_Options()
     {
         InstantiateSingletons();
     }
 
-    private RewardFilterOptionCustomization SelectAll()
+    private RewardFilterCustomization_Options SelectAll()
     {
         NoRewards = true;
         RewardsAvailable = true;
@@ -28,7 +28,7 @@ internal class RewardFilterOptionCustomization : SingletonAccessor
         return this;
     }
 
-    private RewardFilterOptionCustomization DeselectAll()
+    private RewardFilterCustomization_Options DeselectAll()
     {
         NoRewards = false;
         RewardsAvailable = false;

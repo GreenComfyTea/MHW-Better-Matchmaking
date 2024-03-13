@@ -7,7 +7,7 @@ using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
-internal class QuestPreferenceTargetFilterOptionCustomization_BaseGameEndgameMonsters : SingletonAccessor
+internal class QuestPreferenceTargetFilterCustomization_Options_BaseGameEndgameMonsters : SingletonAccessor
 {
     private bool _kulveTaroth = true;
     public bool KulveTaroth { get => _kulveTaroth; set => _kulveTaroth = value; }
@@ -24,12 +24,12 @@ internal class QuestPreferenceTargetFilterOptionCustomization_BaseGameEndgameMon
     private bool _ancientLeshen = true;
     public bool AncientLeshen { get => _ancientLeshen; set => _ancientLeshen = value; }
 
-    public QuestPreferenceTargetFilterOptionCustomization_BaseGameEndgameMonsters()
+    public QuestPreferenceTargetFilterCustomization_Options_BaseGameEndgameMonsters()
     {
         InstantiateSingletons();
     }
 
-    public QuestPreferenceTargetFilterOptionCustomization_BaseGameEndgameMonsters SelectAll()
+    public QuestPreferenceTargetFilterCustomization_Options_BaseGameEndgameMonsters SelectAll()
     {
         KulveTaroth = true;
         Deviljho = true;
@@ -40,7 +40,7 @@ internal class QuestPreferenceTargetFilterOptionCustomization_BaseGameEndgameMon
         return this;
     }
 
-    public QuestPreferenceTargetFilterOptionCustomization_BaseGameEndgameMonsters DeselectAll()
+    public QuestPreferenceTargetFilterCustomization_Options_BaseGameEndgameMonsters DeselectAll()
     {
         KulveTaroth = false;
         Deviljho = false;

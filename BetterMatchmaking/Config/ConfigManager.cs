@@ -128,6 +128,7 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 		MaxSearchResultLimit_I.GuidingLandsCustomization = guidingLands.MaxSearchResultLimit;
 
 		ExpeditionObjectiveFilter_I.Customization = guidingLandsInGameFilterOverride.ExpeditionObjective;
+		RegionLevelFilter_I.Customization = guidingLandsInGameFilterOverride.RegionLevel;
 		LanguageFilter_I.GuidingLandsCustomization = guidingLandsInGameFilterOverride.Language;
 
 		return this;

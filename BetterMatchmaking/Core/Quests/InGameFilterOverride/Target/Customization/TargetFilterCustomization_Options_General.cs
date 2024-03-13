@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class TargetFilterOptionCustomization_General : SingletonAccessor
+internal class TargetFilterCustomization_Options_General : SingletonAccessor
 {
     private bool _none = true;
     public bool None { get => _none; set => _none = value; }
@@ -15,12 +15,12 @@ internal class TargetFilterOptionCustomization_General : SingletonAccessor
     private bool _smallMonsters = true;
     public bool SmallMonsters { get => _smallMonsters; set => _smallMonsters = value; }
 
-    public TargetFilterOptionCustomization_General()
+    public TargetFilterCustomization_Options_General()
     {
         InstantiateSingletons();
     }
 
-    public TargetFilterOptionCustomization_General SelectAll()
+    public TargetFilterCustomization_Options_General SelectAll()
     {
         None = true;
         SmallMonsters = true;
@@ -28,7 +28,7 @@ internal class TargetFilterOptionCustomization_General : SingletonAccessor
         return this;
     }
 
-    public TargetFilterOptionCustomization_General DeselectAll()
+    public TargetFilterCustomization_Options_General DeselectAll()
     {
         None = false;
         SmallMonsters = false;

@@ -13,29 +13,29 @@ internal class QuestPreferenceFilterCustomization : SingletonAccessor
 	private bool _enabled = false;
 	public bool Enabled { get => _enabled; set => _enabled = value; }
 
-	public string QuestPreferenceReplacementTarget { get; set; }
+	public string ReplacementTarget { get; set; }
 
-	public QuestPreferenceFilterOptionCustomization FilterOptions { get; set; } = new();
+	public QuestPreferenceFilterCustomization_Options FilterOptions { get; set; } = new();
 
-	private Targets _questPreferenceReplacementTargetEnum = Targets.SmallMonsters;
+	private Targets _replacementTargetEnum = Targets.SmallMonsters;
 	[JsonIgnore]
-	public Targets QuestPreferenceReplacementTargetEnum { get => _questPreferenceReplacementTargetEnum; set => _questPreferenceReplacementTargetEnum = value; }
+	public Targets ReplacementTargetEnum { get => _replacementTargetEnum; set => _replacementTargetEnum = value; }
 
-	private int _replacementTargetSelectedIndex;
+	private int _selectedIndex;
 	[JsonIgnore]
-	public int ReplacementTargetSelectedIndex { get => _replacementTargetSelectedIndex; set => _replacementTargetSelectedIndex = value; }
+	public int SelectedIndex { get => _selectedIndex; set => _selectedIndex = value; }
 
 	public QuestPreferenceFilterCustomization()
 	{
 		InstantiateSingletons();
 
-		QuestPreferenceReplacementTarget = LocalizationManager_I.Default.ImGui.SmallMonsters;
-		ReplacementTargetSelectedIndex = Array.IndexOf(LocalizationManager_I.Default.ImGui.QuestPreferenceArray, QuestPreferenceReplacementTarget);
+		ReplacementTarget = LocalizationManager_I.Default.ImGui.SmallMonsters;
+		SelectedIndex = Array.IndexOf(LocalizationManager_I.Default.ImGui.QuestPreferenceArray, ReplacementTarget);
 	}
 
 	public QuestPreferenceFilterCustomization Init()
 	{
-		ReplacementTargetSelectedIndex = Array.IndexOf(LocalizationManager_I.Default.ImGui.QuestPreferenceArray, QuestPreferenceReplacementTarget);
+		SelectedIndex = Array.IndexOf(LocalizationManager_I.Default.ImGui.QuestPreferenceArray, ReplacementTarget);
 		UpdateEnumFromString();
 
 		return this;
@@ -43,8 +43,8 @@ internal class QuestPreferenceFilterCustomization : SingletonAccessor
 
 	private QuestPreferenceFilterCustomization UpdateEnumFromString()
 	{
-		var replacementTarget = QuestPreferenceReplacementTarget.Replace(" ", "").Replace("-", "").Replace("'", "");
-		var success = Enum.TryParse(replacementTarget, out _questPreferenceReplacementTargetEnum);
+		var replacementTarget = ReplacementTarget.Replace(" ", "").Replace("-", "").Replace("'", "");
+		var success = Enum.TryParse(replacementTarget, out _replacementTargetEnum);
 
 		return this;
 	}
@@ -61,11 +61,11 @@ internal class QuestPreferenceFilterCustomization : SingletonAccessor
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
 
 			ImGui.SetNextItemWidth(CustomizationWindow_I.ComboBoxWidth);
-			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref _replacementTargetSelectedIndex, questPreferences, questPreferences.Length);
+			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref _selectedIndex, questPreferences, questPreferences.Length);
 
 			if (tempChanged)
 			{
-				QuestPreferenceReplacementTarget = LocalizationManager_I.Default.ImGui.QuestPreferenceArray[ReplacementTargetSelectedIndex];
+				ReplacementTarget = LocalizationManager_I.Default.ImGui.QuestPreferenceArray[SelectedIndex];
 				UpdateEnumFromString();
 			}
 

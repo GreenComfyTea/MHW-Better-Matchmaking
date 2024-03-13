@@ -154,7 +154,7 @@ internal sealed class LanguageFilter : SingletonAccessor
 
 		if(!customization.Enabled) return false;
 		if(!key.Equals(languageKey)) return false;
-		if (customization.LanguageReplacementTargetEnum != LanguageSearchTypes.SameLanguage) return false;
+		if (customization.ReplacementTargetEnum != LanguageSearchTypes.SameLanguage) return false;
 		if (comparison != (int) LobbyComparison.Equal) return false;
 
 		TeaLog.Info("LanguageFilter: Skipping Original Filter...");
@@ -194,7 +194,7 @@ internal sealed class LanguageFilter : SingletonAccessor
 		}
 
 		if (!customization.Enabled) return this;
-		if (customization.LanguageReplacementTargetEnum != LanguageSearchTypes.AnyLanguage) return this;
+		if (customization.ReplacementTargetEnum != LanguageSearchTypes.AnyLanguage) return this;
 
 		Apply(languageKey);
 

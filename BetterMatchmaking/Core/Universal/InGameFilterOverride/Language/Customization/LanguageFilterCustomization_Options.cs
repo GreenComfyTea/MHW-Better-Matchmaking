@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class LanguageFilterOptionCustomization : SingletonAccessor
+internal class LanguageFilterCustomization_Options : SingletonAccessor
 {
     private bool _japanese = true;
     public bool Japanese { get => _japanese; set => _japanese = value; }
@@ -52,12 +52,12 @@ internal class LanguageFilterOptionCustomization : SingletonAccessor
     private bool _latinAmericanSpanish = true;
     public bool LatinAmericanSpanish { get => _latinAmericanSpanish; set => _latinAmericanSpanish = value; }
 
-    public LanguageFilterOptionCustomization()
+    public LanguageFilterCustomization_Options()
     {
         InstantiateSingletons();
     }
 
-    private LanguageFilterOptionCustomization SelectAll()
+    private LanguageFilterCustomization_Options SelectAll()
     {
         Japanese = true;
         English = true;
@@ -77,7 +77,7 @@ internal class LanguageFilterOptionCustomization : SingletonAccessor
         return this;
     }
 
-    private LanguageFilterOptionCustomization DeselectAll()
+    private LanguageFilterCustomization_Options DeselectAll()
     {
         Japanese = false;
         English = false;

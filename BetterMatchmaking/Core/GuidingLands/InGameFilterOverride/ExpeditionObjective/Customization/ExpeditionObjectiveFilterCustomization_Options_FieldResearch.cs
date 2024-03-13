@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class ExpeditionObjectiveFilterOptionCustomization_FieldResearch : SingletonAccessor
+internal class ExpeditionObjectiveFilterCustomization_Options_FieldResearch : SingletonAccessor
 {
 	private bool _fieldResearchForest = true;
 	public bool FieldResearchForest { get => _fieldResearchForest; set => _fieldResearchForest = value; }
@@ -27,12 +27,12 @@ internal class ExpeditionObjectiveFilterOptionCustomization_FieldResearch : Sing
 	private bool _fieldResearchTundra = true;
 	public bool FieldResearchTundra { get => _fieldResearchTundra; set => _fieldResearchTundra = value; }
 
-	public ExpeditionObjectiveFilterOptionCustomization_FieldResearch()
+	public ExpeditionObjectiveFilterCustomization_Options_FieldResearch()
 	{
 		InstantiateSingletons();
 	}
 
-	public ExpeditionObjectiveFilterOptionCustomization_FieldResearch SelectAll()
+	public ExpeditionObjectiveFilterCustomization_Options_FieldResearch SelectAll()
 	{
 		FieldResearchForest = true;
 		FieldResearchWildspire = true;
@@ -44,7 +44,7 @@ internal class ExpeditionObjectiveFilterOptionCustomization_FieldResearch : Sing
 		return this;
 	}
 
-	public ExpeditionObjectiveFilterOptionCustomization_FieldResearch DeselectAll()
+	public ExpeditionObjectiveFilterCustomization_Options_FieldResearch DeselectAll()
 	{
 		FieldResearchForest = false;
 		FieldResearchWildspire = false;

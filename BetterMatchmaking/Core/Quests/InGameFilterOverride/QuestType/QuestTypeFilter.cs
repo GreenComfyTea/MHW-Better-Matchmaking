@@ -79,7 +79,7 @@ internal sealed class QuestTypeFilter : SingletonAccessor
 		if (Core_I.CurrentSearchType != SearchTypes.Quest) return false;
 		if ((LobbyComparison)comparison != LobbyComparison.Equal) return false;
 		if (!key.Equals(Constants.SEARCH_KEY_SESSION_QUEST_TYPE)) return false;
-		if (value != (int)Customization.QuestTypeReplacementTargetEnum) return false;
+		if (value != (int)Customization.ReplacementTargetEnum) return false;
 
 		TeaLog.Info("QuestTypeFilter: Skipping Original Filter...");
 		Apply();
@@ -92,7 +92,7 @@ internal sealed class QuestTypeFilter : SingletonAccessor
 		if(!Core_I.IsQuestTypeNoPreference) return this;
 		if(!Customization.Enabled) return this;
 		if(Core_I.CurrentSearchType != SearchTypes.Quest) return this;
-		if(Customization.QuestTypeReplacementTargetEnum != QuestTypes.NoPreference) return this;
+		if(Customization.ReplacementTargetEnum != QuestTypes.NoPreference) return this;
 
 		Apply();
 

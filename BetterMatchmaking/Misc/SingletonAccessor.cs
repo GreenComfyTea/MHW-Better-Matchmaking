@@ -55,6 +55,9 @@ internal class SingletonAccessor
 
 	[JsonIgnore]
 	protected ExpeditionObjectiveFilter ExpeditionObjectiveFilter_I { get; set; }
+	[JsonIgnore]
+	protected RegionLevelFilter RegionLevelFilter_I { get; set; }
+
 
 
 	protected void InstantiateSingletons()
@@ -80,5 +83,6 @@ internal class SingletonAccessor
 		TargetFilter_I = TargetFilter.Instance;
 
 		ExpeditionObjectiveFilter_I = ExpeditionObjectiveFilter.Instance;
+		RegionLevelFilter_I = RegionLevelFilter.Instance;
 	}
 }

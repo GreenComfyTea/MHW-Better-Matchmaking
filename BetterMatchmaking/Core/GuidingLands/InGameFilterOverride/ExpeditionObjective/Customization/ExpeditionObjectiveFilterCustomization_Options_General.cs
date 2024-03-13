@@ -7,25 +7,25 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class ExpeditionObjectiveFilterOptionCustomization_General : SingletonAccessor
+internal class ExpeditionObjectiveFilterCustomization_Options_General : SingletonAccessor
 {
 	private bool _none = true;
 	public bool None { get => _none; set => _none = value; }
 
 
-	public ExpeditionObjectiveFilterOptionCustomization_General()
+	public ExpeditionObjectiveFilterCustomization_Options_General()
 	{
 		InstantiateSingletons();
 	}
 
-	public ExpeditionObjectiveFilterOptionCustomization_General SelectAll()
+	public ExpeditionObjectiveFilterCustomization_Options_General SelectAll()
 	{
 		None = true;
 
 		return this;
 	}
 
-	public ExpeditionObjectiveFilterOptionCustomization_General DeselectAll()
+	public ExpeditionObjectiveFilterCustomization_Options_General DeselectAll()
 	{
 		None = false;
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class PlayerTypeFilterOptionCustomization : SingletonAccessor
+internal class PlayerTypeFilterCustomization_Options : SingletonAccessor
 {
     private bool _beginners = true;
     public bool Beginners { get => _beginners; set => _beginners = value; }
@@ -19,12 +19,12 @@ internal class PlayerTypeFilterOptionCustomization : SingletonAccessor
     private bool _any = true;
     public bool Any { get => _any; set => _any = value; }
 
-    public PlayerTypeFilterOptionCustomization()
+    public PlayerTypeFilterCustomization_Options()
     {
         InstantiateSingletons();
     }
 
-    private PlayerTypeFilterOptionCustomization SelectAll()
+    private PlayerTypeFilterCustomization_Options SelectAll()
     {
         Beginners = true;
         Experienced = true;
@@ -33,7 +33,7 @@ internal class PlayerTypeFilterOptionCustomization : SingletonAccessor
         return this;
     }
 
-    private PlayerTypeFilterOptionCustomization DeselectAll()
+    private PlayerTypeFilterCustomization_Options DeselectAll()
     {
         Beginners = false;
         Experienced = false;

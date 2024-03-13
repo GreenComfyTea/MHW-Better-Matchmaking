@@ -14,24 +14,24 @@ internal class PlayerTypeFilterCustomization : SingletonAccessor
 	private bool _enabled = true;
 	public bool Enabled { get => _enabled; set => _enabled = value; }
 
-	public string PlayerTypeReplacementTarget { get; set; }
+	public string ReplacementTarget { get; set; }
 
-	public PlayerTypeFilterOptionCustomization FilterOptions { get; set; } = new();
+	public PlayerTypeFilterCustomization_Options FilterOptions { get; set; } = new();
 
-	private PlayerTypes _playerTypeReplacementTargetEnum = PlayerTypes.Any;
+	private PlayerTypes _replacementTargetEnum = PlayerTypes.Any;
 	[JsonIgnore]
-	public PlayerTypes PlayerTypeReplacementTargetEnum { get => _playerTypeReplacementTargetEnum; set => _playerTypeReplacementTargetEnum = value; }
+	public PlayerTypes ReplacementTargetEnum { get => _replacementTargetEnum; set => _replacementTargetEnum = value; }
 
 	public PlayerTypeFilterCustomization()
 	{
 		InstantiateSingletons();
 
-		PlayerTypeReplacementTarget = LocalizationManager_I.Default.ImGui.Any;
+		ReplacementTarget = LocalizationManager_I.Default.ImGui.Any;
 	}
 
 	public PlayerTypeFilterCustomization Init()
 	{
-		var success = Enum.TryParse(PlayerTypeReplacementTarget, true, out _playerTypeReplacementTargetEnum);
+		var success = Enum.TryParse(ReplacementTarget, true, out _replacementTargetEnum);
 		return this;
 	}
 
@@ -47,15 +47,15 @@ internal class PlayerTypeFilterCustomization : SingletonAccessor
 		{
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
 
-			selectedIndex = (int)PlayerTypeReplacementTargetEnum;
+			selectedIndex = (int)ReplacementTargetEnum;
 
 			ImGui.SetNextItemWidth(CustomizationWindow_I.ComboBoxWidth);
 			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref selectedIndex, playerTypes, playerTypes.Length);
 
 			if (tempChanged)
 			{
-				PlayerTypeReplacementTargetEnum = (PlayerTypes)selectedIndex;
-				PlayerTypeReplacementTarget = LocalizationManager_I.Default.ImGui.PlayerTypeArray[selectedIndex];
+				ReplacementTargetEnum = (PlayerTypes)selectedIndex;
+				ReplacementTarget = LocalizationManager_I.Default.ImGui.PlayerTypeArray[selectedIndex];
 			}
 
 			changed = changed || tempChanged;

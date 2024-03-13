@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class QuestPreferenceTargetFilterOptionCustomization_IceborneEndgameMonsters : SingletonAccessor
+internal class QuestPreferenceTargetFilterCustomization_Options_IceborneEndgameMonsters : SingletonAccessor
 {
     private bool _savageDeviljho = true;
     public bool SavageDeviljho { get => _savageDeviljho; set => _savageDeviljho = value; }
@@ -55,12 +55,12 @@ internal class QuestPreferenceTargetFilterOptionCustomization_IceborneEndgameMon
     private bool _fatalis = true;
     public bool Fatalis { get => _fatalis; set => _fatalis = value; }
 
-    public QuestPreferenceTargetFilterOptionCustomization_IceborneEndgameMonsters()
+    public QuestPreferenceTargetFilterCustomization_Options_IceborneEndgameMonsters()
     {
         InstantiateSingletons();
     }
 
-    public QuestPreferenceTargetFilterOptionCustomization_IceborneEndgameMonsters SelectAll()
+    public QuestPreferenceTargetFilterCustomization_Options_IceborneEndgameMonsters SelectAll()
     {
         SavageDeviljho = true;
         BruteTigrex = true;
@@ -81,7 +81,7 @@ internal class QuestPreferenceTargetFilterOptionCustomization_IceborneEndgameMon
         return this;
     }
 
-    public QuestPreferenceTargetFilterOptionCustomization_IceborneEndgameMonsters DeselectAll()
+    public QuestPreferenceTargetFilterCustomization_Options_IceborneEndgameMonsters DeselectAll()
     {
         SavageDeviljho = false;
         BruteTigrex = false;

@@ -37,7 +37,6 @@
 
   <ItemGroup>
     <Folder Include="Core\GuidingLands\InGameFilterOverride\TargetMonster\" />
-    <Folder Include="Core\GuidingLands\InGameFilterOverride\RegionLevel\" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

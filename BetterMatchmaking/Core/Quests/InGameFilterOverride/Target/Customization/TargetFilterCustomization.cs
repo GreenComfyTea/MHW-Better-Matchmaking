@@ -13,29 +13,29 @@ internal class TargetFilterCustomization : SingletonAccessor
 	private bool _enabled = false;
 	public bool Enabled { get => _enabled; set => _enabled = value; }
 
-	public string TargetReplacementTarget { get; set; }
+	public string ReplacementTarget { get; set; }
 
-	public TargetFilterOptionCustomization FilterOptions { get; set; } = new();
+	public TargetFilterCustomization_Options FilterOptions { get; set; } = new();
 
-	private Targets _targetReplacementTargetEnum = Targets.SmallMonsters;
+	private Targets _replacementTargetEnum = Targets.SmallMonsters;
 	[JsonIgnore]
-	public Targets TargetReplacementTargetEnum { get => _targetReplacementTargetEnum; set => _targetReplacementTargetEnum = value; }
+	public Targets ReplacementTargetEnum { get => _replacementTargetEnum; set => _replacementTargetEnum = value; }
 
-	private int _replacementTargetSelectedIndex;
+	private int _selectedIndex;
 	[JsonIgnore]
-	public int ReplacementTargetSelectedIndex { get => _replacementTargetSelectedIndex; set => _replacementTargetSelectedIndex = value; }
+	public int SelectedIndex { get => _selectedIndex; set => _selectedIndex = value; }
 
 	public TargetFilterCustomization()
 	{
 		InstantiateSingletons();
 
-		TargetReplacementTarget = LocalizationManager_I.Default.ImGui.SmallMonsters;
-		ReplacementTargetSelectedIndex = Array.IndexOf(LocalizationManager_I.Default.ImGui.TargetArray, TargetReplacementTarget);
+		ReplacementTarget = LocalizationManager_I.Default.ImGui.SmallMonsters;
+		SelectedIndex = Array.IndexOf(LocalizationManager_I.Default.ImGui.TargetArray, ReplacementTarget);
 	}
 
 	public TargetFilterCustomization Init()
 	{
-		ReplacementTargetSelectedIndex = Array.IndexOf(LocalizationManager_I.Default.ImGui.TargetArray, TargetReplacementTarget);
+		SelectedIndex = Array.IndexOf(LocalizationManager_I.Default.ImGui.TargetArray, ReplacementTarget);
 		UpdateEnumFromString();
 
 		return this;
@@ -43,8 +43,8 @@ internal class TargetFilterCustomization : SingletonAccessor
 
 	private TargetFilterCustomization UpdateEnumFromString()
 	{
-		var replacementTarget = TargetReplacementTarget.Replace(" ", "").Replace("-", "").Replace("'", "");
-		var success = Enum.TryParse(replacementTarget, out _targetReplacementTargetEnum);
+		var replacementTarget = ReplacementTarget.Replace(" ", "").Replace("-", "").Replace("'", "");
+		var success = Enum.TryParse(replacementTarget, out _replacementTargetEnum);
 
 		return this;
 	}
@@ -61,11 +61,11 @@ internal class TargetFilterCustomization : SingletonAccessor
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
 
 			ImGui.SetNextItemWidth(CustomizationWindow_I.ComboBoxWidth);
-			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref _replacementTargetSelectedIndex, targets, targets.Length);
+			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref _selectedIndex, targets, targets.Length);
 
 			if (tempChanged)
 			{
-				TargetReplacementTarget = LocalizationManager_I.Default.ImGui.TargetArray[ReplacementTargetSelectedIndex];
+				ReplacementTarget = LocalizationManager_I.Default.ImGui.TargetArray[SelectedIndex];
 				UpdateEnumFromString();
 			}
 

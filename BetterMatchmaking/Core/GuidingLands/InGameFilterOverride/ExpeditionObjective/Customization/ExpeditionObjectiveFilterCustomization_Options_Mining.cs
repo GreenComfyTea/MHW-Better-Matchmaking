@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class ExpeditionObjectiveFilterOptionCustomization_Mining : SingletonAccessor
+internal class ExpeditionObjectiveFilterCustomization_Options_Mining : SingletonAccessor
 {
 	private bool _miningForest = true;
 	public bool MiningForest { get => _miningForest; set => _miningForest = value; }
@@ -27,12 +27,12 @@ internal class ExpeditionObjectiveFilterOptionCustomization_Mining : SingletonAc
 	private bool _miningTundra = true;
 	public bool MiningTundra { get => _miningTundra; set => _miningTundra = value; }
 
-	public ExpeditionObjectiveFilterOptionCustomization_Mining()
+	public ExpeditionObjectiveFilterCustomization_Options_Mining()
 	{
 		InstantiateSingletons();
 	}
 
-	public ExpeditionObjectiveFilterOptionCustomization_Mining SelectAll()
+	public ExpeditionObjectiveFilterCustomization_Options_Mining SelectAll()
 	{
 		MiningForest = true;
 		MiningWildspire = true;
@@ -44,7 +44,7 @@ internal class ExpeditionObjectiveFilterOptionCustomization_Mining : SingletonAc
 		return this;
 	}
 
-	public ExpeditionObjectiveFilterOptionCustomization_Mining DeselectAll()
+	public ExpeditionObjectiveFilterCustomization_Options_Mining DeselectAll()
 	{
 		MiningForest = false;
 		MiningWildspire = false;

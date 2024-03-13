@@ -306,6 +306,17 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string FixedRegionVolcanic { get; set; } = "Fixed Region: Volcanic";
 	public string FixedRegionTundra { get; set; } = "Fixed Region: Tundra";
 
+	// Region Level
+
+	public string RegionLevel { get; set; } = "Region Level";
+
+	public string Level1 { get; set; } = "Level 1";
+	public string Level2 { get; set; } = "Level 2";
+	public string Level3 { get; set; } = "Level 3";
+	public string Level4 { get; set; } = "Level 4";
+	public string Level5 { get; set; } = "Level 5";
+	public string Level6 { get; set; } = "Level 6";
+	public string Level7 { get; set; } = "Level 7";
 
 	[JsonIgnore]
 	public string[] DistanceFilterArray { get; set; } = Array.Empty<string>();
@@ -326,6 +337,9 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	[JsonIgnore]
 	public string[] ExpeditionObjectiveArray { get; set; } = Array.Empty<string>();
 
+	[JsonIgnore]
+	public string[] RegionLevelArray { get; set; } = Array.Empty<string>();
+
 	public LocalizedStrings_ImGui()
 	{
 		DistanceFilterArray = [Close, Default, Far, Worldwide];
@@ -337,6 +351,8 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 		QuestTypeArray = [NoPreference, OptionalQuests, Assignments, Investigations, Expeditions, EventQuests, SpecialAssignments];
 
 		RewardReplacementTargets = [NoPreference, RewardsAvailable];
+
+		RegionLevelArray = [NoPreference, Level1, Level2, Level3, Level4, Level5, Level6, Level7];
 
 		QuestRankReplacementTargets =
 		[

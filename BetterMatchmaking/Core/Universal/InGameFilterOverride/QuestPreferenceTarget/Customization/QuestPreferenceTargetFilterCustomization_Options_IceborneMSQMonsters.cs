@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class QuestPreferenceTargetFilterOptionCustomization_IceborneMSQMonsters : SingletonAccessor
+internal class QuestPreferenceTargetFilterCustomization_Options_IceborneMSQMonsters : SingletonAccessor
 {
     private bool _beotodus = true;
     public bool Beotodus { get => _beotodus; set => _beotodus = value; }
@@ -69,12 +69,12 @@ internal class QuestPreferenceTargetFilterOptionCustomization_IceborneMSQMonster
     private bool _sharaIshvalda = true;
     public bool SharaIshvalda { get => _sharaIshvalda; set => _sharaIshvalda = value; }
 
-    public QuestPreferenceTargetFilterOptionCustomization_IceborneMSQMonsters()
+    public QuestPreferenceTargetFilterCustomization_Options_IceborneMSQMonsters()
     {
         InstantiateSingletons();
     }
 
-    public QuestPreferenceTargetFilterOptionCustomization_IceborneMSQMonsters SelectAll()
+    public QuestPreferenceTargetFilterCustomization_Options_IceborneMSQMonsters SelectAll()
     {
         Beotodus = true;
         Banbaro = true;
@@ -100,7 +100,7 @@ internal class QuestPreferenceTargetFilterOptionCustomization_IceborneMSQMonster
         return this;
     }
 
-    public QuestPreferenceTargetFilterOptionCustomization_IceborneMSQMonsters DeselectAll()
+    public QuestPreferenceTargetFilterCustomization_Options_IceborneMSQMonsters DeselectAll()
     {
         Beotodus = false;
         Banbaro = false;

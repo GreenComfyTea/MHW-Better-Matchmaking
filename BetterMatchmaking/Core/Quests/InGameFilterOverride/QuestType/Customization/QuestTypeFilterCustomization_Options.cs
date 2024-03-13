@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class QuestTypeFilterOptionCustomization : SingletonAccessor
+internal class QuestTypeFilterCustomization_Options : SingletonAccessor
 {
     private bool _optinalQuests = true;
     public bool OptionalQuests { get => _optinalQuests; set => _optinalQuests = value; }
@@ -28,12 +28,12 @@ internal class QuestTypeFilterOptionCustomization : SingletonAccessor
     private bool _specialInvestigations = true;
     public bool SpecialInvestigations { get => _specialInvestigations; set => _specialInvestigations = value; }
 
-    public QuestTypeFilterOptionCustomization()
+    public QuestTypeFilterCustomization_Options()
     {
         InstantiateSingletons();
     }
 
-    private QuestTypeFilterOptionCustomization SelectAll()
+    private QuestTypeFilterCustomization_Options SelectAll()
     {
         OptionalQuests = true;
         Assignments = true;
@@ -45,7 +45,7 @@ internal class QuestTypeFilterOptionCustomization : SingletonAccessor
         return this;
     }
 
-    private QuestTypeFilterOptionCustomization DeselectAll()
+    private QuestTypeFilterCustomization_Options DeselectAll()
     {
         OptionalQuests = false;
         Assignments = false;

@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class TargetFilterOptionCustomization : SingletonAccessor
+internal class QuestPreferenceFilterCustomization_Options : SingletonAccessor
 {
-    public TargetFilterOptionCustomization_General General { get; set; } = new();
-    public QuestPreferenceTargetFilterOptionCustomization_BaseGameMsqMonsters BaseGameMSQMonsters { get; set; } = new();
-    public QuestPreferenceTargetFilterOptionCustomization_BaseGameEndgameMonsters BaseGameEndgameMonsters { get; set; } = new();
-    public QuestPreferenceTargetFilterOptionCustomization_IceborneMSQMonsters IceborneMSQMonsters { get; set; } = new();
-    public QuestPreferenceTargetFilterOptionCustomization_IceborneEndgameMonsters IceborneEndgameMonsters { get; set; } = new();
+    public QuestPreferenceFilterCustomization_Options_General General { get; set; } = new();
+    public QuestPreferenceTargetFilterCustomization_Options_BaseGameMsqMonsters BaseGameMSQMonsters { get; set; } = new();
+    public QuestPreferenceTargetFilterCustomization_Options_BaseGameEndgameMonsters BaseGameEndgameMonsters { get; set; } = new();
+    public QuestPreferenceTargetFilterCustomization_Options_IceborneMSQMonsters IceborneMSQMonsters { get; set; } = new();
+    public QuestPreferenceTargetFilterCustomization_Options_IceborneEndgameMonsters IceborneEndgameMonsters { get; set; } = new();
 
-    public TargetFilterOptionCustomization()
+    public QuestPreferenceFilterCustomization_Options()
     {
         InstantiateSingletons();
     }
 
-    private TargetFilterOptionCustomization SelectAll()
+    private QuestPreferenceFilterCustomization_Options SelectAll()
     {
         General.SelectAll();
         BaseGameMSQMonsters.SelectAll();
@@ -31,7 +31,7 @@ internal class TargetFilterOptionCustomization : SingletonAccessor
         return this;
     }
 
-    private TargetFilterOptionCustomization DeselectAll()
+    private QuestPreferenceFilterCustomization_Options DeselectAll()
     {
         General.DeselectAll();
         BaseGameMSQMonsters.DeselectAll();

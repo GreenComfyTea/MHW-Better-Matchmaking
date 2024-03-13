@@ -8,31 +8,30 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class QuestTypeFilterCustomization : SingletonAccessor
+internal class RegionLevelFilterCustomization : SingletonAccessor
 {
 	private bool _enabled = false;
 	public bool Enabled { get => _enabled; set => _enabled = value; }
 
 	public string ReplacementTarget { get; set; }
 
-	public QuestTypeFilterCustomization_Options FilterOptions { get; set; } = new();
+	public RegionLevelFilterOptionCustomization FilterOptions { get; set; } = new();
 
-	private QuestTypes _replacementTargetEnum = QuestTypes.Expeditions;
+	private RegionLevels _replacementTargetEnum = RegionLevels.Level1;
 	[JsonIgnore]
-	public QuestTypes ReplacementTargetEnum { get => _replacementTargetEnum; set => _replacementTargetEnum = value; }
+	public RegionLevels ReplacementTargetEnum { get => _replacementTargetEnum; set => _replacementTargetEnum = value; }
 
-	public QuestTypeFilterCustomization()
+	public RegionLevelFilterCustomization()
 	{
 		InstantiateSingletons();
 
-		ReplacementTarget = LocalizationManager_I.Default.ImGui.Expeditions;
+		ReplacementTarget = LocalizationManager_I.Default.ImGui.Level1;
 	}
 
-	public QuestTypeFilterCustomization Init()
+	public RegionLevelFilterCustomization Init()
 	{
 		var replacementTarget = ReplacementTarget.Replace(" ", "");
 		var success = Enum.TryParse(replacementTarget, true, out _replacementTargetEnum);
-
 		return this;
 	}
 
@@ -42,21 +41,21 @@ internal class QuestTypeFilterCustomization : SingletonAccessor
 		var tempChanged = false;
 		var selectedIndex = 0;
 
-		var questTypes = LocalizationManager_I.ImGui.QuestTypeArray;
+		var regionLevels = LocalizationManager_I.ImGui.RegionLevelArray;
 
-		if (ImGui.TreeNode(LocalizationManager_I.ImGui.QuestType))
+		if(ImGui.TreeNode(LocalizationManager_I.ImGui.RegionLevel))
 		{
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
 
 			selectedIndex = (int) ReplacementTargetEnum;
 
 			ImGui.SetNextItemWidth(CustomizationWindow_I.ComboBoxWidth);
-			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref selectedIndex, questTypes, questTypes.Length);
+			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref selectedIndex, regionLevels, regionLevels.Length);
 
-			if (tempChanged)
+			if(tempChanged)
 			{
-				ReplacementTargetEnum = (QuestTypes) (selectedIndex);
-				ReplacementTarget = LocalizationManager_I.Default.ImGui.QuestTypeArray[selectedIndex];
+				ReplacementTargetEnum = (RegionLevels) selectedIndex;
+				ReplacementTarget = LocalizationManager_I.Default.ImGui.RegionLevelArray[selectedIndex];
 			}
 
 			changed = changed || tempChanged;

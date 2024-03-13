@@ -15,7 +15,7 @@ internal class ExpeditionObjectiveFilterCustomization : SingletonAccessor
 
 	public string ReplacementTarget { get; set; }
 
-	public ExpeditionObjectiveFilterOptionCustomization FilterOptions { get; set; } = new();
+	public ExpeditionObjectiveFilterCustomization_Options FilterOptions { get; set; } = new();
 
 	private ExpeditionObjectives _replacementTargetEnum = ExpeditionObjectives.FieldResearchForest;
 	[JsonIgnore]

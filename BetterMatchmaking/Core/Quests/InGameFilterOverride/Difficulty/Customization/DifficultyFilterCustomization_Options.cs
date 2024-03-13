@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class DifficultyFilterOptionCustomization : SingletonAccessor
+internal class DifficultyFilterCustomization_Options : SingletonAccessor
 {
-    public DifficultyFilterOptionCustomization_LowRank LowRank { get; set; } = new();
-    public DifficultyFilterOptionCustomization_HighRank HighRank { get; set; } = new();
-    public DifficultyFilterOptionCustomization_MasterRank MasterRank { get; set; } = new();
+    public DifficultyFilterCustomization_Options_LowRank LowRank { get; set; } = new();
+    public DifficultyFilterCustomization_Options_HighRank HighRank { get; set; } = new();
+    public DifficultyFilterCustomization_Options_MasterRank MasterRank { get; set; } = new();
 
-    public DifficultyFilterOptionCustomization()
+    public DifficultyFilterCustomization_Options()
     {
         InstantiateSingletons();
     }
 
-    private DifficultyFilterOptionCustomization SelectAll()
+    private DifficultyFilterCustomization_Options SelectAll()
     {
         LowRank.SelectAll();
         HighRank.SelectAll();
@@ -27,7 +27,7 @@ internal class DifficultyFilterOptionCustomization : SingletonAccessor
         return this;
     }
 
-    private DifficultyFilterOptionCustomization DeselectAll()
+    private DifficultyFilterCustomization_Options DeselectAll()
     {
         LowRank.DeselectAll();
         HighRank.DeselectAll();

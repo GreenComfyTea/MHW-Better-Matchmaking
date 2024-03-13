@@ -18,6 +18,8 @@ public enum SimilarMasterRank { Disabled, Enabled = 10 }
 public enum Rewards { NoRewards, RewardsAvailable }
 public enum RewardTypes { NoPreference, RewardsAvailable }
 
+public enum RegionLevels { NoPreference, Level1, Level2, Level3, Level4, Level5, Level6, Level7 }
+
 public enum SearchTypes
 {
 	None = 0,
@@ -314,7 +316,8 @@ public static class Constants
 	public const string SEARCH_KEY_QUEST_TARGET = "SearchKey3";
 
 	public const string SEARCH_KEY_GUIDING_LANDS_EXPEDITION_OBJECTIVE = SEARCH_KEY_SESSION_QUEST_PREFERENCE;
-	public const string SEARCH_KEY_GUIDING_LANDS_LANGUAGE = SEARCH_KEY_QUEST_LANGUAGE;
+	public const string SEARCH_KEY_GUIDING_LANDS_LANGUAGE = SEARCH_KEY_SESSION_SIMILAR_HUNTER_RANK;
+	public const string SEARCH_KEY_GUIDING_LANDS_REGION_LEVEL = SEARCH_KEY_SESSION_SIMILAR_MASTER_RANK;
 
 	public static readonly Vector4 IMGUI_RED_COLOR = new(1f, 0.25f, 0.25f, 1f);
 	public static readonly Vector4 IMGUI_YELLOW_COLOR = new(1f, 0.75f, 0.5f, 1f);

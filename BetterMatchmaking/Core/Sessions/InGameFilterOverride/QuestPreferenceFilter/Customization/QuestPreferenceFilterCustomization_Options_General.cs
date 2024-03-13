@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class QuestPreferenceFilterOptionCustomization_General : SingletonAccessor
+internal class QuestPreferenceFilterCustomization_Options_General : SingletonAccessor
 {
     private bool _none = true;
     public bool None { get => _none; set => _none = value; }
@@ -43,12 +43,12 @@ internal class QuestPreferenceFilterOptionCustomization_General : SingletonAcces
     private bool _smallMonsters = true;
     public bool SmallMonsters { get => _smallMonsters; set => _smallMonsters = value; }
 
-    public QuestPreferenceFilterOptionCustomization_General()
+    public QuestPreferenceFilterCustomization_Options_General()
     {
         InstantiateSingletons();
     }
 
-    public QuestPreferenceFilterOptionCustomization_General SelectAll()
+    public QuestPreferenceFilterCustomization_Options_General SelectAll()
     {
         None = true;
         Assignments = true;
@@ -65,7 +65,7 @@ internal class QuestPreferenceFilterOptionCustomization_General : SingletonAcces
         return this;
     }
 
-    public QuestPreferenceFilterOptionCustomization_General DeselectAll()
+    public QuestPreferenceFilterCustomization_Options_General DeselectAll()
     {
         None = false;
         Assignments = false;

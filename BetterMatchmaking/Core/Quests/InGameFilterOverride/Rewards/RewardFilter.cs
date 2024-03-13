@@ -56,7 +56,7 @@ internal sealed class RewardFilter : SingletonAccessor
         if (Core_I.IsQuestRewardsNoPreference) return false;
         if ((LobbyComparison)comparison != LobbyComparison.Equal) return false;
         if (!key.Equals(Constants.SEARCH_KEY_SESSION_QUEST_REWARDS)) return false;
-        if (Customization.RewardTypeReplacementTargetEnum != RewardTypes.RewardsAvailable) return false;
+        if (Customization.ReplacementTargetEnum != RewardTypes.RewardsAvailable) return false;
 
         TeaLog.Info("RewardFilter: Skipping Original Filter...");
         Apply();
@@ -69,7 +69,7 @@ internal sealed class RewardFilter : SingletonAccessor
         if (!Core_I.IsQuestRewardsNoPreference) return this;
         if (!Customization.Enabled) return this;
         if (Core_I.CurrentSearchType != SearchTypes.Quest) return this;
-        if (Customization.RewardTypeReplacementTargetEnum != RewardTypes.NoPreference) return this;
+        if (Customization.ReplacementTargetEnum != RewardTypes.NoPreference) return this;
 
         Apply();
 

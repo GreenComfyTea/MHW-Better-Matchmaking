@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class ExpeditionObjectiveFilterOptionCustomization : SingletonAccessor
+internal class ExpeditionObjectiveFilterCustomization_Options : SingletonAccessor
 {
-	public ExpeditionObjectiveFilterOptionCustomization_General General { get; set; } = new();
-	public ExpeditionObjectiveFilterOptionCustomization_FieldResearch FieldResearch { get; set; } = new();
-	public ExpeditionObjectiveFilterOptionCustomization_Mining Mining { get; set; } = new();
-	public ExpeditionObjectiveFilterOptionCustomization_BoneResearch BoneResearch { get; set; } = new();
-	public ExpeditionObjectiveFilterOptionCustomization_FixedRegion FixedRegion { get; set; } = new();
+	public ExpeditionObjectiveFilterCustomization_Options_General General { get; set; } = new();
+	public ExpeditionObjectiveFilterCustomization_Options_FieldResearch FieldResearch { get; set; } = new();
+	public ExpeditionObjectiveFilterCustomization_Options_Mining Mining { get; set; } = new();
+	public ExpeditionObjectiveFilterCustomization_Options_BoneResearch BoneResearch { get; set; } = new();
+	public ExpeditionObjectiveFilterCustomization_Options_FixedRegion FixedRegion { get; set; } = new();
 
-	public ExpeditionObjectiveFilterOptionCustomization()
+	public ExpeditionObjectiveFilterCustomization_Options()
 	{
 		InstantiateSingletons();
 	}
 
-	private ExpeditionObjectiveFilterOptionCustomization SelectAll()
+	private ExpeditionObjectiveFilterCustomization_Options SelectAll()
 	{
 		General.SelectAll();
 		FieldResearch.SelectAll();
@@ -31,7 +31,7 @@ internal class ExpeditionObjectiveFilterOptionCustomization : SingletonAccessor
 		return this;
 	}
 
-	private ExpeditionObjectiveFilterOptionCustomization DeselectAll()
+	private ExpeditionObjectiveFilterCustomization_Options DeselectAll()
 	{
 		General.DeselectAll();
 		FieldResearch.DeselectAll();

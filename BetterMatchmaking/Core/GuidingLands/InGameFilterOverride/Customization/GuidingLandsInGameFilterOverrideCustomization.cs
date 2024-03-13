@@ -10,6 +10,7 @@ namespace BetterMatchmaking;
 internal class GuidingLandsInGameFilterOverrideCustomization : SingletonAccessor
 {
 	public ExpeditionObjectiveFilterCustomization ExpeditionObjective { get; set; } = new();
+	public RegionLevelFilterCustomization RegionLevel { get; set; } = new();
 	public LanguageFilterCustomization Language { get; set; } = new();
 
 
@@ -21,6 +22,7 @@ internal class GuidingLandsInGameFilterOverrideCustomization : SingletonAccessor
 	public GuidingLandsInGameFilterOverrideCustomization Init()
 	{
 		ExpeditionObjective.Init();
+		RegionLevel.Init();
 		Language.Init();
 
 		return this;
@@ -32,6 +34,7 @@ internal class GuidingLandsInGameFilterOverrideCustomization : SingletonAccessor
 		if(ImGui.TreeNode(LocalizationManager_I.ImGui.InGameFilterOverride))
 		{
 			changed = ExpeditionObjective.RenderImGui() || changed;
+			changed = RegionLevel.RenderImGui() || changed;
 			changed = Language.RenderImGui() || changed;
 
 			ImGui.TreePop();
