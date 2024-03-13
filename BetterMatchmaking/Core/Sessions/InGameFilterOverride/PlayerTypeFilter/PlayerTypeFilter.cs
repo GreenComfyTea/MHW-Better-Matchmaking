@@ -35,7 +35,7 @@ internal sealed class PlayerTypeFilter : SingletonAccessor
     {
         if (!Customization.Enabled) return false;
         if (Core_I.CurrentSearchType != SearchTypes.Session) return false;
-        if ((LobbyComparison)comparison != LobbyComparison.Equal) return false;
+        if (comparison != (int) LobbyComparison.Equal) return false;
         if (!key.Equals(Constants.SEARCH_KEY_SESSION_PLAYER_TYPE)) return false;
         if (value != (int)Customization.ReplacementTargetEnum) return false;
 

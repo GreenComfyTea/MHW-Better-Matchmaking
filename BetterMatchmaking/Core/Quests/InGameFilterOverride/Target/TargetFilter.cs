@@ -33,7 +33,7 @@ internal sealed class TargetFilter : SingletonAccessor
 
 	public bool Apply(ref string key, ref int value, ref int comparison)
 	{
-		var comparisonEnum = (LobbyComparison)comparison;
+		var comparisonEnum = (LobbyComparison) comparison;
 
 		if (!Customization.Enabled) return false;
 		if (Core_I.CurrentSearchType != SearchTypes.Quest) return false;

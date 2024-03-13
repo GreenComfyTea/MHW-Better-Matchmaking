@@ -77,7 +77,7 @@ internal sealed class QuestTypeFilter : SingletonAccessor
 	{
 		if (!Customization.Enabled) return false;
 		if (Core_I.CurrentSearchType != SearchTypes.Quest) return false;
-		if ((LobbyComparison)comparison != LobbyComparison.Equal) return false;
+		if (comparison != (int) LobbyComparison.Equal) return false;
 		if (!key.Equals(Constants.SEARCH_KEY_SESSION_QUEST_TYPE)) return false;
 		if (value != (int)Customization.ReplacementTargetEnum) return false;
 
