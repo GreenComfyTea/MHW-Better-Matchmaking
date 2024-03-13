@@ -122,7 +122,7 @@ internal sealed class QuestPreferenceFilter : SingletonAccessor
 
 		QuestPreferenceTargetFilter_I.Apply(
 			Constants.SEARCH_KEY_SESSION_QUEST_PREFERENCE,
-			filterOptions.BaseGameMSQMonsters,
+			filterOptions.BaseGameMsqMonsters,
 			filterOptions.BaseGameEndgameMonsters,
 			filterOptions.IceborneMSQMonsters,
 			filterOptions.IceborneEndgameMonsters

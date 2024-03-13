@@ -29,7 +29,7 @@ internal class SingletonAccessor
 	[JsonIgnore]
 	protected PlayerCountFilter SessionPlayerCountFilter_I { get; set; }
 	[JsonIgnore]
-	protected QuestPreferenceTargetFilter QuestPreferenceTargetFilter_I { get; set; }
+	protected UniversalTargetFilter QuestPreferenceTargetFilter_I { get; set; }
 
 
 
@@ -57,7 +57,8 @@ internal class SingletonAccessor
 	protected ExpeditionObjectiveFilter ExpeditionObjectiveFilter_I { get; set; }
 	[JsonIgnore]
 	protected RegionLevelFilter RegionLevelFilter_I { get; set; }
-
+	[JsonIgnore]
+	protected TargetMonsterFilter TargetMonsterFilter_I { get; set; }
 
 
 	protected void InstantiateSingletons()
@@ -71,7 +72,7 @@ internal class SingletonAccessor
 		RegionLockFix_I = RegionLockFix.Instance;
 		MaxSearchResultLimit_I = MaxSearchResultLimit.Instance;
 		SessionPlayerCountFilter_I = PlayerCountFilter.Instance;
-		QuestPreferenceTargetFilter_I = QuestPreferenceTargetFilter.Instance;
+		QuestPreferenceTargetFilter_I = UniversalTargetFilter.Instance;
 
 		PlayerTypeFilter_I = PlayerTypeFilter.Instance;
 		QuestPreferenceFilter_I = QuestPreferenceFilter.Instance;
@@ -84,5 +85,6 @@ internal class SingletonAccessor
 
 		ExpeditionObjectiveFilter_I = ExpeditionObjectiveFilter.Instance;
 		RegionLevelFilter_I = RegionLevelFilter.Instance;
+		TargetMonsterFilter_I = TargetMonsterFilter.Instance;
 	}
 }

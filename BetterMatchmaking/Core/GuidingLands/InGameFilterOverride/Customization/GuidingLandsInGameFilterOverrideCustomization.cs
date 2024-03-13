@@ -12,7 +12,7 @@ internal class GuidingLandsInGameFilterOverrideCustomization : SingletonAccessor
 	public ExpeditionObjectiveFilterCustomization ExpeditionObjective { get; set; } = new();
 	public RegionLevelFilterCustomization RegionLevel { get; set; } = new();
 	public LanguageFilterCustomization Language { get; set; } = new();
-
+	public TargetMonsterFilterCustomization TargetMonster { get; set; } = new();
 
 	public GuidingLandsInGameFilterOverrideCustomization()
 	{
@@ -24,6 +24,7 @@ internal class GuidingLandsInGameFilterOverrideCustomization : SingletonAccessor
 		ExpeditionObjective.Init();
 		RegionLevel.Init();
 		Language.Init();
+		TargetMonster.Init();
 
 		return this;
 	}
@@ -36,6 +37,7 @@ internal class GuidingLandsInGameFilterOverrideCustomization : SingletonAccessor
 			changed = ExpeditionObjective.RenderImGui() || changed;
 			changed = RegionLevel.RenderImGui() || changed;
 			changed = Language.RenderImGui() || changed;
+			changed = TargetMonster.RenderImGui() || changed;
 
 			ImGui.TreePop();
 		}

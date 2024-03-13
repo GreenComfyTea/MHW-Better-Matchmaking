@@ -47,6 +47,7 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 
 			ExpeditionObjectiveFilter_I.Init();
 			RegionLevelFilter_I.Init();
+			TargetMonsterFilter_I.Init();
 
 			IsInitialized = true;
 

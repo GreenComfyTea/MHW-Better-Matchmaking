@@ -35,10 +35,6 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Core\GuidingLands\InGameFilterOverride\TargetMonster\" />
-  </ItemGroup>
-
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="xcopy &quot;$(OutDir)&quot; &quot;D:\Programs\Steam\steamapps\common\Monster Hunter World\nativePC\plugins\CSharp\BetterMatchmaking&quot; /s /i /y" />
   </Target>

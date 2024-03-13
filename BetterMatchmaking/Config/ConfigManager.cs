@@ -130,6 +130,7 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 		ExpeditionObjectiveFilter_I.Customization = guidingLandsInGameFilterOverride.ExpeditionObjective;
 		RegionLevelFilter_I.Customization = guidingLandsInGameFilterOverride.RegionLevel;
 		LanguageFilter_I.GuidingLandsCustomization = guidingLandsInGameFilterOverride.Language;
+		TargetMonsterFilter_I.Customization = guidingLandsInGameFilterOverride.TargetMonster;
 
 		return this;
 	}

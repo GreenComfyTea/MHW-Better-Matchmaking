@@ -10,10 +10,10 @@ namespace BetterMatchmaking;
 internal class TargetFilterCustomization_Options : SingletonAccessor
 {
     public TargetFilterCustomization_Options_General General { get; set; } = new();
-    public QuestPreferenceTargetFilterCustomization_Options_BaseGameMsqMonsters BaseGameMSQMonsters { get; set; } = new();
-    public QuestPreferenceTargetFilterCustomization_Options_BaseGameEndgameMonsters BaseGameEndgameMonsters { get; set; } = new();
-    public QuestPreferenceTargetFilterCustomization_Options_IceborneMSQMonsters IceborneMSQMonsters { get; set; } = new();
-    public QuestPreferenceTargetFilterCustomization_Options_IceborneEndgameMonsters IceborneEndgameMonsters { get; set; } = new();
+    public UniversalTargetFilterCustomization_Options_BaseGameMsqMonsters BaseGameMsqMonsters { get; set; } = new();
+    public UniversalTargetFilterCustomization_Options_BaseGameEndgameMonsters BaseGameEndgameMonsters { get; set; } = new();
+    public UniversalTargetFilterCustomization_Options_IceborneMsqMonsters IceborneMSQMonsters { get; set; } = new();
+    public UniversalTargetFilterCustomization_Options_IceborneEndgameMonsters IceborneEndgameMonsters { get; set; } = new();
 
     public TargetFilterCustomization_Options()
     {
@@ -23,7 +23,7 @@ internal class TargetFilterCustomization_Options : SingletonAccessor
     private TargetFilterCustomization_Options SelectAll()
     {
         General.SelectAll();
-        BaseGameMSQMonsters.SelectAll();
+        BaseGameMsqMonsters.SelectAll();
         BaseGameEndgameMonsters.SelectAll();
         IceborneMSQMonsters.SelectAll();
         IceborneEndgameMonsters.SelectAll();
@@ -34,7 +34,7 @@ internal class TargetFilterCustomization_Options : SingletonAccessor
     private TargetFilterCustomization_Options DeselectAll()
     {
         General.DeselectAll();
-        BaseGameMSQMonsters.DeselectAll();
+        BaseGameMsqMonsters.DeselectAll();
         BaseGameEndgameMonsters.DeselectAll();
         IceborneMSQMonsters.DeselectAll();
         IceborneEndgameMonsters.DeselectAll();
@@ -63,7 +63,7 @@ internal class TargetFilterCustomization_Options : SingletonAccessor
             }
 
             changed = General.RenderImGui() || changed;
-            changed = BaseGameMSQMonsters.RenderImGui() || changed;
+            changed = BaseGameMsqMonsters.RenderImGui() || changed;
             changed = BaseGameEndgameMonsters.RenderImGui() || changed;
             changed = IceborneMSQMonsters.RenderImGui() || changed;
             changed = IceborneEndgameMonsters.RenderImGui() || changed;

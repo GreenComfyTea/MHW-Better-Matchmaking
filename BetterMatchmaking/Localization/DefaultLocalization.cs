@@ -318,6 +318,11 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string Level6 { get; set; } = "Level 6";
 	public string Level7 { get; set; } = "Level 7";
 
+	// Target Monster
+
+	public string TargetMonster { get; set; } = "Target Monster";
+	
+
 	[JsonIgnore]
 	public string[] DistanceFilterArray { get; set; } = Array.Empty<string>();
 	[JsonIgnore]
@@ -339,6 +344,8 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 
 	[JsonIgnore]
 	public string[] RegionLevelArray { get; set; } = Array.Empty<string>();
+	[JsonIgnore]
+	public string[] TargetMonsterArray { get; set; } = Array.Empty<string>();
 
 	public LocalizedStrings_ImGui()
 	{
@@ -561,6 +568,69 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 			FixedRegionRotted,
 			FixedRegionVolcanic,
 			FixedRegionTundra
+		];
+
+		TargetMonsterArray =
+		[
+			NoPreference,
+
+			GreatJagras,
+			KuluYaKu,
+			PukeiPukei,
+			Barroth,
+			TobiKadachi,
+			Anjanath,
+			Rathian,
+			TzitziYaKu,
+			Paolumu,
+			GreatGirros,
+			Radobaan,
+			Legiana,
+			Odogaron,
+			Rathalos,
+			Diablos,
+			PinkRathian,
+			AzureRathalos,
+			BlackDiablos,
+
+			Banbaro,
+			NightshadePaolumu,
+			CoralPukeiPukei,
+			Nargacuga,
+			Glavenus,
+			Tigrex,
+			FulgurAnjanath,
+			AcidicGlavenus,
+			EbonyOdogaron,
+
+			SavageDeviljho,
+			Zinogre,
+			BruteTigrex,
+			YianGaruga,
+			ScarredYianGaruga,
+
+			Kirin,
+			KushalaDaora,
+			Teostra,
+			Lunastra,
+
+			Velkhana,
+			BlackveilVaalHazak,
+			Namielle,
+			RuinerNergigante,
+			GoldRathian,
+			SilverRathalos,
+
+			Dodogama,
+			Lavasioth,
+			Uragaan,
+			Brachydios,
+			SeethingBazelgeuse,
+			ViperTobiKadachi,
+			Barioth,
+			ShriekingLegiana,
+			StygianZinogre,
+			Rajang
 		];
 	}
 }

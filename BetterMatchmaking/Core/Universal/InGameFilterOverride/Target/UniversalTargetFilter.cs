@@ -7,34 +7,34 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class QuestPreferenceTargetFilter : SingletonAccessor
+internal class UniversalTargetFilter : SingletonAccessor
 {
 	// Singleton Pattern
-	private static readonly QuestPreferenceTargetFilter _singleton = new();
+	private static readonly UniversalTargetFilter _singleton = new();
 
-	public static QuestPreferenceTargetFilter Instance => _singleton;
+	public static UniversalTargetFilter Instance => _singleton;
 
 	// Explicit static constructor to tell C# compiler
 	// not to mark type as beforefieldinit
-	static QuestPreferenceTargetFilter() { }
+	static UniversalTargetFilter() { }
 
 	// Singleton Pattern End
 
-	private QuestPreferenceTargetFilter() { }
+	private UniversalTargetFilter() { }
 
-	public QuestPreferenceTargetFilter Init()
+	public UniversalTargetFilter Init()
 	{
 		InstantiateSingletons();
 
 		return this;
 	}
 
-	public QuestPreferenceTargetFilter Apply(
+	public UniversalTargetFilter Apply(
 		string searchKey,
-		QuestPreferenceTargetFilterCustomization_Options_BaseGameMsqMonsters baseGameMSQMonsters,
-		QuestPreferenceTargetFilterCustomization_Options_BaseGameEndgameMonsters baseGameEndgameMonsters,
-		QuestPreferenceTargetFilterCustomization_Options_IceborneMSQMonsters iceborneMSQMonsters,
-		QuestPreferenceTargetFilterCustomization_Options_IceborneEndgameMonsters iceborneEndgameMonsters
+		UniversalTargetFilterCustomization_Options_BaseGameMsqMonsters baseGameMSQMonsters,
+		UniversalTargetFilterCustomization_Options_BaseGameEndgameMonsters baseGameEndgameMonsters,
+		UniversalTargetFilterCustomization_Options_IceborneMsqMonsters iceborneMsqMonsters,
+		UniversalTargetFilterCustomization_Options_IceborneEndgameMonsters iceborneEndgameMonsters
 	)
 	{
 
@@ -248,121 +248,121 @@ internal class QuestPreferenceTargetFilter : SingletonAccessor
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.AncientLeshen, LobbyComparison.NotEqual);
 		}
 
-		if(!iceborneMSQMonsters.Beotodus)
+		if(!iceborneMsqMonsters.Beotodus)
 		{
 			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Beotodus...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.Beotodus, LobbyComparison.NotEqual);
 		}
 
-		if(!iceborneMSQMonsters.Banbaro)
+		if(!iceborneMsqMonsters.Banbaro)
 		{
 			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Banbaro...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.Banbaro, LobbyComparison.NotEqual);
 		}
 
-		if(!iceborneMSQMonsters.ViperTobiKadachi)
+		if(!iceborneMsqMonsters.ViperTobiKadachi)
 		{
 			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Viper Tobi-Kadachi...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.ViperTobiKadachi, LobbyComparison.NotEqual);
 		}
 
-		if(!iceborneMSQMonsters.NightshadePaolumu)
+		if(!iceborneMsqMonsters.NightshadePaolumu)
 		{
 			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Nightshade Paolumu...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.NightshadePaolumu, LobbyComparison.NotEqual);
 		}
 
-		if(!iceborneMSQMonsters.CoralPukeiPukei)
+		if(!iceborneMsqMonsters.CoralPukeiPukei)
 		{
 			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Coral Pukei-Pukei...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.CoralPukeiPukei, LobbyComparison.NotEqual);
 		}
 
-		if(!iceborneMSQMonsters.Barioth)
+		if(!iceborneMsqMonsters.Barioth)
 		{
 			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Barioth...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.Barioth, LobbyComparison.NotEqual);
 		}
 
-		if(!iceborneMSQMonsters.Nargacuga)
+		if(!iceborneMsqMonsters.Nargacuga)
 		{
 			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Nargacuga...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.Nargacuga, LobbyComparison.NotEqual);
 		}
 
-		if(!iceborneMSQMonsters.Glavenus)
+		if(!iceborneMsqMonsters.Glavenus)
 		{
 			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Glavenus...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.Glavenus, LobbyComparison.NotEqual);
 		}
 
-		if(!iceborneMSQMonsters.Tigrex)
+		if(!iceborneMsqMonsters.Tigrex)
 		{
 			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Tigrex...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.Tigrex, LobbyComparison.NotEqual);
 		}
 
-		if(!iceborneMSQMonsters.Brachydios)
+		if(!iceborneMsqMonsters.Brachydios)
 		{
 			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Brachydios...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.Brachydios, LobbyComparison.NotEqual);
 		}
 
-		if(!iceborneMSQMonsters.ShriekingLegiana)
+		if(!iceborneMsqMonsters.ShriekingLegiana)
 		{
 			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Shrieking Legiana...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.ShriekingLegiana, LobbyComparison.NotEqual);
 		}
 
-		if(!iceborneMSQMonsters.FulgurAnjanath)
+		if(!iceborneMsqMonsters.FulgurAnjanath)
 		{
 			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Fulgur Anjanath...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.FulgurAnjanath, LobbyComparison.NotEqual);
 		}
 
-		if(!iceborneMSQMonsters.AcidicGlavenus)
+		if(!iceborneMsqMonsters.AcidicGlavenus)
 		{
 			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Acidic Glavenus...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.AcidicGlavenus, LobbyComparison.NotEqual);
 		}
 
-		if(!iceborneMSQMonsters.EbonyOdogaron)
+		if(!iceborneMsqMonsters.EbonyOdogaron)
 		{
 			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Ebony Odogaron...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.EbonyOdogaron, LobbyComparison.NotEqual);
 		}
 
-		if(!iceborneMSQMonsters.Velkhana)
+		if(!iceborneMsqMonsters.Velkhana)
 		{
 			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Velkhana...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.Velkhana, LobbyComparison.NotEqual);
 		}
 
-		if(!iceborneMSQMonsters.SeethingBazelgeuse)
+		if(!iceborneMsqMonsters.SeethingBazelgeuse)
 		{
 			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Seething Bazelgeuse...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.SeethingBazelgeuse, LobbyComparison.NotEqual);
 		}
 
-		if(!iceborneMSQMonsters.BlackveilVaalHazak)
+		if(!iceborneMsqMonsters.BlackveilVaalHazak)
 		{
 			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Blackveil Vaal Hazak...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.BlackveilVaalHazak, LobbyComparison.NotEqual);
 		}
 
-		if(!iceborneMSQMonsters.Namielle)
+		if(!iceborneMsqMonsters.Namielle)
 		{
 			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Namielle...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.Namielle, LobbyComparison.NotEqual);
 		}
 
-		if(!iceborneMSQMonsters.RuinerNergigante)
+		if(!iceborneMsqMonsters.RuinerNergigante)
 		{
 			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Ruiner Nergigante...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.RuinerNergigante, LobbyComparison.NotEqual);
 		}
 
-		if(!iceborneMSQMonsters.SharaIshvalda)
+		if(!iceborneMsqMonsters.SharaIshvalda)
 		{
 			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Shara Ishvalda...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.SharaIshvalda, LobbyComparison.NotEqual);
