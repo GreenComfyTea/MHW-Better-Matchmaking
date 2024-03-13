@@ -152,8 +152,8 @@
 5. Extract the mod from the archive and place it in **Monster Hunter World** root folder.
 
 # How to Use
-1. Open SharpPluginLoader﻿ menu by pressing F9 key;
-2. Press "Better Matchmaking" button;
+1. Open `SharpPluginLoader`﻿ menu by pressing `F9` key;
+2. Press `Better Matchmaking` button;
 3. Configure according to your needs.
 
 # For Translators
