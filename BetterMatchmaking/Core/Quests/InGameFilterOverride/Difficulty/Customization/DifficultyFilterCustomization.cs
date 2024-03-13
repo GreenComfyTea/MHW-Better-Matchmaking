@@ -26,7 +26,7 @@ internal class DifficultyFilterCustomization : SingletonAccessor
 	public DifficultyFilterCustomization()
 	{
 		InstantiateSingletons();
-		ReplacementTarget = LocalizationManager_I.Default.ImGui.LowRank1;
+		ReplacementTarget = LocalizationManager_I.Default.ImGui._1;
 	}
 
 	public DifficultyFilterCustomization Init()
@@ -35,7 +35,7 @@ internal class DifficultyFilterCustomization : SingletonAccessor
 			LocalizationManager.Instance.Default.ImGui.QuestRankReplacementTargets, arrayString => arrayString.Equals(ReplacementTarget)
 		);
 
-		ReplacementTargetEnum = (Difficulties)StringIndexToEnum(stringIndex);
+		ReplacementTargetEnum = (Difficulties) StringIndexToEnum(stringIndex);
 
 		return this;
 	}
@@ -43,7 +43,7 @@ internal class DifficultyFilterCustomization : SingletonAccessor
 	private static int StringIndexToEnum(int stringIndex)
 	{
 		var highRank9Index = Array.FindIndex(
-			LocalizationManager.Instance.Default.ImGui.QuestRankReplacementTargets, arrayString => arrayString.Equals(LocalizationManager.Instance.Default.ImGui.HighRank9)
+			LocalizationManager.Instance.Default.ImGui.QuestRankReplacementTargets, arrayString => arrayString.Equals(LocalizationManager.Instance.Default.ImGui._9)
 		);
 
 		if (stringIndex <= 2) return stringIndex + 20;
@@ -54,10 +54,10 @@ internal class DifficultyFilterCustomization : SingletonAccessor
 
 	private static int EnumToStringIndex(Difficulties replacementTargetEnum)
 	{
-		var replacementTargetEnumValue = (int)replacementTargetEnum;
+		var replacementTargetEnumValue = (int) replacementTargetEnum;
 
-		if (replacementTargetEnumValue <= (int)Difficulties.HighRank9) return replacementTargetEnumValue + 2;
-		if (replacementTargetEnumValue <= (int)Difficulties.MasterRank6) return replacementTargetEnumValue + 1;
+		if (replacementTargetEnum <= Difficulties.HighRank9) return replacementTargetEnumValue + 2;
+		if (replacementTargetEnum <= Difficulties.MasterRank6) return replacementTargetEnumValue + 1;
 
 		return replacementTargetEnumValue - 20;
 	}
@@ -68,7 +68,7 @@ internal class DifficultyFilterCustomization : SingletonAccessor
 		var tempChanged = false;
 		var selectedIndex = 0;
 
-		var questRanks = LocalizationManager_I.ImGui.QuestRankReplacementTargets;
+		var styledQuestRanks = LocalizationManager_I.ImGui.StyledQuestRankReplacementTargets;
 
 		if (ImGui.TreeNode(LocalizationManager_I.ImGui.Difficulty))
 		{
@@ -77,7 +77,7 @@ internal class DifficultyFilterCustomization : SingletonAccessor
 			selectedIndex = EnumToStringIndex(ReplacementTargetEnum);
 
 			ImGui.SetNextItemWidth(CustomizationWindow_I.ComboBoxWidth);
-			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref selectedIndex, questRanks, questRanks.Length);
+			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref selectedIndex, styledQuestRanks, styledQuestRanks.Length);
 
 			if (tempChanged)
 			{
@@ -89,8 +89,6 @@ internal class DifficultyFilterCustomization : SingletonAccessor
 			changed = changed || tempChanged;
 
 			changed = FilterOptions.RenderImGui() || changed;
-
-			//TeaLog.Info($"ReplacementTargetEnum: {ReplacementTargetEnum} -> selectedIndex: {selectedIndex} -> ReplacementTargetEnum: {ReplacementTargetEnum} -> ReplacementTarget: {ReplacementTarget}");
 
 			ImGui.TreePop();
 		}

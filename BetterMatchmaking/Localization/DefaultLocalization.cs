@@ -236,23 +236,41 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string HighRank { get; set; } = "High Rank";
 	public string MasterRank { get; set; } = "Master Rank";
 
-	public string LowRank1 { get; set; } = "1⭐";
-	public string LowRank2 { get; set; } = "2⭐";
-	public string LowRank3 { get; set; } = "3⭐";
-	public string LowRank4 { get; set; } = "4⭐";
-	public string LowRank5 { get; set; } = "5⭐";
+	public string _1 { get; set; } = "1";
+	public string _2 { get; set; } = "2";
+	public string _3 { get; set; } = "3";
+	public string _4 { get; set; } = "4";
+	public string _5 { get; set; } = "5";
 
-	public string HighRank6 { get; set; } = "6⭐";
-	public string HighRank7 { get; set; } = "7⭐";
-	public string HighRank8 { get; set; } = "8⭐";
-	public string HighRank9 { get; set; } = "9⭐";
+	public string _6 { get; set; } = "6";
+	public string _7 { get; set; } = "7";
+	public string _8 { get; set; } = "8";
+	public string _9 { get; set; } = "9";
 
-	public string MasterRank1 { get; set; } = "M1⭐";
-	public string MasterRank2 { get; set; } = "M2⭐";
-	public string MasterRank3 { get; set; } = "M3⭐";
-	public string MasterRank4 { get; set; } = "M4⭐";
-	public string MasterRank5 { get; set; } = "M5⭐";
-	public string MasterRank6 { get; set; } = "M6⭐";
+	public string MasterRank1 { get; set; } = "M1";
+	public string MasterRank2 { get; set; } = "M2";
+	public string MasterRank3 { get; set; } = "M3";
+	public string MasterRank4 { get; set; } = "M4";
+	public string MasterRank5 { get; set; } = "M5";
+	public string MasterRank6 { get; set; } = "M6";
+
+	public string LowRank1Star { get; set; } = "1⭐";
+	public string LowRank2Star { get; set; } = "2⭐";
+	public string LowRank3Star { get; set; } = "3⭐";
+	public string LowRank4Star { get; set; } = "4⭐";
+	public string LowRank5Star { get; set; } = "5⭐";
+
+	public string HighRank6Star { get; set; } = "6⭐";
+	public string HighRank7Star { get; set; } = "7⭐";
+	public string HighRank8Star { get; set; } = "8⭐";
+	public string HighRank9Star { get; set; } = "9⭐";
+
+	public string MasterRank1Star { get; set; } = "M1⭐";
+	public string MasterRank2Star { get; set; } = "M2⭐";
+	public string MasterRank3Star { get; set; } = "M3⭐";
+	public string MasterRank4Star { get; set; } = "M4⭐";
+	public string MasterRank5Star { get; set; } = "M5⭐";
+	public string MasterRank6Star { get; set; } = "M6⭐";
 
 	// Rewards Filter
 
@@ -336,6 +354,8 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	[JsonIgnore]
 	public string[] QuestRankReplacementTargets { get; set; } = Array.Empty<string>();
 	[JsonIgnore]
+	public string[] StyledQuestRankReplacementTargets { get; set; } = Array.Empty<string>();
+	[JsonIgnore]
 	public string[] RewardReplacementTargets { get; set; } = Array.Empty<string>();
 	[JsonIgnore]
 	public string[] TargetArray { get; set; } = Array.Empty<string>();
@@ -364,9 +384,17 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 		QuestRankReplacementTargets =
 		[
 			LowRank, HighRank, MasterRank,
-			LowRank1, LowRank2, LowRank3, LowRank4, LowRank5,
-			HighRank6, HighRank7, HighRank8, HighRank9,
+			_1, _2, _3, _4, _5,
+			_6, _7, _8, _9,
 			MasterRank1, MasterRank2, MasterRank3, MasterRank4, MasterRank5, MasterRank6
+		];
+
+		StyledQuestRankReplacementTargets =
+		[
+			LowRank, HighRank, MasterRank,
+			LowRank1Star, LowRank2Star, LowRank3Star, LowRank4Star, LowRank5Star,
+			HighRank6Star, HighRank7Star, HighRank8Star, HighRank9Star,
+			MasterRank1Star, MasterRank2Star, MasterRank3Star, MasterRank4Star, MasterRank5Star, MasterRank6Star
 		];
 
 		QuestPreferenceArray =

@@ -66,10 +66,10 @@ internal class DifficultyFilterCustomization_Options_HighRank : SingletonAccesso
                 changed = true;
             }
 
-            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.HighRank6, ref _highRank6) || changed;
-            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.HighRank7, ref _highRank7) || changed;
-            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.HighRank8, ref _highRank8) || changed;
-            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.HighRank9, ref _highRank9) || changed;
+            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.HighRank6Star, ref _highRank6) || changed;
+            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.HighRank7Star, ref _highRank7) || changed;
+            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.HighRank8Star, ref _highRank8) || changed;
+            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.HighRank9Star, ref _highRank9) || changed;
 
             ImGui.TreePop();
         }
