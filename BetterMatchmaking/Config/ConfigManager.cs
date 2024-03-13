@@ -1,4 +1,4 @@
-﻿using ImGuiNET;
+using ImGuiNET;
 using SharpPluginLoader.Core.Configuration;
 using SharpPluginLoader.Core.IO;
 using System;
@@ -93,30 +93,42 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 		DebugManager_I.Customization = config.Debug;
 
 
+		var sessions = config.Sessions;
+		var quests = config.Quests;
+		var guidingLands = config.GuidingLands;
 
-		RegionLockFix_I.SessionCustomization = config.Sessions.RegionLockFix;
-		MaxSearchResultLimit_I.SessionCustomization = config.Sessions.MaxSearchResultLimit;
-		SessionPlayerCountFilter_I.Customization = config.Sessions.PlayerCountFilter;
-
-		PlayerTypeFilter_I.Customization = config.Sessions.InGameFilterOverride.PlayerType;
-		QuestPreferenceFilter_I.Customization = config.Sessions.InGameFilterOverride.QuestPreference;
-		LanguageFilter_I.SessionCustomization = config.Sessions.InGameFilterOverride.Language;
-
-
-
-		RegionLockFix_I.QuestCustomization = config.Quests.RegionLockFix;
-		MaxSearchResultLimit_I.QuestCustomization = config.Quests.MaxSearchResultLimit;
-
-		QuestTypeFilter_I.Customization = config.Quests.InGameFilterOverride.QuestType;
-		DifficultyFilter_I.Customization = config.Quests.InGameFilterOverride.Difficulty;
-		RewardFilter_I.Customization = config.Quests.InGameFilterOverride.Rewards;
-		LanguageFilter_I.QuestCustomization = config.Quests.InGameFilterOverride.Language;
-		TargetFilter_I.Customization = config.Quests.InGameFilterOverride.Target;
+		var sessionInGameFilterOverride = sessions.InGameFilterOverride;
+		var questInGameFilterOverride = quests.InGameFilterOverride;
+		var guidingLandsInGameFilterOverride = guidingLands.InGameFilterOverride;
 
 
 
-		RegionLockFix_I.GuidingLandsCustomization = config.GuidingLands.RegionLockFix;
-		MaxSearchResultLimit_I.GuidingLandsCustomization = config.GuidingLands.MaxSearchResultLimit;
+		RegionLockFix_I.SessionCustomization = sessions.RegionLockFix;
+		MaxSearchResultLimit_I.SessionCustomization = sessions.MaxSearchResultLimit;
+		SessionPlayerCountFilter_I.Customization = sessions.PlayerCountFilter;
+
+		PlayerTypeFilter_I.Customization = sessionInGameFilterOverride.PlayerType;
+		QuestPreferenceFilter_I.Customization = sessionInGameFilterOverride.QuestPreference;
+		LanguageFilter_I.SessionCustomization = sessionInGameFilterOverride.Language;
+
+
+
+		RegionLockFix_I.QuestCustomization = quests.RegionLockFix;
+		MaxSearchResultLimit_I.QuestCustomization = quests.MaxSearchResultLimit;
+
+		QuestTypeFilter_I.Customization = questInGameFilterOverride.QuestType;
+		DifficultyFilter_I.Customization = questInGameFilterOverride.Difficulty;
+		RewardFilter_I.Customization = questInGameFilterOverride.Rewards;
+		LanguageFilter_I.QuestCustomization = questInGameFilterOverride.Language;
+		TargetFilter_I.Customization = questInGameFilterOverride.Target;
+
+
+
+		RegionLockFix_I.GuidingLandsCustomization = guidingLands.RegionLockFix;
+		MaxSearchResultLimit_I.GuidingLandsCustomization = guidingLands.MaxSearchResultLimit;
+
+		ExpeditionObjectiveFilter_I.Customization = guidingLandsInGameFilterOverride.ExpeditionObjective;
+		LanguageFilter_I.GuidingLandsCustomization = guidingLandsInGameFilterOverride.Language;
 
 		return this;
 	}

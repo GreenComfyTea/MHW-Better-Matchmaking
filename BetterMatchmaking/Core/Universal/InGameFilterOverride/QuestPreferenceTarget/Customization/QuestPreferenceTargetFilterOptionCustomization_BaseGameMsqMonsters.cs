@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class QuestPreferenceFilterOptionCustomization_BaseGameMSQMonsters : SingletonAccessor
+internal class QuestPreferenceTargetFilterOptionCustomization_BaseGameMsqMonsters : SingletonAccessor
 {
     private bool _greatJagras = true;
     public bool GreatJagras { get => _greatJagras; set => _greatJagras = value; }
@@ -101,12 +101,12 @@ internal class QuestPreferenceFilterOptionCustomization_BaseGameMSQMonsters : Si
     private bool _xenojiiva = true;
     public bool Xenojiiva { get => _xenojiiva; set => _xenojiiva = value; }
 
-    public QuestPreferenceFilterOptionCustomization_BaseGameMSQMonsters()
+    public QuestPreferenceTargetFilterOptionCustomization_BaseGameMsqMonsters()
     {
         InstantiateSingletons();
     }
 
-    public QuestPreferenceFilterOptionCustomization_BaseGameMSQMonsters SelectAll()
+    public QuestPreferenceTargetFilterOptionCustomization_BaseGameMsqMonsters SelectAll()
     {
         GreatJagras = true;
         KuluYaKu = true;
@@ -142,7 +142,7 @@ internal class QuestPreferenceFilterOptionCustomization_BaseGameMSQMonsters : Si
         return this;
     }
 
-    public QuestPreferenceFilterOptionCustomization_BaseGameMSQMonsters DeselectAll()
+    public QuestPreferenceTargetFilterOptionCustomization_BaseGameMsqMonsters DeselectAll()
     {
         GreatJagras = false;
         KuluYaKu = false;

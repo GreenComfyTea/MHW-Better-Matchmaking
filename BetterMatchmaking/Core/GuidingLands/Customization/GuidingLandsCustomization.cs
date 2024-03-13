@@ -10,12 +10,8 @@ namespace BetterMatchmaking;
 internal class GuidingLandsCustomization : SingletonAccessor
 {
 	public RegionLockFixCustomization RegionLockFix { get; set; } = new();
-
 	public MaxSearchResultLimitCustomization MaxSearchResultLimit { get; set; } = new();
-
-	//public GuidingLandsInGameFilterOverride InGameFilterOverride { get; set; } = new();
-
-
+	public GuidingLandsInGameFilterOverrideCustomization InGameFilterOverride { get; set; } = new();
 
 	public GuidingLandsCustomization()
 	{
@@ -26,7 +22,7 @@ internal class GuidingLandsCustomization : SingletonAccessor
 	{
 		RegionLockFix.Init();
 		MaxSearchResultLimit.Init();
-		//InGameFilterOverride.Init();
+		InGameFilterOverride.Init();
 
 		return this;
 	}
@@ -38,7 +34,7 @@ internal class GuidingLandsCustomization : SingletonAccessor
 		{
 			changed = RegionLockFix.RenderImGui() || changed;
 			changed = MaxSearchResultLimit.RenderImGui() || changed;
-			//changed = InGameFilterOverride.RenderImGui() || changed;
+			changed = InGameFilterOverride.RenderImGui() || changed;
 
 			ImGui.TreePop();
 		}

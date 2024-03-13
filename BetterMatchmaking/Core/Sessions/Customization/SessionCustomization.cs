@@ -16,7 +16,7 @@ internal class SessionCustomization : SingletonAccessor
 
     public PlayerCountFilterCustomization PlayerCountFilter { get; set; } = new();
 
-    public SessionInGameFilterOverride InGameFilterOverride { get; set; } = new();
+    public SessionInGameFilterOverrideCustomization InGameFilterOverride { get; set; } = new();
 
     public SessionCustomization()
     {

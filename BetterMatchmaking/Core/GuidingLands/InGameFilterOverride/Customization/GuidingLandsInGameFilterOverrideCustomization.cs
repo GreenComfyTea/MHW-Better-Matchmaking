@@ -1,5 +1,4 @@
 ﻿using ImGuiNET;
-using SharpPluginLoader.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,23 +6,21 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
-internal class SessionInGameFilterOverride : SingletonAccessor
+
+internal class GuidingLandsInGameFilterOverrideCustomization : SingletonAccessor
 {
-	public PlayerTypeFilterCustomization PlayerType { get; set; } = new();
-
-	public QuestPreferenceFilterCustomization QuestPreference { get; set; } = new();
-
+	public ExpeditionObjectiveFilterCustomization ExpeditionObjective { get; set; } = new();
 	public LanguageFilterCustomization Language { get; set; } = new();
 
-	public SessionInGameFilterOverride()
+
+	public GuidingLandsInGameFilterOverrideCustomization()
 	{
 		InstantiateSingletons();
 	}
 
-	public SessionInGameFilterOverride Init()
+	public GuidingLandsInGameFilterOverrideCustomization Init()
 	{
-		PlayerType.Init();
-		QuestPreference.Init();
+		ExpeditionObjective.Init();
 		Language.Init();
 
 		return this;
@@ -34,8 +31,7 @@ internal class SessionInGameFilterOverride : SingletonAccessor
 		var changed = false;
 		if(ImGui.TreeNode(LocalizationManager_I.ImGui.InGameFilterOverride))
 		{
-			changed = PlayerType.RenderImGui() || changed;
-			changed = QuestPreference.RenderImGui() || changed;
+			changed = ExpeditionObjective.RenderImGui() || changed;
 			changed = Language.RenderImGui() || changed;
 
 			ImGui.TreePop();

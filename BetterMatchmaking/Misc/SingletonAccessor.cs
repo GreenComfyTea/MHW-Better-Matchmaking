@@ -52,6 +52,11 @@ internal class SingletonAccessor
 	protected TargetFilter TargetFilter_I { get; set; }
 
 
+
+	[JsonIgnore]
+	protected ExpeditionObjectiveFilter ExpeditionObjectiveFilter_I { get; set; }
+
+
 	protected void InstantiateSingletons()
 	{
 		LocalizationManager_I = LocalizationManager.Instance;
@@ -73,5 +78,7 @@ internal class SingletonAccessor
 		DifficultyFilter_I = DifficultyFilter.Instance;
 		RewardFilter_I = RewardFilter.Instance;
 		TargetFilter_I = TargetFilter.Instance;
+
+		ExpeditionObjectiveFilter_I = ExpeditionObjectiveFilter.Instance;
 	}
 }

@@ -36,7 +36,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Core\GuidingLands\InGameFilterOverride\ExpeditionObjective\" />
     <Folder Include="Core\GuidingLands\InGameFilterOverride\TargetMonster\" />
     <Folder Include="Core\GuidingLands\InGameFilterOverride\RegionLevel\" />
   </ItemGroup>

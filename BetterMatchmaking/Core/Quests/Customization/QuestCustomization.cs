@@ -13,7 +13,7 @@ internal class QuestCustomization : SingletonAccessor
 
     public MaxSearchResultLimitCustomization MaxSearchResultLimit { get; set; } = new();
 
-    public QuestInGameFilterOverride InGameFilterOverride { get; set; } = new();
+    public QuestInGameFilterOverrideCustomization InGameFilterOverride { get; set; } = new();
 
 
 

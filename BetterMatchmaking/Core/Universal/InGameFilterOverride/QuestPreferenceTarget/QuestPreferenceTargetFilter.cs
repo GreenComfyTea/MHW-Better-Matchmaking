@@ -31,10 +31,10 @@ internal class QuestPreferenceTargetFilter : SingletonAccessor
 
 	public QuestPreferenceTargetFilter Apply(
 		string searchKey,
-		QuestPreferenceFilterOptionCustomization_BaseGameMSQMonsters baseGameMSQMonsters,
-		QuestPreferenceFilterOptionCustomization_BaseGameEndgameMonsters baseGameEndgameMonsters,
-		QuestPreferenceFilterOptionCustomization_IceborneMSQMonsters iceborneMSQMonsters,
-		QuestPreferenceFilterOptionCustomization_IceborneEndgameMonsters iceborneEndgameMonsters
+		QuestPreferenceTargetFilterOptionCustomization_BaseGameMsqMonsters baseGameMSQMonsters,
+		QuestPreferenceTargetFilterOptionCustomization_BaseGameEndgameMonsters baseGameEndgameMonsters,
+		QuestPreferenceTargetFilterOptionCustomization_IceborneMSQMonsters iceborneMSQMonsters,
+		QuestPreferenceTargetFilterOptionCustomization_IceborneEndgameMonsters iceborneEndgameMonsters
 	)
 	{
 
@@ -442,16 +442,16 @@ internal class QuestPreferenceTargetFilter : SingletonAccessor
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.FrostfangBarioth, LobbyComparison.NotEqual);
 		}
 
-		if(!iceborneEndgameMonsters.Alatreon)
-		{
-			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Alatreon...");
-			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.Alatreon, LobbyComparison.NotEqual);
-		}
-
 		if(!iceborneEndgameMonsters.Safijiiva)
 		{
 			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Safi'jiiva...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.Safijiiva, LobbyComparison.NotEqual);
+		}
+
+		if(!iceborneEndgameMonsters.Alatreon)
+		{
+			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Alatreon...");
+			Matchmaking.AddRequestLobbyListNumericalFilter(searchKey, (int) Targets.Alatreon, LobbyComparison.NotEqual);
 		}
 
 		if(!iceborneEndgameMonsters.Fatalis)

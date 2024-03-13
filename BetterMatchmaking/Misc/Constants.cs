@@ -208,6 +208,39 @@ public enum Targets
 	Fatalis =				1600014
 }
 
+public enum ExpeditionObjectives
+{
+	None,
+
+	FieldResearchForest,
+	FieldResearchWildspire,
+	FieldResearchCoral,
+	FieldResearchRotted,
+	FieldResearchVolcanic,
+	FieldResearchTundra,
+
+	MiningForest,
+	MiningWildspire,
+	MiningCoral,
+	MiningRotted,
+	MiningVolcanic,
+	MiningTundra,
+
+	BoneResearchForest,
+	BoneResearchWildspire,
+	BoneResearchCoral,
+	BoneResearchRotted,
+	BoneResearchVolcanic,
+	BoneResearchTundra,
+
+	FixedRegionForest,
+	FixedRegionWildspire,
+	FixedRegionCoral,
+	FixedRegionRotted,
+	FixedRegionVolcanic,
+	FixedRegionTundra
+};
+
 public static class Constants
 {
 	public const string MOD_AUTHOR = "GreenComfyTea";
@@ -280,6 +313,7 @@ public static class Constants
 	public const string SEARCH_KEY_QUEST_LANGUAGE = SEARCH_KEY_SESSION_SIMILAR_HUNTER_RANK;
 	public const string SEARCH_KEY_QUEST_TARGET = "SearchKey3";
 
+	public const string SEARCH_KEY_GUIDING_LANDS_EXPEDITION_OBJECTIVE = SEARCH_KEY_SESSION_QUEST_PREFERENCE;
 	public const string SEARCH_KEY_GUIDING_LANDS_LANGUAGE = SEARCH_KEY_QUEST_LANGUAGE;
 
 	public static readonly Vector4 IMGUI_RED_COLOR = new(1f, 0.25f, 0.25f, 1f);

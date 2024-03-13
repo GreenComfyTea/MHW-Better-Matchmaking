@@ -149,7 +149,6 @@ internal sealed class LanguageFilter : SingletonAccessor
 				customization = GuidingLandsCustomization;
 				languageKey = Constants.SEARCH_KEY_GUIDING_LANDS_LANGUAGE;
 
-				return false;
 				break;
 		}
 
@@ -191,7 +190,6 @@ internal sealed class LanguageFilter : SingletonAccessor
 				customization = GuidingLandsCustomization;
 				languageKey = Constants.SEARCH_KEY_GUIDING_LANDS_LANGUAGE;
 
-				return this;
 				break;
 		}
 

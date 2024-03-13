@@ -42,7 +42,7 @@ internal sealed class TargetFilter : SingletonAccessor
 		if (comparisonEnum == LobbyComparison.Equal && value != (int)Customization.TargetReplacementTargetEnum) return false;
 
 		if (comparisonEnum == LobbyComparison.EqualToOrLessThan
-		&& value == (int)Targets.SilverRathalos
+		&& value == (int) Targets.SilverRathalos
 		&& Customization.TargetReplacementTargetEnum != Targets.None)
 		{
 			return false;
@@ -72,7 +72,6 @@ internal sealed class TargetFilter : SingletonAccessor
 			filterOptions.IceborneMSQMonsters,
 			filterOptions.IceborneEndgameMonsters
 		);
-
 
 		return true;
 	}

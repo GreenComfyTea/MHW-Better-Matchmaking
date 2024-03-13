@@ -36,7 +36,7 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 			CustomizationWindow_I.Init();
 
 			PlayerTypeFilter_I.Init();
-			QuestPreferenceFilter_I.Init();
+			QuestPreferenceTargetFilter_I.Init();
 			LanguageFilter_I.Init();
 			QuestPreferenceTargetFilter_I.Init();
 
@@ -44,6 +44,8 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 			DifficultyFilter_I.Init();
 			RewardFilter_I.Init();
 			TargetFilter_I.Init();
+
+			ExpeditionObjectiveFilter_I.Init();
 
 			IsInitialized = true;
 

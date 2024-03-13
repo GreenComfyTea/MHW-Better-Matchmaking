@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class QuestInGameFilterOverride : SingletonAccessor
+internal class QuestInGameFilterOverrideCustomization : SingletonAccessor
 {
 	public QuestTypeFilterCustomization QuestType { get; set; } = new();
 
@@ -20,12 +20,12 @@ internal class QuestInGameFilterOverride : SingletonAccessor
 
 	public TargetFilterCustomization Target { get; set; } = new();
 
-	public QuestInGameFilterOverride()
+	public QuestInGameFilterOverrideCustomization()
 	{
 		InstantiateSingletons();
 	}
 
-	public QuestInGameFilterOverride Init()
+	public QuestInGameFilterOverrideCustomization Init()
 	{
 		QuestType.Init();
 		Difficulty.Init();

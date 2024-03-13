@@ -10,10 +10,10 @@ namespace BetterMatchmaking;
 internal class TargetFilterOptionCustomization : SingletonAccessor
 {
     public TargetFilterOptionCustomization_General General { get; set; } = new();
-    public QuestPreferenceFilterOptionCustomization_BaseGameMSQMonsters BaseGameMSQMonsters { get; set; } = new();
-    public QuestPreferenceFilterOptionCustomization_BaseGameEndgameMonsters BaseGameEndgameMonsters { get; set; } = new();
-    public QuestPreferenceFilterOptionCustomization_IceborneMSQMonsters IceborneMSQMonsters { get; set; } = new();
-    public QuestPreferenceFilterOptionCustomization_IceborneEndgameMonsters IceborneEndgameMonsters { get; set; } = new();
+    public QuestPreferenceTargetFilterOptionCustomization_BaseGameMsqMonsters BaseGameMSQMonsters { get; set; } = new();
+    public QuestPreferenceTargetFilterOptionCustomization_BaseGameEndgameMonsters BaseGameEndgameMonsters { get; set; } = new();
+    public QuestPreferenceTargetFilterOptionCustomization_IceborneMSQMonsters IceborneMSQMonsters { get; set; } = new();
+    public QuestPreferenceTargetFilterOptionCustomization_IceborneEndgameMonsters IceborneEndgameMonsters { get; set; } = new();
 
     public TargetFilterOptionCustomization()
     {

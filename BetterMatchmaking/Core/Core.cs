@@ -27,6 +27,8 @@ internal sealed class Core : SingletonAccessor, IDisposable
 	public bool IsLanguageAny { get; set; } = false;
 	public bool IsQuestTypeNoPreference { get; set; } = false;
 	public bool IsQuestRewardsNoPreference { get; set; } = false;
+	public bool IsExpeditionObjectiveNoPreference { get; set; } = false;
+
 
 	private delegate int startRequest_Delegate(nint netCore, nint netRequest);
 	private Hook<startRequest_Delegate> StartRequestHook { get; set; }
@@ -53,17 +55,52 @@ internal sealed class Core : SingletonAccessor, IDisposable
 		return this;
 	}
 
-	public static string GetSearchKeyName(string key)
+	public string GetSearchKeyName(string key)
 	{
-		if(key == "SearchKey0") return "Search Type";
-		if (key == "SearchKey1") return "Player Type | ??? | Guiding Lands";
-		if (key == "SearchKey2") return "Quest Preference | Rewards Available | Expedition Objective";
-		if (key == "SearchKey3") return "??? | Target | ???";
-		if (key == "SearchKey4") return "Language | Difficulty | Conditions";
-		if (key == "SearchKey5") return "Similar Hunter Rank | Language | ???";
-		if (key == "SearchKey6") return "Similar Master Rank | Quest Type | ???";
-		if (key == "SearchKey7") return "Min Master Rank | ??? | ???";
-		if (key == "SearchKey8") return "Max Master Rank | ??? | ???";
+		if(CurrentSearchType == SearchTypes.Quest)
+		{
+			if(key == "SearchKey0") return "Search Type";
+			if(key == "SearchKey1") return "???";
+			if(key == "SearchKey2") return "Rewards Available";
+			if(key == "SearchKey3") return "Target";
+			if(key == "SearchKey4") return "Difficulty";
+			if(key == "SearchKey5") return "Language";
+			if(key == "SearchKey6") return "Quest Type";
+			if(key == "SearchKey7") return "???";
+			if(key == "SearchKey8") return "???";
+
+			return "";
+		}
+
+		if(CurrentSearchType == SearchTypes.Session)
+		{
+			if(key == "SearchKey0") return "Search Type";
+			if(key == "SearchKey1") return "Player Type";
+			if(key == "SearchKey2") return "Quest Preference";
+			if(key == "SearchKey3") return "???";
+			if(key == "SearchKey4") return "Language";
+			if(key == "SearchKey5") return "Similar Hunter Rank";
+			if(key == "SearchKey6") return "Similar Master Rank";
+			if(key == "SearchKey7") return "Min Master Rank";
+			if(key == "SearchKey8") return "Max Master Rank";
+
+			return "";
+		}
+
+		if(CurrentSearchType == SearchTypes.GuidingLands)
+		{
+			if(key == "SearchKey0") return "Search Type";
+			if(key == "SearchKey1") return "Guiding Lands";
+			if(key == "SearchKey2") return "Expedition Objective";
+			if(key == "SearchKey3") return "???";
+			if(key == "SearchKey4") return "Conditions";
+			if(key == "SearchKey5") return "???";
+			if(key == "SearchKey6") return "???";
+			if(key == "SearchKey7") return "???";
+			if(key == "SearchKey8") return "???";
+
+			return "";
+		}
 
 		return "";
 	}
@@ -90,6 +127,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 		var isLanguageUpdated = false;
 		var isQuestRewardsUpdated = false;
 		var isQuestTypeUpdated = false;
+		var isExpeditionObjectiveUpdated = false;
 
 		for(int i = 0; i < searchKeyCount; i++)
 		{
@@ -162,12 +200,25 @@ internal sealed class Core : SingletonAccessor, IDisposable
 				}
 			}
 
+			if(CurrentSearchType == SearchTypes.GuidingLands)
+			{
+				if(keyID == (int) GuidingLandsSearchKeyIDs.ExpeditionObjective)
+				{
+					IsExpeditionObjectiveNoPreference = false;
+					isExpeditionObjectiveUpdated = true;
+
+					searchKeyData += 0x10;
+					continue;
+				}
+			}
+
 			searchKeyData += 0x10;
 		}
 
 		if(!isLanguageUpdated) IsLanguageAny = true;
 		if(!isQuestTypeUpdated) IsQuestTypeNoPreference = true;
 		if(!isQuestRewardsUpdated) IsQuestRewardsNoPreference = true;
+		if(!isExpeditionObjectiveUpdated) IsExpeditionObjectiveNoPreference = true;
 	}
 
 	private int OnStartRequest(nint netCore, nint netRequest)
@@ -202,6 +253,8 @@ internal sealed class Core : SingletonAccessor, IDisposable
 			LanguageFilter_I.ApplyAnyLanguage();
 			QuestTypeFilter_I.ApplyNoPreference();
 			RewardFilter_I.ApplyNoPreference();
+
+			ExpeditionObjectiveFilter_I.ApplyNoPreference();
 		}
 		catch(Exception exception)
 		{
@@ -217,10 +270,6 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 		try
 		{
-			var key1 = MemoryUtil.ReadString(keyAddress);
-
-			TeaLog.Info($"{key1} ({GetSearchKeyName(key1)}) {GetComparisonSign(comparison)} {value}");
-
 			if(CurrentSearchType == SearchTypes.None)
 			{
 				NumericalFilterHook!.Original(steamInterface, keyAddress, value, comparison);
@@ -239,6 +288,8 @@ internal sealed class Core : SingletonAccessor, IDisposable
 			skip = DifficultyFilter_I.Apply(ref key, ref value, ref comparison) || skip;
 			skip = RewardFilter_I.ApplyRewardsAvailable(ref key, ref value, ref comparison) || skip;
 			skip = TargetFilter_I.Apply(ref key, ref value, ref comparison) || skip;
+
+			skip = ExpeditionObjectiveFilter_I.Apply(ref key, ref value, ref comparison) || skip;
 		}
 		catch(Exception exception)
 		{

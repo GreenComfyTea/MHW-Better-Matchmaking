@@ -267,7 +267,45 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string Target { get; set; } = "Target";
 
 	// Guiding Lands
-	public string GuidingLands { get; set; } = "GuidingLands";
+
+	public string GuidingLands { get; set; } = "Guiding Lands";
+
+	// Expedition Objective Filter
+
+	public string ExpeditionObjective { get; set; } = "Expedition Objective";
+
+	public string FieldResearch { get; set; } = "Field Research";
+	public string FieldResearchForest { get; set; } = "Field Research: Forest";
+	public string FieldResearchWildspire { get; set; } = "Field Research: Wildspire";
+	public string FieldResearchCoral { get; set; } = "Field Research: Coral";
+	public string FieldResearchRotted { get; set; } = "Field Research: Rotted";
+	public string FieldResearchVolcanic { get; set; } = "Field Research: Volcanic";
+	public string FieldResearchTundra { get; set; } = "Field Research: Tundra";
+
+	public string Mining { get; set; } = "Mining";
+	public string MiningForest { get; set; } = "Mining: Forest";
+	public string MiningWildspire { get; set; } = "Mining: Wildspire";
+	public string MiningCoral { get; set; } = "Mining: Coral";
+	public string MiningRotted { get; set; } = "Mining: Rotted";
+	public string MiningVolcanic { get; set; } = "Mining: Volcanic";
+	public string MiningTundra { get; set; } = "Mining: Tundra";
+
+	public string BoneResearch { get; set; } = "Bone Research";
+	public string BoneResearchForest { get; set; } = "Bone Research: Forest";
+	public string BoneResearchWildspire { get; set; } = "Bone Research: Wildspire";
+	public string BoneResearchCoral { get; set; } = "Bone Research: Coral";
+	public string BoneResearchRotted { get; set; } = "Bone Research: Rotted";
+	public string BoneResearchVolcanic { get; set; } = "Bone Research: Volcanic";
+	public string BoneResearchTundra { get; set; } = "Bone Research: Tundra";
+
+	public string FixedRegion { get; set; } = "Fixed Region";
+	public string FixedRegionForest { get; set; } = "Fixed Region: Forest";
+	public string FixedRegionWildspire { get; set; } = "Fixed Region: Wildspire";
+	public string FixedRegionCoral { get; set; } = "Fixed Region: Coral";
+	public string FixedRegionRotted { get; set; } = "Fixed Region: Rotted";
+	public string FixedRegionVolcanic { get; set; } = "Fixed Region: Volcanic";
+	public string FixedRegionTundra { get; set; } = "Fixed Region: Tundra";
+
 
 	[JsonIgnore]
 	public string[] DistanceFilterArray { get; set; } = Array.Empty<string>();
@@ -285,6 +323,8 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string[] RewardReplacementTargets { get; set; } = Array.Empty<string>();
 	[JsonIgnore]
 	public string[] TargetArray { get; set; } = Array.Empty<string>();
+	[JsonIgnore]
+	public string[] ExpeditionObjectiveArray { get; set; } = Array.Empty<string>();
 
 	public LocalizedStrings_ImGui()
 	{
@@ -470,9 +510,41 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 			FuriousRajang,
 			RagingBrachydios,
 			FrostfangBarioth,
-			Safijiiva,
 			Alatreon,
 			Fatalis
+		];
+
+		ExpeditionObjectiveArray =
+		[
+			NoPreference,
+
+			FieldResearchForest,
+			FieldResearchWildspire,
+			FieldResearchCoral,
+			FieldResearchRotted,
+			FieldResearchVolcanic,
+			FieldResearchTundra,
+
+			MiningForest,
+			MiningWildspire,
+			MiningCoral,
+			MiningRotted,
+			MiningVolcanic,
+			MiningTundra,
+
+			BoneResearchForest,
+			BoneResearchWildspire,
+			BoneResearchCoral,
+			BoneResearchRotted,
+			BoneResearchVolcanic,
+			BoneResearchTundra,
+
+			FixedRegionForest,
+			FixedRegionWildspire,
+			FixedRegionCoral,
+			FixedRegionRotted,
+			FixedRegionVolcanic,
+			FixedRegionTundra
 		];
 	}
 }
