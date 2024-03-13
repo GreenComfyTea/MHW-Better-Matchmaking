@@ -249,7 +249,7 @@ public static class Constants
 	public const string MOD_NAME = "Better Matchmaking";
 	public const string MOD_FOLDER_NAME = "BetterMatchmaking";
 
-	public const string VERSION = "2.0.0";
+	public const string VERSION = "2.0";
 
 	public const float EPSILON = 0.000001f;
 
@@ -273,7 +273,7 @@ public static class Constants
 	public static readonly Vector4 MOD_AUTHOR_COLOR = new(0.702f, 0.851f, 0.424f, 1f);
 	public static readonly Vector4 IMGUI_USERNAME_COLOR = new(0.5f, 0.710f, 1f, 1f);
 
-	public const string NEXUSMODS_LINK = "https://nexusmods.com";
+	public const string NEXUSMODS_LINK = "https://nexusmods.com/monsterhunterworld/mods/7263";
 	public const string GITHUB_REPO_LINK = "https://github.com/GreenComfyTea/MHW-Better-Matchmaking";
 	public const string TWITCH_LINK = "https://twitch.tv/GreenComfyTea";
 	public const string TWITTER_LINK = "https://twitter.com/GreenComfyTea";

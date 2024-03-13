@@ -26,6 +26,8 @@ internal class LocalizedStrings_UI : ILocalizedStrings
 internal class LocalizedStrings_ImGui : ILocalizedStrings
 {
 	// Mod Info
+	public string ModInfo { get; set; } = "Mod Info";
+
 	public string MadeBy { get; set; } = "Made by:";
 	public string NexusMods { get; set; } = "Nexus Mods";
 	public string GitHubRepo { get; set; } = "GitHub Repo";

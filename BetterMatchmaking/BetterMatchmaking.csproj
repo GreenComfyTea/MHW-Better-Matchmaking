@@ -19,14 +19,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="SharpPluginLoader.Core" Version="0.0.4.1" />
     <PackageReference Include="SharpPluginLoader.ImGui" Version="1.90.2.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="SharpPluginLoader.Core">
-      <HintPath>D:\Programs\Steam\steamapps\common\Monster Hunter World\nativePC\plugins\CSharp\Loader\SharpPluginLoader.Core.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>

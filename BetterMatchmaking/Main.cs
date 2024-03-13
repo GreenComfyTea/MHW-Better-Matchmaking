@@ -1,6 +1,7 @@
 ﻿using ImGuiNET;
 using SharpPluginLoader.Core;
 using System.Diagnostics;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BetterMatchmaking;
 
