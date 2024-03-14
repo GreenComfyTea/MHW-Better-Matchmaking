@@ -167,8 +167,8 @@ The mod has support for localizations. If you wish to translate the mod, follow 
 > There is no support for unicode symbols at the moment. It will be added in the future release.
 
 # Credits
-**GreenComfyTea** - creator of the mod and it's main contributor.  
-**Fexty12573** - creator of SharpPluginLoader. Implemented an interface for Steam Matchmaking API. Provided invaluable help on figuring out how matchmaking works.
+**[GreenComfyTea](https://github.com/GreenComfyTea)** - creator of the mod and it's main contributor.  
+**[Fexty12573](https://github.com/Fexty12573)** - creator of [SharpPluginLoader](https://github.com/Fexty12573/SharpPluginLoader). Implemented an interface for Steam Matchmaking API. Provided invaluable help on figuring out how matchmaking works.
  
 ***
 # Support
