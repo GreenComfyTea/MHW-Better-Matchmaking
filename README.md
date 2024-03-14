@@ -124,7 +124,7 @@
 
 <p align="center">
 	<a>
-		<img align="center" src="" />
+		<img align="center" src="https://github.com/GreenComfyTea/MHW-Better-Matchmaking/assets/30152047/c192bcb6-c7f2-4207-a348-d784ee73bdfd" />
 	</a>
 </p>
 
@@ -164,7 +164,7 @@ The mod has support for localizations. If you wish to translate the mod, follow 
 4. Make an issue/pull request, or dm me on discord/twitter, to submit your translation. I will check it and include it in the next release.
 
 > [!IMPORTANT]
-> There is no support for unicode symbols at the moment. It will be added in the next release.
+> There is no support for unicode symbols at the moment. It will be added in the future release.
 
 # Credits
 **GreenComfyTea** - creator of the mod and it's main contributor.  
