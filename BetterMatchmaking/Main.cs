@@ -12,8 +12,6 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 	public string Author => Constants.MOD_AUTHOR;
 
 	private bool IsInitialized { get; set; } = false;
-	private bool AreHooksInitialized { get; set; } = false;
-
 	private bool IsImGuiRenderingEnabled { get; set; } = false;
 
 	public PluginData Initialize()
@@ -49,6 +47,8 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 			ExpeditionObjectiveFilter_I.Init();
 			RegionLevelFilter_I.Init();
 			TargetMonsterFilter_I.Init();
+
+			Core_I.Init();
 
 			IsInitialized = true;
 
@@ -100,13 +100,6 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 		try
 		{
 			if(!IsInitialized) return;
-
-			if(!AreHooksInitialized)
-			{
-				AreHooksInitialized = true;
-				Task.Run(Core_I.Init);
-			}
-
 			if(!IsImGuiRenderingEnabled) return;
 
 			CustomizationWindow_I.Render();

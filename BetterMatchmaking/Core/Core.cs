@@ -43,7 +43,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 	public Core Init()
 	{
-		TeaLog.Info("Core: Initializing Hooks...");
+		TeaLog.Info("Core: Initializing...");
 
 		InstantiateSingletons();
 
@@ -56,7 +56,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 		SteamMatchmaking.Init();
 		SteamMatchmakingInterface = SteamMatchmaking.GetSteamMatchmakingInterface();
 
-		TeaLog.Info("Core: Hook Initialization Done!");
+		TeaLog.Info("Core: Initialization Done!");
 
 		return this;
 	}
