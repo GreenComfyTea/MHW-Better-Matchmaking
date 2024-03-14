@@ -149,7 +149,7 @@
 4. Download the mod:
     * Official release can be downloaded from [Nexus Mods](https://nexusmods.com/monsterhunterworld/mods/7263);
     * Nightly builds are available in [this repo](https://github.com/greencomfytea/mhw-better-matchmaking) and can contain broken functionality, debugging info on screen, bugs and might require latest unreleased version of [SharpPluginLoader](https://github.com/Fexty12573/SharpPluginLoader). Use with caution!
-5. Extract the mod from the archive and place it in **Monster Hunter World** root folder.
+5. Extract the mod from the archive and place it in the game root folder: **/Monster Hunter World/**.
 
 # How to Enable F9 Menu
 1. Launch the game once to spawn `/Monster Hunter World/loader-config.json` file, close the game;
