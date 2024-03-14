@@ -100,18 +100,18 @@ internal class LocalizationWatcher : SingletonAccessor, IDisposable
 
 		Timers.SetTimeout(() =>
 		{
-			var localizationName = LocalizationManager_I.LoadLocalization(filePathName);
-			LocalizationManager_I.Customization.AddLocalization(localizationName);
-			LocalizationManager_I.SetCurrentLocalization(LocalizationManager_I.Current.Name);
+			var localization = LocalizationManager_I.LoadLocalization(filePathName);
+			LocalizationManager_I.Customization.AddLocalization(localization);
+			LocalizationManager_I.SetCurrentLocalization(LocalizationManager_I.Current.IsoName);
 		}, 250);
 
 		return this;
 	}
 
-	public LocalizationWatcher TemporarilyDisable(string localizationName)
+	public LocalizationWatcher TemporarilyDisable(string isoName)
 	{
-		TeaLog.Info($"LocalizationChangeWatcher: Localization { localizationName}: Temporarily Disabling...");
-		_lastEventTimes[$"{localizationName}.json"] = DateTime.Now;
+		TeaLog.Info($"LocalizationChangeWatcher: Localization { isoName}: Temporarily Disabling...");
+		_lastEventTimes[$"{isoName}.json"] = DateTime.Now;
 
 		return this;
 	}

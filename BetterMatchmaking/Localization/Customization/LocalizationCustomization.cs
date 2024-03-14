@@ -11,8 +11,9 @@ namespace BetterMatchmaking;
 
 internal class LocalizationCustomization : SingletonAccessor
 {
-	public List<string> LocalizationNamesList { get; set; } = new();
+	public List<string> LocalizationIsoNamesList { get; set; } = new();
 
+	private List<string> LocalizationNamesList { get; set; } = new();
 	private string[] LocalizationNames { get; set; } = Array.Empty<string>();
 
 	private int _selectedLocalizationIndex = 0;
@@ -25,9 +26,9 @@ internal class LocalizationCustomization : SingletonAccessor
 		InstantiateSingletons();
 	}
 
-	public LocalizationCustomization SetCurrentLocalization(string name)
+	public LocalizationCustomization SetCurrentLocalization(Localization localization)
 	{
-		var newSelectedLocalizationIndex = Array.IndexOf(LocalizationNames, name);
+		var newSelectedLocalizationIndex = LocalizationIsoNamesList.IndexOf(localization.IsoName);
 
 		if (newSelectedLocalizationIndex == -1) return this;
 
@@ -41,21 +42,24 @@ internal class LocalizationCustomization : SingletonAccessor
 		return this;
 	}
 
-	public LocalizationCustomization DeleteLocalization(string name)
+	public LocalizationCustomization DeleteLocalization(Localization localization)
 	{
-		if (LocalizationNamesList.Remove(name))
+		if (LocalizationIsoNamesList.Remove(localization.IsoName))
 		{
+			LocalizationNamesList.Remove(localization.LocalizationInfo.Name);
 			UpdateNamesList();
 		}
 
 		return this;
 	}
 
-	public LocalizationCustomization AddLocalization(string name)
+	public LocalizationCustomization AddLocalization(Localization localization)
 	{
-		if (LocalizationNamesList.Contains(name)) return this;
+		if (LocalizationIsoNamesList.Contains(localization.IsoName)) return this;
 
-		LocalizationNamesList.Add(name);
+		LocalizationIsoNamesList.Add(localization.IsoName);
+		LocalizationNamesList.Add(localization.LocalizationInfo.Name);
+
 		UpdateNamesList();
 
 		return this;
@@ -63,13 +67,6 @@ internal class LocalizationCustomization : SingletonAccessor
 
 	public LocalizationCustomization UpdateNamesList()
 	{
-		LocalizationNamesList.Sort((left, right) =>
-		{
-			if (left.Equals(Constants.DEFAULT_LOCALIZATION)) return -1;
-
-			return left.CompareTo(right);
-		});
-
 		LocalizationNames = LocalizationNamesList.ToArray();
 
 		return this;
@@ -77,7 +74,7 @@ internal class LocalizationCustomization : SingletonAccessor
 
 	public LocalizationCustomization OnLocalizationChanged(int selectedLocalizationIndex)
 	{
-		var currentLocalizationName = LocalizationNames[selectedLocalizationIndex];
+		var currentLocalizationName = LocalizationIsoNamesList[selectedLocalizationIndex];
 		ConfigManager_I.Current.Localization = currentLocalizationName;
 		LocalizationManager_I.SetCurrentLocalization(currentLocalizationName);
 

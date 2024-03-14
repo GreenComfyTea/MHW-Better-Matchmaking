@@ -15,6 +15,7 @@ public interface ILocalizedStrings;
 
 internal class LocalizedStrings_LocalizationInfo : ILocalizedStrings
 {
+	public string Name { get; set; } = "English";
 	public string Translators { get; set; } = "GreenComfyTea";
 }
 

@@ -63,7 +63,7 @@ internal sealed class LocalizationManager : IDisposable
 	public LocalizationManager SetCurrentLocalization(Localization localization)
 	{
 		Current = localization;
-		Customization.SetCurrentLocalization(localization.Name);
+		Customization.SetCurrentLocalization(localization);
 
 		LocalizationInfo = Current.LocalizationInfo;
 		ImGui = Current.ImGui;
@@ -71,9 +71,9 @@ internal sealed class LocalizationManager : IDisposable
 		return this;
 	}
 
-	public LocalizationManager SetCurrentLocalization(string localizationName)
+	public LocalizationManager SetCurrentLocalization(string isoName)
 	{
-		var localization = Localizations[localizationName];
+		var localization = Localizations[isoName];
 		SetCurrentLocalization(localization);
 
 		return this;
@@ -85,47 +85,46 @@ internal sealed class LocalizationManager : IDisposable
 
 		Localizations = new();
 		var localizationNamesList = new List<string>();
-		Localizations[Default.Name] = Default;
+		Localizations[Default.IsoName] = Default;
 
-		foreach (var localalizationFileNamePath in Directory.EnumerateFiles(Constants.LOCALIZATIONS_PATH, "*.json"))
+		foreach (var localizationFileNamePath in Directory.EnumerateFiles(Constants.LOCALIZATIONS_PATH, "*.json"))
 		{
-			var localizationName = LoadLocalization(localalizationFileNamePath);
-			if (localizationName == null) continue;
+			var localization = LoadLocalization(localizationFileNamePath);
+			if (localization == null) continue;
 
-			localizationNamesList.Add(localizationName);
+			localizationNamesList.Add(localization.IsoName);
+
+			Customization.AddLocalization(localization);
 		}
-
-		Customization.LocalizationNamesList = localizationNamesList;
-		Customization.UpdateNamesList();
 
 		TeaLog.Info("LocalizationManager: Loading All Localizations Done!");
 
 		return this;
 	}
 
-	public string LoadLocalization(string localizationFileNamePath)
+	public Localization LoadLocalization(string localizationFileNamePath)
 	{
-		var localizationName = Path.GetFileNameWithoutExtension(localizationFileNamePath);
+		var isoName = Path.GetFileNameWithoutExtension(localizationFileNamePath);
 
 		try
 		{
-			if (localizationName.Equals(Default.Name)) return localizationName;
+			if (isoName.Equals(Default.IsoName)) return Default;
 
-			TeaLog.Info($"Localization {localizationName}: Loading...");
+			TeaLog.Info($"Localization {isoName}: Loading...");
 
 			var json = JsonManager.ReadFromFile(localizationFileNamePath);
 
-			var localization = JsonSerializer.Deserialize<Localization>(json, JsonManager.JSON_SERIALIZER_OPTIONS_INSTANCE).Init(localizationName);
+			var localization = JsonSerializer.Deserialize<Localization>(json, JsonManager.JSON_SERIALIZER_OPTIONS_INSTANCE).Init(isoName);
 
-			TeaLog.Info($"Localization {localizationName}: Loading Done!");
+			TeaLog.Info($"Localization {isoName}: Loading Done!");
 
-			Localizations[localizationName] = localization;
+			Localizations[isoName] = localization;
 
-			return localizationName;
+			return localization;
 		}
 		catch(Exception exception)
 		{
-			TeaLog.Info($"Localization {localizationName}: Loading Failed!");
+			TeaLog.Info($"Localization {isoName}: Loading Failed!");
 			TeaLog.Error(exception.ToString());
 			return null;
 		}

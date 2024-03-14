@@ -17,7 +17,7 @@ namespace BetterMatchmaking
 	internal class Localization : SingletonAccessor
 	{
 		[JsonIgnore]
-		public string Name { get; set; } = "";
+		public string IsoName { get; set; } = "";
 
 		[JsonIgnore]
 		public bool IsDefault { get; set; } = false;
@@ -34,13 +34,13 @@ namespace BetterMatchmaking
 
 		public Localization Init()
 		{
-			Name = Constants.DEFAULT_LOCALIZATION;
+			IsoName = Constants.DEFAULT_LOCALIZATION;
 
-			TeaLog.Info($"Localization {Name}: Initializing...");
+			TeaLog.Info($"Localization {IsoName}: Initializing...");
 
 			IsDefault = true;
 
-			TeaLog.Info($"Localization {Name}: Done!");
+			TeaLog.Info($"Localization {IsoName}: Done!");
 
 			return this;
 		}
@@ -50,7 +50,7 @@ namespace BetterMatchmaking
 			TeaLog.Info($"Localization {name}: Initializing...");
 
 			InstantiateSingletons();
-			Name = name;
+			IsoName = name;
 			IsDefault = false;
 
 			TeaLog.Info($"Localization {name}: Done!");
@@ -60,10 +60,10 @@ namespace BetterMatchmaking
 
 		public Localization Save()
 		{
-			TeaLog.Info($"Localization {Name}: Saving...");
+			TeaLog.Info($"Localization {IsoName}: Saving...");
 
-			LocalizationManager_I.LocalizationWatcherInstance.TemporarilyDisable(Name);
-			JsonManager.SearializeToFile(Path.Combine(Constants.LOCALIZATIONS_PATH, $"{Name}.json"), this);
+			LocalizationManager_I.LocalizationWatcherInstance.TemporarilyDisable(IsoName);
+			JsonManager.SearializeToFile(Path.Combine(Constants.LOCALIZATIONS_PATH, $"{IsoName}.json"), this);
 
 			return this;
 		}

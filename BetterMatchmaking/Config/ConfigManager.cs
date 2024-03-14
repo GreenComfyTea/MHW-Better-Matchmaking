@@ -92,6 +92,7 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 
 		DebugManager_I.Customization = config.Debug;
 
+		LocalizationManager_I.SetCurrentLocalization(config.Localization);
 
 		var sessions = config.Sessions;
 		var quests = config.Quests;
@@ -142,7 +143,6 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 			TeaLog.Info("Config: Loading...");
 
 			var json = JsonManager.ReadFromFile(Constants.DEFAULT_CONFIG_FILE_PATH_NAME);
-
 			var config = JsonSerializer.Deserialize<Config>(json, JsonManager.JSON_SERIALIZER_OPTIONS_INSTANCE).Init();
 
 			TeaLog.Info("Config: Loading Done!");
