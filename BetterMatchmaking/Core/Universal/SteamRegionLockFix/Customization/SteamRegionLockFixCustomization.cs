@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class RegionLockFixCustomization : SingletonAccessor
+internal class SteamRegionLockFixCustomization : SingletonAccessor
 {
 	private bool _enabled = true;
 	public bool Enabled { get => _enabled; set => _enabled = value; }
@@ -20,14 +20,14 @@ internal class RegionLockFixCustomization : SingletonAccessor
 	[JsonIgnore]
 	public LobbyDistanceFilter DistanceFilterEnum { get => _distanceFilterEnum; set => _distanceFilterEnum = value; }
 
-	public RegionLockFixCustomization()
+	public SteamRegionLockFixCustomization()
 	{
 		InstantiateSingletons();
 
 		DistanceFilter = LocalizationManager_I.Default.ImGui.Worldwide;
 	}
 
-	public RegionLockFixCustomization Init()
+	public SteamRegionLockFixCustomization Init()
 	{
 		var success = Enum.TryParse(DistanceFilter, true, out _distanceFilterEnum);
 

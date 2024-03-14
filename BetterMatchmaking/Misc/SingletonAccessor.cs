@@ -23,7 +23,7 @@ internal class SingletonAccessor
 	[JsonIgnore]
 	protected Core Core_I { get; set; }
 	[JsonIgnore]
-	protected RegionLockFix RegionLockFix_I { get; set; }
+	protected SteamRegionLockFix SteamRegionLockFix_I { get; set; }
 	[JsonIgnore]
 	protected MaxSearchResultLimit MaxSearchResultLimit_I { get; set; }
 	[JsonIgnore]
@@ -69,7 +69,7 @@ internal class SingletonAccessor
 		DebugManager_I = DebugManager.Instance;
 
 		Core_I = Core.Instance;
-		RegionLockFix_I = RegionLockFix.Instance;
+		SteamRegionLockFix_I = SteamRegionLockFix.Instance;
 		MaxSearchResultLimit_I = MaxSearchResultLimit.Instance;
 		SessionPlayerCountFilter_I = PlayerCountFilter.Instance;
 		QuestPreferenceTargetFilter_I = UniversalTargetFilter.Instance;

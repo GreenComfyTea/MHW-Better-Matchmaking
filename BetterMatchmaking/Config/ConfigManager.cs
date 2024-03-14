@@ -104,7 +104,7 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 
 
 
-		RegionLockFix_I.SessionCustomization = sessions.RegionLockFix;
+		SteamRegionLockFix_I.SessionCustomization = sessions.RegionLockFix;
 		MaxSearchResultLimit_I.SessionCustomization = sessions.MaxSearchResultLimit;
 		SessionPlayerCountFilter_I.Customization = sessions.PlayerCountFilter;
 
@@ -114,7 +114,7 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 
 
 
-		RegionLockFix_I.QuestCustomization = quests.RegionLockFix;
+		SteamRegionLockFix_I.QuestCustomization = quests.RegionLockFix;
 		MaxSearchResultLimit_I.QuestCustomization = quests.MaxSearchResultLimit;
 
 		QuestTypeFilter_I.Customization = questInGameFilterOverride.QuestType;
@@ -125,7 +125,7 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 
 
 
-		RegionLockFix_I.GuidingLandsCustomization = guidingLands.RegionLockFix;
+		SteamRegionLockFix_I.GuidingLandsCustomization = guidingLands.RegionLockFix;
 		MaxSearchResultLimit_I.GuidingLandsCustomization = guidingLands.MaxSearchResultLimit;
 
 		ExpeditionObjectiveFilter_I.Customization = guidingLandsInGameFilterOverride.ExpeditionObjective;

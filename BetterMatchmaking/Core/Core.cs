@@ -270,7 +270,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 			// Apply Stuff
 
 			MaxSearchResultLimit_I.Apply(ref maxResultsRef);
-			RegionLockFix_I.Apply();
+			SteamRegionLockFix_I.Apply();
 			SessionPlayerCountFilter_I.ApplyMin().ApplyMax();
 
 			LanguageFilter_I.ApplyAnyLanguage();
