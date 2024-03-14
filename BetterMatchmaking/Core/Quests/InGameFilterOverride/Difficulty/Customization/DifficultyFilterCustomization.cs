@@ -68,7 +68,7 @@ internal class DifficultyFilterCustomization : SingletonAccessor
 		var tempChanged = false;
 		var selectedIndex = 0;
 
-		var styledQuestRanks = LocalizationManager_I.ImGui.StyledQuestRankReplacementTargets;
+		var questRanks = LocalizationManager_I.ImGui.QuestRankReplacementTargets;
 
 		if (ImGui.TreeNode(LocalizationManager_I.ImGui.Difficulty))
 		{
@@ -77,7 +77,7 @@ internal class DifficultyFilterCustomization : SingletonAccessor
 			selectedIndex = EnumToStringIndex(ReplacementTargetEnum);
 
 			ImGui.SetNextItemWidth(CustomizationWindow_I.ComboBoxWidth);
-			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref selectedIndex, styledQuestRanks, styledQuestRanks.Length);
+			tempChanged = ImGui.Combo(LocalizationManager_I.ImGui.ReplacementTarget, ref selectedIndex, questRanks, questRanks.Length);
 
 			if (tempChanged)
 			{

@@ -76,12 +76,12 @@ internal class DifficultyFilterCustomization_Options_MasterRank : SingletonAcces
                 changed = true;
             }
 
-            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.MasterRank1Star, ref _masterRank1) || changed;
-            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.MasterRank2Star, ref _masterRank2) || changed;
-            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.MasterRank3Star, ref _masterRank3) || changed;
-            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.MasterRank4Star, ref _masterRank4) || changed;
-            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.MasterRank5Star, ref _masterRank5) || changed;
-            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.MasterRank6Star, ref _masterRank6) || changed;
+            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.MasterRank1, ref _masterRank1) || changed;
+            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.MasterRank2, ref _masterRank2) || changed;
+            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.MasterRank3, ref _masterRank3) || changed;
+            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.MasterRank4, ref _masterRank4) || changed;
+            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.MasterRank5, ref _masterRank5) || changed;
+            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.MasterRank6, ref _masterRank6) || changed;
 
             ImGui.TreePop();
         }
