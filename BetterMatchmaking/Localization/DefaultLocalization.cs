@@ -67,10 +67,10 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string History { get; set; } = "History";
 	public string HistorySize { get; set; } = "History Size";
 
-	// Region Fix
+	// Steam Region Fix
 
 	public string Enabled { get; set; } = "Enabled";
-	public string RegionLockFix { get; set; } = "Region Lock Fix";
+	public string SteamRegionLockFix { get; set; } = "Steam Region Lock Fix";
 	public string Sessions { get; set; } = "Sessions";
 	public string Quests { get; set; } = "Quests";
 
