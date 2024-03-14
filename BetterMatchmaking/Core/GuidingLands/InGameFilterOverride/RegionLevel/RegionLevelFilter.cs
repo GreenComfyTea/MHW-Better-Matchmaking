@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class RegionLevelFilter : SingletonAccessor
+internal sealed class RegionLevelFilter : SingletonAccessor
 {
 	// Singleton Pattern
 	private static readonly RegionLevelFilter _singleton = new();

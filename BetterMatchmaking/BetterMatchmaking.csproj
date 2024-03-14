@@ -1,36 +1,36 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
-    <RootNamespace>BetterMatchmaking</RootNamespace>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>disable</Nullable>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
-    <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
+	<TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
+	<RootNamespace>BetterMatchmaking</RootNamespace>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<Nullable>disable</Nullable>
+	<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+	<SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+	<ProduceReferenceAssembly>True</ProduceReferenceAssembly>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>embedded</DebugType>
+	<DebugType>embedded</DebugType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DebugType>embedded</DebugType>
+	<DebugType>embedded</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SharpPluginLoader.Core" Version="0.0.4.1" />
-    <PackageReference Include="SharpPluginLoader.ImGui" Version="1.90.2.3" />
+	<PackageReference Include="SharpPluginLoader.Core" Version="0.0.4.1" />
+	<PackageReference Include="SharpPluginLoader.ImGui" Version="1.90.2.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="data\NotoSansKR-Bold.otf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+	<None Update="data\NotoSansKR-Bold.otf">
+	  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	</None>
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy &quot;$(OutDir)&quot; &quot;D:\Programs\Steam\steamapps\common\Monster Hunter World\nativePC\plugins\CSharp\BetterMatchmaking&quot; /s /i /y" />
+	<Exec Command="xcopy &quot;$(OutDir)&quot; &quot;D:\Programs\Steam\steamapps\common\Monster Hunter World\nativePC\plugins\CSharp\BetterMatchmaking&quot; /s /i /y" />
   </Target>
 
 </Project>

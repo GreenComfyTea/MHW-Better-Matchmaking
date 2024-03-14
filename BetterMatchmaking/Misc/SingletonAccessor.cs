@@ -61,6 +61,7 @@ internal class SingletonAccessor
 	protected TargetMonsterFilter TargetMonsterFilter_I { get; set; }
 
 
+
 	protected void InstantiateSingletons()
 	{
 		LocalizationManager_I = LocalizationManager.Instance;

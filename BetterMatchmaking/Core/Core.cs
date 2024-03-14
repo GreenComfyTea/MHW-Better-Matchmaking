@@ -174,7 +174,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 					searchKeyData += 0x10;
 					continue;
 				}
-				
+
 				if(keyID == (int) QuestSearchKeyIDs.RewardsAvailable)
 				{
 					IsQuestRewardsNoPreference = false;
@@ -183,7 +183,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 					searchKeyData += 0x10;
 					continue;
 				}
-				
+
 				if(keyID == (int) QuestSearchKeyIDs.Language)
 				{
 					IsLanguageAny = false;
@@ -192,7 +192,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 					searchKeyData += 0x10;
 					continue;
 				}
-				
+
 				if(keyID == (int) QuestSearchKeyIDs.QuestType)
 				{
 					IsQuestTypeNoPreference = false;

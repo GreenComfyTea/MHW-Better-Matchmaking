@@ -51,7 +51,7 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 
 	public string Language { get; set; } = "Language";
 
-	public string Translators { get; set; } = "Translators";
+	public string Translators { get; set; } = "Translator(s)";
 
 	// Debug Manager
 
@@ -336,7 +336,6 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	// Target Monster
 
 	public string TargetMonster { get; set; } = "Target Monster";
-	
 
 	[JsonIgnore]
 	public string[] DistanceFilterArray { get; set; } = Array.Empty<string>();

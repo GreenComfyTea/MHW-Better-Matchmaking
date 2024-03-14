@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class ExpeditionObjectiveFilter : SingletonAccessor
+internal sealed class ExpeditionObjectiveFilter : SingletonAccessor
 {
 	// Singleton Pattern
 	private static readonly ExpeditionObjectiveFilter _singleton = new();
@@ -69,7 +69,6 @@ internal class ExpeditionObjectiveFilter : SingletonAccessor
 			Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_GUIDING_LANDS_EXPEDITION_OBJECTIVE, (int) ExpeditionObjectives.FieldResearchRotted, LobbyComparison.NotEqual);
 		}
 
-
 		if(!fieldResearchFilterOptions.FieldResearchVolcanic)
 		{
 			TeaLog.Info("ExpeditionObjectiveFilter: Skipping Field Research: Volcanic...");
@@ -108,7 +107,6 @@ internal class ExpeditionObjectiveFilter : SingletonAccessor
 			Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_GUIDING_LANDS_EXPEDITION_OBJECTIVE, (int) ExpeditionObjectives.MiningRotted, LobbyComparison.NotEqual);
 		}
 
-
 		if(!miningFilterOptions.MiningVolcanic)
 		{
 			TeaLog.Info("ExpeditionObjectiveFilter: Skipping Mining: Volcanic...");
@@ -146,7 +144,6 @@ internal class ExpeditionObjectiveFilter : SingletonAccessor
 			TeaLog.Info("ExpeditionObjectiveFilter: Skipping Bone Research: Rotted...");
 			Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_GUIDING_LANDS_EXPEDITION_OBJECTIVE, (int) ExpeditionObjectives.BoneResearchRotted, LobbyComparison.NotEqual);
 		}
-
 
 		if(!boneResearchFilterOptions.BoneResearchVolcanic)
 		{

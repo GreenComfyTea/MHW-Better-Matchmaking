@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class TargetMonsterFilter : SingletonAccessor
+internal sealed class TargetMonsterFilter : SingletonAccessor
 {
 	// Singleton Pattern
 	private static readonly TargetMonsterFilter _singleton = new();
@@ -370,7 +370,6 @@ internal class TargetMonsterFilter : SingletonAccessor
 		if(comparison != (int) LobbyComparison.Equal) return false;
 		if(!key.Equals(Constants.SEARCH_KEY_GUIDING_LANDS_TARGET_MONSTER)) return false;
 		if(value != (int) Customization.ReplacementTargetEnum) return false;
-
 
 		TeaLog.Info("TargetMonsterFilter: Skipping Original Filter...");
 		Apply();

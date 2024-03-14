@@ -88,7 +88,7 @@ internal class RegionLevelFilterOptionCustomization : SingletonAccessor
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Level5, ref _level5) || changed;
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Level6, ref _level6) || changed;
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Level7, ref _level7) || changed;
-			
+
 			ImGui.TreePop();
 		}
 

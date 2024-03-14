@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal class UniversalTargetFilter : SingletonAccessor
+internal sealed class UniversalTargetFilter : SingletonAccessor
 {
 	// Singleton Pattern
 	private static readonly UniversalTargetFilter _singleton = new();
@@ -37,7 +37,6 @@ internal class UniversalTargetFilter : SingletonAccessor
 		UniversalTargetFilterCustomization_Options_IceborneEndgameMonsters iceborneEndgameMonsters
 	)
 	{
-
 		if(!baseGameMSQMonsters.GreatJagras)
 		{
 			TeaLog.Info("QuestPreferenceTargetFilter: Skipping Great Jagras...");

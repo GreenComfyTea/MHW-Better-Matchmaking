@@ -11,7 +11,7 @@ namespace BetterMatchmaking;
 
 internal class LocalizationWatcher : SingletonAccessor, IDisposable
 {
-	private Dictionary<string, DateTime> _lastEventTimes = new();
+	private readonly Dictionary<string, DateTime> _lastEventTimes = new();
 
 	private FileSystemWatcher Watcher { get; }
 
