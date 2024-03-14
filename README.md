@@ -161,7 +161,7 @@ The mod has support for localizations. If you wish to translate the mod, follow 
 1. Go to `Monster Hunter World\nativePC\plugins\CSharp\BetterMatchmaking\data\localizations\` folder. There should be `en-us.json` file. If not, launch the game once, the file will be regenerated;
 2. Copy-paste the file and give it a new name. Any format is supported but I expect it to be `ISO language code` for uniformity reasons;
 3. Open the file with any text editor and translate the strings;
-4. Make an issue/pull request, or dm me on discord/twitter, to submit your translation. I will check it and include it in the next release.
+4. Make an issue/pull request, or dm me on twitter, to submit your translation. I will check it and include it in the next release.
 
 > [!IMPORTANT]
 > There is no support for unicode symbols at the moment. It will be added in the future release.
