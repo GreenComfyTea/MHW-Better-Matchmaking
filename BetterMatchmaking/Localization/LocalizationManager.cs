@@ -40,15 +40,17 @@ internal sealed class LocalizationManager : IDisposable
 	{
 		TeaLog.Info("LocalizationManager: Initializing...");
 
+		// Create folder hierarchy if it doesn't exist
+		Directory.CreateDirectory(Constants.LOCALIZATIONS_PATH);
+
 		Customization = new();
 		LocalizationWatcherInstance = new();
 		Default = new();
 
+		
+
 		Default.Init();
 		Default.Save();
-
-		// Create folder hierarchy if it doesn't exist
-		Directory.CreateDirectory(Constants.LOCALIZATIONS_PATH);
 
 		SetCurrentLocalization(Default);
 		LoadAllLocalizations();

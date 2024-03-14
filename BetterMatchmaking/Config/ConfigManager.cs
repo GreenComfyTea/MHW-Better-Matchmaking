@@ -40,14 +40,16 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 
 		InstantiateSingletons();
 
+		// Create folder hierarchy if it doesn't exist
+		Directory.CreateDirectory(Constants.PLUGIN_DATA_PATH);
+
 		ConfigWatcherInstance = new();
 		Customization = new();
 		Default = new();
 
 		Default.InitDefault();
 
-		// Create folder hierarchy if it doesn't exist
-		Directory.CreateDirectory(Constants.PLUGIN_DATA_PATH);
+		
 
 		// If config file doesn't exist - use default one
 		if(!File.Exists(Constants.DEFAULT_CONFIG_FILE_PATH_NAME))
