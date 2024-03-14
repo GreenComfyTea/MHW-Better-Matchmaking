@@ -1,4 +1,4 @@
-﻿using ImGuiNET;
+using ImGuiNET;
 using SharpPluginLoader.Core;
 using SharpPluginLoader.Core.Configuration;
 using SharpPluginLoader.Core.Memory;
@@ -45,11 +45,8 @@ namespace BetterMatchmaking
 			return this;
 		}
 
-
 		public CustomizationWindow Render()
 		{
-			ImGui.ShowMetricsWindow();
-
 			if (!IsOpened) return this;
 
 			try
@@ -58,7 +55,6 @@ namespace BetterMatchmaking
 
 				ImGui.SetNextWindowPos(Constants.DEFAULT_WINDOW_POSITION, ImGuiCond.FirstUseEver);
 				ImGui.SetNextWindowSize(Constants.DEFAULT_WINDOW_SIZE, ImGuiCond.FirstUseEver);
-
 
 				ImGui.Begin($"{Constants.MOD_NAME} v{Constants.VERSION}", ref _isOpened);
 
