@@ -152,6 +152,10 @@
 5. Extract the mod from the archive and place it in **Monster Hunter World** root folder.
 
 # How to Use
+1. Launch the game once to spawn `/Monster Hunter World/loader-config.json` file, close the game;
+2. Open `loader-config.json` with any text editor and set `"ImGuiRenderingEnabled"` to `true`.
+
+# How to Use
 1. Open `SharpPluginLoader`﻿ menu by pressing `F9` key;
 2. Press `Better Matchmaking` button;
 3. Configure according to your needs.
