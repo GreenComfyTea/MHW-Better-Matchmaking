@@ -10,32 +10,32 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal sealed class SteamRegionLockFix : SingletonAccessor
+internal sealed class RegionLockFix : SingletonAccessor
 {
 	// Singleton Pattern
-	private static readonly SteamRegionLockFix _singleton = new();
+	private static readonly RegionLockFix _singleton = new();
 
-	public static SteamRegionLockFix Instance => _singleton;
+	public static RegionLockFix Instance => _singleton;
 
 	// Explicit static constructor to tell C# compiler
 	// not to mark type as beforefieldinit
-	static SteamRegionLockFix() { }
+	static RegionLockFix() { }
 
 	// Singleton Pattern End
 
 	//private delegate void numericalFilter_Delegate(nint steamInterface, nint keyAddress, int value, int comparison);
 	//private MarshallingHook<numericalFilter_Delegate> numericalFilter;
 
-	public SteamRegionLockFixCustomization SessionCustomization { get; set; }
-	public SteamRegionLockFixCustomization QuestCustomization { get; set; }
-	public SteamRegionLockFixCustomization GuidingLandsCustomization { get; set; }
+	public RegionLockFixCustomization SessionCustomization { get; set; }
+	public RegionLockFixCustomization QuestCustomization { get; set; }
+	public RegionLockFixCustomization GuidingLandsCustomization { get; set; }
 
-	private SteamRegionLockFix()
+	private RegionLockFix()
 	{
 		InstantiateSingletons();
 	}
 
-	public SteamRegionLockFix Apply()
+	public RegionLockFix Apply()
 	{
 		if (Core_I.CurrentSearchType == SearchTypes.None) return this;
 

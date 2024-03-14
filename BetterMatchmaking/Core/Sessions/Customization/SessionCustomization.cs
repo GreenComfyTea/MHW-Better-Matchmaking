@@ -10,7 +10,7 @@ namespace BetterMatchmaking;
 
 internal class SessionCustomization : SingletonAccessor
 {
-    public SteamRegionLockFixCustomization RegionLockFix { get; set; } = new();
+    public RegionLockFixCustomization RegionLockFix { get; set; } = new();
 
     public MaxSearchResultLimitCustomization MaxSearchResultLimit { get; set; } = new();
 

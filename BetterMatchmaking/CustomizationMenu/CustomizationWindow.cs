@@ -48,6 +48,8 @@ namespace BetterMatchmaking
 
 		public CustomizationWindow Render()
 		{
+			ImGui.ShowMetricsWindow();
+
 			if (!IsOpened) return this;
 
 			try
@@ -56,6 +58,7 @@ namespace BetterMatchmaking
 
 				ImGui.SetNextWindowPos(Constants.DEFAULT_WINDOW_POSITION, ImGuiCond.FirstUseEver);
 				ImGui.SetNextWindowSize(Constants.DEFAULT_WINDOW_SIZE, ImGuiCond.FirstUseEver);
+
 
 				ImGui.Begin($"{Constants.MOD_NAME} v{Constants.VERSION}", ref _isOpened);
 
