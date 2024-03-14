@@ -37,6 +37,8 @@ internal sealed class Core : SingletonAccessor, IDisposable
 	private delegate void numericalFilter_Delegate(nint steamInterface, nint keyAddress, int value, int comparison);
 	private Hook<numericalFilter_Delegate> NumericalFilterHook { get; set; }
 
+	private nint SteamMatchmakingInterface { get; set; }
+
 	private Core() { }
 
 	public Core Init()
@@ -50,6 +52,9 @@ internal sealed class Core : SingletonAccessor, IDisposable
 		// 0x7FFE2A0B5700
 		var numericalFilterAddress = Matchmaking.GetVirtualFunction(Matchmaking.VirtualFunctionIndex.AddRequestLobbyListNumericalFilter);
 		NumericalFilterHook = Hook.Create<numericalFilter_Delegate>(numericalFilterAddress, OnNumericalFilter);
+
+		SteamMatchmaking.Init();
+		SteamMatchmakingInterface = SteamMatchmaking.GetSteamMatchmakingInterface();
 
 		TeaLog.Info("Core: Hook Initialization Done!");
 
@@ -251,17 +256,20 @@ internal sealed class Core : SingletonAccessor, IDisposable
 			// Phase Check
 			var phase = MemoryUtil.Read<int>(netRequest + 0xE0);
 
+			//TeaLog.Info($"Phase: {phase}");
+
 			if(phase != 0)
 			{
 				CurrentSearchType = SearchTypes.None;
 				return StartRequestHook!.Original(netCore, netRequest);
 			}
 
-			TeaLog.Info("OnStartRequest");
-
 			AnalyzeSearchKeys(netRequest);
 
 			if(CurrentSearchType == SearchTypes.None) return StartRequestHook!.Original(netCore, netRequest);
+
+			TeaLog.Info("");
+			TeaLog.Info($"Search Request: {CurrentSearchType}");
 
 			// Max Results
 
@@ -295,7 +303,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 		try
 		{
-			if(CurrentSearchType == SearchTypes.None)
+			if(steamInterface != SteamMatchmakingInterface || CurrentSearchType == SearchTypes.None)
 			{
 				NumericalFilterHook!.Original(steamInterface, keyAddress, value, comparison);
 				return;
@@ -303,7 +311,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 			var key = MemoryUtil.ReadString(keyAddress);
 
-			TeaLog.Info($"{key} ({GetSearchKeyName(key)}) {GetComparisonSign(comparison)} {value}");
+			//TeaLog.Info($"{key} ({GetSearchKeyName(key)}) {GetComparisonSign(comparison)} {value}");
 
 			skip = PlayerTypeFilter_I.Apply(ref key, ref value, ref comparison) || skip;
 			skip = QuestPreferenceFilter_I.Apply(ref key, ref value, ref comparison) || skip;
