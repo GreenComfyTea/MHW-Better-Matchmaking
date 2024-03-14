@@ -18,12 +18,6 @@ internal class LocalizedStrings_LocalizationInfo : ILocalizedStrings
 	public string Name { get; set; } = "English";
 	public string Translators { get; set; } = "GreenComfyTea";
 }
-
-internal class LocalizedStrings_UI : ILocalizedStrings
-{
-	public string UI { get; set; } = "UI";
-}
-
 internal class LocalizedStrings_ImGui : ILocalizedStrings
 {
 	// Mod Info
@@ -67,10 +61,10 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string History { get; set; } = "History";
 	public string HistorySize { get; set; } = "History Size";
 
-	// Region Fix
+	// Steam Region Lock Fix
 
 	public string Enabled { get; set; } = "Enabled";
-	public string RegionLockFix { get; set; } = "Region Lock Fix";
+	public string SteamRegionLockFix { get; set; } = "Steam Region Lock Fix";
 	public string Sessions { get; set; } = "Sessions";
 	public string Quests { get; set; } = "Quests";
 
@@ -370,7 +364,7 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	[JsonIgnore]
 	public string[] TargetMonsterArray { get; set; } = Array.Empty<string>();
 
-	public LocalizedStrings_ImGui()
+	public LocalizedStrings_ImGui Init()
 	{
 		DistanceFilterArray = [Close, Default, Far, Worldwide];
 
@@ -386,18 +380,46 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 
 		QuestRankReplacementTargets =
 		[
-			LowRank, HighRank, MasterRank,
-			_1, _2, _3, _4, _5,
-			_6, _7, _8, _9,
-			MasterRank1, MasterRank2, MasterRank3, MasterRank4, MasterRank5, MasterRank6
+			LowRank,
+			HighRank,
+			MasterRank,
+			_1,
+			_2,
+			_3,
+			_4,
+			_5,
+			_6,
+			_7,
+			_8,
+			_9,
+			MasterRank1,
+			MasterRank2,
+			MasterRank3,
+			MasterRank4,
+			MasterRank5,
+			MasterRank6
 		];
 
 		StyledQuestRankReplacementTargets =
 		[
-			LowRank, HighRank, MasterRank,
-			LowRank1Star, LowRank2Star, LowRank3Star, LowRank4Star, LowRank5Star,
-			HighRank6Star, HighRank7Star, HighRank8Star, HighRank9Star,
-			MasterRank1Star, MasterRank2Star, MasterRank3Star, MasterRank4Star, MasterRank5Star, MasterRank6Star
+			LowRank,
+			HighRank,
+			MasterRank,
+			LowRank1Star,
+			LowRank2Star,
+			LowRank3Star,
+			LowRank4Star,
+			LowRank5Star,
+			HighRank6Star,
+			HighRank7Star,
+			HighRank8Star,
+			HighRank9Star,
+			MasterRank1Star,
+			MasterRank2Star,
+			MasterRank3Star,
+			MasterRank4Star,
+			MasterRank5Star,
+			MasterRank6Star
 		];
 
 		QuestPreferenceArray =
@@ -635,6 +657,7 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 			EbonyOdogaron,
 
 			SavageDeviljho,
+
 			Zinogre,
 			BruteTigrex,
 			YianGaruga,
@@ -663,5 +686,7 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 			StygianZinogre,
 			Rajang
 		];
+
+		return this;
 	}
 }

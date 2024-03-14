@@ -115,6 +115,7 @@ internal sealed class LocalizationManager : IDisposable
 			var json = JsonManager.ReadFromFile(localizationFileNamePath);
 
 			var localization = JsonSerializer.Deserialize<Localization>(json, JsonManager.JSON_SERIALIZER_OPTIONS_INSTANCE).Init(isoName);
+			localization.Save();
 
 			TeaLog.Info($"Localization {isoName}: Loading Done!");
 

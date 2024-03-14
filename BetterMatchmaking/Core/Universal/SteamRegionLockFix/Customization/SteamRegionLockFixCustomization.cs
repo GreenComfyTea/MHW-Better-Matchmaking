@@ -42,7 +42,7 @@ internal class SteamRegionLockFixCustomization : SingletonAccessor
 
 		var distanceFilters = LocalizationManager_I.ImGui.DistanceFilterArray;
 
-		if (ImGui.TreeNode(LocalizationManager_I.ImGui.RegionLockFix))
+		if (ImGui.TreeNode(LocalizationManager_I.ImGui.SteamRegionLockFix))
 		{
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
 

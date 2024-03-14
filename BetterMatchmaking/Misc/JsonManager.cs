@@ -10,7 +10,12 @@ namespace BetterMatchmaking;
 
 public static class JsonManager
 {
-	public static readonly JsonSerializerOptions JSON_SERIALIZER_OPTIONS_INSTANCE = new() { WriteIndented = true, AllowTrailingCommas = true };
+	public static readonly JsonSerializerOptions JSON_SERIALIZER_OPTIONS_INSTANCE = new()
+	{
+		WriteIndented = true,
+		AllowTrailingCommas = true,
+		Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+	};
 
 	public static string Serialize(object obj)
 	{

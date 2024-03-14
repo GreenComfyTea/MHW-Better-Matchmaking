@@ -18,14 +18,10 @@ namespace BetterMatchmaking
 	{
 		[JsonIgnore]
 		public string IsoName { get; set; } = "";
-
 		[JsonIgnore]
 		public bool IsDefault { get; set; } = false;
 
 		public LocalizedStrings_LocalizationInfo LocalizationInfo { get; set; } = new();
-
-		public LocalizedStrings_UI UI { get; set; } = new();
-
 		public LocalizedStrings_ImGui ImGui { get; set; } = new();
 
 		public Localization() {
@@ -39,6 +35,7 @@ namespace BetterMatchmaking
 			TeaLog.Info($"Localization {IsoName}: Initializing...");
 
 			IsDefault = true;
+			ImGui.Init();
 
 			TeaLog.Info($"Localization {IsoName}: Done!");
 
@@ -52,6 +49,7 @@ namespace BetterMatchmaking
 			InstantiateSingletons();
 			IsoName = name;
 			IsDefault = false;
+			ImGui.Init();
 
 			TeaLog.Info($"Localization {name}: Done!");
 
