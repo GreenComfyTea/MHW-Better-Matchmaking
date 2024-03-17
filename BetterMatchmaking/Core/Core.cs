@@ -1,8 +1,10 @@
 ﻿using SharpPluginLoader.Core.Memory;
+using SharpPluginLoader.Core.Networking;
 using SharpPluginLoader.Core.Steam;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -125,10 +127,18 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 	private void AnalyzeSearchKeys(nint netRequest)
 	{
+		TeaLog.Info(1);
+
 		var requestArguments = MemoryUtil.Read<int>(netRequest + 0x58);
+
+		TeaLog.Info(2);
+
 		var searchKeyCount = MemoryUtil.Read<int>(requestArguments + 0x14);
+		TeaLog.Info($"3: searchKeyCount = {searchKeyCount}");
 
 		var searchKeyData = requestArguments + 0x1C;
+
+		TeaLog.Info(4);
 
 		var isLanguageUpdated = false;
 		var isQuestRewardsUpdated = false;
@@ -137,10 +147,14 @@ internal sealed class Core : SingletonAccessor, IDisposable
 		var isRegionLevelUpdated = false;
 		var isTargetMonsterUpdated = false;
 
+		TeaLog.Info(5);
+
 		for(int i = 0; i < searchKeyCount; i++)
 		{
 			var keyID = MemoryUtil.Read<int>(searchKeyData - 0x4);
+			TeaLog.Info($"6: keyID = {keyID}");
 			var value = MemoryUtil.Read<int>(searchKeyData + 0x8);
+			TeaLog.Info($"7: value = {value}");
 
 			if(keyID == Constants.SEARCH_KEY_SEARCH_TYPE_ID)
 			{
@@ -241,12 +255,16 @@ internal sealed class Core : SingletonAccessor, IDisposable
 			searchKeyData += 0x10;
 		}
 
+		TeaLog.Info(8);
+
 		if(!isLanguageUpdated) IsLanguageAny = true;
 		if(!isQuestTypeUpdated) IsQuestTypeNoPreference = true;
 		if(!isQuestRewardsUpdated) IsQuestRewardsNoPreference = true;
 		if(!isExpeditionObjectiveUpdated) IsExpeditionObjectiveNoPreference = true;
 		if(!isRegionLevelUpdated) IsRegionLevelNoPreference = true;
 		if(!isTargetMonsterUpdated) IsTargetMonsterNoPreference = true;
+
+		TeaLog.Info(9);
 	}
 
 	private int OnStartRequest(nint netCore, nint netRequest)
@@ -256,7 +274,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 			// Phase Check
 			var phase = MemoryUtil.Read<int>(netRequest + 0xE0);
 
-			//TeaLog.Info($"Phase: {phase}");
+			TeaLog.Info($"[OnStartRequest] phase: {phase}, netCore: {netCore}, netRequest: {netRequest}");
 
 			if(phase != 0)
 			{
@@ -300,9 +318,10 @@ internal sealed class Core : SingletonAccessor, IDisposable
 	private void OnNumericalFilter(nint steamInterface, nint keyAddress, int value, int comparison)
 	{
 		var skip = false;
-
 		try
 		{
+			TeaLog.Info($"[OnNumericalFilter] steamInterface: {steamInterface}, keyAddress: {keyAddress}, comparison: {GetComparisonSign(comparison)}, value: {value}");
+
 			if(steamInterface != SteamMatchmakingInterface || CurrentSearchType == SearchTypes.None)
 			{
 				NumericalFilterHook!.Original(steamInterface, keyAddress, value, comparison);
@@ -311,7 +330,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 			var key = MemoryUtil.ReadString(keyAddress);
 
-			//TeaLog.Info($"{key} ({GetSearchKeyName(key)}) {GetComparisonSign(comparison)} {value}");
+			TeaLog.Info($"{key} ({GetSearchKeyName(key)}) {GetComparisonSign(comparison)} {value}");
 
 			skip = PlayerTypeFilter_I.Apply(ref key, ref value, ref comparison) || skip;
 			skip = QuestPreferenceFilter_I.Apply(ref key, ref value, ref comparison) || skip;
