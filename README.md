@@ -144,7 +144,7 @@
 
 # How to Install
 1. Install [Stracker's Loader](https://www.nexusmods.com/monsterhunterworld/mods/1982);
-2. Install [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) (Get the **.NET Desktop Runtime 8.0.x**);
+2. Install [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) (Get the **.NET Desktop Runtime 8.0.x 64-bit**);
 3. Install [SharpPluginLoader](https://github.com/Fexty12573/SharpPluginLoader);
 4. Download the mod:
     * Official release can be downloaded from [Nexus Mods](https://nexusmods.com/monsterhunterworld/mods/7263);
