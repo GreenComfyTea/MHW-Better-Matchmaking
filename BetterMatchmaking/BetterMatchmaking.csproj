@@ -24,9 +24,22 @@
   </ItemGroup>
 
   <ItemGroup>
+	<None Update="data\localizations\en-us.json">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</None>
+	<None Update="data\localizations\ja-jp.json">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</None>
+	<None Update="data\localizations\ru-ru.json">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</None>
 	<None Update="data\NotoSansKR-Bold.otf">
 	  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	</None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="data\localizations\" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
