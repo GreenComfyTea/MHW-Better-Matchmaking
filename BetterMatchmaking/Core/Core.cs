@@ -47,11 +47,30 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 		InstantiateSingletons();
 
-		StartRequestHook = Hook.Create<startRequest_Delegate>(0x1421e2430, OnStartRequest);
+		TeaLog.Info("Core: Scanning for StartRequest() Address...");
+
+		var instruction = PatternScanner.FindFirst(Pattern.FromString(Constants.START_REQUEST_FUNCTION_PATTERN));
+		var startRequestAddress = instruction + Constants.START_REQUEST_FUNCTION_OFFSET;
+
+		if(startRequestAddress == 0)
+		{
+			TeaLog.Info("Core: StartRequest() Not Found!");
+		}
+		else
+		{
+			TeaLog.Info($"Core: StartRequest() Found at 0x{startRequestAddress:X}!");
+			TeaLog.Info("Core: Creating StartRequest() Hook...");
+			StartRequestHook = Hook.Create<startRequest_Delegate>(startRequestAddress, OnStartRequest);
+			TeaLog.Info("Core: StartRequest() Hook Created!");
+		}
+
+		TeaLog.Info("Core: Creating AddRequestLobbyListNumericalFilter() Hook...");
 
 		// 0x7FFE2A0B5700
 		var numericalFilterAddress = Matchmaking.GetVirtualFunction(Matchmaking.VirtualFunctionIndex.AddRequestLobbyListNumericalFilter);
 		NumericalFilterHook = Hook.Create<numericalFilter_Delegate>(numericalFilterAddress, OnNumericalFilter);
+
+		TeaLog.Info("Core: AddRequestLobbyListNumericalFilter() Hook Created!");
 
 		SteamMatchmaking.Init();
 		SteamMatchmakingInterface = SteamMatchmaking.GetSteamMatchmakingInterface();
@@ -125,10 +144,22 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 	private void AnalyzeSearchKeys(nint netRequest)
 	{
+<<<<<<< Updated upstream
 		var requestArguments = MemoryUtil.Read<int>(netRequest + 0x58);
+=======
+		TeaLog.Info($"1: netRequest = {netRequest}");
+
+		var requestArguments = MemoryUtil.Read<int>(netRequest + 0x58);
+		TeaLog.Info($"2: requestArguments = {requestArguments}");
+
+>>>>>>> Stashed changes
 		var searchKeyCount = MemoryUtil.Read<int>(requestArguments + 0x14);
 
 		var searchKeyData = requestArguments + 0x1C;
+<<<<<<< Updated upstream
+=======
+		TeaLog.Info($"4: searchKeyData = {searchKeyData}");
+>>>>>>> Stashed changes
 
 		var isLanguageUpdated = false;
 		var isQuestRewardsUpdated = false;

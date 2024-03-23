@@ -331,4 +331,7 @@ public static class Constants
 
 	public static readonly Vector2 DEFAULT_WINDOW_POSITION = new(480, 60);
 	public static readonly Vector2 DEFAULT_WINDOW_SIZE = new(600, 500);
+
+	public const string START_REQUEST_FUNCTION_PATTERN = "8b 42 54 33 ed 4c 8b f2 48 8b d9 44 8b ed 85 c0";
+	public const nint START_REQUEST_FUNCTION_OFFSET = -0xB;
 }
