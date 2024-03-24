@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.ExceptionServices;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -72,8 +74,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 		TeaLog.Info("Core: AddRequestLobbyListNumericalFilter() Hook Created!");
 
-		SteamMatchmaking.Init();
-		SteamMatchmakingInterface = SteamMatchmaking.GetSteamMatchmakingInterface();
+		SteamMatchmakingInterface = Matchmaking.GetSteamMatchmakingInterface();
 
 		TeaLog.Info("Core: Initialization Done!");
 

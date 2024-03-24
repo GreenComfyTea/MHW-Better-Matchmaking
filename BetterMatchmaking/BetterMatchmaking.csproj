@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 	<TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
@@ -19,7 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-	<PackageReference Include="SharpPluginLoader.Core" Version="0.0.4.1" />
+	<PackageReference Include="SharpPluginLoader.Core" Version="0.0.5" />
 	<PackageReference Include="SharpPluginLoader.ImGui" Version="1.90.2.3" />
   </ItemGroup>
 
