@@ -144,22 +144,9 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 	private void AnalyzeSearchKeys(nint netRequest)
 	{
-<<<<<<< Updated upstream
-		var requestArguments = MemoryUtil.Read<int>(netRequest + 0x58);
-=======
-		TeaLog.Info($"1: netRequest = {netRequest}");
-
-		var requestArguments = MemoryUtil.Read<int>(netRequest + 0x58);
-		TeaLog.Info($"2: requestArguments = {requestArguments}");
-
->>>>>>> Stashed changes
-		var searchKeyCount = MemoryUtil.Read<int>(requestArguments + 0x14);
-
-		var searchKeyData = requestArguments + 0x1C;
-<<<<<<< Updated upstream
-=======
-		TeaLog.Info($"4: searchKeyData = {searchKeyData}");
->>>>>>> Stashed changes
+		var requestArgumentsAddress = MemoryUtil.Read<nint>(netRequest + 0x58);
+		var searchKeyCount = MemoryUtil.Read<int>(requestArgumentsAddress + 0x14);
+		var searchKeyData = requestArgumentsAddress + 0x1C;
 
 		var isLanguageUpdated = false;
 		var isQuestRewardsUpdated = false;
@@ -287,7 +274,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 			// Phase Check
 			var phase = MemoryUtil.Read<int>(netRequest + 0xE0);
 
-			//TeaLog.Info($"Phase: {phase}");
+			TeaLog.Info($"Search Request: Phase = {phase}");
 
 			if(phase != 0)
 			{
@@ -342,7 +329,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 			var key = MemoryUtil.ReadString(keyAddress);
 
-			//TeaLog.Info($"{key} ({GetSearchKeyName(key)}) {GetComparisonSign(comparison)} {value}");
+			TeaLog.Debug($"{key} ({GetSearchKeyName(key)}) {GetComparisonSign(comparison)} {value}");
 
 			skip = PlayerTypeFilter_I.Apply(ref key, ref value, ref comparison) || skip;
 			skip = QuestPreferenceFilter_I.Apply(ref key, ref value, ref comparison) || skip;
