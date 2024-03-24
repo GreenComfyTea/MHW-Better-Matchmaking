@@ -43,7 +43,7 @@
 		<img alt=".NET Dependency" src="https://custom-icon-badges.demolab.com/badge/dependency-.NET%20v8.0-brightgreen?logo=package-dependencies" />
 	</a>
 	<a href="https://github.com/Fexty12573/SharpPluginLoader">
-		<img alt="SharpPluginLoader Dependency" src="https://custom-icon-badges.demolab.com/badge/dependency-SharpPluginLoader%20v0.0.4.1-brightgreen?logo=package-dependencies" />
+		<img alt="SharpPluginLoader Dependency" src="https://custom-icon-badges.demolab.com/badge/dependency-SharpPluginLoader%20v0.0.5-brightgreen?logo=package-dependencies" />
 	</a>
 	<br>
 	<br>
@@ -140,7 +140,7 @@
 # Requirements
 1. [Stracker's Loader](https://www.nexusmods.com/monsterhunterworld/mods/1982);
 2. [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0);
-3. [SharpPluginLoader v0.0.4.1](https://github.com/Fexty12573/SharpPluginLoader) (Other versions are not guaranteed to work).
+3. [SharpPluginLoader v0.0.5](https://github.com/Fexty12573/SharpPluginLoader) (Other versions are not guaranteed to work).
 
 # How to Install
 1. Install [Stracker's Loader](https://www.nexusmods.com/monsterhunterworld/mods/1982);
@@ -151,12 +151,8 @@
     * Nightly builds are available in [this repo](https://github.com/greencomfytea/mhw-better-matchmaking) and can contain broken functionality, debugging info on screen, bugs and might require latest unreleased version of [SharpPluginLoader](https://github.com/Fexty12573/SharpPluginLoader). Use with caution!
 5. Extract the mod from the archive and place it in the game root folder: **/Monster Hunter World/**.
 
-# How to Enable F9 Menu
-1. Launch the game once to spawn `/Monster Hunter World/loader-config.json` file, close the game;
-2. Open `loader-config.json` with any text editor and set `ImGuiRenderingEnabled` to `true`.
-
 # How to Use
-1. Open `SharpPluginLoader`﻿ menu by pressing `F9` key;
+1. Open `SharpPluginLoader`﻿ menu by pressing `F9` key  (can be changed in `loader-config.json`);
 2. Press `Better Matchmaking` button;
 3. Configure according to your needs.
 
