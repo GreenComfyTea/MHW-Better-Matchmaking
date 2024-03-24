@@ -249,7 +249,7 @@ public static class Constants
 	public const string MOD_NAME = "Better Matchmaking";
 	public const string MOD_FOLDER_NAME = "BetterMatchmaking";
 
-	public const string VERSION = "2.0";
+	public const string VERSION = "2.1";
 
 	public const float EPSILON = 0.000001f;
 
