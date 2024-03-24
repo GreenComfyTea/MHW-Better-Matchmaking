@@ -168,7 +168,8 @@ The mod has support for localizations. If you wish to translate the mod, follow 
 
 # Credits
 **[GreenComfyTea](https://github.com/GreenComfyTea)** - creator of the mod and it's main contributor.  
-**[Fexty12573](https://github.com/Fexty12573)** - creator of [SharpPluginLoader](https://github.com/Fexty12573/SharpPluginLoader). Implemented an interface for Steam Matchmaking API. Provided invaluable help on figuring out how matchmaking works.
+**[Fexty12573](https://github.com/Fexty12573)** - creator of [SharpPluginLoader](https://github.com/Fexty12573/SharpPluginLoader). Implemented an interface for Steam Matchmaking API. Provided invaluable help on figuring out how matchmaking works.  
+**[elappale](https://github.com/elappale)** - Japanese translator.
  
 ***
 # Support
