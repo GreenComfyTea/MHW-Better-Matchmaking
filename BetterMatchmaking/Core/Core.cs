@@ -1,4 +1,4 @@
-﻿using SharpPluginLoader.Core.Memory;
+using SharpPluginLoader.Core.Memory;
 using SharpPluginLoader.Core.Networking;
 using SharpPluginLoader.Core.Steam;
 using System;
@@ -6,11 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
+using System.Runtime.ExceptionServices;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
+[System.Obsolete("Recovery from corrupted process state exceptions is not supported; HandleProcessCorruptedStateExceptionsAttribute is ignored.", DiagnosticId = "SYSLIB0032", UrlFormat = "https://aka.ms/dotnet-warnings/{0}")]
 internal sealed class Core : SingletonAccessor, IDisposable
 {
 	// Singleton Pattern
@@ -125,146 +128,158 @@ internal sealed class Core : SingletonAccessor, IDisposable
 		return "";
 	}
 
+	[HandleProcessCorruptedStateExceptions, SecurityCritical]
 	private void AnalyzeSearchKeys(nint netRequest)
 	{
-		TeaLog.Info(1);
-
-		var requestArguments = MemoryUtil.Read<int>(netRequest + 0x58);
-
-		TeaLog.Info(2);
-
-		var searchKeyCount = MemoryUtil.Read<int>(requestArguments + 0x14);
-		TeaLog.Info($"3: searchKeyCount = {searchKeyCount}");
-
-		var searchKeyData = requestArguments + 0x1C;
-
-		TeaLog.Info(4);
-
-		var isLanguageUpdated = false;
-		var isQuestRewardsUpdated = false;
-		var isQuestTypeUpdated = false;
-		var isExpeditionObjectiveUpdated = false;
-		var isRegionLevelUpdated = false;
-		var isTargetMonsterUpdated = false;
-
-		TeaLog.Info(5);
-
-		for(int i = 0; i < searchKeyCount; i++)
+		try
 		{
-			var keyID = MemoryUtil.Read<int>(searchKeyData - 0x4);
-			TeaLog.Info($"6: keyID = {keyID}");
-			var value = MemoryUtil.Read<int>(searchKeyData + 0x8);
-			TeaLog.Info($"7: value = {value}");
+			TeaLog.Info($"1: netRequest = {netRequest}");
 
-			if(keyID == Constants.SEARCH_KEY_SEARCH_TYPE_ID)
+			var requestArguments = MemoryUtil.Read<nint>(netRequest + 0x58);
+			TeaLog.Info($"2: requestArguments = {requestArguments}");
+
+			TeaLog.Info($"2.5: searchKeyCountAddress = {requestArguments + 0x14}");
+
+			var searchKeyCount = MemoryUtil.Read<int>(requestArguments + 0x14);
+
+			TeaLog.Info($"3: searchKeyCount = {searchKeyCount}");
+
+			var searchKeyData = requestArguments + 0x1C;
+
+			TeaLog.Info($"4: searchKeyData = {searchKeyData}");
+
+			var isLanguageUpdated = false;
+			var isQuestRewardsUpdated = false;
+			var isQuestTypeUpdated = false;
+			var isExpeditionObjectiveUpdated = false;
+			var isRegionLevelUpdated = false;
+			var isTargetMonsterUpdated = false;
+
+			TeaLog.Info("5");
+
+			for(int i = 0; i < searchKeyCount; i++)
 			{
-				CurrentSearchType = value switch
-				{
-					(int) SearchTypes.Session => SearchTypes.Session,
-					(int) SearchTypes.Quest => SearchTypes.Quest,
-					_ => SearchTypes.None
-				};
+				var keyID = MemoryUtil.Read<int>(searchKeyData - 0x4);
+				TeaLog.Info($"6: keyID = {keyID}");
 
-				searchKeyData += 0x10;
-				continue;
-			}
+				var value = MemoryUtil.Read<int>(searchKeyData + 0x8);
+				TeaLog.Info($"7: value = {value}");
+				TeaLog.Info("");
 
-			if(CurrentSearchType == SearchTypes.Session)
-			{
-				if(keyID == (int) SessionSearchKeyIDs.Language)
+				if(keyID == Constants.SEARCH_KEY_SEARCH_TYPE_ID)
 				{
-					IsLanguageAny = false;
-					isLanguageUpdated = true;
+					CurrentSearchType = value switch
+					{
+						(int) SearchTypes.Session => SearchTypes.Session,
+						(int) SearchTypes.Quest => SearchTypes.Quest,
+						_ => SearchTypes.None
+					};
+
+					searchKeyData += 0x10;
+					continue;
 				}
 
-				searchKeyData += 0x10;
-				continue;
-			}
-
-			if(CurrentSearchType == SearchTypes.Quest)
-			{
-				if(keyID == (int) GuidingLandsSearchKeyIDs.IsGuidingLands)
+				if(CurrentSearchType == SearchTypes.Session)
 				{
-					if(value == (int) GuidingLands.Yes)
+					if(keyID == (int) SessionSearchKeyIDs.Language)
 					{
-						CurrentSearchType = SearchTypes.GuidingLands;
+						IsLanguageAny = false;
+						isLanguageUpdated = true;
 					}
 
 					searchKeyData += 0x10;
 					continue;
 				}
 
-				if(keyID == (int) QuestSearchKeyIDs.RewardsAvailable)
+				if(CurrentSearchType == SearchTypes.Quest)
 				{
-					IsQuestRewardsNoPreference = false;
-					isQuestRewardsUpdated = true;
+					if(keyID == (int) GuidingLandsSearchKeyIDs.IsGuidingLands)
+					{
+						if(value == (int) GuidingLands.Yes)
+						{
+							CurrentSearchType = SearchTypes.GuidingLands;
+						}
 
-					searchKeyData += 0x10;
-					continue;
+						searchKeyData += 0x10;
+						continue;
+					}
+
+					if(keyID == (int) QuestSearchKeyIDs.RewardsAvailable)
+					{
+						IsQuestRewardsNoPreference = false;
+						isQuestRewardsUpdated = true;
+
+						searchKeyData += 0x10;
+						continue;
+					}
+
+					if(keyID == (int) QuestSearchKeyIDs.Language)
+					{
+						IsLanguageAny = false;
+						isLanguageUpdated = true;
+
+						searchKeyData += 0x10;
+						continue;
+					}
+
+					if(keyID == (int) QuestSearchKeyIDs.QuestType)
+					{
+						IsQuestTypeNoPreference = false;
+						isQuestTypeUpdated = true;
+
+						searchKeyData += 0x10;
+						continue;
+					}
 				}
 
-				if(keyID == (int) QuestSearchKeyIDs.Language)
+				if(CurrentSearchType == SearchTypes.GuidingLands)
 				{
-					IsLanguageAny = false;
-					isLanguageUpdated = true;
+					if(keyID == (int) GuidingLandsSearchKeyIDs.ExpeditionObjective)
+					{
+						IsExpeditionObjectiveNoPreference = false;
+						isExpeditionObjectiveUpdated = true;
 
-					searchKeyData += 0x10;
-					continue;
+						searchKeyData += 0x10;
+						continue;
+					}
+
+					if(keyID == (int) GuidingLandsSearchKeyIDs.RegionLevel)
+					{
+						IsRegionLevelNoPreference = false;
+						isRegionLevelUpdated = true;
+
+						searchKeyData += 0x10;
+						continue;
+					}
+
+					if(keyID == (int) GuidingLandsSearchKeyIDs.TargetMonster)
+					{
+						IsTargetMonsterNoPreference = false;
+						isTargetMonsterUpdated = true;
+
+						searchKeyData += 0x10;
+						continue;
+					}
 				}
 
-				if(keyID == (int) QuestSearchKeyIDs.QuestType)
-				{
-					IsQuestTypeNoPreference = false;
-					isQuestTypeUpdated = true;
-
-					searchKeyData += 0x10;
-					continue;
-				}
+				searchKeyData += 0x10;
 			}
 
-			if(CurrentSearchType == SearchTypes.GuidingLands)
-			{
-				if(keyID == (int) GuidingLandsSearchKeyIDs.ExpeditionObjective)
-				{
-					IsExpeditionObjectiveNoPreference = false;
-					isExpeditionObjectiveUpdated = true;
+			TeaLog.Info("8");
 
-					searchKeyData += 0x10;
-					continue;
-				}
+			if(!isLanguageUpdated) IsLanguageAny = true;
+			if(!isQuestTypeUpdated) IsQuestTypeNoPreference = true;
+			if(!isQuestRewardsUpdated) IsQuestRewardsNoPreference = true;
+			if(!isExpeditionObjectiveUpdated) IsExpeditionObjectiveNoPreference = true;
+			if(!isRegionLevelUpdated) IsRegionLevelNoPreference = true;
+			if(!isTargetMonsterUpdated) IsTargetMonsterNoPreference = true;
 
-				if(keyID == (int) GuidingLandsSearchKeyIDs.RegionLevel)
-				{
-					IsRegionLevelNoPreference = false;
-					isRegionLevelUpdated = true;
-
-					searchKeyData += 0x10;
-					continue;
-				}
-
-				if(keyID == (int) GuidingLandsSearchKeyIDs.TargetMonster)
-				{
-					IsTargetMonsterNoPreference = false;
-					isTargetMonsterUpdated = true;
-
-					searchKeyData += 0x10;
-					continue;
-				}
-			}
-
-			searchKeyData += 0x10;
+			TeaLog.Info("9");
 		}
-
-		TeaLog.Info(8);
-
-		if(!isLanguageUpdated) IsLanguageAny = true;
-		if(!isQuestTypeUpdated) IsQuestTypeNoPreference = true;
-		if(!isQuestRewardsUpdated) IsQuestRewardsNoPreference = true;
-		if(!isExpeditionObjectiveUpdated) IsExpeditionObjectiveNoPreference = true;
-		if(!isRegionLevelUpdated) IsRegionLevelNoPreference = true;
-		if(!isTargetMonsterUpdated) IsTargetMonsterNoPreference = true;
-
-		TeaLog.Info(9);
+		catch(Exception exception)
+		{
+			TeaLog.Info(exception);
+		}
 	}
 
 	private int OnStartRequest(nint netCore, nint netRequest)
