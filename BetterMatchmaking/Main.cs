@@ -74,8 +74,6 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 		Core_I.Dispose();
 	}
 
-	public int count = 0;
-
 	public void OnImGuiRender()
 	{
 		if (!IsInitialized) return;
