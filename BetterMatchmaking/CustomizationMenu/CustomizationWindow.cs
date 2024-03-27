@@ -2,6 +2,7 @@ using ImGuiNET;
 using SharpPluginLoader.Core;
 using SharpPluginLoader.Core.Configuration;
 using SharpPluginLoader.Core.Memory;
+using SharpPluginLoader.Core.Rendering;
 using SharpPluginLoader.Core.View;
 using System;
 using System.Collections.Generic;
@@ -45,9 +46,54 @@ namespace BetterMatchmaking
 			return this;
 		}
 
+		private static ImFontPtr Font { get; set; }
+		private static bool IsFontInitialized { get; set; } = false;
+
+
+		public static unsafe void InitFont()
+		{
+			IsFontInitialized = true;
+
+			var io = ImGuiNative.igGetIO();
+			var fonts = io->Fonts;
+
+			ImFontConfig* config = ImGuiNative.ImFontConfig_ImFontConfig();
+			config->MergeMode = 0;
+			config->FontDataOwnedByAtlas = 0;
+
+			//fonts.AddFontDefault();
+
+			//config->MergeMode = 1;
+
+			var path = Encoding.ASCII.GetBytes(@"\nativePC\plugins\CSharp\BetterMatchmaking\data\NotoSansKR-Bold.otf");
+
+			fixed(byte* pathPointer = &path[0])
+			{
+				ImGuiNative.ImFontAtlas_AddFontFromFileTTF(fonts, pathPointer, 26f, config, ImGuiNative.ImFontAtlas_GetGlyphRangesKorean(fonts));
+			}
+
+			ImGuiNative.ImFontAtlas_Build(fonts);
+			
+
+			//Font = fonts.AddFontFromFileTTF(Path.Combine(@"D:\Programs\Steam\steamapps\common\Monster Hunter World\nativePC\plugins\CSharp\BetterMatchmaking\data\NotoSansKR-Bold.otf"), 26f, config, fonts.GetGlyphRangesKorean());
+
+			//fonts.GetTexDataAsRGBA32(out byte* pixels, out var texDataWidth, out var texDataHeight);
+
+			//var texture = LoadTexture("./path/to/texture.png", out var width, out var height);
+
+			//fonts.SetTexID(texture);
+			//fonts.ClearTexData();
+		}
+
 		public CustomizationWindow Render()
 		{
-			if (!IsOpened) return this;
+			if(!IsOpened) return this;
+
+			//if(!IsFontInitialized) InitFont();
+
+			ImGui.PushFont(Renderer.KoreanFont);
+			ImGui.DebugTextEncoding("안녕하세요");
+			ImGui.PopFont();
 
 			try
 			{
@@ -55,6 +101,8 @@ namespace BetterMatchmaking
 
 				ImGui.SetNextWindowPos(Constants.DEFAULT_WINDOW_POSITION, ImGuiCond.FirstUseEver);
 				ImGui.SetNextWindowSize(Constants.DEFAULT_WINDOW_SIZE, ImGuiCond.FirstUseEver);
+
+				ImGui.ShowMetricsWindow();
 
 				ImGui.Begin($"{Constants.MOD_NAME} v{Constants.VERSION}", ref _isOpened);
 
