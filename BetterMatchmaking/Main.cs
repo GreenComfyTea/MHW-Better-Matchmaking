@@ -1,5 +1,6 @@
 ﻿using ImGuiNET;
 using SharpPluginLoader.Core;
+using SharpPluginLoader.Core.Rendering;
 using System.Diagnostics;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -12,7 +13,6 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 	public string Author => Constants.MOD_AUTHOR;
 
 	private bool IsInitialized { get; set; } = false;
-	private bool IsImGuiRenderingEnabled { get; set; } = false;
 
 	public PluginData Initialize()
 	{
@@ -78,8 +78,6 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 	{
 		if (!IsInitialized) return;
 
-		IsImGuiRenderingEnabled = true;
-
 		try
 		{
 			if (ImGui.Button($"{Constants.MOD_NAME} v{Constants.VERSION}"))
@@ -98,7 +96,7 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 		try
 		{
 			if(!IsInitialized) return;
-			if(!IsImGuiRenderingEnabled) return;
+			if(!Renderer.MenuShown) return;
 
 			CustomizationWindow_I.Render();
 		}
@@ -106,7 +104,5 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 		{
 			DebugManager_I.Report("BetterMatchmakingPlugin.OnImGuiFreeRender()", exception.ToString());
 		}
-
-		IsImGuiRenderingEnabled = false;
 	}
 }
