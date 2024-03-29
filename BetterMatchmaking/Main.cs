@@ -1,5 +1,6 @@
 ﻿using ImGuiNET;
 using SharpPluginLoader.Core;
+using SharpPluginLoader.Core.Rendering;
 using System.Diagnostics;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -12,7 +13,6 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 	public string Author => Constants.MOD_AUTHOR;
 
 	private bool IsInitialized { get; set; } = false;
-	private bool IsImGuiRenderingEnabled { get; set; } = false;
 
 	public PluginData Initialize()
 	{
@@ -34,10 +34,12 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 			ConfigManager_I.Init();
 			CustomizationWindow_I.Init();
 
+			UniversalTargetFilter_I.Init();
+
 			PlayerTypeFilter_I.Init();
-			QuestPreferenceTargetFilter_I.Init();
+			QuestPreferenceFilter_I.Init();
 			LanguageFilter_I.Init();
-			QuestPreferenceTargetFilter_I.Init();
+
 
 			QuestTypeFilter_I.Init();
 			DifficultyFilter_I.Init();
@@ -78,8 +80,6 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 	{
 		if (!IsInitialized) return;
 
-		IsImGuiRenderingEnabled = true;
-
 		try
 		{
 			if (ImGui.Button($"{Constants.MOD_NAME} v{Constants.VERSION}"))
@@ -98,7 +98,7 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 		try
 		{
 			if(!IsInitialized) return;
-			if(!IsImGuiRenderingEnabled) return;
+			if(!Renderer.MenuShown) return;
 
 			CustomizationWindow_I.Render();
 		}
@@ -106,7 +106,5 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 		{
 			DebugManager_I.Report("BetterMatchmakingPlugin.OnImGuiFreeRender()", exception.ToString());
 		}
-
-		IsImGuiRenderingEnabled = false;
 	}
 }

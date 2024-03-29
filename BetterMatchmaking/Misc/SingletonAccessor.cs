@@ -29,7 +29,7 @@ internal class SingletonAccessor
 	[JsonIgnore]
 	protected PlayerCountFilter SessionPlayerCountFilter_I { get; set; }
 	[JsonIgnore]
-	protected UniversalTargetFilter QuestPreferenceTargetFilter_I { get; set; }
+	protected UniversalTargetFilter UniversalTargetFilter_I { get; set; }
 
 
 
@@ -73,7 +73,7 @@ internal class SingletonAccessor
 		SteamRegionLockFix_I = SteamRegionLockFix.Instance;
 		MaxSearchResultLimit_I = MaxSearchResultLimit.Instance;
 		SessionPlayerCountFilter_I = PlayerCountFilter.Instance;
-		QuestPreferenceTargetFilter_I = UniversalTargetFilter.Instance;
+		UniversalTargetFilter_I = UniversalTargetFilter.Instance;
 
 		PlayerTypeFilter_I = PlayerTypeFilter.Instance;
 		QuestPreferenceFilter_I = QuestPreferenceFilter.Instance;
