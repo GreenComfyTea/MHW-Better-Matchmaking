@@ -34,10 +34,12 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 			ConfigManager_I.Init();
 			CustomizationWindow_I.Init();
 
+			UniversalTargetFilter_I.Init();
+
 			PlayerTypeFilter_I.Init();
-			QuestPreferenceTargetFilter_I.Init();
+			QuestPreferenceFilter_I.Init();
 			LanguageFilter_I.Init();
-			QuestPreferenceTargetFilter_I.Init();
+
 
 			QuestTypeFilter_I.Init();
 			DifficultyFilter_I.Init();

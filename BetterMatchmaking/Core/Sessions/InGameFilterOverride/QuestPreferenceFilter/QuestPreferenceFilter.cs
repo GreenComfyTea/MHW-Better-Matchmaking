@@ -120,7 +120,7 @@ internal sealed class QuestPreferenceFilter : SingletonAccessor
 			Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_SESSION_QUEST_PREFERENCE, (int) Targets.SmallMonsters, LobbyComparison.NotEqual);
 		}
 
-		QuestPreferenceTargetFilter_I.Apply(
+		UniversalTargetFilter_I.Apply(
 			Constants.SEARCH_KEY_SESSION_QUEST_PREFERENCE,
 			filterOptions.BaseGameMsqMonsters,
 			filterOptions.BaseGameEndgameMonsters,
