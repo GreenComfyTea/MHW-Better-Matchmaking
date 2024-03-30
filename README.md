@@ -130,6 +130,7 @@
 
 # Links
 * **[Nexus Mods](https://nexusmods.com/monsterhunterworld/mods/7263)**
+* **[Nightly Builds](https://github.com/GreenComfyTea/MHW-Better-Matchmaking-Nightly/releases)**
 
 # Features
 1. Steam Region Lock Fix;
