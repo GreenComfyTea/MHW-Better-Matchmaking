@@ -10,7 +10,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-and-create-pre-release:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,6 +31,9 @@ jobs:
     - name: Zip the Build
       run: |
         cd /home/runner/work/MHW-Better-Matchmaking/MHW-Better-Matchmaking/BetterMatchmaking/bin/Release/net8.0-windows10.0.22621.0 && zip -r BetterMatchmaking.zip *
+
+    - name: Expose Commit Data
+      uses: rlespinasse/git-commit-data-action@v1
         
     - name: Create Release
       id: create_release
