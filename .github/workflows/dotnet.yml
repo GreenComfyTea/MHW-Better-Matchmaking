@@ -65,7 +65,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag: nightly
+        tag: latest
         name: Nightly ${{ github.run_number }} (${{ env.GIT_COMMIT_SHORT_SHA }})
         draft: false
         allowUpdates: true
