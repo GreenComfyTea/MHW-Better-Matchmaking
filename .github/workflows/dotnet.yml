@@ -45,6 +45,7 @@ jobs:
         name: Build ${{ github.run_number }} (${{ env.GIT_COMMIT_SHORT_SHA }})
         draft: false
         prerelease: true
+        body: '## [Main Repo](https://github.com/GreenComfyTea/MHW-Better-Matchmaking) | [Commit Files](https://github.com/GreenComfyTea/MHW-Better-Matchmaking/tree/${{ env.GIT_COMMIT_SHA }})'
         token: ${{ secrets.NIGHTLY_TOKEN }}
         repo: MHW-Better-Matchmaking-Nightly
         
@@ -59,8 +60,8 @@ jobs:
         asset_name: BetterMatchmaking_${{ github.run_number }}_${{ env.GIT_COMMIT_SHORT_SHA }}.zip
         asset_content_type: application/zip
         
-    - name: Update Nightly Release
-      id: update-nightly-release
+    - name: Update Latest Release
+      id: update-latest-release
       uses: ncipollo/release-action@v1.14.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -70,16 +71,17 @@ jobs:
         draft: false
         allowUpdates: true
         removeArtifacts: true
+        omitBodyDuringUpdate: true
         token: ${{ secrets.NIGHTLY_TOKEN }}
         repo: MHW-Better-Matchmaking-Nightly
 
-    - name: Upload Assets to Nightly Release
-      id: upload-assets-to-nightly-release
+    - name: Upload Assets to Latest Release
+      id: upload-assets-to-latest-release
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.NIGHTLY_TOKEN }}
       with:
-        upload_url: ${{ steps.update-nightly-release.outputs.upload_url }}
+        upload_url: ${{ steps.update-latest-release.outputs.upload_url }}
         asset_path: /home/runner/work/MHW-Better-Matchmaking/MHW-Better-Matchmaking/BetterMatchmaking/bin/Release/net8.0-windows10.0.22621.0/BetterMatchmaking.zip
         asset_name: BetterMatchmaking_${{ github.run_number }}_${{ env.GIT_COMMIT_SHORT_SHA }}.zip
         asset_content_type: application/zip
