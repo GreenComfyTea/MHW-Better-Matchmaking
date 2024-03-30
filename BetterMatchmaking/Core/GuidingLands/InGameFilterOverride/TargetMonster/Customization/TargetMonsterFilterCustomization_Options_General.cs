@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace BetterMatchmaking;
 internal class TargetMonsterFilterCustomization_Options_General : SingletonAccessor
 {
-	private bool _none = true;
-	public bool None { get => _none; set => _none = value; }
+	private bool _noPreference = true;
+	public bool NoPreference { get => _noPreference; set => _noPreference = value; }
 
 	public TargetMonsterFilterCustomization_Options_General()
 	{
@@ -18,14 +18,14 @@ internal class TargetMonsterFilterCustomization_Options_General : SingletonAcces
 
 	public TargetMonsterFilterCustomization_Options_General SelectAll()
 	{
-		None = true;
+		NoPreference = true;
 
 		return this;
 	}
 
 	public TargetMonsterFilterCustomization_Options_General DeselectAll()
 	{
-		None = false;
+		NoPreference = false;
 
 		return this;
 	}
@@ -50,7 +50,7 @@ internal class TargetMonsterFilterCustomization_Options_General : SingletonAcces
 			//    changed = true;
 			//}
 
-			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.None, ref _none) || changed;
+			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.NoPreference, ref _noPreference) || changed;
 
 			ImGui.TreePop();
 		}

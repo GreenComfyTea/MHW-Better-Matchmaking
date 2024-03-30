@@ -39,10 +39,10 @@ internal sealed class TargetMonsterFilter : SingletonAccessor
 		var iceborneMsqMonsters = filterOptions.IceborneMSQMonsters;
 		var iceborneEndgameMonsters = filterOptions.IceborneEndgameMonsters;
 
-		if(!generalFilterOptions.None)
+		if(!generalFilterOptions.NoPreference)
 		{
-			TeaLog.Info("TargetMonsterFilter: Skipping None...");
-			Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_GUIDING_LANDS_TARGET_MONSTER, (int) Targets.None, LobbyComparison.NotEqual);
+			TeaLog.Info("TargetMonsterFilter: Skipping No Preference...");
+			Matchmaking.AddRequestLobbyListNumericalFilter(Constants.SEARCH_KEY_GUIDING_LANDS_TARGET_MONSTER, (int) Targets.NoPreference, LobbyComparison.NotEqual);
 		}
 
 		if(!baseGameMSQMonsters.GreatJagras)

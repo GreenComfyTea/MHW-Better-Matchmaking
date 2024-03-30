@@ -1,4 +1,4 @@
-﻿using SharpPluginLoader.Core.Memory;
+using SharpPluginLoader.Core.Memory;
 using SharpPluginLoader.Core.Steam;
 
 namespace BetterMatchmaking;
@@ -60,7 +60,6 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 		TeaLog.Info("Core: Creating AddRequestLobbyListNumericalFilter() Hook...");
 
-		// 0x7FFE2A0B5700
 		var numericalFilterAddress = Matchmaking.GetVirtualFunction(Matchmaking.VirtualFunctionIndex.AddRequestLobbyListNumericalFilter);
 		NumericalFilterHook = Hook.Create<numericalFilter_Delegate>(numericalFilterAddress, OnNumericalFilter);
 
@@ -348,7 +347,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 	public void Dispose()
 	{
 		TeaLog.Info("Core: Disposing Hooks...");
-		if(StartRequestHook != null) StartRequestHook?.Dispose();
-		if(NumericalFilterHook != null) NumericalFilterHook?.Dispose();
+		StartRequestHook?.Dispose();
+		NumericalFilterHook?.Dispose();
 	}
 }
