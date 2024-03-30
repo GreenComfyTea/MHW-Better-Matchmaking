@@ -31,7 +31,9 @@ jobs:
     - name: Zip the Build
       run: |
         cd /home/runner/work/MHW-Better-Matchmaking/MHW-Better-Matchmaking/BetterMatchmaking/bin/Release/net8.0-windows10.0.22621.0 && zip -r BetterMatchmaking.zip *
-  
+    - name: Print
+      run: |
+        ls /home/runner/work/MHW-Better-Matchmaking/MHW-Better-Matchmaking/BetterMatchmaking/bin/Release/net8.0-windows10.0.22621.0
   release:
     runs-on: ubuntu-latest
     needs: build
@@ -59,6 +61,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
+        
         asset_path: /home/runner/work/MHW-Better-Matchmaking/MHW-Better-Matchmaking/BetterMatchmaking/bin/Release/net8.0-windows10.0.22621.0/BetterMatchmaking.zip
         asset_name: BetterMatchmaking_build${{ secrets.run_count }}_${{ steps.date.outputs.date }}.zip
         asset_content_type: application/zip
