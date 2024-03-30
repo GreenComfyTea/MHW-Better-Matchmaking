@@ -37,7 +37,7 @@ jobs:
         
     - name: Create Build Release
       id: create-build-release
-      uses: actions/create-release@v1
+      uses: actions/create-release@v1.14.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -59,7 +59,7 @@ jobs:
         
     - name: Update Nightly Release
       id: update-nightly-release
-      uses: actions/create-release@v1
+      uses: actions/create-release@v1.14.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
