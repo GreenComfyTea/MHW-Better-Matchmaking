@@ -35,8 +35,8 @@ jobs:
     - name: Expose Commit Data
       uses: rlespinasse/git-commit-data-action@v1
         
-    - name: Create Release
-      id: create_release
+    - name: Create Build Release
+      id: create-build-release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -45,25 +45,40 @@ jobs:
         release_name: Build ${{ env.GIT_COMMIT_SHORT_SHA }}
         draft: false
         prerelease: true
-
-    - name: Create Release2
-      id: create_release2
+        
+    - name: Upload Assets to Build Release
+      id: upload-assets-to-build-release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create-build-release.outputs.upload_url }}
+        asset_path: /home/runner/work/MHW-Better-Matchmaking/MHW-Better-Matchmaking/BetterMatchmaking/bin/Release/net8.0-windows10.0.22621.0/BetterMatchmaking.zip
+        asset_name: BetterMatchmaking_${{ env.GIT_COMMIT_SHORT_SHA }}.zip
+        asset_content_type: application/zip
+        
+    - name: Update Nightly Release
+      id: update-nightly-release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: nightly
-        release_name: Nightly
+        release_name: Build ${{ env.GIT_COMMIT_SHORT_SHA }}
         draft: false
         prerelease: true
-        
-    - name: Upload Asset
-      id: upload-asset 
+        allowUpdates: true
+        generateReleaseNotes: true
+        removeArtifacts: true
+        repo: MHW-Better-Matchmaking-Nightly
+
+    - name: Upload Assets to Nightly Release
+      id: upload-assets-to-nightly-release
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{ steps.update-nightly-release.outputs.upload_url }}
         asset_path: /home/runner/work/MHW-Better-Matchmaking/MHW-Better-Matchmaking/BetterMatchmaking/bin/Release/net8.0-windows10.0.22621.0/BetterMatchmaking.zip
         asset_name: BetterMatchmaking_${{ env.GIT_COMMIT_SHORT_SHA }}.zip
         asset_content_type: application/zip
