@@ -45,6 +45,17 @@ jobs:
         release_name: Build ${{ env.GIT_COMMIT_SHORT_SHA }}
         draft: false
         prerelease: true
+
+    - name: Create Release2
+      id: create_release2
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: nightly
+        release_name: Nightly
+        draft: false
+        prerelease: true
         
     - name: Upload Asset
       id: upload-asset 
