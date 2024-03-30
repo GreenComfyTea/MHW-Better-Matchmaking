@@ -47,6 +47,9 @@
 	</a>
 	<br>
 	<br>
+	<a href="https://github.com/GreenComfyTea/MHW-Better-Matchmaking-Nightly/releases">
+		<img alt="Build" src="https://custom-icon-badges.demolab.com/github/actions/workflow/status/GreenComfyTea/MHW-Better-Matchmaking/build-and-create-release.yml?logo=mark-github" />
+	</a>
 	<a href="https://github.com/GreenComfyTea/MHW-Better-Matchmaking/commits/main">
 		<img alt="Commits" src="https://custom-icon-badges.demolab.com/github/commit-activity/t/GreenComfyTea/MHW-Better-Matchmaking?logo=git-commit" />
 	</a>
