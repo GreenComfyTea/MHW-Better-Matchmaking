@@ -26,6 +26,11 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: BetterMatchmaking_build_${{ github.run_number }}
+        path: ./pre-release
 
   release:
 
@@ -34,9 +39,9 @@ jobs:
 
     steps:
     - name: Zip the Build
-      run: zip -r BetterMatchmaking_${{ github.run_number }} ./AppName/bin/Release/
-    - name: Create Release
-      id: create_release
+      run: zip -r BetterMatchmaking_build_${{ github.run_number }} ./pre-release
+    - name: Create Pre-release
+      id: create_pre-release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -51,7 +56,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        upload_url: ${{ steps.create_pre-release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
         asset_path: ./BetterMatchmaking_${{ github.run_number }}.zip
         asset_name: BetterMatchmaking_${{ github.run_number }}.zip
         asset_content_type: application/zip
