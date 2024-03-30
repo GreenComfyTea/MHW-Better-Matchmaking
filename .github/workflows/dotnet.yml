@@ -71,7 +71,7 @@ jobs:
         draft: false
         allowUpdates: true
         removeArtifacts: true
-        omitBodyDuringUpdate: true
+        body: '## [Main Repo](https://github.com/GreenComfyTea/MHW-Better-Matchmaking) | [Commit Files](https://github.com/GreenComfyTea/MHW-Better-Matchmaking/tree/${{ env.GIT_COMMIT_SHA }}) | Ignore the date shown for the release. This is the latest build.'
         token: ${{ secrets.NIGHTLY_TOKEN }}
         repo: MHW-Better-Matchmaking-Nightly
 
