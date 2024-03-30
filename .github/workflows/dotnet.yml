@@ -30,10 +30,11 @@ jobs:
   release:
 
     runs-on: ubuntu-latest
+    needs: build
 
     steps:
     - name: Zip the Build
-      run: zip -r ${{ secrets.ReleaseZipName }} ./AppName/bin/Release/
+      run: zip -r BetterMatchmaking_${{ github.run_number }} ./AppName/bin/Release/
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -51,6 +52,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./${{ secrets.ReleaseZipName }}.zip
-        asset_name: ${{ secrets.ReleaseZipName }}.zip
+        asset_path: ./BetterMatchmaking_${{ github.run_number }}.zip
+        asset_name: BetterMatchmaking_${{ github.run_number }}.zip
         asset_content_type: application/zip
