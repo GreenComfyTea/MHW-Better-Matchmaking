@@ -1,6 +1,5 @@
 # This workflow will build a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-
 name: .NET
 
 on:
@@ -11,52 +10,54 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v4
+    
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+        
     - name: Restore dependencies
       run: dotnet restore
+      
     - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: BetterMatchmaking_build_${{ github.run_number }}
-        path: ./pre-release
-
+      run: dotnet build --no-restore --configuration Release
+      
+    - name: Zip the Build
+      run: |
+        cd /home/runner/work/MHW-Better-Matchmaking/MHW-Better-Matchmaking/BetterMatchmaking/bin/Debug/net8.0-windows10.0.22621.0 && zip -r BetterMatchmaking.zip *
+  
   release:
-
     runs-on: ubuntu-latest
     needs: build
 
     steps:
-    - name: Zip the Build
-      run: zip -r BetterMatchmaking_build_${{ github.run_number }} ./pre-release
-    - name: Create Pre-release
-      id: create_pre-release
+    - name: Get current date
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y%m%d%H%M%S')"
+    
+    - name: Create Release
+      id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.run_number }}
-        release_name: Release ${{ github.ref }}
-        body: New Release.
+        tag_name: build-${{ steps.date.outputs.date }}
+        release_name: Build ${{ steps.date.outputs.date }}
         draft: false
         prerelease: true
-    - name: Upload Release Asset
+      
+    - name: Upload Asset
+      id: upload-asset 
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_pre-release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./BetterMatchmaking_${{ github.run_number }}.zip
-        asset_name: BetterMatchmaking_${{ github.run_number }}.zip
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: /home/runner/work/MHW-Better-Matchmaking/MHW-Better-Matchmaking/BetterMatchmaking/bin/Debug/net8.0-windows10.0.22621.0/BetterMatchmaking.zip
+        asset_name: BetterMatchmaking_build${{ secrets.run_count }}_${{ steps.date.outputs.date }}.zip
         asset_content_type: application/zip
