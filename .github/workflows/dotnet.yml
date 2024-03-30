@@ -70,6 +70,7 @@ jobs:
         allowUpdates: true
         generateReleaseNotes: true
         removeArtifacts: true
+        token: ${{ secrets.NIGHTLY_TOKEN }}
         repo: MHW-Better-Matchmaking-Nightly
 
     - name: Upload Assets to Nightly Release
