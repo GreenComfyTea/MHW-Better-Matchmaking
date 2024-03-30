@@ -98,8 +98,8 @@
 	</a>
 	<br>
 	<br>
-	<a href="https://mhwnexusmods.com/monsterhunterworld/mods/7263">
-		<img alt="Website" src="https://custom-icon-badges.demolab.com/website?down_color=red&down_message=down&up_color=brightgreen&up_message=up&logo=link&url=https://mhwnexusmods.com/monsterhunterrise/mods/1044" />
+	<a href="https://nexusmods.com/monsterhunterworld/mods/7263">
+		<img alt="Website" src="https://custom-icon-badges.demolab.com/website?down_color=red&down_message=down&up_color=brightgreen&up_message=up&logo=link&url=https://nexusmods.com/monsterhunterworld/mods/7263" />
 	</a>
 	<a href="https://github.com/GreenComfyTea?tab=followers">
 		<img alt="Followers" src="https://custom-icon-badges.demolab.com/github/followers/GreenComfyTea?logo=people" />
