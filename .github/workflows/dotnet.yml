@@ -41,7 +41,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag: build-${{ github.run_number }}-${{ env.GIT_COMMIT_SHORT_SHA }}
+        tag: ${{ github.run_number }}-${{ env.GIT_COMMIT_SHORT_SHA }}
         name: Build ${{ github.run_number }} (${{ env.GIT_COMMIT_SHORT_SHA }})
         draft: false
         prerelease: true
