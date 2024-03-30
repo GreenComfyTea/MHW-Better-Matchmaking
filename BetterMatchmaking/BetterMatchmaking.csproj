@@ -8,6 +8,7 @@
 	<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 	<SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
 	<ProduceReferenceAssembly>True</ProduceReferenceAssembly>
+	<EnableWindowsTargeting>True</EnableWindowsTargeting>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
