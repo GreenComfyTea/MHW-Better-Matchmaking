@@ -69,7 +69,6 @@ jobs:
         name: Nightly ${{ github.run_number }} (${{ env.GIT_COMMIT_SHORT_SHA }})
         draft: false
         allowUpdates: true
-        generateReleaseNotes: true
         removeArtifacts: true
         token: ${{ secrets.NIGHTLY_TOKEN }}
         repo: MHW-Better-Matchmaking-Nightly
