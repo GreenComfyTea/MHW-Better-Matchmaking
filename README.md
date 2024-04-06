@@ -169,7 +169,27 @@ The mod has support for localizations. If you wish to translate the mod, follow 
 5. Make an issue/pull request, or dm me on [Twitter](https://twitter.com/GreenComfyTea), to submit your localization. I will check it and include it in the next release.
 
 > [!IMPORTANT]
-> There is no support for unicode symbols at the moment. It will be added in the future release.
+> Each localization must provide unicode glyph ranges to load. You can take the ranges [here](https://github.com/Fexty12573/SharpPluginLoader/blob/master/SharpPluginLoader.Core/Rendering/GlyphRangeFactory.cs) and [here](https://jrgraphix.net/r/Unicode/).
+
+### Example:
+```JSON
+"FontInfo": {
+	"Name": "NotoSans-Bold.ttf",
+	"GlyphRanges": [
+		"0x0020", "0x00FF",
+		"0x0370", "0x03FF",
+		"0x0400", "0x052F",
+		"0x2DE0", "0x2DFF",
+		"0xA640", "0xA69F"
+	]
+},
+```
+
+> [!IMPORTANT]
+> Put the font you want to use in `\Monster Hunter World\nativePC\plugins\CSharp\BetterMatchmaking\data\fonts\` folder. The font must be static. Only `.OTF` and `.TTF` fonts are supported.
+
+> [!IMPORTANT]
+> SharpPluginLoader doesn't support font hot-reload. So adding/changing a font will require game restart. This applies both to localization file changes (font name, glyph ranges) and config changes (font size, oversample).
 
 # Credits
 **[GreenComfyTea](https://github.com/GreenComfyTea)** - Creator of the mod and it's main contributor;  
