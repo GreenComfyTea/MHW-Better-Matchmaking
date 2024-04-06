@@ -41,8 +41,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag: ${{ github.run_number }}-${{ env.GIT_COMMIT_SHORT_SHA }}
-        name: Build ${{ github.run_number }} (${{ env.GIT_COMMIT_SHORT_SHA }})
+        tag: 0${{ github.run_number }}-${{ env.GIT_COMMIT_SHORT_SHA }}
+        name: Build 0${{ github.run_number }} (${{ env.GIT_COMMIT_SHORT_SHA }})
         draft: false
         prerelease: true
         body: '## [Main Repo](https://github.com/GreenComfyTea/MHW-Better-Matchmaking) | [Commit Files](https://github.com/GreenComfyTea/MHW-Better-Matchmaking/tree/${{ env.GIT_COMMIT_SHA }})'
