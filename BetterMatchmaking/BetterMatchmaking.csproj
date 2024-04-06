@@ -20,26 +20,51 @@
   </PropertyGroup>
 
   <ItemGroup>
-	<PackageReference Include="SharpPluginLoader.Core" Version="0.0.5" />
+	<PackageReference Include="SharpPluginLoader.Core" Version="0.0.6" />
 	<PackageReference Include="SharpPluginLoader.ImGui" Version="1.90.2.3" />
   </ItemGroup>
 
   <ItemGroup>
+	<None Update="data\fonts\NotoEmoji-Bold.ttf">
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>
+	<None Update="data\fonts\NotoSans-Bold.ttf">
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>
+	<None Update="data\fonts\NotoSansJP-Bold.ttf">
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>
+	<None Update="data\fonts\NotoSansSC-Bold.ttf">
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>
+	<None Update="data\fonts\NotoSansTC-Bold.ttf">
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>
 	<None Update="data\localizations\en-us.json">
-	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</None>
 	<None Update="data\localizations\ja-jp.json">
-	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</None>
 	<None Update="data\localizations\ru-ru.json">
-	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</None>
-	<None Update="data\NotoSansKR-Bold.otf">
-	  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	<None Update="data\fonts\NotoSansKR-Bold.otf">
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>
+	<None Update="data\localizations\zh-hans.json">
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>
+	<None Update="data\localizations\zh-hant.json">
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</None>
   </ItemGroup>
 
   <ItemGroup>
 	<Folder Include="data\localizations\" />
   </ItemGroup>
+  
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	<Exec Command="xcopy &quot;$(OutDir)&quot; &quot;D:\Programs\Steam\steamapps\common\Monster Hunter World\nativePC\plugins\CSharp\BetterMatchmaking&quot; /s /i /y" />
+  </Target>
 </Project>

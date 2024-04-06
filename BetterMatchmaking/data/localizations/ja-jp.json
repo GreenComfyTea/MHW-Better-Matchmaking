@@ -1,7 +1,24 @@
 {
 	"LocalizationInfo": {
-		"Name": "日本語",
+		"Name": "Japanese",
 		"Translators": "elappale"
+	},
+	"FontInfo": {
+		"Name": "NotoSansJP-Bold.ttf",
+		"GlyphRanges": [
+			"0x0020",
+			"0x00FF",
+			"0x3000",
+			"0x30FF",
+			"0x31F0",
+			"0x31FF",
+			"0x4E00",
+			"0x9FFF",
+			"0xFF00",
+			"0xFFEF",
+			"0xFFFD",
+			"0xFFFD"
+		]
 	},
 	"ImGui": {
 		"ModInfo": "MOD情報",
@@ -238,6 +255,11 @@
 		"Level5": "Lv 5",
 		"Level6": "Lv 6",
 		"Level7": "Lv 7",
-		"TargetMonster": "ターゲット"
+		"TargetMonster": "ターゲット",
+		"Font": "Font",
+		"AnyChangesToFontRequireGameRestart": "Any Changes to Font Require Game Restart!",
+		"Size": "Size",
+		"HorizontalOversample": "Horizontal Oversample",
+		"VerticalOversample": "Vertical Oversample"
 	}
 }

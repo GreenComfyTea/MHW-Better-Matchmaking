@@ -261,6 +261,7 @@ public static class Constants
 
 	public const string PLUGIN_PATH = $@"nativePC\plugins\CSharp\{MOD_FOLDER_NAME}\";
 	public const string PLUGIN_DATA_PATH = $@"{PLUGIN_PATH}data\";
+	public const string PLUGIN_FONTS_PATH = $@"{PLUGIN_DATA_PATH}fonts\";
 	public const string LOCALIZATIONS_PATH = $@"{PLUGIN_DATA_PATH}localizations\";
 
 	public const string DEFAULT_CONFIG = "config";
@@ -336,4 +337,6 @@ public static class Constants
 
 	public const string START_REQUEST_FUNCTION_PATTERN = "8b 42 54 33 ed 4c 8b f2 48 8b d9 44 8b ed 85 c0";
 	public const nint START_REQUEST_FUNCTION_OFFSET = -0xB;
+
+	public const string EMOJI_FONT = "NotoEmoji-Bold.ttf";
 }

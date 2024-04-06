@@ -16,6 +16,8 @@ internal class SingletonAccessor
 	[JsonIgnore]
 	protected CustomizationWindow CustomizationWindow_I { get; set; }
 	[JsonIgnore]
+	protected FontManager FontManager_I { get; set; }
+	[JsonIgnore]
 	protected DebugManager DebugManager_I { get; set; }
 
 
@@ -67,6 +69,8 @@ internal class SingletonAccessor
 		LocalizationManager_I = LocalizationManager.Instance;
 		ConfigManager_I = ConfigManager.Instance;
 		CustomizationWindow_I = CustomizationWindow.Instance;
+		FontManager_I = FontManager.Instance;
+
 		DebugManager_I = DebugManager.Instance;
 
 		Core_I = Core.Instance;

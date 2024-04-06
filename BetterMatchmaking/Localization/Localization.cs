@@ -21,8 +21,10 @@ namespace BetterMatchmaking
 		[JsonIgnore]
 		public bool IsDefault { get; set; } = false;
 
-		public LocalizedStrings_LocalizationInfo LocalizationInfo { get; set; } = new();
-		public LocalizedStrings_ImGui ImGui { get; set; } = new();
+		public LocalizationInfoSection LocalizationInfo { get; set; } = new();
+
+		public FontInfoSection FontInfo { get; set; } = new();
+		public ImGuiSection ImGui { get; set; } = new();
 
 		public Localization() {
 			InstantiateSingletons();

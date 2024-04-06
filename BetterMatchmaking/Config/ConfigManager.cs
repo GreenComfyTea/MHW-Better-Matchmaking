@@ -49,8 +49,6 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 
 		Default.InitDefault();
 
-		
-
 		// If config file doesn't exist - use default one
 		if(!File.Exists(Constants.DEFAULT_CONFIG_FILE_PATH_NAME))
 		{

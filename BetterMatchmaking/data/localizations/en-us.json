@@ -3,6 +3,16 @@
 		"Name": "English",
 		"Translators": "GreenComfyTea"
 	},
+	"FontInfo": {
+		"Name": "NotoSans-Bold.ttf",
+		"GlyphRanges": [
+			"0x0020", "0x00FF",
+			"0x0370", "0x03FF",
+			"0x0400", "0x052F",
+			"0x2DE0", "0x2DFF",
+			"0xA640", "0xA69F"
+		]
+	},
 	"ImGui": {
 		"ModInfo": "Mod Info",
 		"MadeBy": "Made by:",
@@ -238,6 +248,11 @@
 		"Level5": "Level 5",
 		"Level6": "Level 6",
 		"Level7": "Level 7",
-		"TargetMonster": "Target Monster"
+		"TargetMonster": "Target Monster",
+		"Font": "Font",
+		"AnyChangesToFontRequireGameRestart": "Any Changes to Font Require Game Restart!",
+		"Size": "Size",
+		"HorizontalOversample": "Horizontal Oversample",
+		"VerticalOversample": "Vertical Oversample"
 	}
 }

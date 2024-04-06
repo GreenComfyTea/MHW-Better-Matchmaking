@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BetterMatchmaking;
 
-internal sealed class LocalizationManager : IDisposable
+internal sealed class LocalizationManager : SingletonAccessor, IDisposable
 {
 	// Singleton Pattern
 	private static readonly LocalizationManager _singleton = new();
@@ -22,7 +22,12 @@ internal sealed class LocalizationManager : IDisposable
 
 	// Singleton Pattern End
 
-	private LocalizationManager() { }
+	private LocalizationManager()
+	{
+		InstantiateSingletons();
+	}
+
+	private bool IsInitialized { get; set; } = false;
 
 	public LocalizationWatcher LocalizationWatcherInstance { get; set; }
 
@@ -33,8 +38,8 @@ internal sealed class LocalizationManager : IDisposable
 	public Localization Default { get; set; }
 	public Localization Current { get; set; }
 
-	public LocalizedStrings_LocalizationInfo LocalizationInfo { get; set; }
-	public LocalizedStrings_ImGui ImGui { get; set; }
+	public LocalizationInfoSection LocalizationInfo { get; set; }
+	public ImGuiSection ImGui { get; set; }
 
 	public LocalizationManager Init()
 	{
@@ -47,8 +52,6 @@ internal sealed class LocalizationManager : IDisposable
 		LocalizationWatcherInstance = new();
 		Default = new();
 
-		
-
 		Default.Init();
 		Default.Save();
 
@@ -56,6 +59,8 @@ internal sealed class LocalizationManager : IDisposable
 		LoadAllLocalizations();
 
 		LocalizationWatcherInstance.Init();
+
+		IsInitialized = true;
 
 		TeaLog.Info("LocalizationManager: Initialization Done!");
 
@@ -77,6 +82,8 @@ internal sealed class LocalizationManager : IDisposable
 	{
 		var localization = Localizations[isoName];
 		SetCurrentLocalization(localization);
+
+		if(IsInitialized) FontManager_I.SetCurrentFont(localization);
 
 		return this;
 	}

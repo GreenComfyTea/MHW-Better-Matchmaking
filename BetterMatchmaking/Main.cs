@@ -1,4 +1,4 @@
-﻿using ImGuiNET;
+using ImGuiNET;
 using SharpPluginLoader.Core;
 using SharpPluginLoader.Core.Rendering;
 using System.Diagnostics;
@@ -49,8 +49,11 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 			ExpeditionObjectiveFilter_I.Init();
 			RegionLevelFilter_I.Init();
 			TargetMonsterFilter_I.Init();
-
 			Core_I.Init();
+
+			FontManager_I.Init();
+
+			ConfigManager_I.Current.Save();
 
 			IsInitialized = true;
 

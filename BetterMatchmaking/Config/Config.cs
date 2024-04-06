@@ -23,6 +23,8 @@ internal class Config : SingletonAccessor
 
 	public string Localization { get; set; } = "en-us";
 
+	public Dictionary<string, FontCustomization> Fonts { get; set; } = new();
+
 	public DebugCustomization Debug { get; set; } = new();
 	public SessionCustomization Sessions { get; set; } = new();
 	public QuestCustomization Quests { get; set; } = new();

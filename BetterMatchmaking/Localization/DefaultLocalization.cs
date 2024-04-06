@@ -9,16 +9,26 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Windows.UI.Text;
 
+using GlyphRange = (ushort start, ushort end);
+
 namespace BetterMatchmaking;
 
-public interface ILocalizedStrings;
+public interface ILocalizationSection;
 
-internal class LocalizedStrings_LocalizationInfo : ILocalizedStrings
+internal class LocalizationInfoSection : ILocalizationSection
 {
 	public string Name { get; set; } = "English";
 	public string Translators { get; set; } = "GreenComfyTea";
 }
-internal class LocalizedStrings_ImGui : ILocalizedStrings
+
+internal class FontInfoSection : ILocalizationSection
+{
+	public string Name { get; set; } = "NotoSans-Bold.ttf";
+
+	public string[] GlyphRanges { get; set; } = ["0x0020", "0xFFFF"];
+}
+
+internal class ImGuiSection : ILocalizationSection
 {
 	// Mod Info
 	public string ModInfo { get; set; } = "Mod Info";
@@ -334,8 +344,15 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	public string Level7 { get; set; } = "Level 7";
 
 	// Target Monster
-
 	public string TargetMonster { get; set; } = "Target Monster";
+
+	// Font
+
+	public string Font { get; set; } = "Font";
+	public string AnyChangesToFontRequireGameRestart { get; set; } = "Any Changes to Font Require Game Restart!";
+	public string Size { get; set; } = "Size";
+	public string HorizontalOversample { get; set; } = "Horizontal Oversample";
+	public string VerticalOversample { get; set; } = "Vertical Oversample";
 
 	[JsonIgnore]
 	public string[] DistanceFilterArray { get; set; } = Array.Empty<string>();
@@ -363,7 +380,7 @@ internal class LocalizedStrings_ImGui : ILocalizedStrings
 	[JsonIgnore]
 	public string[] TargetMonsterArray { get; set; } = Array.Empty<string>();
 
-	public LocalizedStrings_ImGui Init()
+	public ImGuiSection Init()
 	{
 		DistanceFilterArray = [Close, Default, Far, Worldwide];
 
