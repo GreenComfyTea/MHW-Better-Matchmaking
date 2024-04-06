@@ -122,7 +122,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 		return "";
 	}
 
-	public string GetComparisonSign(int comparison)
+	public static string GetComparisonSign(int comparison)
 	{
 		if (comparison == -2) return "<=";
 		if (comparison == -1) return "<";
