@@ -172,10 +172,10 @@ The mod has support for localizations. If you wish to translate the mod, follow 
 > There is no support for unicode symbols at the moment. It will be added in the future release.
 
 # Credits
-**[GreenComfyTea](https://github.com/GreenComfyTea)** - Creator of the mod and it's main contributor;
+**[GreenComfyTea](https://github.com/GreenComfyTea)** - Creator of the mod and it's main contributor;  
 **[Fexty12573](https://github.com/Fexty12573)** - Creator of [SharpPluginLoader](https://github.com/Fexty12573/SharpPluginLoader). Implemented an interface for Steam Matchmaking API. Provided invaluable help on figuring out how matchmaking works; 
-**[elappale](https://github.com/elappale)** - Japanese translator;
-**[Alpha-Cyg](https://github.com/Alpha-Cyg)** - Traditional Chinese translator;
+**[elappale](https://github.com/elappale)** - Japanese translator;  
+**[Alpha-Cyg](https://github.com/Alpha-Cyg)** - Traditional Chinese translator;  
 **[Narugakuruga](https://github.com/Narugakuruga)** - Simplified and Traditional Chinese translator.
  
 ***
