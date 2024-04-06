@@ -15,7 +15,7 @@ internal class MaxSearchResultLimitCustomization : SingletonAccessor
 	private bool _enabled = true;
 	public bool Enabled { get => _enabled; set => _enabled = value; }
 
-	private int _value = Constants.SEARCH_RESULT_LIMIT_MAX;
+	private int _value = 32;
 	public int Value { get => _value; set => _value = value; }
 
 	public MaxSearchResultLimitCustomization()
@@ -35,7 +35,7 @@ internal class MaxSearchResultLimitCustomization : SingletonAccessor
 		if (ImGui.TreeNode(LocalizationManager_I.ImGui.MaxSearchResultLimit))
 		{
 			changed = ImGui.Checkbox(LocalizationManager_I.ImGui.Enabled, ref _enabled) || changed;
-			changed = ImGui.SliderInt(LocalizationManager_I.ImGui.Value, ref _value, 1, Constants.SEARCH_RESULT_LIMIT_MAX) || changed;
+			changed = ImGui.SliderInt(LocalizationManager_I.ImGui.Value, ref _value, 1, 32) || changed;
 
 			ImGui.TreePop();
 		}

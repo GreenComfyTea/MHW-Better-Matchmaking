@@ -54,7 +54,7 @@ internal class LanguageFilterCustomization : SingletonAccessor
 
 			if (tempChanged)
 			{
-				ReplacementTargetEnum = (LanguageSearchTypes)selectedIndex;
+				ReplacementTargetEnum = (LanguageSearchTypes) selectedIndex;
 				ReplacementTarget = LocalizationManager_I.Default.ImGui.LanguageSearchTypeArray[selectedIndex];
 			}
 
