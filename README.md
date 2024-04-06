@@ -189,7 +189,7 @@ The mod has support for localizations. If you wish to translate the mod, follow 
 > Put the font you want to use in `\Monster Hunter World\nativePC\plugins\CSharp\BetterMatchmaking\data\fonts\` folder. The font must be static. Only `.OTF` and `.TTF` fonts are supported.
 
 > [!IMPORTANT]
-> SharpPluginLoader doesn't support font hot-reload. So adding/changing a font will require game restart. This applies both to localization file changes (font name, glyph ranges) and config changes (font size, oversample).
+> **SharpPluginLoader doesn't support font hot-reload. So adding/changing a font will require game restart.** This applies to both localization file changes (font name, glyph ranges) and config changes (font size, oversample).
 
 # Credits
 **[GreenComfyTea](https://github.com/GreenComfyTea)** - Creator of the mod and it's main contributor;  
