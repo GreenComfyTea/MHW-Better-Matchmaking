@@ -61,8 +61,6 @@ internal sealed class CustomizationWindow : SingletonAccessor
 
 			ImGui.Begin($"{Constants.MOD_NAME} v{Constants.VERSION}", ref _isOpened);
 
-			ImGui.Text(LocalizationManager_I.Current.ImGui.HighRank7Star);
-			
 			ComboBoxWidth = Constants.COMBOBOX_WIDTH_MULTIPLIER * ImGui.GetWindowSize().X;
 
 			if(IsForceModInfoOpen) ImGui.SetNextItemOpen(true);
