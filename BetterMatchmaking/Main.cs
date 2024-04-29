@@ -100,6 +100,8 @@ internal class BetterMatchmakingPlugin : SingletonAccessor, IPlugin
 	{
 		try
 		{
+			Core_I.InitDebugHooks();
+
 			if(!IsInitialized) return;
 			if(!Renderer.MenuShown) return;
 
