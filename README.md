@@ -142,17 +142,17 @@
 4. Improved In-Game Search Filters (overrides one of the existing option and allows to search by several options at the same time).
 
 # Requirements
-1. [Stracker's Loader v3.0.1+](https://www.nexusmods.com/monsterhunterworld/mods/1982);
-2. [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0);
-3. [SharpPluginLoader v0.0.6](https://github.com/Fexty12573/SharpPluginLoader) (Other versions are not guaranteed to work).
+1. **[Stracker's Loader v3.0.1+](https://www.nexusmods.com/monsterhunterworld/mods/1982)**;
+2. **[.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)**;
+3. **[SharpPluginLoader v0.0.6](https://github.com/Fexty12573/SharpPluginLoader)** (Other versions are not guaranteed to work).
 
 # How to Install
-1. Install [Stracker's Loader](https://www.nexusmods.com/monsterhunterworld/mods/1982);
-2. Install [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) (Get the **.NET Desktop Runtime 8.0.x 64-bit**);
-3. Install [SharpPluginLoader](https://github.com/Fexty12573/SharpPluginLoader);
+1. Install **[Stracker's Loader](https://www.nexusmods.com/monsterhunterworld/mods/1982)**;
+2. Install **[.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)** (Get the **.NET Desktop Runtime 8.0.x 64-bit**);
+3. Install **[SharpPluginLoader](https://github.com/Fexty12573/SharpPluginLoader)**;
 4. Download the mod:
-    * Official release can be downloaded from [Nexus Mods](https://nexusmods.com/monsterhunterworld/mods/7263);
-    * Nightly builds are available in [this repo](https://github.com/GreenComfyTea/MHW-Better-Matchmaking) and can contain broken functionality, debugging info on screen, bugs and might require latest unreleased version of [SharpPluginLoader](https://github.com/Fexty12573/SharpPluginLoader). Use with caution!
+    * Official release can be downloaded from **[Nexus Mods](https://nexusmods.com/monsterhunterworld/mods/7263)**;
+    * Nightly builds are available in **[this repo](https://github.com/GreenComfyTea/MHW-Better-Matchmaking)** and can contain broken functionality, debugging info on screen, bugs and might require latest unreleased version of **[SharpPluginLoader](https://github.com/Fexty12573/SharpPluginLoader)**. Use with caution!
 5. Extract the mod from the archive and place it in the game root folder: **/Monster Hunter World/**.
 
 # How to Use
@@ -162,14 +162,14 @@
 
 # For Translators
 The mod has support for localizations. If you wish to translate the mod, follow these steps:
-1. Verify that the localization doesn't exist ([Link](https://github.com/GreenComfyTea/MHW-Better-Matchmaking/tree/main/BetterMatchmaking/data/localizations));
+1. Verify that the localization doesn't exist (**[Link](https://github.com/GreenComfyTea/MHW-Better-Matchmaking/tree/main/BetterMatchmaking/data/localizations)**);
 2. Go to `Monster Hunter World\nativePC\plugins\CSharp\BetterMatchmaking\data\localizations\` folder. There should be `en-us.json` file. If not, launch the game once, the file will be regenerated;
 3. Copy-paste the file and give it a new name. Any format is supported but I expect it to be `ISO language code` for uniformity reasons;
 4. Open the file with any text editor and translate the strings;
-5. Make an issue/pull request, or dm me on [Twitter](https://twitter.com/GreenComfyTea), to submit your localization. I will check it and include it in the next release.
+5. Make an issue/pull request, or dm me on **[Twitter](https://twitter.com/GreenComfyTea)**, to submit your localization. I will check it and include it in the next release.
 
 > [!IMPORTANT]
-> Each localization must provide unicode glyph ranges to load. You can take the ranges [here](https://github.com/Fexty12573/SharpPluginLoader/blob/master/SharpPluginLoader.Core/Rendering/GlyphRangeFactory.cs) and [here](https://jrgraphix.net/r/Unicode/).
+> Each localization must provide unicode glyph ranges to load. You can take the ranges **[here](https://github.com/Fexty12573/SharpPluginLoader/blob/master/SharpPluginLoader.Core/Rendering/GlyphRangeFactory.cs)** and **[here](https://jrgraphix.net/r/Unicode/)**.
 
 > [!IMPORTANT]
 > Put the font you want to use in `\Monster Hunter World\nativePC\plugins\CSharp\BetterMatchmaking\data\fonts\` folder. The font must be `static`. Only `.OTF` and `.TTF` fonts are supported.
@@ -193,7 +193,7 @@ The mod has support for localizations. If you wish to translate the mod, follow 
 
 # Credits
 **[GreenComfyTea](https://github.com/GreenComfyTea)** - Creator of the mod and it's main contributor;  
-**[Fexty12573](https://github.com/Fexty12573)** - Creator of [SharpPluginLoader](https://github.com/Fexty12573/SharpPluginLoader). Implemented an interface for Steam Matchmaking API. Provided invaluable help on figuring out how matchmaking works;  
+**[Fexty12573](https://github.com/Fexty12573)** - Creator of **[SharpPluginLoader](https://github.com/Fexty12573/SharpPluginLoader)**. Implemented an interface for Steam Matchmaking API. Provided invaluable help on figuring out how matchmaking works;  
 **[elappale](https://github.com/elappale)** - Japanese translator;  
 **[Alpha-Cyg](https://github.com/Alpha-Cyg)** - Traditional Chinese translator;  
 **[Narugakuruga](https://github.com/Narugakuruga)** - Simplified and Traditional Chinese translator.
