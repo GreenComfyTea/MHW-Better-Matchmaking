@@ -23,8 +23,8 @@ public enum RegionLevels { NoPreference, Level1, Level2, Level3, Level4, Level5,
 public enum SearchTypes
 {
 	None = 0,
-	Session = 537292564,
-	Quest = 421652,
+	Session = 537292652,
+	Quest = 421740,
 	GuidingLands = 1074163476
 }
 
