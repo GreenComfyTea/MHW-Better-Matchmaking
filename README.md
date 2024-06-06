@@ -37,13 +37,13 @@
 	</a>
 	<br>
 	<a href="https://www.nexusmods.com/monsterhunterworld/mods/1982">
-		<img alt="Stracker's Loader Dependency" src="https://custom-icon-badges.demolab.com/badge/dependency-Stracker%27s Loader-brightgreen?logo=package-dependencies" />
+		<img alt="Stracker's Loader Dependency" src="https://custom-icon-badges.demolab.com/badge/dependency-Stracker%27s Loader%20v3.0.1+-brightgreen?logo=package-dependencies" />
 	</a>
 	<a href="https://dotnet.microsoft.com/en-us/download/dotnet/8.0">
 		<img alt=".NET Dependency" src="https://custom-icon-badges.demolab.com/badge/dependency-.NET%20v8.0-brightgreen?logo=package-dependencies" />
 	</a>
 	<a href="https://github.com/Fexty12573/SharpPluginLoader">
-		<img alt="SharpPluginLoader Dependency" src="https://custom-icon-badges.demolab.com/badge/dependency-SharpPluginLoader%20v0.0.6-brightgreen?logo=package-dependencies" />
+		<img alt="SharpPluginLoader Dependency" src="https://custom-icon-badges.demolab.com/badge/dependency-SharpPluginLoader%20v0.0.6.1-brightgreen?logo=package-dependencies" />
 	</a>
 	<br>
 	<br>
