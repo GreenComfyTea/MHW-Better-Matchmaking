@@ -111,7 +111,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 			if(key == "SearchKey2") return "Expedition Objective";
 			if(key == "SearchKey3") return "Target Monster";
 			if(key == "SearchKey4") return "Conditions";
-			if(key == "SearchKey5") return "???";
+			if(key == "SearchKey5") return "Language";
 			if(key == "SearchKey6") return "Region Level";
 			if(key == "SearchKey7") return "???";
 			if(key == "SearchKey8") return "???";
