@@ -152,6 +152,8 @@ internal sealed class Core : SingletonAccessor, IDisposable
 			var keyID = MemoryUtil.Read<int>(searchKeyData - 0x4);
 			var value = MemoryUtil.Read<int>(searchKeyData + 0x8);
 
+			TeaLog.Debug($"{keyID}: {value}");
+
 			if(keyID == Constants.SEARCH_KEY_SEARCH_TYPE_ID)
 			{
 				CurrentSearchType = value switch
@@ -266,7 +268,7 @@ internal sealed class Core : SingletonAccessor, IDisposable
 			// Phase Check
 			var phase = MemoryUtil.Read<int>(netRequest + 0xE0);
 
-			TeaLog.Info($"Search Request: Phase = {phase}");
+			TeaLog.Debug($"Search Request: Phase = {phase}");
 
 			if(phase != 0)
 			{
@@ -278,7 +280,6 @@ internal sealed class Core : SingletonAccessor, IDisposable
 
 			if(CurrentSearchType == SearchTypes.None) return StartRequestHook!.Original(netCore, netRequest);
 
-			TeaLog.Info("");
 			TeaLog.Info($"Search Request: {CurrentSearchType}");
 
 			// Max Results
