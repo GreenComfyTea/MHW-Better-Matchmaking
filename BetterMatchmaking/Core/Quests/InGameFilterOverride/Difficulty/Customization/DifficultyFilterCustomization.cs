@@ -26,13 +26,13 @@ internal class DifficultyFilterCustomization : SingletonAccessor
 	public DifficultyFilterCustomization()
 	{
 		InstantiateSingletons();
-		ReplacementTarget = LocalizationManager_I.Default.ImGui._1;
+		ReplacementTarget = LocalizationManager_I.Default.ImGui.LowRank1Star;
 	}
 
 	public DifficultyFilterCustomization Init()
 	{
 		var stringIndex = Array.FindIndex(
-			LocalizationManager.Instance.Default.ImGui.QuestRankReplacementTargets, arrayString => arrayString.Equals(ReplacementTarget)
+			LocalizationManager.Instance.Default.ImGui.StyledQuestRankReplacementTargets, arrayString => arrayString.Equals(ReplacementTarget)
 		);
 
 		ReplacementTargetEnum = (Difficulties) StringIndexToEnum(stringIndex);
@@ -43,7 +43,7 @@ internal class DifficultyFilterCustomization : SingletonAccessor
 	private static int StringIndexToEnum(int stringIndex)
 	{
 		var highRank9Index = Array.FindIndex(
-			LocalizationManager.Instance.Default.ImGui.QuestRankReplacementTargets, arrayString => arrayString.Equals(LocalizationManager.Instance.Default.ImGui._9)
+			LocalizationManager.Instance.Default.ImGui.StyledQuestRankReplacementTargets, arrayString => arrayString.Equals(LocalizationManager.Instance.Default.ImGui.HighRank9Star)
 		);
 
 		if (stringIndex <= 2) return stringIndex + 20;
@@ -68,7 +68,7 @@ internal class DifficultyFilterCustomization : SingletonAccessor
 		var tempChanged = false;
 		var selectedIndex = 0;
 
-		var questRanks = LocalizationManager_I.ImGui.QuestRankReplacementTargets;
+		var questRanks = LocalizationManager_I.ImGui.StyledQuestRankReplacementTargets;
 
 		if (ImGui.TreeNode(LocalizationManager_I.ImGui.Difficulty))
 		{
@@ -82,7 +82,7 @@ internal class DifficultyFilterCustomization : SingletonAccessor
 			if (tempChanged)
 			{
 				ReplacementTargetEnum = (Difficulties) StringIndexToEnum(selectedIndex);
-				ReplacementTarget = LocalizationManager_I.Default.ImGui.QuestRankReplacementTargets[selectedIndex];
+				ReplacementTarget = LocalizationManager_I.Default.ImGui.StyledQuestRankReplacementTargets[selectedIndex];
 				TeaLog.Info(ReplacementTarget);
 			}
 

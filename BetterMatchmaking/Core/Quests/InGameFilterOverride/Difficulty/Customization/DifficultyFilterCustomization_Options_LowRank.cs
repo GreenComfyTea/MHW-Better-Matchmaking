@@ -74,11 +74,11 @@ internal class DifficultyFilterCustomization_Options_LowRank : SingletonAccessor
                 changed = true;
             }
 
-            changed = ImGui.Checkbox(LocalizationManager_I.ImGui._1, ref _lowRank1) || changed;
-            changed = ImGui.Checkbox(LocalizationManager_I.ImGui._2, ref _lowRank2) || changed;
-            changed = ImGui.Checkbox(LocalizationManager_I.ImGui._3, ref _lowRank3) || changed;
-            changed = ImGui.Checkbox(LocalizationManager_I.ImGui._4, ref _lowRank4) || changed;
-            changed = ImGui.Checkbox(LocalizationManager_I.ImGui._5, ref _lowRank5) || changed;
+            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.LowRank1Star, ref _lowRank1) || changed;
+            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.LowRank2Star, ref _lowRank2) || changed;
+            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.LowRank3Star, ref _lowRank3) || changed;
+            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.LowRank4Star, ref _lowRank4) || changed;
+            changed = ImGui.Checkbox(LocalizationManager_I.ImGui.LowRank5Star, ref _lowRank5) || changed;
 
             ImGui.TreePop();
         }
