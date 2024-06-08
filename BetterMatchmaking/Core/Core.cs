@@ -248,6 +248,15 @@ internal sealed class Core : SingletonAccessor, IDisposable
 					searchKeyData += 0x10;
 					continue;
 				}
+
+				if(keyID == (int) GuidingLandsSearchKeyIDs.Language)
+				{
+					IsLanguageAny = false;
+					isLanguageUpdated = true;
+
+					searchKeyData += 0x10;
+					continue;
+				}
 			}
 
 			searchKeyData += 0x10;
