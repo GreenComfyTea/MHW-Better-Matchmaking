@@ -1,6 +1,7 @@
 ﻿using ABI.System.Collections.Generic;
 using SharpPluginLoader.Core.Rendering;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -44,6 +45,8 @@ internal sealed class FontManager : SingletonAccessor, IDisposable
 	public Dictionary<string, string> Fonts { get; set; } = new();
 
 	private List<string> FontNames { get; set; } = new();
+
+	private List<string> LabeledFontNames { get; set; } = new();
 
 	private string _currentFont = string.Empty;
 
@@ -97,7 +100,7 @@ internal sealed class FontManager : SingletonAccessor, IDisposable
 
 		var labeledFontName = $"{fontName}##{Constants.MOD_FOLDER_NAME}";
 
-		if(FontNames.Contains(labeledFontName))
+		if(LabeledFontNames.Contains(labeledFontName))
 		{
 			TeaLog.Info($"Font {fontName}: Already Loaded. Skipping.");
 			return labeledFontName;
@@ -109,9 +112,9 @@ internal sealed class FontManager : SingletonAccessor, IDisposable
 		Ranges.Add(glyphRangesAddress);
 
 		FontCustomization customization;
-		fontConfig.TryGetValue(fontName, out customization);
+		var fontCustomizationExist = fontConfig.TryGetValue(fontName, out customization);
 
-		if(customization == null)
+		if(!fontCustomizationExist)
 		{
 			customization = new();
 			fontConfig[fontName] = customization;
@@ -137,7 +140,8 @@ internal sealed class FontManager : SingletonAccessor, IDisposable
 			customization.HorizontalOversample
 		);
 
-		FontNames.Add(labeledFontName);
+		LabeledFontNames.Add(labeledFontName);
+		FontNames.Add(fontName);
 
 		TeaLog.Info($"Font {fontName}: Loading Done!");
 		return labeledFontName;
@@ -150,6 +154,18 @@ internal sealed class FontManager : SingletonAccessor, IDisposable
 		if(!IsInitialized) return this;
 
 		ConfigManager_I.Current.Fonts.TryGetValue(localization.FontInfo.Name, out _customization);
+
+		return this;
+	}
+
+	public FontManager RecreateFontCustomizations()
+	{
+		var fontConfig = ConfigManager_I.Current.Fonts;
+
+		foreach(var fontName in FontNames)
+		{
+			fontConfig[fontName] = new();
+		}
 
 		return this;
 	}
@@ -175,8 +191,6 @@ internal sealed class FontManager : SingletonAccessor, IDisposable
 
 	public void Dispose()
 	{
-		TeaLog.Warn("font dispose");
-
 		foreach(var range in Ranges)
 		{
 			GlyphRangeFactory.DestroyGlyphRanges(range);

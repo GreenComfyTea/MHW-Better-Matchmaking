@@ -158,7 +158,11 @@ internal sealed class ConfigManager : SingletonAccessor, IDisposable
 	public ConfigManager ResetConfig()
 	{
 		var newConfig = Default.DeepCopy();
+
 		SetCurrentConfig(newConfig);
+		FontManager_I.RecreateFontCustomizations();
+		FontManager_I.SetCurrentFont(LocalizationManager_I.Current);
+
 		newConfig.Save();
 
 		return this;
