@@ -43,7 +43,7 @@ internal sealed class TargetFilter : SingletonAccessor
 
 		if (comparisonEnum == LobbyComparison.EqualToOrLessThan
 		&& value == (int) Targets.SilverRathalos
-		&& Customization.ReplacementTargetEnum != Targets.None)
+		&& Customization.ReplacementTargetEnum != Targets.NoPreference)
 		{
 			return false;
 		}
