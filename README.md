@@ -144,7 +144,7 @@
 # Requirements
 1. **[Stracker's Loader v3.0.1+](https://www.nexusmods.com/monsterhunterworld/mods/1982)**;
 2. **[.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)**;
-3. **[SharpPluginLoader v0.0.6](https://github.com/Fexty12573/SharpPluginLoader)** (Other versions are not guaranteed to work).
+3. **[SharpPluginLoader v0.0.6.1](https://github.com/Fexty12573/SharpPluginLoader)** (Other versions are not guaranteed to work).
 
 # How to Install
 1. Install **[Stracker's Loader](https://www.nexusmods.com/monsterhunterworld/mods/1982)**;
