@@ -43,7 +43,7 @@
 		<img alt=".NET Dependency" src="https://custom-icon-badges.demolab.com/badge/dependency-.NET%20v8.0-brightgreen?logo=package-dependencies" />
 	</a>
 	<a href="https://github.com/Fexty12573/SharpPluginLoader">
-		<img alt="SharpPluginLoader Dependency" src="https://custom-icon-badges.demolab.com/badge/dependency-SharpPluginLoader%20v0.0.7-brightgreen?logo=package-dependencies" />
+		<img alt="SharpPluginLoader Dependency" src="https://custom-icon-badges.demolab.com/badge/dependency-SharpPluginLoader%20v0.0.7.1-brightgreen?logo=package-dependencies" />
 	</a>
 	<br>
 	<br>
@@ -144,7 +144,7 @@
 # Requirements
 1. **[Stracker's Loader v3.0.1+](https://www.nexusmods.com/monsterhunterworld/mods/1982)**;
 2. **[.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)**;
-3. **[SharpPluginLoader v0.0.7](https://github.com/Fexty12573/SharpPluginLoader)** (Other versions are not guaranteed to work).
+3. **[SharpPluginLoader v0.0.7.1](https://github.com/Fexty12573/SharpPluginLoader)** (Other versions are not guaranteed to work).
 
 # How to Install
 1. Install **[Stracker's Loader](https://www.nexusmods.com/monsterhunterworld/mods/1982)**;
@@ -196,7 +196,8 @@ The mod has support for localizations. If you wish to translate the mod, follow 
 **[Fexty12573](https://github.com/Fexty12573)** - Creator of **[SharpPluginLoader](https://github.com/Fexty12573/SharpPluginLoader)**. Implemented an interface for Steam Matchmaking API. Provided invaluable help on figuring out how matchmaking works;  
 **[elappale](https://github.com/elappale)** - Japanese translator;  
 **[Alpha-Cyg](https://github.com/Alpha-Cyg)** - Traditional Chinese translator;  
-**[Narugakuruga](https://github.com/Narugakuruga)** - Simplified and Traditional Chinese translator.
+**[Narugakuruga](https://github.com/Narugakuruga)** - Simplified and Traditional Chinese translator;  
+**[BlacklightsC](https://github.com/BlacklightsC)** - Korean translator.  
  
 ***
 # Support
