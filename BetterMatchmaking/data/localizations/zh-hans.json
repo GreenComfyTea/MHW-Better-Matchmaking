@@ -258,10 +258,10 @@
 		"Level6": "Lv6",
 		"Level7": "Lv7",
 		"TargetMonster": "目标怪物",
-		"Font": "Font",
-		"AnyChangesToFontRequireGameRestart": "Any Changes to Font Require Game Restart!",
-		"Size": "Size",
-		"HorizontalOversample": "Horizontal Oversample",
-		"VerticalOversample": "Vertical Oversample"
+		"Font": "字体",
+		"AnyChangesToFontRequireGameRestart": "字体的任何更改都需要重启游戏！",
+		"Size": "大小",
+		"HorizontalOversample": "水平超采样",
+		"VerticalOversample": "垂直超采样"
 	}
 }
