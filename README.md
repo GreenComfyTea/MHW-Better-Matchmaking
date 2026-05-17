@@ -197,6 +197,7 @@ The mod has support for localizations. If you wish to translate the mod, follow 
 **[elappale](https://github.com/elappale)** - Japanese translator;  
 **[Alpha-Cyg](https://github.com/Alpha-Cyg)** - Traditional Chinese translator;  
 **[Narugakuruga](https://github.com/Narugakuruga)** - Simplified and Traditional Chinese translator;  
+**[AzureZee](https://github.com/AzureZee)** - Simplified and Traditional Chinese translator;  
 **[BlacklightsC](https://github.com/BlacklightsC)** - Korean translator.  
  
 ***
