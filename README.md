@@ -33,7 +33,7 @@
 		<img alt="Platform" src="https://custom-icon-badges.demolab.com/badge/platform-win-blue?logo=device-desktop" />
 	</a>
 	<a href="">
-		<img alt="Maintenance" src="https://custom-icon-badges.demolab.com/maintenance/yes/2024?logo=tools" />
+		<img alt="Maintenance" src="https://custom-icon-badges.demolab.com/maintenance/yes/2026?logo=tools" />
 	</a>
 	<br>
 	<a href="https://www.nexusmods.com/monsterhunterworld/mods/1982">
@@ -43,7 +43,7 @@
 		<img alt=".NET Dependency" src="https://custom-icon-badges.demolab.com/badge/dependency-.NET%20v8.0-brightgreen?logo=package-dependencies" />
 	</a>
 	<a href="https://github.com/Fexty12573/SharpPluginLoader">
-		<img alt="SharpPluginLoader Dependency" src="https://custom-icon-badges.demolab.com/badge/dependency-SharpPluginLoader%20v0.0.7.1-brightgreen?logo=package-dependencies" />
+		<img alt="SharpPluginLoader Dependency" src="https://custom-icon-badges.demolab.com/badge/dependency-SharpPluginLoader%20v0.0.7.2-brightgreen?logo=package-dependencies" />
 	</a>
 	<br>
 	<br>
